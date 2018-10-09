@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "278296114647",
+    "firebase_url": "https://technology-salesman-toolkit.firebaseio.com",
+    "project_id": "technology-salesman-toolkit",
+    "storage_bucket": "technology-salesman-toolkit.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:278296114647:android:68ff25ab00e6a2df",
+        "android_client_info": {
+          "package_name": "com.bramdeconinck.technologysalesmantoolkit"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "278296114647-77278er2ps8qqsccggc0s1etdp5fd0b9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.bramdeconinck.technologysalesmantoolkit",
+            "certificate_hash": "de5a2a047523caf661e410d0bbda1adced521b0a"
+          }
+        },
+        {
+          "client_id": "278296114647-vkacvp17bmg1gqhviq4ss0ve3v6cgmpt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCbwmgsqfpjkOzJAfkoSwN9SmtBzvuKizk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "278296114647-vkacvp17bmg1gqhviq4ss0ve3v6cgmpt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
