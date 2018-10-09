@@ -19,32 +19,33 @@ import com.google.firebase.auth.GoogleAuthProvider
 
 class Login : AppCompatActivity() {
 
-    lateinit var mGoogleSignInClient: GoogleSignInClient
-    lateinit var gso: GoogleSignInOptions
-    lateinit var mAuth: FirebaseAuth
-    val RC_SIGN_IN: Int = 1
+    private lateinit var mGoogleSignInClient: GoogleSignInClient
+    private lateinit var gso: GoogleSignInOptions
+    private lateinit var mAuth: FirebaseAuth
+    private val RC_SIGN_IN: Int = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.default_web_client_id))
-                .requestEmail()
-                .build()
-
-        mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
-
         mAuth = FirebaseAuth.getInstance()
 
-        btn_signInWithGoogle.setOnClickListener {
-            view: View? -> signInWithGoogle()
-        }
-    }
-
-    override fun onStart() {
-        super.onStart()
         val firebaseUser: FirebaseUser? = mAuth.currentUser
+
+        if (firebaseUser != null) {
+            //Intent to MainActivity
+        } else {
+            gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                    .requestIdToken(getString(R.string.default_web_client_id))
+                    .requestEmail()
+                    .build()
+
+            mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
+
+            btn_signInWithGoogle.setOnClickListener { _: View? ->
+                signInWithGoogle()
+            }
+        }
     }
 
     private fun signInWithGoogle() {
@@ -61,7 +62,7 @@ class Login : AppCompatActivity() {
                 val account: GoogleSignInAccount? = task.getResult(ApiException::class.java)
                 firebaseAuthWithGoogle(account)
             } catch (e: ApiException) {
-                Toast.makeText(this, "Er is een fout opgetreden tijdens het aanmelden. Gelieve het opnieuw te proberen.", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, getString(R.string.sign_in_error), Toast.LENGTH_LONG).show()
             }
         }
     }
@@ -74,7 +75,7 @@ class Login : AppCompatActivity() {
                         val user = mAuth.currentUser
                         Toast.makeText(this, "Welkom, ${user?.displayName}!", Toast.LENGTH_LONG).show()
                     } else {
-                        Toast.makeText(this, "Er is een fout opgetreden tijdens het aanmelden. Gelieve het opnieuw te proberen.", Toast.LENGTH_LONG).show()
+                        Toast.makeText(this, getString(R.string.sign_in_error), Toast.LENGTH_LONG).show()
                     }
                 }
     }

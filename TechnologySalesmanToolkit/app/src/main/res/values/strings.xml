@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">Technology Salesman Toolkit</string>
+
+    //Error message for failed authentications
+    <string name="sign_in_error">Er is een fout opgetreden tijdens het aanmelden. Gelieve het opnieuw te proberen.</string>
+
+    //Hint text on the LoginActivity
+    <string name="email">E-mailadres</string>
+    <string name="password">Wachtwoord</string>
+    <string name="google_button_text">Meld aan met Google</string>
+
 </resources>

@@ -15,7 +15,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="119dp"
         android:ems="10"
-        android:hint="E-mailadres"
+        android:hint="@string/email"
         android:inputType="textEmailAddress" />
 
     <EditText
@@ -26,7 +26,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="181dp"
         android:ems="10"
-        android:hint="Wachtwoord"
+        android:hint="@string/password"
         android:inputType="textPassword" />
 
     <com.shobhitpuri.custombuttons.GoogleSignInButton
@@ -36,7 +36,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="108dp"
-        android:text="Meld aan met Google"
+        android:text="@string/google_button_text"
         app:isDarkTheme="false" />
 
 </RelativeLayout>
