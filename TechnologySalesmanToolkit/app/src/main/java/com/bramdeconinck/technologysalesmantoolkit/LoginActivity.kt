@@ -43,17 +43,9 @@ class LoginActivity : AppCompatActivity() {
 
             mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
 
-            btn_signInWithGoogle.setOnClickListener { _: View? ->
-                signInWithGoogle()
-            }
-
-            btn_signIn.setOnClickListener { _: View? ->
-                validateLoginForm()
-            }
-
-            lbl_goToRegistration.setOnClickListener { _: View? ->
-                goToRegistration()
-            }
+            btn_signIn.setOnClickListener { _: View? -> validateLoginForm() }
+            btn_signInWithGoogle.setOnClickListener { _: View? -> signInWithGoogle() }
+            lbl_goToRegistration.setOnClickListener { _: View? -> goToRegistration() }
         }
     }
 
@@ -82,7 +74,7 @@ class LoginActivity : AppCompatActivity() {
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
                         val firebaseUser = mAuth.currentUser
-                        makeToast("Welkom, ${firebaseUser?.displayName}!")
+                        makeToast(getString(R.string.welcome, firebaseUser?.displayName))
                     } else {
                         makeToast(getString(R.string.sign_in_error))
                     }
@@ -94,12 +86,13 @@ class LoginActivity : AppCompatActivity() {
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
                         if (mAuth.currentUser!!.isEmailVerified) {
-                            val user = mAuth.currentUser
+                            val firebaseUser = mAuth.currentUser
+                            makeToast(getString(R.string.welcome, firebaseUser?.displayName))
                         } else {
-                            makeToast("Gelieve uw e-mailadres te bevestigen aan de hand van de verzonden e-mail.")
+                            makeToast(getString(R.string.email_is_not_verified))
                         }
                     } else {
-                        makeToast("Uw e-mailadres en/of wachtwoord is onjuist. Gelieve het opnieuw te proberen.")
+                        makeToast(getString(R.string.sign_in_error))
                     }
                 }
     }
@@ -109,7 +102,7 @@ class LoginActivity : AppCompatActivity() {
                 && !txt_password.text.isBlank()) {
             logInWithFirebaseAccount()
         } else {
-            makeToast("Gelieve alle velden in te vullen.")
+            makeToast(getString(R.string.empty_field))
         }
     }
 

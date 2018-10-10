@@ -22,9 +22,7 @@ class RegistrationActivity : AppCompatActivity() {
 
         mAuth = FirebaseAuth.getInstance()
 
-        btn_register.setOnClickListener { _: View? ->
-            validateRegistrationForm()
-        }
+        btn_register.setOnClickListener { _: View? ->  validateRegistrationForm() }
     }
 
     private fun createFirebaseAccount() {
@@ -34,7 +32,7 @@ class RegistrationActivity : AppCompatActivity() {
                         val firebaseUser = mAuth.currentUser
                         updateUserInfo(firebaseUser)
                     } else {
-                        makeToast("Er is iets fout gelopen tijdens het aanmaken van uw account.")
+                        makeToast(getString(R.string.account_not_created))
                     }
                 }
     }
@@ -47,8 +45,8 @@ class RegistrationActivity : AppCompatActivity() {
         firebaseUser?.updateProfile(profileUpdates)
                 ?.addOnCompleteListener { task ->
                     if (task.isSuccessful) {
-                        firebaseUser?.sendEmailVerification()
-                        makeToast("Uw account werd succesvol aangemaakt!")
+                        firebaseUser.sendEmailVerification()
+                        makeToast(getString(R.string.account_created))
                     }
                 }
     }
@@ -63,13 +61,13 @@ class RegistrationActivity : AppCompatActivity() {
                 if (txt_password_r.text.toString() == txt_repeatpassword.text.toString()) {
                     createFirebaseAccount()
                 } else {
-                    makeToast("De twee ingevoerde wachtwoorden komen niet overeen.")
+                    makeToast(getString(R.string.passwords_dont_match))
                 }
             } else {
-                makeToast("Gelieve een geldig e-mailadres in te voeren.")
+                makeToast(getString(R.string.invalid_email))
             }
         } else {
-            makeToast("Gelieve alle velden in te vullen.")
+            makeToast(getString(R.string.empty_field))
         }
     }
 
