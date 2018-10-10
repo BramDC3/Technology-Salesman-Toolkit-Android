@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Login">
+    tools:context=".LoginActivity">
 
     <EditText
         android:id="@+id/txt_email"
@@ -29,6 +29,16 @@
         android:hint="@string/password"
         android:inputType="textPassword" />
 
+    <Button
+        android:id="@+id/button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginBottom="169dp"
+        android:text="Log in" />
+
     <com.shobhitpuri.custombuttons.GoogleSignInButton
         android:id="@+id/btn_signInWithGoogle"
         android:layout_width="match_parent"
@@ -38,5 +48,17 @@
         android:layout_marginBottom="108dp"
         android:text="@string/google_button_text"
         app:isDarkTheme="false" />
+
+    <TextView
+        android:id="@+id/lbl_goToRegistration"
+        android:layout_width="237dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="76dp"
+        android:layout_marginEnd="71dp"
+        android:layout_marginBottom="28dp"
+        android:text="Heeft u nog geen account? Klik hier!" />
 
 </RelativeLayout>

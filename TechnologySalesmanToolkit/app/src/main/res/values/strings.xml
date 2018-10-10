@@ -4,9 +4,17 @@
     //Error message for failed authentications
     <string name="sign_in_error">Er is een fout opgetreden tijdens het aanmelden. Gelieve het opnieuw te proberen.</string>
 
-    //Hint text on the LoginActivity
+    //Hint text for the LoginActivity
     <string name="email">E-mailadres</string>
     <string name="password">Wachtwoord</string>
-    <string name="google_button_text">Meld aan met Google</string>
+    <string name="sign_in_button_text">Log in</string>
+    <string name="google_button_text">Log in met Google</string>
+
+    //Hint text for the RegistrationActivity
+    <string name="firstname">Voornaam</string>
+    <string name="lastname">Achternaam</string>
+    <string name="repeatpassword">Herhaal wachtwoord</string>
+    <string name="register_button_text">Maak uw account aan</string>
+    <string name="back_to_login_text">Heeft u al een account? Klik hier!</string>
 
 </resources>

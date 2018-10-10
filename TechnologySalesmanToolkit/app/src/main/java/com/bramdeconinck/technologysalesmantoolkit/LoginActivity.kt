@@ -9,7 +9,6 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import com.google.android.gms.common.SignInButton
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
@@ -17,7 +16,7 @@ import com.google.firebase.auth.FirebaseUser
 import kotlinx.android.synthetic.main.activity_login.*
 import com.google.firebase.auth.GoogleAuthProvider
 
-class Login : AppCompatActivity() {
+class LoginActivity : AppCompatActivity() {
 
     private lateinit var mGoogleSignInClient: GoogleSignInClient
     private lateinit var gso: GoogleSignInOptions
@@ -44,6 +43,10 @@ class Login : AppCompatActivity() {
 
             btn_signInWithGoogle.setOnClickListener { _: View? ->
                 signInWithGoogle()
+            }
+
+            lbl_goToRegistration.setOnClickListener { _: View? ->
+                goToRegistration()
             }
         }
     }
@@ -72,12 +75,17 @@ class Login : AppCompatActivity() {
         mAuth.signInWithCredential(credential)
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
-                        val user = mAuth.currentUser
-                        Toast.makeText(this, "Welkom, ${user?.displayName}!", Toast.LENGTH_LONG).show()
+                        val firebaseUser = mAuth.currentUser
+                        Toast.makeText(this, "Welkom, ${firebaseUser?.displayName}!", Toast.LENGTH_LONG).show()
                     } else {
                         Toast.makeText(this, getString(R.string.sign_in_error), Toast.LENGTH_LONG).show()
                     }
                 }
+    }
+
+    private fun goToRegistration() {
+        val intent = Intent(this, RegistrationActivity::class.java)
+        startActivity(intent)
     }
 
 }
