@@ -1,5 +1,6 @@
 package com.bramdeconinck.technologysalesmantoolkit
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -27,7 +28,7 @@ class RegistrationActivity : AppCompatActivity() {
     }
 
     private fun createFirebaseAccount() {
-        mAuth.createUserWithEmailAndPassword(txt_email.text.toString(), txt_password.text.toString())
+        mAuth.createUserWithEmailAndPassword(txt_email_r.text.toString(), txt_password_r.text.toString())
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
                         val firebaseUser = mAuth.currentUser
@@ -55,11 +56,11 @@ class RegistrationActivity : AppCompatActivity() {
     private fun validateRegistrationForm() {
         if (!txt_firstname.text.isBlank()
                 && !txt_lastname.text.isBlank()
-                && !txt_email.text.isBlank()
-                && !txt_password.text.isBlank()
+                && !txt_email_r.text.isBlank()
+                && !txt_password_r.text.isBlank()
                 && !txt_repeatpassword.text.isBlank()) {
-            if (isValid(txt_email.text.toString())) {
-                if (txt_password.text.toString() == txt_repeatpassword.text.toString()) {
+            if (isValid(txt_email_r.text.toString())) {
+                if (txt_password_r.text.toString() == txt_repeatpassword.text.toString()) {
                     createFirebaseAccount()
                 } else {
                     makeToast("De twee ingevoerde wachtwoorden komen niet overeen.")
@@ -72,13 +73,11 @@ class RegistrationActivity : AppCompatActivity() {
         }
     }
 
-    fun isValid(email: String): Boolean {
+    private fun isValid(email: String): Boolean {
         val matcher = validEmailAddressRegex.matcher(email)
         return matcher.find()
     }
 
-    fun makeToast(text: String) {
-        Toast.makeText(this, text, Toast.LENGTH_SHORT).show()
-    }
+    private fun makeToast(text: String) = Toast.makeText(this, text, Toast.LENGTH_SHORT).show()
 
 }

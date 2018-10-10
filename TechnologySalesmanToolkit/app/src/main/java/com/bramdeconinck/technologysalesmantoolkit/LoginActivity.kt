@@ -16,6 +16,7 @@ import com.google.firebase.auth.FirebaseUser
 import kotlinx.android.synthetic.main.activity_login.*
 import com.google.firebase.auth.GoogleAuthProvider
 
+
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var mGoogleSignInClient: GoogleSignInClient
@@ -33,6 +34,7 @@ class LoginActivity : AppCompatActivity() {
 
         if (firebaseUser != null) {
             //Intent to MainActivity
+
         } else {
             gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                     .requestIdToken(getString(R.string.default_web_client_id))
@@ -43,6 +45,10 @@ class LoginActivity : AppCompatActivity() {
 
             btn_signInWithGoogle.setOnClickListener { _: View? ->
                 signInWithGoogle()
+            }
+
+            btn_signIn.setOnClickListener { _: View? ->
+                validateLoginForm()
             }
 
             lbl_goToRegistration.setOnClickListener { _: View? ->
@@ -65,7 +71,7 @@ class LoginActivity : AppCompatActivity() {
                 val account: GoogleSignInAccount? = task.getResult(ApiException::class.java)
                 firebaseAuthWithGoogle(account)
             } catch (e: ApiException) {
-                Toast.makeText(this, getString(R.string.sign_in_error), Toast.LENGTH_LONG).show()
+                makeToast(getString(R.string.sign_in_error))
             }
         }
     }
@@ -76,11 +82,39 @@ class LoginActivity : AppCompatActivity() {
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
                         val firebaseUser = mAuth.currentUser
-                        Toast.makeText(this, "Welkom, ${firebaseUser?.displayName}!", Toast.LENGTH_LONG).show()
+                        makeToast("Welkom, ${firebaseUser?.displayName}!")
                     } else {
-                        Toast.makeText(this, getString(R.string.sign_in_error), Toast.LENGTH_LONG).show()
+                        makeToast(getString(R.string.sign_in_error))
                     }
                 }
+    }
+
+    private fun logInWithFirebaseAccount() {
+        mAuth.signInWithEmailAndPassword(txt_email.text.toString(), txt_password.text.toString())
+                .addOnCompleteListener(this) { task ->
+                    if (task.isSuccessful) {
+                        if (mAuth.currentUser!!.isEmailVerified) {
+                            val user = mAuth.currentUser
+                        } else {
+                            makeToast("Gelieve uw e-mailadres te bevestigen aan de hand van de verzonden e-mail.")
+                        }
+                    } else {
+                        makeToast("Uw e-mailadres en/of wachtwoord is onjuist. Gelieve het opnieuw te proberen.")
+                    }
+                }
+    }
+
+    private fun validateLoginForm() {
+        if (!txt_email.text.isBlank()
+                && !txt_password.text.isBlank()) {
+            logInWithFirebaseAccount()
+        } else {
+            makeToast("Gelieve alle velden in te vullen.")
+        }
+    }
+
+    private fun makeToast(text: String) {
+        Toast.makeText(this, text, Toast.LENGTH_LONG).show()
     }
 
     private fun goToRegistration() {
