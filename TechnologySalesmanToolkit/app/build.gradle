@@ -33,8 +33,11 @@ dependencies {
 
     //Firebase and Google Authentication
     implementation 'com.google.firebase:firebase-core:16.0.4'
-    implementation 'com.google.firebase:firebase-auth:16.0.4'
+    implementation 'com.google.firebase:firebase-auth:16.0.5'
     implementation 'com.google.android.gms:play-services-auth:16.0.1'
+
+    //Firebase Firestore database
+    implementation 'com.google.firebase:firebase-firestore:17.1.1'
 
     //Custom Google Sign-In Button
     implementation 'com.shobhitpuri.custombuttons:google-signin:1.0.0'
