@@ -9,7 +9,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot
 class FirestoreAPI {
 
     //Access a Cloud Firestore instance
-    val db = FirebaseFirestore.getInstance()
+    private val db = FirebaseFirestore.getInstance()
 
     //Get all services from the Firestore
     fun getServicesFromFirestore(): MutableList<Service> {
