@@ -9,7 +9,6 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import com.google.android.gms.common.SignInButton
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
@@ -17,7 +16,7 @@ import com.google.firebase.auth.FirebaseUser
 import kotlinx.android.synthetic.main.activity_login.*
 import com.google.firebase.auth.GoogleAuthProvider
 
-class Login : AppCompatActivity() {
+class LoginActivity : AppCompatActivity() {
 
     private lateinit var mGoogleSignInClient: GoogleSignInClient
     private lateinit var gso: GoogleSignInOptions
@@ -34,6 +33,7 @@ class Login : AppCompatActivity() {
 
         if (firebaseUser != null) {
             //Intent to MainActivity
+
         } else {
             gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                     .requestIdToken(getString(R.string.default_web_client_id))
@@ -42,9 +42,9 @@ class Login : AppCompatActivity() {
 
             mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
 
-            btn_signInWithGoogle.setOnClickListener { _: View? ->
-                signInWithGoogle()
-            }
+            btn_signIn.setOnClickListener { _: View? -> validateLoginForm() }
+            btn_signInWithGoogle.setOnClickListener { _: View? -> signInWithGoogle() }
+            lbl_goToRegistration.setOnClickListener { _: View? -> goToRegistration() }
         }
     }
 
@@ -62,7 +62,7 @@ class Login : AppCompatActivity() {
                 val account: GoogleSignInAccount? = task.getResult(ApiException::class.java)
                 firebaseAuthWithGoogle(account)
             } catch (e: ApiException) {
-                Toast.makeText(this, getString(R.string.sign_in_error), Toast.LENGTH_LONG).show()
+                makeToast(getString(R.string.sign_in_error))
             }
         }
     }
@@ -72,12 +72,46 @@ class Login : AppCompatActivity() {
         mAuth.signInWithCredential(credential)
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
-                        val user = mAuth.currentUser
-                        Toast.makeText(this, "Welkom, ${user?.displayName}!", Toast.LENGTH_LONG).show()
+                        val firebaseUser = mAuth.currentUser
+                        makeToast(getString(R.string.welcome, firebaseUser?.displayName))
                     } else {
-                        Toast.makeText(this, getString(R.string.sign_in_error), Toast.LENGTH_LONG).show()
+                        makeToast(getString(R.string.sign_in_error))
                     }
                 }
+    }
+
+    private fun logInWithFirebaseAccount() {
+        mAuth.signInWithEmailAndPassword(txt_email.text.toString(), txt_password.text.toString())
+                .addOnCompleteListener(this) { task ->
+                    if (task.isSuccessful) {
+                        if (mAuth.currentUser!!.isEmailVerified) {
+                            val firebaseUser = mAuth.currentUser
+                            makeToast(getString(R.string.welcome, firebaseUser?.displayName))
+                        } else {
+                            makeToast(getString(R.string.email_is_not_verified))
+                        }
+                    } else {
+                        makeToast(getString(R.string.sign_in_error))
+                    }
+                }
+    }
+
+    private fun validateLoginForm() {
+        if (!txt_email.text.isBlank()
+                && !txt_password.text.isBlank()) {
+            logInWithFirebaseAccount()
+        } else {
+            makeToast(getString(R.string.empty_field))
+        }
+    }
+
+    private fun makeToast(text: String) {
+        Toast.makeText(this, text, Toast.LENGTH_LONG).show()
+    }
+
+    private fun goToRegistration() {
+        val intent = Intent(this, RegistrationActivity::class.java)
+        startActivity(intent)
     }
 
 }
