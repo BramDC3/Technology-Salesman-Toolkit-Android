@@ -18,7 +18,7 @@ class FirestoreAPI {
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         for (doc in task.result!!) {
-                            servicesList.add(fromJSONToService(doc))
+                            servicesList.add(fromSnapshotToService(doc))
                         }
                         Log.d(TAG, "Retrieved all service documents successfully")
                     } else {
@@ -28,8 +28,8 @@ class FirestoreAPI {
         return servicesList
     }
 
-    //Converting JSON data to a Service object
-    private fun fromJSONToService(snapshot: QueryDocumentSnapshot): Service {
+    //Converting the data of a snapshot to a Service object
+    private fun fromSnapshotToService(snapshot: QueryDocumentSnapshot): Service {
         return Service(
                 id = snapshot.id,
                 name = snapshot.getString("name")!!,
