@@ -21,7 +21,7 @@ class RegistrationActivity : AppCompatActivity() {
 
         mAuth = FirebaseAuth.getInstance()
 
-        btn_register.setOnClickListener { _: View? ->  validateRegistrationForm() }
+        btn_register.setOnClickListener { _: View? -> validateRegistrationForm() }
     }
 
     private fun createFirebaseAccount() {
