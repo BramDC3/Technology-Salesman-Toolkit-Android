@@ -11,24 +11,14 @@ import com.google.firebase.Timestamp
 import kotlinx.android.synthetic.main.activity_service_list.*
 import kotlinx.android.synthetic.main.service_list.*
 
-/**
- * An activity representing a list of Pings. This activity
- * has different presentations for handset and tablet-size devices. On
- * handsets, the activity presents a list of items, which when touched,
- * lead to a [ServiceDetailActivity] representing
- * item details. On tablets, the activity presents the list of items and
- * item details side-by-side using two vertical panes.
- */
 class ServiceListActivity : AppCompatActivity() {
 
-    /**
-     * Whether or not the activity is in two-pane mode, i.e. running on a tablet
-     * device.
-     */
-    private var twoPane: Boolean = false
     private lateinit var firestoreApi: FirestoreAPI
     private lateinit var serviceData: MutableList<Service>
     private lateinit var serviceAdapter: ServiceAdapter
+
+    //Variable to check whether the app is running on a tablet or not
+    private var twoPane: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,6 +42,7 @@ class ServiceListActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
 
+        if (serviceData.isNotEmpty()) serviceData.clear()
         firestoreApi.getServicesFromFirestore(serviceData, serviceAdapter)
     }
 
