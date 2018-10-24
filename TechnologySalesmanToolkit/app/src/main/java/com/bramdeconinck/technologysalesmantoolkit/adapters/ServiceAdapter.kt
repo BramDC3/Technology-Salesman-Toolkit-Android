@@ -6,13 +6,10 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import com.bramdeconinck.technologysalesmantoolkit.R
-import com.bramdeconinck.technologysalesmantoolkit.R.id.iv_afbeelding
 import com.bramdeconinck.technologysalesmantoolkit.activities.ServiceDetailActivity
 import com.bramdeconinck.technologysalesmantoolkit.fragments.ServiceDetailFragment
 import com.bramdeconinck.technologysalesmantoolkit.activities.ServiceListActivity
-import com.bramdeconinck.technologysalesmantoolkit.dummy.DummyContent
 import com.bramdeconinck.technologysalesmantoolkit.models.Service
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.service_list_content.view.*
