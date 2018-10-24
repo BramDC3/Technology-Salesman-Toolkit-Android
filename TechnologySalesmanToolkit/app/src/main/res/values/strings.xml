@@ -23,5 +23,7 @@
     <string name="account_created">Uw account werd succesvol aangemaakt!</string>
     <string name="invalid_email">Gelieve een geldig e-mailadres in te voeren.</string>
     <string name="passwords_dont_match">De twee ingevoerde wachtwoorden komen niet overeen.</string>
+    <string name="title_service_list">Services</string>
+    <string name="title_service_detail">Service Detail</string>
 
 </resources>

@@ -1,16 +1,15 @@
-package com.bramdeconinck.technologysalesmantoolkit
+package com.bramdeconinck.technologysalesmantoolkit.activities
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
+import com.bramdeconinck.technologysalesmantoolkit.R
 import com.bramdeconinck.technologysalesmantoolkit.models.Service
 import com.bramdeconinck.technologysalesmantoolkit.network.FirestoreAPI
-import com.google.common.collect.ImmutableList
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var firestoreApi: FirestoreAPI
-    private lateinit var services: MutableList<Service>
+    //private lateinit var services: MutableList<Service>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,7 +21,7 @@ class MainActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
 
-        services = firestoreApi.getServicesFromFirestore()
+        //services = firestoreApi.getServicesFromFirestore()
     }
 
 }

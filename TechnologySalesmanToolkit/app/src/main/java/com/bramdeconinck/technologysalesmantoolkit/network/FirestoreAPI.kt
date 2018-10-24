@@ -2,6 +2,7 @@ package com.bramdeconinck.technologysalesmantoolkit.network
 
 import android.content.ContentValues.TAG
 import android.util.Log
+import com.bramdeconinck.technologysalesmantoolkit.adapters.ServiceAdapter
 import com.bramdeconinck.technologysalesmantoolkit.models.Category
 import com.bramdeconinck.technologysalesmantoolkit.models.Service
 import com.google.firebase.firestore.FirebaseFirestore
@@ -13,24 +14,26 @@ class FirestoreAPI {
     private val db = FirebaseFirestore.getInstance()
 
     //Get all services from the Firestore
-    fun getServicesFromFirestore(): MutableList<Service> {
+    fun getServicesFromFirestore(services: MutableList<Service>, adapter: ServiceAdapter) {
         val servicesList: MutableList<Service> = mutableListOf()
         db.collection("Services").get()
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         for (doc in task.result!!) {
-                            servicesList.add(fromSnapshotToService(doc))
+                            services.add(fromSnapshotToService(doc))
                         }
+                        adapter.notifyDataSetChanged()
                         Log.d(TAG, "Retrieved all service documents successfully")
                     } else {
                         Log.d(TAG, "Error getting service documents: ", task.exception)
                     }
                 }
-        return servicesList
     }
 
     //Converting the data of a snapshot to a Service object
     private fun fromSnapshotToService(snapshot: QueryDocumentSnapshot): Service {
+        Log.d("TAG", "Service gevonden: ${snapshot.id}")
+
         return Service(
                 id = snapshot.id,
                 name = snapshot.getString("name")!!,
