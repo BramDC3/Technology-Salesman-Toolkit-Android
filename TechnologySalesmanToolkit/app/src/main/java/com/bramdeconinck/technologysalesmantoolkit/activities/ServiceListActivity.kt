@@ -12,7 +12,7 @@ import com.google.firebase.Timestamp
 import kotlinx.android.synthetic.main.activity_service_list.*
 import kotlinx.android.synthetic.main.service_list.*
 
-class ServiceListActivity : AppCompatActivity() {
+class ServiceListActivity : AppCompatActivity(), IFirebaseCallback {
 
     private lateinit var firestoreApi: FirestoreAPI
     private lateinit var serviceData: MutableList<Service>
@@ -48,13 +48,12 @@ class ServiceListActivity : AppCompatActivity() {
 
     private fun fillRecyclerview() {
         if (serviceData.isNotEmpty()) serviceData.clear()
-        firestoreApi.getServicesFromFirestore(object: IFirebaseCallback {
-            override fun onCallBack(list: MutableList<Service>) {
-                serviceData.addAll(list)
-                serviceAdapter.notifyDataSetChanged()
-            }
+        firestoreApi.getServicesFromFirestore(this)
+    }
 
-        })
+    override fun onCallBack(list: MutableList<Service>) {
+        serviceData.addAll(list)
+        serviceAdapter.notifyDataSetChanged()
     }
 
 }
