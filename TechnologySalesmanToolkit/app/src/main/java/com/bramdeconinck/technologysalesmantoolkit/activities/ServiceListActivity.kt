@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.bramdeconinck.technologysalesmantoolkit.R
 import com.bramdeconinck.technologysalesmantoolkit.adapters.ServiceAdapter
+import com.bramdeconinck.technologysalesmantoolkit.interfaces.IFirebaseCallback
 import com.bramdeconinck.technologysalesmantoolkit.models.Category
 import com.bramdeconinck.technologysalesmantoolkit.models.Service
 import com.bramdeconinck.technologysalesmantoolkit.network.FirestoreAPI
@@ -42,8 +43,18 @@ class ServiceListActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
 
+        fillRecyclerview()
+    }
+
+    private fun fillRecyclerview() {
         if (serviceData.isNotEmpty()) serviceData.clear()
-        firestoreApi.getServicesFromFirestore(serviceData, serviceAdapter)
+        firestoreApi.getServicesFromFirestore(object: IFirebaseCallback {
+            override fun onCallBack(list: MutableList<Service>) {
+                serviceData.addAll(list)
+                serviceAdapter.notifyDataSetChanged()
+            }
+
+        })
     }
 
 }
