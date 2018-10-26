@@ -24,6 +24,14 @@
         tools:context="com.bramdeconinck.technologysalesmantoolkit.activities.ServiceListActivity"
         tools:listitem="@layout/service_list_content" />
 
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        style="?android:attr/progressBarStyle"/>
+
     <FrameLayout
         android:id="@+id/service_detail_container"
         android:layout_width="0dp"

@@ -16,6 +16,7 @@ class FirestoreAPI {
 
     //Get all services from the Firestore
     fun getServicesFromFirestore(firebaseCallback: IFirebaseCallback) {
+        firebaseCallback.showProgress()
         val servicesList: MutableList<Service> = mutableListOf()
         db.collection("Services").get()
                 .addOnCompleteListener { task ->
@@ -26,8 +27,10 @@ class FirestoreAPI {
                         firebaseCallback.onCallBack(servicesList)
                         Log.d(TAG, "Retrieved all service documents successfully")
                     } else {
+                        firebaseCallback.showMessage("Er is een fout opgetreden tijdens het ophalen van de gegevens.")
                         Log.d(TAG, "Error getting service documents: ", task.exception)
                     }
+                    firebaseCallback.hideProgress()
                 }
     }
 

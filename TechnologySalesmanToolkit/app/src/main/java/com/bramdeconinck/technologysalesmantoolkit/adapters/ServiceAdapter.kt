@@ -1,5 +1,6 @@
 package com.bramdeconinck.technologysalesmantoolkit.adapters
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.widget.RecyclerView
@@ -53,7 +54,7 @@ class ServiceAdapter(private val parentActivity: ServiceListActivity, private va
         holder.naamView.text = item.name
         holder.beschrijvingView.text = item.description
         holder.categorieView.text = item.category.toString()
-        holder.prijsView.text = item.price.toString()
+        if (item.price != 0.0) holder.prijsView.text = String.format("€ %.2f", item.price)
 
         with(holder.itemView) {
             tag = item

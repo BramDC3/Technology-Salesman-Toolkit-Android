@@ -2,6 +2,8 @@ package com.bramdeconinck.technologysalesmantoolkit.activities
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.view.View
+import android.widget.Toast
 import com.bramdeconinck.technologysalesmantoolkit.R
 import com.bramdeconinck.technologysalesmantoolkit.adapters.ServiceAdapter
 import com.bramdeconinck.technologysalesmantoolkit.interfaces.IFirebaseCallback
@@ -51,9 +53,27 @@ class ServiceListActivity : AppCompatActivity(), IFirebaseCallback {
         firestoreApi.getServicesFromFirestore(this)
     }
 
+    // De methodes van de interface IFirebaseCallback worden gebruikt
+    // voor het ophalen van gegevens uit de Firebase en de
+    // RecyclerView er mee te vullen.
     override fun onCallBack(list: MutableList<Service>) {
         serviceData.addAll(list)
         serviceAdapter.notifyDataSetChanged()
+    }
+
+    // Deze methode laat een loading indicator zien
+    override fun showProgress() {
+        progress_bar.visibility = View.VISIBLE
+    }
+
+    // Deze methode haalt de loading indicator weg
+    override fun hideProgress() {
+        progress_bar.visibility = View.GONE
+    }
+
+    // Deze methode toont een foutmelding indien er geen gegevens opgehaald kunnen worden.
+    override fun showMessage(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show()
     }
 
 }
