@@ -1,10 +1,12 @@
-package com.bramdeconinck.technologysalesmantoolkit
+package com.bramdeconinck.technologysalesmantoolkit.activities
 
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
+import com.bramdeconinck.technologysalesmantoolkit.R
+import com.bramdeconinck.technologysalesmantoolkit.utils.Utils.isValid
+import com.bramdeconinck.technologysalesmantoolkit.utils.Utils.makeToast
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -33,7 +35,6 @@ class LoginActivity : AppCompatActivity() {
 
         if (firebaseUser != null) {
             //Intent to MainActivity
-
         } else {
             gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                     .requestIdToken(getString(R.string.default_web_client_id))
@@ -62,7 +63,7 @@ class LoginActivity : AppCompatActivity() {
                 val account: GoogleSignInAccount? = task.getResult(ApiException::class.java)
                 firebaseAuthWithGoogle(account)
             } catch (e: ApiException) {
-                makeToast(getString(R.string.sign_in_error))
+                makeToast(this, getString(R.string.sign_in_error))
             }
         }
     }
@@ -73,9 +74,9 @@ class LoginActivity : AppCompatActivity() {
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
                         val firebaseUser = mAuth.currentUser
-                        makeToast(getString(R.string.welcome, firebaseUser?.displayName))
+                        makeToast(this, getString(R.string.welcome, firebaseUser?.displayName))
                     } else {
-                        makeToast(getString(R.string.sign_in_error))
+                        makeToast(this, getString(R.string.sign_in_error))
                     }
                 }
     }
@@ -86,12 +87,12 @@ class LoginActivity : AppCompatActivity() {
                     if (task.isSuccessful) {
                         if (mAuth.currentUser!!.isEmailVerified) {
                             val firebaseUser = mAuth.currentUser
-                            makeToast(getString(R.string.welcome, firebaseUser?.displayName))
+                            makeToast(this, getString(R.string.welcome, firebaseUser?.displayName))
                         } else {
-                            makeToast(getString(R.string.email_is_not_verified))
+                            makeToast(this, getString(R.string.email_is_not_verified))
                         }
                     } else {
-                        makeToast(getString(R.string.sign_in_error))
+                        makeToast(this, getString(R.string.sign_in_error))
                     }
                 }
     }
@@ -99,14 +100,13 @@ class LoginActivity : AppCompatActivity() {
     private fun validateLoginForm() {
         if (!txt_email.text.isBlank()
                 && !txt_password.text.isBlank()) {
-            logInWithFirebaseAccount()
+            if (isValid(txt_email.text.toString())) {
+                logInWithFirebaseAccount()
+            }
+            makeToast(this, getString(R.string.invalid_email))
         } else {
-            makeToast(getString(R.string.empty_field))
+            makeToast(this, getString(R.string.empty_field))
         }
-    }
-
-    private fun makeToast(text: String) {
-        Toast.makeText(this, text, Toast.LENGTH_LONG).show()
     }
 
     private fun goToRegistration() {
