@@ -7,10 +7,9 @@ import android.widget.Toast
 import com.bramdeconinck.technologysalesmantoolkit.R
 import com.bramdeconinck.technologysalesmantoolkit.adapters.ServiceAdapter
 import com.bramdeconinck.technologysalesmantoolkit.interfaces.IFirebaseCallback
-import com.bramdeconinck.technologysalesmantoolkit.models.Category
 import com.bramdeconinck.technologysalesmantoolkit.models.Service
 import com.bramdeconinck.technologysalesmantoolkit.network.FirestoreAPI
-import com.google.firebase.Timestamp
+import com.bramdeconinck.technologysalesmantoolkit.utils.Utils.makeToast
 import kotlinx.android.synthetic.main.activity_service_list.*
 import kotlinx.android.synthetic.main.service_list.*
 
@@ -63,17 +62,17 @@ class ServiceListActivity : AppCompatActivity(), IFirebaseCallback {
 
     // Deze methode laat een loading indicator zien
     override fun showProgress() {
-        progress_bar.visibility = View.VISIBLE
+        if (serviceData.isEmpty()) progress_bar.visibility = View.VISIBLE
     }
 
     // Deze methode haalt de loading indicator weg
     override fun hideProgress() {
-        progress_bar.visibility = View.GONE
+        if (serviceData.isEmpty()) progress_bar.visibility = View.GONE
     }
 
     // Deze methode toont een foutmelding indien er geen gegevens opgehaald kunnen worden.
-    override fun showMessage(message: String) {
-        Toast.makeText(this, message, Toast.LENGTH_LONG).show()
+    override fun showMessage() {
+        makeToast(this, getString(R.string.fetching_data_error))
     }
 
 }

@@ -5,6 +5,6 @@ import com.bramdeconinck.technologysalesmantoolkit.models.Service
 interface IFirebaseCallback {
     fun showProgress()
     fun hideProgress()
-    fun showMessage(message: String)
+    fun showMessage()
     fun onCallBack(list: MutableList<Service>)
 }
