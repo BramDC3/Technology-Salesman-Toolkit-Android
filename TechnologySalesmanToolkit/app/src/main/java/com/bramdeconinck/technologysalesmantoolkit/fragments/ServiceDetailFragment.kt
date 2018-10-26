@@ -10,17 +10,8 @@ import com.bramdeconinck.technologysalesmantoolkit.dummy.DummyContent
 import kotlinx.android.synthetic.main.activity_service_detail.*
 import kotlinx.android.synthetic.main.service_detail.view.*
 
-/**
- * A fragment representing a single Service detail screen.
- * This fragment is either contained in a [ServiceListActivity]
- * in two-pane mode (on tablets) or a [ServiceDetailActivity]
- * on handsets.
- */
 class ServiceDetailFragment : Fragment() {
 
-    /**
-     * The dummy content this fragment is presenting.
-     */
     private var item: DummyContent.DummyItem? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -50,10 +41,8 @@ class ServiceDetailFragment : Fragment() {
     }
 
     companion object {
-        /**
-         * The fragment argument representing the item ID that this fragment
-         * represents.
-         */
+
+         // The fragment argument representing the item ID that this fragment represents.
         const val ARG_ITEM_ID = "item_id"
     }
 }

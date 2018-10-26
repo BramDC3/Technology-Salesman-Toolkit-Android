@@ -2,7 +2,6 @@ package com.bramdeconinck.technologysalesmantoolkit.network
 
 import android.content.ContentValues.TAG
 import android.util.Log
-import com.bramdeconinck.technologysalesmantoolkit.adapters.ServiceAdapter
 import com.bramdeconinck.technologysalesmantoolkit.interfaces.IFirebaseCallback
 import com.bramdeconinck.technologysalesmantoolkit.models.Category
 import com.bramdeconinck.technologysalesmantoolkit.models.Service
@@ -11,7 +10,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot
 
 class FirestoreAPI {
 
-    //Access a Cloud Firestore instance
+    //Access a Firebase Firestore instance
     private val db = FirebaseFirestore.getInstance()
 
     //Get all services from the Firestore
