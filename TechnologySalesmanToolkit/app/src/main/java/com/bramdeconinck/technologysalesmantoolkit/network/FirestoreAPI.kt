@@ -1,6 +1,5 @@
 package com.bramdeconinck.technologysalesmantoolkit.network
 
-import android.content.ContentValues.TAG
 import android.util.Log
 import com.bramdeconinck.technologysalesmantoolkit.interfaces.IFirebaseCallback
 import com.bramdeconinck.technologysalesmantoolkit.models.Category
@@ -10,30 +9,29 @@ import com.google.firebase.firestore.QueryDocumentSnapshot
 
 class FirestoreAPI {
 
-    //Access a Firebase Firestore instance
+    // Access a Firebase Firestore instance
     private val db = FirebaseFirestore.getInstance()
 
-    //Get all services from the Firestore
+    // Get all services from the Firestore
     fun getServicesFromFirestore(firebaseCallback: IFirebaseCallback) {
         firebaseCallback.showProgress()
-        val servicesList: MutableList<Service> = mutableListOf()
         db.collection("Services").get()
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
+                        val servicesList: MutableList<Service> = mutableListOf()
                         for (doc in task.result!!) {
                             servicesList.add(fromSnapshotToService(doc))
                         }
                         firebaseCallback.onCallBack(servicesList)
-                        Log.d(TAG, "Retrieved all service documents successfully")
-                    } else {
-                        firebaseCallback.showMessage("Er is een fout opgetreden tijdens het ophalen van de gegevens.")
-                        Log.d(TAG, "Error getting service documents: ", task.exception)
+                    }
+                    else {
+                        firebaseCallback.showMessage()
                     }
                     firebaseCallback.hideProgress()
                 }
     }
 
-    //Converting the data of a snapshot to a Service object
+    // Converting the data of a snapshot to a Service object
     private fun fromSnapshotToService(snapshot: QueryDocumentSnapshot): Service {
         Log.d("TAG", "Service gevonden: ${snapshot.id}")
 
@@ -49,7 +47,7 @@ class FirestoreAPI {
         )
     }
 
-    //Retrieve the right category based on an integer
+    // Retrieve the right category of a service based on an integer
     private fun fromIntToCategory(i: Int): Category {
         return when (i) {
             0 -> Category.Windows

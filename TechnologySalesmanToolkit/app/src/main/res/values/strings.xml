@@ -1,10 +1,8 @@
 <resources>
+    <!-- App name -->
     <string name="app_name">Technology Salesman Toolkit</string>
 
-    //Error message for failed authentications
-    <string name="sign_in_error">Er is een fout opgetreden tijdens het aanmelden. Gelieve het opnieuw te proberen.</string>
-
-    //Hint text for the LoginActivity
+    <!-- LoginActivity -->
     <string name="welcome">Welkom, %1$s!</string>
     <string name="email">E-mailadres</string>
     <string name="password">Wachtwoord</string>
@@ -13,7 +11,7 @@
     <string name="email_is_not_verified">Gelieve uw e-mailadres te bevestigen aan de hand van de verzonden e-mail.</string>
     <string name="empty_field">"Gelieve alle velden in te vullen."</string>
 
-    //Hint text for the RegistrationActivity
+    <!-- RegistrationActivity -->
     <string name="firstname">Voornaam</string>
     <string name="lastname">Achternaam</string>
     <string name="repeatpassword">Herhaal wachtwoord</string>
@@ -23,7 +21,15 @@
     <string name="account_created">Uw account werd succesvol aangemaakt!</string>
     <string name="invalid_email">Gelieve een geldig e-mailadres in te voeren.</string>
     <string name="passwords_dont_match">De twee ingevoerde wachtwoorden komen niet overeen.</string>
-    <string name="title_service_list">Services</string>
-    <string name="title_service_detail">Service Detail</string>
+
+    <!-- ServiceListActivity -->
+    <string name="title_service_list">Dienstlijst</string>
+
+    <!-- ServiceDetailActivity -->
+    <string name="title_service_detail">Dienst detail</string>
+
+    <!-- Firebase errors  -->
+    <string name="sign_in_error">Er is een fout opgetreden tijdens het aanmelden. Gelieve het opnieuw te proberen.</string>
+    <string name="fetching_data_error">Er is een fout opgetreden tijdens het ophalen van de gegevens.</string>
 
 </resources>
