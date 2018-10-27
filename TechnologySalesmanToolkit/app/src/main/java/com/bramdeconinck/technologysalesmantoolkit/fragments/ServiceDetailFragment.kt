@@ -12,7 +12,6 @@ import android.webkit.WebViewClient
 import com.bramdeconinck.technologysalesmantoolkit.R
 import kotlinx.android.synthetic.main.service_detail.view.*
 
-
 class ServiceDetailFragment : Fragment() {
 
     private var service: Service? = null

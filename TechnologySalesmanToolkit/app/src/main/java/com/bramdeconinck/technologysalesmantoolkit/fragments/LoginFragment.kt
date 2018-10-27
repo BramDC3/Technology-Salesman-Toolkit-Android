@@ -1,12 +1,13 @@
-package com.bramdeconinck.technologysalesmantoolkit.activities
+package com.bramdeconinck.technologysalesmantoolkit.fragments
 
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v4.app.Fragment
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import com.bramdeconinck.technologysalesmantoolkit.R
-import com.bramdeconinck.technologysalesmantoolkit.utils.Utils.isValid
-import com.bramdeconinck.technologysalesmantoolkit.utils.Utils.makeToast
+import com.bramdeconinck.technologysalesmantoolkit.utils.Utils
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -14,39 +15,33 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
-import kotlinx.android.synthetic.main.activity_login.*
 import com.google.firebase.auth.GoogleAuthProvider
+import kotlinx.android.synthetic.main.fragment_login.*
+import kotlinx.android.synthetic.main.fragment_login.view.*
 
-class LoginActivity : AppCompatActivity() {
+class LoginFragment : Fragment() {
 
-    private lateinit var mGoogleSignInClient: GoogleSignInClient
     private lateinit var gso: GoogleSignInOptions
     private lateinit var mAuth: FirebaseAuth
+    private lateinit var mGoogleSignInClient: GoogleSignInClient
     private val RC_SIGN_IN: Int = 1
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        val rootView = inflater.inflate(R.layout.fragment_login, container, false)
+
+        gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestEmail()
+                .build()
 
         mAuth = FirebaseAuth.getInstance()
 
-        val firebaseUser: FirebaseUser? = mAuth.currentUser
+        mGoogleSignInClient = GoogleSignIn.getClient(this.requireActivity(), gso)
 
-        if (firebaseUser != null) {
-            //Intent to MainActivity
-        } else {
-            gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                    .requestIdToken(getString(R.string.default_web_client_id))
-                    .requestEmail()
-                    .build()
+        rootView.btn_signIn.setOnClickListener { _: View? -> validateLoginForm() }
+        rootView.btn_signInWithGoogle.setOnClickListener { _: View? -> signInWithGoogle() }
 
-            mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
-
-            btn_signIn.setOnClickListener { _: View? -> validateLoginForm() }
-            btn_signInWithGoogle.setOnClickListener { _: View? -> signInWithGoogle() }
-            lbl_goToRegistration.setOnClickListener { _: View? -> goToRegistration() }
-        }
+        return rootView
     }
 
     private fun signInWithGoogle() {
@@ -63,7 +58,7 @@ class LoginActivity : AppCompatActivity() {
                 val account: GoogleSignInAccount? = task.getResult(ApiException::class.java)
                 firebaseAuthWithGoogle(account)
             } catch (e: ApiException) {
-                makeToast(this, getString(R.string.sign_in_error))
+                Utils.makeToast(this.requireContext(), getString(R.string.sign_in_error))
             }
         }
     }
@@ -71,28 +66,28 @@ class LoginActivity : AppCompatActivity() {
     private fun firebaseAuthWithGoogle(acct: GoogleSignInAccount?) {
         val credential = GoogleAuthProvider.getCredential(acct?.idToken, null)
         mAuth.signInWithCredential(credential)
-                .addOnCompleteListener(this) { task ->
+                .addOnCompleteListener(this.requireActivity()) { task ->
                     if (task.isSuccessful) {
                         val firebaseUser = mAuth.currentUser
-                        makeToast(this, getString(R.string.welcome, firebaseUser?.displayName))
+                        Utils.makeToast(this.requireContext(), getString(R.string.welcome, firebaseUser?.displayName))
                     } else {
-                        makeToast(this, getString(R.string.sign_in_error))
+                        Utils.makeToast(this.requireContext(), getString(R.string.sign_in_error))
                     }
                 }
     }
 
     private fun logInWithFirebaseAccount() {
         mAuth.signInWithEmailAndPassword(txt_email.text.toString(), txt_password.text.toString())
-                .addOnCompleteListener(this) { task ->
+                .addOnCompleteListener(this.requireActivity()) { task ->
                     if (task.isSuccessful) {
                         if (mAuth.currentUser!!.isEmailVerified) {
                             val firebaseUser = mAuth.currentUser
-                            makeToast(this, getString(R.string.welcome, firebaseUser?.displayName))
+                            Utils.makeToast(this.requireContext(), getString(R.string.welcome, firebaseUser?.displayName))
                         } else {
-                            makeToast(this, getString(R.string.email_is_not_verified))
+                            Utils.makeToast(this.requireContext(), getString(R.string.email_is_not_verified))
                         }
                     } else {
-                        makeToast(this, getString(R.string.sign_in_error))
+                        Utils.makeToast(this.requireContext(), getString(R.string.sign_in_error))
                     }
                 }
     }
@@ -100,18 +95,14 @@ class LoginActivity : AppCompatActivity() {
     private fun validateLoginForm() {
         if (!txt_email.text.isBlank()
                 && !txt_password.text.isBlank()) {
-            if (isValid(txt_email.text.toString())) {
+            if (Utils.isValid(txt_email.text.toString())) {
                 logInWithFirebaseAccount()
+            } else {
+                Utils.makeToast(this.requireContext(), getString(R.string.invalid_email))
             }
-            makeToast(this, getString(R.string.invalid_email))
         } else {
-            makeToast(this, getString(R.string.empty_field))
+            Utils.makeToast(this.requireContext(), getString(R.string.empty_field))
         }
-    }
-
-    private fun goToRegistration() {
-        val intent = Intent(this, RegistrationActivity::class.java)
-        startActivity(intent)
     }
 
 }
