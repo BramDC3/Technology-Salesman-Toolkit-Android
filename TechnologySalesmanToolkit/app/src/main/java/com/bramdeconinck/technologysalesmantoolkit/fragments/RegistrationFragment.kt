@@ -1,40 +1,40 @@
-package com.bramdeconinck.technologysalesmantoolkit.activities
+package com.bramdeconinck.technologysalesmantoolkit.fragments
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v4.app.Fragment
+import android.view.LayoutInflater
 import android.view.View
-import android.widget.Toast
+import android.view.ViewGroup
 import com.bramdeconinck.technologysalesmantoolkit.R
 import com.bramdeconinck.technologysalesmantoolkit.utils.Utils
-import com.bramdeconinck.technologysalesmantoolkit.utils.Utils.isValid
-import com.bramdeconinck.technologysalesmantoolkit.utils.Utils.makeToast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.UserProfileChangeRequest
-import kotlinx.android.synthetic.main.activity_registration.*
-import java.util.regex.Pattern
+import kotlinx.android.synthetic.main.fragment_registration.*
+import kotlinx.android.synthetic.main.fragment_registration.view.*
 
-class RegistrationActivity : AppCompatActivity() {
+class RegistrationFragment : Fragment() {
 
     private lateinit var mAuth: FirebaseAuth
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_registration)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        val rootView = inflater.inflate(R.layout.fragment_registration, container, false)
 
         mAuth = FirebaseAuth.getInstance()
 
-        btn_register.setOnClickListener { _: View? -> validateRegistrationForm() }
+        rootView.btn_register.setOnClickListener { _: View? -> validateRegistrationForm() }
+
+        return rootView
     }
 
     private fun createFirebaseAccount() {
         mAuth.createUserWithEmailAndPassword(txt_email_r.text.toString(), txt_password_r.text.toString())
-                .addOnCompleteListener(this) { task ->
+                .addOnCompleteListener(this.requireActivity()) { task ->
                     if (task.isSuccessful) {
                         val firebaseUser = mAuth.currentUser
                         updateUserInfo(firebaseUser)
                     } else {
-                        makeToast(this, getString(R.string.account_not_created))
+                        Utils.makeToast(this.requireContext(), getString(R.string.account_not_created))
                     }
                 }
     }
@@ -48,7 +48,7 @@ class RegistrationActivity : AppCompatActivity() {
                 ?.addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         firebaseUser.sendEmailVerification()
-                        makeToast(this, getString(R.string.account_created))
+                        Utils.makeToast(this.requireContext(), getString(R.string.account_created))
                     }
                 }
     }
@@ -59,17 +59,17 @@ class RegistrationActivity : AppCompatActivity() {
                 && !txt_email_r.text.isBlank()
                 && !txt_password_r.text.isBlank()
                 && !txt_repeatpassword.text.isBlank()) {
-            if (isValid(txt_email_r.text.toString())) {
+            if (Utils.isValid(txt_email_r.text.toString())) {
                 if (txt_password_r.text.toString() == txt_repeatpassword.text.toString()) {
                     createFirebaseAccount()
                 } else {
-                    makeToast(this, getString(R.string.passwords_dont_match))
+                    Utils.makeToast(this.requireContext(), getString(R.string.passwords_dont_match))
                 }
             } else {
-                makeToast(this, getString(R.string.invalid_email))
+                Utils.makeToast(this.requireContext(), getString(R.string.invalid_email))
             }
         } else {
-            makeToast(this, getString(R.string.empty_field))
+            Utils.makeToast(this.requireContext(), getString(R.string.empty_field))
         }
     }
 
