@@ -25,7 +25,7 @@ class ServiceAdapter(private val parentActivity: ServiceListActivity, private va
             if (twoPane) {
                 val fragment = ServiceDetailFragment().apply {
                     arguments = Bundle().apply {
-                        putString(ServiceDetailFragment.ARG_ITEM_ID, item.id)
+                        putParcelable(ServiceDetailFragment.ARG_ITEM_ID, item)
                     }
                 }
                 parentActivity.supportFragmentManager
@@ -34,7 +34,7 @@ class ServiceAdapter(private val parentActivity: ServiceListActivity, private va
                         .commit()
             } else {
                 val intent = Intent(v.context, ServiceDetailActivity::class.java).apply {
-                    putExtra(ServiceDetailFragment.ARG_ITEM_ID, item.name)
+                    putExtra(ServiceDetailFragment.ARG_ITEM_ID, item)
                 }
                 v.context.startActivity(intent)
             }
