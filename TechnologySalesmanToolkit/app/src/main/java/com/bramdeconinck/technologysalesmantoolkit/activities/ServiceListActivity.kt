@@ -27,7 +27,6 @@ class ServiceListActivity : AppCompatActivity(), IFirebaseCallback {
         setContentView(R.layout.activity_service_list)
 
         setSupportActionBar(toolbar)
-        toolbar.title = title
 
         //If the service detail container is not null,
         //then the app is opened with a tablet

@@ -1,6 +1,5 @@
 package com.bramdeconinck.technologysalesmantoolkit.adapters
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.widget.RecyclerView
@@ -35,7 +34,7 @@ class ServiceAdapter(private val parentActivity: ServiceListActivity, private va
                         .commit()
             } else {
                 val intent = Intent(v.context, ServiceDetailActivity::class.java).apply {
-                    putExtra(ServiceDetailFragment.ARG_ITEM_ID, item.id)
+                    putExtra(ServiceDetailFragment.ARG_ITEM_ID, item.name)
                 }
                 v.context.startActivity(intent)
             }

@@ -23,7 +23,6 @@ class ServiceDetailFragment : Fragment() {
                 // arguments. In a real-world scenario, use a Loader
                 // to load content from a content provider.
                 item = DummyContent.ITEM_MAP[it.getString(ARG_ITEM_ID)]
-                activity?.toolbar_layout?.title = item?.content
             }
         }
     }
@@ -41,7 +40,6 @@ class ServiceDetailFragment : Fragment() {
     }
 
     companion object {
-
          // The fragment argument representing the item ID that this fragment represents.
         const val ARG_ITEM_ID = "item_id"
     }

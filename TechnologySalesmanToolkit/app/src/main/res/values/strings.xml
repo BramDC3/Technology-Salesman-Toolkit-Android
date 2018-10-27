@@ -22,12 +22,6 @@
     <string name="invalid_email">Gelieve een geldig e-mailadres in te voeren.</string>
     <string name="passwords_dont_match">De twee ingevoerde wachtwoorden komen niet overeen.</string>
 
-    <!-- ServiceListActivity -->
-    <string name="title_service_list">Dienstlijst</string>
-
-    <!-- ServiceDetailActivity -->
-    <string name="title_service_detail">Dienst detail</string>
-
     <!-- Firebase errors  -->
     <string name="sign_in_error">Er is een fout opgetreden tijdens het aanmelden. Gelieve het opnieuw te proberen.</string>
     <string name="fetching_data_error">Er is een fout opgetreden tijdens het ophalen van de gegevens.</string>

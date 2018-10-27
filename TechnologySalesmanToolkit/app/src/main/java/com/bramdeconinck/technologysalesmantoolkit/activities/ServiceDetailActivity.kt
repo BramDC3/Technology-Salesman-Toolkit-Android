@@ -14,9 +14,10 @@ class ServiceDetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_service_detail)
-        setSupportActionBar(detail_toolbar)
 
+        setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.title = intent.getStringExtra(ServiceDetailFragment.ARG_ITEM_ID)
 
         if (savedInstanceState == null) {
             // Create the detail fragment and add it to the activity using a fragment transaction.

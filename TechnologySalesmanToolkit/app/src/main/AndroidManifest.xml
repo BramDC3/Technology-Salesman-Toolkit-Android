@@ -13,7 +13,6 @@
         <activity android:name=".activities.RegistrationActivity" />
         <activity
             android:name=".activities.ServiceListActivity"
-            android:label="@string/title_service_list"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,7 +22,6 @@
         </activity>
         <activity
             android:name=".activities.ServiceDetailActivity"
-            android:label="@string/title_service_detail"
             android:parentActivityName=".activities.ServiceListActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
