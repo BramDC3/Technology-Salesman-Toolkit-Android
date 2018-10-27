@@ -4,26 +4,33 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
 import android.view.MenuItem
 import com.bramdeconinck.technologysalesmantoolkit.R
 import com.bramdeconinck.technologysalesmantoolkit.fragments.ServiceDetailFragment
+import com.bramdeconinck.technologysalesmantoolkit.models.Service
 import kotlinx.android.synthetic.main.activity_service_detail.*
 
 class ServiceDetailActivity : AppCompatActivity() {
 
+    private var service: Service? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_service_detail)
-        setSupportActionBar(detail_toolbar)
+
+        setSupportActionBar(toolbar)
+
+        service = intent.getParcelableExtra(ServiceDetailFragment.ARG_ITEM_ID)
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.title = service?.name
 
         if (savedInstanceState == null) {
             // Create the detail fragment and add it to the activity using a fragment transaction.
             val fragment = ServiceDetailFragment().apply {
                 arguments = Bundle().apply {
-                    putString(ServiceDetailFragment.ARG_ITEM_ID,
-                            intent.getStringExtra(ServiceDetailFragment.ARG_ITEM_ID))
+                    putParcelable(ServiceDetailFragment.ARG_ITEM_ID, service)
                 }
             }
 

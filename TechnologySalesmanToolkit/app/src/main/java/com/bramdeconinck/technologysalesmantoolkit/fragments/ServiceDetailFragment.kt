@@ -2,47 +2,50 @@ package com.bramdeconinck.technologysalesmantoolkit.fragments
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.webkit.WebView
+import com.bramdeconinck.technologysalesmantoolkit.models.Service
+import android.webkit.WebViewClient
 import com.bramdeconinck.technologysalesmantoolkit.R
-import com.bramdeconinck.technologysalesmantoolkit.dummy.DummyContent
-import kotlinx.android.synthetic.main.activity_service_detail.*
 import kotlinx.android.synthetic.main.service_detail.view.*
+
 
 class ServiceDetailFragment : Fragment() {
 
-    private var item: DummyContent.DummyItem? = null
+    private var service: Service? = null
+    private val defaultUrl: String = "https://bramdeconinck.com/404"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        arguments?.let {
-            if (it.containsKey(ARG_ITEM_ID)) {
-                // Load the dummy content specified by the fragment
-                // arguments. In a real-world scenario, use a Loader
-                // to load content from a content provider.
-                item = DummyContent.ITEM_MAP[it.getString(ARG_ITEM_ID)]
-                activity?.toolbar_layout?.title = item?.content
-            }
-        }
+        service = arguments?.getParcelable(ARG_ITEM_ID) as Service
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val rootView = inflater.inflate(R.layout.service_detail, container, false)
 
-        // Show the dummy content as text in a TextView.
-        item?.let {
-            rootView.service_detail.text = it.details
-        }
+        loadWebpage(rootView.service_detail)
 
         return rootView
     }
 
-    companion object {
+    private fun loadWebpage(webview: WebView) {
+        webview.loadUrl(defaultUrl)
+        try {
+            webview.loadUrl(service?.url)
+            webview.webViewClient = WebViewClient()
+            val webSettings = webview.settings
+            webSettings.setAppCacheEnabled(true)
+        } catch(e: UnsupportedOperationException) {
+            e.printStackTrace()
+        }
+    }
 
-         // The fragment argument representing the item ID that this fragment represents.
-        const val ARG_ITEM_ID = "item_id"
+    companion object {
+         // The fragment argument representing the service that this fragment represents
+        const val ARG_ITEM_ID = "serviceItem"
     }
 }

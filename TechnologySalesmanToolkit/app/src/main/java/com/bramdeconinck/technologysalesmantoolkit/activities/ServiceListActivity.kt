@@ -27,7 +27,6 @@ class ServiceListActivity : AppCompatActivity(), IFirebaseCallback {
         setContentView(R.layout.activity_service_list)
 
         setSupportActionBar(toolbar)
-        toolbar.title = title
 
         //If the service detail container is not null,
         //then the app is opened with a tablet
@@ -48,8 +47,8 @@ class ServiceListActivity : AppCompatActivity(), IFirebaseCallback {
     }
 
     private fun fillRecyclerview() {
-        if (serviceData.isNotEmpty()) serviceData.clear()
         firestoreApi.getServicesFromFirestore(this)
+        if (serviceData.isNotEmpty()) serviceData.clear()
     }
 
     // De methodes van de interface IFirebaseCallback worden gebruikt
@@ -67,7 +66,7 @@ class ServiceListActivity : AppCompatActivity(), IFirebaseCallback {
 
     // Deze methode haalt de loading indicator weg
     override fun hideProgress() {
-        if (serviceData.isEmpty()) progress_bar.visibility = View.GONE
+        if (progress_bar.visibility == View.VISIBLE) progress_bar.visibility = View.GONE
     }
 
     // Deze methode toont een foutmelding indien er geen gegevens opgehaald kunnen worden.
