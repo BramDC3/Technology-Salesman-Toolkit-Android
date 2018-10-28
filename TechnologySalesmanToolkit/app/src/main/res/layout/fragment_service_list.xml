@@ -9,7 +9,6 @@
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/service_list"
-        android:name="com.bramdeconinck.technologysalesmantoolkit.ServiceListFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layoutManager="LinearLayoutManager"
@@ -17,7 +16,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:context=".activities.ServiceListActivity"
         tools:listitem="@layout/service_list_content" />
 
     <ProgressBar

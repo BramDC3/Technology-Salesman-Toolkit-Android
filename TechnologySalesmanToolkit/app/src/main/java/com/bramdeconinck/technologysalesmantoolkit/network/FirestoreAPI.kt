@@ -1,6 +1,5 @@
 package com.bramdeconinck.technologysalesmantoolkit.network
 
-import android.util.Log
 import com.bramdeconinck.technologysalesmantoolkit.interfaces.IFirebaseCallback
 import com.bramdeconinck.technologysalesmantoolkit.models.Category
 import com.bramdeconinck.technologysalesmantoolkit.models.Service
@@ -33,8 +32,6 @@ class FirestoreAPI {
 
     // Converting the data of a snapshot to a Service object
     private fun fromSnapshotToService(snapshot: QueryDocumentSnapshot): Service {
-        Log.d("TAG", "Service gevonden: ${snapshot.id}")
-
         return Service(
                 id = snapshot.id,
                 name = snapshot.getString("name")!!,

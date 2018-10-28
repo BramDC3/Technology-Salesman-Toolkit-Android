@@ -1,20 +1,18 @@
 package com.bramdeconinck.technologysalesmantoolkit.adapters
 
-import android.content.Intent
 import android.os.Bundle
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.bramdeconinck.technologysalesmantoolkit.R
-import com.bramdeconinck.technologysalesmantoolkit.activities.ServiceDetailActivity
+import com.bramdeconinck.technologysalesmantoolkit.activities.MainActivity
 import com.bramdeconinck.technologysalesmantoolkit.fragments.ServiceDetailFragment
-import com.bramdeconinck.technologysalesmantoolkit.activities.ServiceListActivity
 import com.bramdeconinck.technologysalesmantoolkit.models.Service
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.service_list_content.view.*
 
-class ServiceAdapter(private val parentActivity: ServiceListActivity, private val values: List<Service>, private val twoPane: Boolean) :
+class ServiceAdapter(private val parentActivity: MainActivity, private val values: List<Service>, private val twoPane: Boolean) :
         RecyclerView.Adapter<ServiceAdapter.ViewHolder>() {
 
     private val onClickListener: View.OnClickListener
@@ -22,21 +20,22 @@ class ServiceAdapter(private val parentActivity: ServiceListActivity, private va
     init {
         onClickListener = View.OnClickListener { v ->
             val item = v.tag as Service
-            if (twoPane) {
-                val fragment = ServiceDetailFragment().apply {
-                    arguments = Bundle().apply {
-                        putParcelable(ServiceDetailFragment.ARG_ITEM_ID, item)
-                    }
+            val fragment = ServiceDetailFragment().apply {
+                arguments = Bundle().apply {
+                    putParcelable(ServiceDetailFragment.ARG_ITEM_ID, item)
                 }
+            }
+            if (twoPane) {
                 parentActivity.supportFragmentManager
                         .beginTransaction()
                         .replace(R.id.service_detail_container, fragment)
                         .commit()
             } else {
-                val intent = Intent(v.context, ServiceDetailActivity::class.java).apply {
-                    putExtra(ServiceDetailFragment.ARG_ITEM_ID, item)
-                }
-                v.context.startActivity(intent)
+                parentActivity.supportFragmentManager
+                        .beginTransaction()
+                        .replace(R.id.fragment_container, fragment)
+                        .addToBackStack(null)
+                        .commit()
             }
         }
     }

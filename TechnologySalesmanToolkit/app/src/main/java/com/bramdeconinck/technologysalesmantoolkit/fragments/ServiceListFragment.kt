@@ -1,19 +1,22 @@
-package com.bramdeconinck.technologysalesmantoolkit.activities
+package com.bramdeconinck.technologysalesmantoolkit.fragments
 
+import android.content.Context
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import android.support.v4.app.Fragment
+import android.view.LayoutInflater
 import android.view.View
-import android.widget.Toast
+import android.view.ViewGroup
 import com.bramdeconinck.technologysalesmantoolkit.R
+import com.bramdeconinck.technologysalesmantoolkit.activities.MainActivity
 import com.bramdeconinck.technologysalesmantoolkit.adapters.ServiceAdapter
 import com.bramdeconinck.technologysalesmantoolkit.interfaces.IFirebaseCallback
 import com.bramdeconinck.technologysalesmantoolkit.models.Service
 import com.bramdeconinck.technologysalesmantoolkit.network.FirestoreAPI
-import com.bramdeconinck.technologysalesmantoolkit.utils.Utils.makeToast
-import kotlinx.android.synthetic.main.activity_service_list.*
-import kotlinx.android.synthetic.main.service_list.*
+import com.bramdeconinck.technologysalesmantoolkit.utils.Utils
+import kotlinx.android.synthetic.main.fragment_service_list.*
+import kotlinx.android.synthetic.main.fragment_service_list.view.*
 
-class ServiceListActivity : AppCompatActivity(), IFirebaseCallback {
+class ServiceListFragment : Fragment(), IFirebaseCallback {
 
     private lateinit var firestoreApi: FirestoreAPI
     private lateinit var serviceData: MutableList<Service>
@@ -22,22 +25,27 @@ class ServiceListActivity : AppCompatActivity(), IFirebaseCallback {
     //Variable to check whether the app is running on a tablet or not
     private var twoPane: Boolean = false
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_service_list)
-
-        setSupportActionBar(toolbar)
-
-        //If the service detail container is not null,
-        //then the app is opened with a tablet
-        if (service_detail_container != null) {
-            twoPane = true
-        }
+    override fun onAttach(context: Context?) {
+        super.onAttach(context)
 
         firestoreApi = FirestoreAPI()
         serviceData = mutableListOf()
-        serviceAdapter = ServiceAdapter(this, serviceData, twoPane)
-        service_list.adapter = serviceAdapter
+    }
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        val rootView = inflater.inflate(R.layout.fragment_service_list, container, false)
+
+        //If the service detail container is not null,
+        //then the app is opened with a tablet
+        if (rootView.service_detail_container != null) {
+            twoPane = true
+        }
+
+        serviceAdapter = ServiceAdapter(this.requireActivity() as MainActivity, serviceData, twoPane)
+
+        rootView.service_list.adapter = serviceAdapter
+
+        return rootView
     }
 
     override fun onStart() {
@@ -71,7 +79,7 @@ class ServiceListActivity : AppCompatActivity(), IFirebaseCallback {
 
     // Deze methode toont een foutmelding indien er geen gegevens opgehaald kunnen worden.
     override fun showMessage() {
-        makeToast(this, getString(R.string.fetching_data_error))
+        Utils.makeToast(this.requireContext(), getString(R.string.fetching_data_error))
     }
 
 }
