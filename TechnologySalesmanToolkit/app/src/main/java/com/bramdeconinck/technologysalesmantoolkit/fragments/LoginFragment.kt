@@ -25,20 +25,16 @@ import kotlinx.android.synthetic.main.fragment_login.view.*
 
 class LoginFragment : Fragment() {
 
+    private lateinit var mCallback: IRegistrationSelected
     private lateinit var gso: GoogleSignInOptions
     private lateinit var mAuth: FirebaseAuth
     private lateinit var mGoogleSignInClient: GoogleSignInClient
-    private lateinit var mCallback: IRegistrationSelected
     private val RC_SIGN_IN: Int = 1
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
 
         mCallback = activity as IRegistrationSelected
-    }
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val rootView = inflater.inflate(R.layout.fragment_login, container, false)
 
         gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
@@ -48,6 +44,10 @@ class LoginFragment : Fragment() {
         mAuth = FirebaseAuth.getInstance()
 
         mGoogleSignInClient = GoogleSignIn.getClient(this.requireActivity(), gso)
+    }
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        val rootView = inflater.inflate(R.layout.fragment_login, container, false)
 
         rootView.btn_signIn.setOnClickListener { _: View? -> validateLoginForm() }
         rootView.btn_signInWithGoogle.setOnClickListener { _: View? -> signInWithGoogle() }
@@ -70,7 +70,7 @@ class LoginFragment : Fragment() {
                 val account: GoogleSignInAccount? = task.getResult(ApiException::class.java)
                 firebaseAuthWithGoogle(account)
             } catch (e: ApiException) {
-                Utils.makeToast(this.requireContext(), getString(R.string.sign_in_error))
+                print(e.message)
             }
         }
     }

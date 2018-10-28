@@ -1,5 +1,6 @@
 package com.bramdeconinck.technologysalesmantoolkit.fragments
 
+import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
@@ -17,10 +18,14 @@ class RegistrationFragment : Fragment() {
 
     private lateinit var mAuth: FirebaseAuth
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val rootView = inflater.inflate(R.layout.fragment_registration, container, false)
+    override fun onAttach(context: Context?) {
+        super.onAttach(context)
 
         mAuth = FirebaseAuth.getInstance()
+    }
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        val rootView = inflater.inflate(R.layout.fragment_registration, container, false)
 
         rootView.btn_register.setOnClickListener { _: View? -> validateRegistrationForm() }
 
