@@ -1,12 +1,16 @@
 package com.bramdeconinck.technologysalesmantoolkit.fragments
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.support.v4.app.ActivityCompat.startActivityForResult
 import android.support.v4.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.bramdeconinck.technologysalesmantoolkit.R
+import com.bramdeconinck.technologysalesmantoolkit.interfaces.IRegistrationSelected
 import com.bramdeconinck.technologysalesmantoolkit.utils.Utils
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
@@ -24,7 +28,14 @@ class LoginFragment : Fragment() {
     private lateinit var gso: GoogleSignInOptions
     private lateinit var mAuth: FirebaseAuth
     private lateinit var mGoogleSignInClient: GoogleSignInClient
+    private lateinit var mCallback: IRegistrationSelected
     private val RC_SIGN_IN: Int = 1
+
+    override fun onAttach(context: Context?) {
+        super.onAttach(context)
+
+        mCallback = activity as IRegistrationSelected
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val rootView = inflater.inflate(R.layout.fragment_login, container, false)
@@ -40,6 +51,7 @@ class LoginFragment : Fragment() {
 
         rootView.btn_signIn.setOnClickListener { _: View? -> validateLoginForm() }
         rootView.btn_signInWithGoogle.setOnClickListener { _: View? -> signInWithGoogle() }
+        rootView.lbl_goToRegistration.setOnClickListener { _: View? -> mCallback.onRegistrationLabelSelected() }
 
         return rootView
     }

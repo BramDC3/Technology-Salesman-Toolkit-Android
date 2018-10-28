@@ -48,7 +48,6 @@ class ServiceListActivity : AppCompatActivity(), IFirebaseCallback {
 
     private fun fillRecyclerview() {
         firestoreApi.getServicesFromFirestore(this)
-        if (serviceData.isNotEmpty()) serviceData.clear()
     }
 
     // De methodes van de interface IFirebaseCallback worden gebruikt
@@ -62,6 +61,7 @@ class ServiceListActivity : AppCompatActivity(), IFirebaseCallback {
     // Deze methode laat een loading indicator zien
     override fun showProgress() {
         if (serviceData.isEmpty()) progress_bar.visibility = View.VISIBLE
+        else serviceData.clear()
     }
 
     // Deze methode haalt de loading indicator weg

@@ -4,8 +4,10 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.bramdeconinck.technologysalesmantoolkit.R
 import com.bramdeconinck.technologysalesmantoolkit.fragments.LoginFragment
+import com.bramdeconinck.technologysalesmantoolkit.fragments.RegistrationFragment
+import com.bramdeconinck.technologysalesmantoolkit.interfaces.IRegistrationSelected
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), IRegistrationSelected {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -17,6 +19,15 @@ class MainActivity : AppCompatActivity() {
 
         fragmentManager.beginTransaction()
                 .add(R.id.fragment_container, loginFragment)
+                .commit()
+    }
+
+    override fun onRegistrationLabelSelected() {
+        val fragmentManager = supportFragmentManager
+
+        fragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, RegistrationFragment())
+                .addToBackStack(null)
                 .commit()
     }
 }
