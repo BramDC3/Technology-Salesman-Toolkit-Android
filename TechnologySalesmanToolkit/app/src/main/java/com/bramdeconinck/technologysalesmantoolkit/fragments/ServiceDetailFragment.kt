@@ -2,7 +2,6 @@ package com.bramdeconinck.technologysalesmantoolkit.fragments
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,7 +9,7 @@ import android.webkit.WebView
 import com.bramdeconinck.technologysalesmantoolkit.models.Service
 import android.webkit.WebViewClient
 import com.bramdeconinck.technologysalesmantoolkit.R
-import kotlinx.android.synthetic.main.service_detail.view.*
+import kotlinx.android.synthetic.main.fragment_service_detail.view.*
 
 class ServiceDetailFragment : Fragment() {
 
@@ -24,7 +23,7 @@ class ServiceDetailFragment : Fragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val rootView = inflater.inflate(R.layout.service_detail, container, false)
+        val rootView = inflater.inflate(R.layout.fragment_service_detail, container, false)
 
         loadWebpage(rootView.service_detail)
 

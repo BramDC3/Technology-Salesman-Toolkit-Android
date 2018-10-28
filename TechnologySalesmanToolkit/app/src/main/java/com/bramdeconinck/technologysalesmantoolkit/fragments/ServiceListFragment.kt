@@ -30,7 +30,6 @@ class ServiceListFragment : Fragment(), IFirebaseCallback {
 
         firestoreApi = FirestoreAPI()
         serviceData = mutableListOf()
-        serviceAdapter = ServiceAdapter(this.requireActivity() as MainActivity, serviceData, twoPane)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -41,6 +40,8 @@ class ServiceListFragment : Fragment(), IFirebaseCallback {
         if (rootView.service_detail_container != null) {
             twoPane = true
         }
+
+        serviceAdapter = ServiceAdapter(this.requireActivity() as MainActivity, serviceData, twoPane)
 
         rootView.service_list.adapter = serviceAdapter
 
