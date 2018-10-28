@@ -41,7 +41,7 @@ class ServiceListFragment : Fragment(), IFirebaseCallback {
             twoPane = true
         }
 
-        serviceAdapter = ServiceAdapter(this.requireActivity() as MainActivity, serviceData, twoPane)
+        serviceAdapter = ServiceAdapter(this, serviceData, twoPane)
 
         rootView.service_list.adapter = serviceAdapter
 

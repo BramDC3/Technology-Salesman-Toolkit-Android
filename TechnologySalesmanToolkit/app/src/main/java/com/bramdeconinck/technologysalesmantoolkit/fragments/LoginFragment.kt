@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.Navigation
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.bramdeconinck.technologysalesmantoolkit.R
 import com.bramdeconinck.technologysalesmantoolkit.utils.Utils
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -48,13 +49,12 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        btn_signIn.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.toServiceList))
         lbl_goToRegistration.setOnClickListener {
             it.findNavController().navigate(R.id.toRegistration)
         }
 
-        //btn_signIn.setOnClickListener { _: View? -> validateLoginForm() }
-        //btn_signInWithGoogle.setOnClickListener { _: View? -> signInWithGoogle() }
+        btn_signIn.setOnClickListener { _: View? -> validateLoginForm() }
+        btn_signInWithGoogle.setOnClickListener { _: View? -> signInWithGoogle() }
     }
 
     private fun signInWithGoogle() {
@@ -83,6 +83,7 @@ class LoginFragment : Fragment() {
                     if (task.isSuccessful) {
                         val firebaseUser = mAuth.currentUser
                         Utils.makeToast(this.requireContext(), getString(R.string.welcome, firebaseUser?.displayName))
+                        this.findNavController().navigate(R.id.toServiceList)
                     } else {
                         Utils.makeToast(this.requireContext(), getString(R.string.sign_in_error))
                     }
@@ -96,6 +97,7 @@ class LoginFragment : Fragment() {
                         if (mAuth.currentUser!!.isEmailVerified) {
                             val firebaseUser = mAuth.currentUser
                             Utils.makeToast(this.requireContext(), getString(R.string.welcome, firebaseUser?.displayName))
+                            this.findNavController().navigate(R.id.toServiceList)
                         } else {
                             Utils.makeToast(this.requireContext(), getString(R.string.email_is_not_verified))
                         }
