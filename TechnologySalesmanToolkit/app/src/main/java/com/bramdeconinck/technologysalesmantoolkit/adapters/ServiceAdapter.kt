@@ -33,7 +33,8 @@ class ServiceAdapter(private val parentActivity: MainActivity, private val value
             } else {
                 parentActivity.supportFragmentManager
                         .beginTransaction()
-                        .replace(R.id.fragment_container, fragment)
+                        //DIKKE RIP
+                        .replace(R.id.service_detail_container, fragment)
                         .addToBackStack(null)
                         .commit()
             }

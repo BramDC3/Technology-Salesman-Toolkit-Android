@@ -1,8 +1,7 @@
 apply plugin: 'com.android.application'
-
 apply plugin: 'kotlin-android'
-
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'com.google.gms.google-services'
 
 android {
     compileSdkVersion 28
@@ -46,7 +45,7 @@ dependencies {
     implementation 'com.google.android.gms:play-services-auth:16.0.1'
 
     //Firebase Firestore database
-    implementation 'com.google.firebase:firebase-firestore:17.1.1'
+    implementation 'com.google.firebase:firebase-firestore:17.1.2'
 
     //Custom Google Sign-In Button
     implementation 'com.shobhitpuri.custombuttons:google-signin:1.0.0'
@@ -54,15 +53,7 @@ dependencies {
     //Glide is used to load images from a URL
     implementation "com.github.bumptech.glide:glide:4.8.0"
 
-    //Kotlin coroutines for handling the REST API
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:0.23.4"
-}
-
-apply plugin: 'com.google.gms.google-services'
-apply plugin: "kotlin-android-extensions"
-
-kotlin {
-    experimental {
-        coroutines "enable"
-    }
+    //Navigation Component of Android Jetpack
+    implementation "android.arch.navigation:navigation-fragment-ktx:1.0.0-alpha06"
+    implementation "android.arch.navigation:navigation-ui-ktx:1.0.0-alpha06"
 }
