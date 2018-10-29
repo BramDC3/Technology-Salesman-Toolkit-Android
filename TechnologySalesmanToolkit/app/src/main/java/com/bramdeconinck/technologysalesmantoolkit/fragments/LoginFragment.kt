@@ -48,12 +48,13 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        btn_signIn.setOnClickListener { _: View? -> validateLoginForm() }
+
+        btn_signInWithGoogle.setOnClickListener { _: View? -> signInWithGoogle() }
+
         lbl_goToRegistration.setOnClickListener {
             it.findNavController().navigate(R.id.toRegistration)
         }
-
-        btn_signIn.setOnClickListener { _: View? -> validateLoginForm() }
-        btn_signInWithGoogle.setOnClickListener { _: View? -> signInWithGoogle() }
     }
 
     private fun signInWithGoogle() {

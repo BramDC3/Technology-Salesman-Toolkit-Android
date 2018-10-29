@@ -18,7 +18,7 @@ class MainActivity : AppCompatActivity() {
 
         mAuth = FirebaseAuth.getInstance()
 
-        findNavController(nav_host_fragment).addOnNavigatedListener { controller, destination ->
+        findNavController(nav_host_fragment).addOnNavigatedListener { _, destination ->
             when (destination.id) {
                 R.id.serviceListFragment -> {
                     if (mAuth.currentUser == null) {

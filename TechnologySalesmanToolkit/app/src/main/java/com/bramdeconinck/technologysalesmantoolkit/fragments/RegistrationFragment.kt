@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import com.bramdeconinck.technologysalesmantoolkit.R
 import com.bramdeconinck.technologysalesmantoolkit.utils.Utils
 import com.google.firebase.auth.FirebaseAuth
@@ -26,11 +27,17 @@ class RegistrationFragment : Fragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val rootView = inflater.inflate(R.layout.fragment_registration, container, false)
+        return inflater.inflate(R.layout.fragment_registration, container, false)
+    }
 
-        rootView.btn_register.setOnClickListener { _: View? -> validateRegistrationForm() }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-        return rootView
+        btn_register.setOnClickListener { _: View? -> validateRegistrationForm() }
+
+        lbl_backToLogin.setOnClickListener {
+            it.findNavController().popBackStack()
+        }
     }
 
     private fun createFirebaseAccount() {
