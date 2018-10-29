@@ -1,16 +1,14 @@
 package com.bramdeconinck.technologysalesmantoolkit.activities
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
+import androidx.navigation.findNavController
 import com.bramdeconinck.technologysalesmantoolkit.R
-import com.bramdeconinck.technologysalesmantoolkit.fragments.LoginFragment
-import com.bramdeconinck.technologysalesmantoolkit.fragments.RegistrationFragment
-import com.bramdeconinck.technologysalesmantoolkit.fragments.ServiceListFragment
-import com.bramdeconinck.technologysalesmantoolkit.interfaces.IRegistrationSelected
+import com.bramdeconinck.technologysalesmantoolkit.R.id.nav_host_fragment
 import com.google.firebase.auth.FirebaseAuth
 
-class MainActivity : AppCompatActivity(), IRegistrationSelected {
+
+class MainActivity : AppCompatActivity() {
 
     private lateinit var mAuth: FirebaseAuth
 
@@ -20,22 +18,16 @@ class MainActivity : AppCompatActivity(), IRegistrationSelected {
 
         mAuth = FirebaseAuth.getInstance()
 
-        val firstFragment: Fragment = if (mAuth.currentUser == null) LoginFragment()
-        else ServiceListFragment()
-
-        val fragmentManager = supportFragmentManager
-
-        fragmentManager.beginTransaction()
-                .add(R.id.fragment_container, firstFragment)
-                .commit()
+        findNavController(nav_host_fragment).addOnNavigatedListener { _, destination ->
+            when (destination.id) {
+                R.id.serviceListFragment -> {
+                    if (mAuth.currentUser == null) {
+                        findNavController(nav_host_fragment).popBackStack(R.id.serviceListFragment, true)
+                        findNavController(nav_host_fragment).navigate(R.id.loginFragment)
+                    }
+                }
+            }
+        }
     }
 
-    override fun onRegistrationLabelSelected() {
-        val fragmentManager = supportFragmentManager
-
-        fragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, RegistrationFragment())
-                .addToBackStack(null)
-                .commit()
-    }
 }

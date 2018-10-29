@@ -2,17 +2,20 @@ package com.bramdeconinck.technologysalesmantoolkit.adapters
 
 import android.os.Bundle
 import android.support.v7.widget.RecyclerView
+import android.text.TextUtils.replace
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import com.bramdeconinck.technologysalesmantoolkit.R
 import com.bramdeconinck.technologysalesmantoolkit.activities.MainActivity
 import com.bramdeconinck.technologysalesmantoolkit.fragments.ServiceDetailFragment
+import com.bramdeconinck.technologysalesmantoolkit.fragments.ServiceListFragment
 import com.bramdeconinck.technologysalesmantoolkit.models.Service
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.service_list_content.view.*
 
-class ServiceAdapter(private val parentActivity: MainActivity, private val values: List<Service>, private val twoPane: Boolean) :
+class ServiceAdapter(private val fragment: ServiceListFragment, private val values: List<Service>, private val twoPane: Boolean) :
         RecyclerView.Adapter<ServiceAdapter.ViewHolder>() {
 
     private val onClickListener: View.OnClickListener
@@ -20,22 +23,21 @@ class ServiceAdapter(private val parentActivity: MainActivity, private val value
     init {
         onClickListener = View.OnClickListener { v ->
             val item = v.tag as Service
-            val fragment = ServiceDetailFragment().apply {
-                arguments = Bundle().apply {
-                    putParcelable(ServiceDetailFragment.ARG_ITEM_ID, item)
-                }
-            }
             if (twoPane) {
-                parentActivity.supportFragmentManager
+                val detailFragment = ServiceDetailFragment().apply {
+                    arguments = Bundle().apply {
+                        putParcelable(ServiceDetailFragment.ARG_ITEM_ID, item)
+                    }
+                }
+                fragment.activity!!.supportFragmentManager
                         .beginTransaction()
-                        .replace(R.id.service_detail_container, fragment)
+                        .replace(R.id.service_detail_container, detailFragment)
                         .commit()
             } else {
-                parentActivity.supportFragmentManager
-                        .beginTransaction()
-                        .replace(R.id.fragment_container, fragment)
-                        .addToBackStack(null)
-                        .commit()
+                val arguments = Bundle().apply {
+                    putParcelable(ServiceDetailFragment.ARG_ITEM_ID, item)
+                }
+                fragment.findNavController().navigate(R.id.toServiceDetail, arguments)
             }
         }
     }
@@ -48,7 +50,7 @@ class ServiceAdapter(private val parentActivity: MainActivity, private val value
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = values[position]
-        Glide.with(parentActivity).load(item.image).into(holder.afbeeldingView)
+        Glide.with(fragment).load(item.image).into(holder.afbeeldingView)
         holder.naamView.text = item.name
         holder.beschrijvingView.text = item.description
         holder.categorieView.text = item.category.toString()

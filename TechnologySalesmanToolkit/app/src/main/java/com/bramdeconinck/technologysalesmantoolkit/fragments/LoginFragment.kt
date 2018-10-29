@@ -7,8 +7,9 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.bramdeconinck.technologysalesmantoolkit.R
-import com.bramdeconinck.technologysalesmantoolkit.interfaces.IRegistrationSelected
 import com.bramdeconinck.technologysalesmantoolkit.utils.Utils
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
@@ -19,11 +20,9 @@ import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import kotlinx.android.synthetic.main.fragment_login.*
-import kotlinx.android.synthetic.main.fragment_login.view.*
 
 class LoginFragment : Fragment() {
 
-    private lateinit var mCallback: IRegistrationSelected
     private lateinit var gso: GoogleSignInOptions
     private lateinit var mAuth: FirebaseAuth
     private lateinit var mGoogleSignInClient: GoogleSignInClient
@@ -31,8 +30,6 @@ class LoginFragment : Fragment() {
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
-
-        mCallback = activity as IRegistrationSelected
 
         gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
@@ -45,13 +42,19 @@ class LoginFragment : Fragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val rootView = inflater.inflate(R.layout.fragment_login, container, false)
+        return inflater.inflate(R.layout.fragment_login, container, false)
+    }
 
-        rootView.btn_signIn.setOnClickListener { _: View? -> validateLoginForm() }
-        rootView.btn_signInWithGoogle.setOnClickListener { _: View? -> signInWithGoogle() }
-        rootView.lbl_goToRegistration.setOnClickListener { _: View? -> mCallback.onRegistrationLabelSelected() }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-        return rootView
+        btn_signIn.setOnClickListener { _: View? -> validateLoginForm() }
+
+        btn_signInWithGoogle.setOnClickListener { _: View? -> signInWithGoogle() }
+
+        lbl_goToRegistration.setOnClickListener {
+            it.findNavController().navigate(R.id.toRegistration)
+        }
     }
 
     private fun signInWithGoogle() {
@@ -80,6 +83,7 @@ class LoginFragment : Fragment() {
                     if (task.isSuccessful) {
                         val firebaseUser = mAuth.currentUser
                         Utils.makeToast(this.requireContext(), getString(R.string.welcome, firebaseUser?.displayName))
+                        this.findNavController().navigate(R.id.toServiceList)
                     } else {
                         Utils.makeToast(this.requireContext(), getString(R.string.sign_in_error))
                     }
@@ -93,6 +97,7 @@ class LoginFragment : Fragment() {
                         if (mAuth.currentUser!!.isEmailVerified) {
                             val firebaseUser = mAuth.currentUser
                             Utils.makeToast(this.requireContext(), getString(R.string.welcome, firebaseUser?.displayName))
+                            this.findNavController().navigate(R.id.toServiceList)
                         } else {
                             Utils.makeToast(this.requireContext(), getString(R.string.email_is_not_verified))
                         }
