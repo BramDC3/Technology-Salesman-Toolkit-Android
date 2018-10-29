@@ -24,14 +24,15 @@ class ServiceAdapter(private val fragment: ServiceListFragment, private val valu
         onClickListener = View.OnClickListener { v ->
             val item = v.tag as Service
             if (twoPane) {
-                //val fragment = ServiceDetailFragment().apply {
-                //arguments = Bundle().apply {
-                //putParcelable(ServiceDetailFragment.ARG_ITEM_ID, item)
-                //}
-                //parentActivity.supportFragmentManager
-                //.beginTransaction()
-                //.replace(R.id.service_detail_container, fragment)
-                //.commit()
+                val detailFragment = ServiceDetailFragment().apply {
+                    arguments = Bundle().apply {
+                        putParcelable(ServiceDetailFragment.ARG_ITEM_ID, item)
+                    }
+                }
+                fragment.activity!!.supportFragmentManager
+                        .beginTransaction()
+                        .replace(R.id.service_detail_container, detailFragment)
+                        .commit()
             } else {
                 val arguments = Bundle().apply {
                     putParcelable(ServiceDetailFragment.ARG_ITEM_ID, item)
