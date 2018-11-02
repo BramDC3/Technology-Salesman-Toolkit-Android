@@ -16,8 +16,13 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        // The Firebase Authentication instance
         mAuth = FirebaseAuth.getInstance()
 
+
+        // The home of our nav graph is the ServiceListFragment, but
+        // Users need to be logged in in order to do so
+        // This method redirects users to the LoginFragment if they aren't logged in
         findNavController(nav_host_fragment).addOnNavigatedListener { _, destination ->
             when (destination.id) {
                 R.id.serviceListFragment -> {

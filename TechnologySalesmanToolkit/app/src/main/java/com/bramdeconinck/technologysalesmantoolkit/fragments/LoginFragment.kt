@@ -48,9 +48,9 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        btn_signIn.setOnClickListener { _: View? -> validateLoginForm() }
+        btn_signIn.setOnClickListener { validateLoginForm() }
 
-        btn_signInWithGoogle.setOnClickListener { _: View? -> signInWithGoogle() }
+        btn_signInWithGoogle.setOnClickListener { signInWithGoogle() }
 
         lbl_goToRegistration.setOnClickListener {
             it.findNavController().navigate(R.id.toRegistration)
@@ -99,6 +99,7 @@ class LoginFragment : Fragment() {
                             Utils.makeToast(this.requireContext(), getString(R.string.welcome, firebaseUser?.displayName))
                             this.findNavController().navigate(R.id.toServiceList)
                         } else {
+                            mAuth.signOut()
                             Utils.makeToast(this.requireContext(), getString(R.string.email_is_not_verified))
                         }
                     } else {
