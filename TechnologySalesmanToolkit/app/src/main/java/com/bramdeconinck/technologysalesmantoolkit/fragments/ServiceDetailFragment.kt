@@ -9,6 +9,7 @@ import android.webkit.WebView
 import com.bramdeconinck.technologysalesmantoolkit.models.Service
 import android.webkit.WebViewClient
 import com.bramdeconinck.technologysalesmantoolkit.R
+import com.bramdeconinck.technologysalesmantoolkit.activities.MainActivity
 import kotlinx.android.synthetic.main.fragment_service_detail.view.*
 
 class ServiceDetailFragment : Fragment() {
@@ -28,6 +29,19 @@ class ServiceDetailFragment : Fragment() {
         loadWebpage(rootView.service_detail)
 
         return rootView
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        (activity as MainActivity).supportActionBar?.title = service?.name
+        (activity as MainActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
+    }
+
+    override fun onStop() {
+        super.onStop()
+
+        (activity as MainActivity).supportActionBar?.setDisplayHomeAsUpEnabled(false)
     }
 
     private fun loadWebpage(webview: WebView) {

@@ -17,17 +17,19 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // The Firebase Authentication instance
+        // Firebase Authentication instance
         mAuth = FirebaseAuth.getInstance()
 
-        // Using the custom toolbar as support action bar
+        // Using a custom toolbar as support action bar
         setSupportActionBar(custom_toolbar)
 
-        // The home of our nav graph is the ServiceListFragment, but
-        // Users need to be logged in in order to do so
-        // This method redirects users to the LoginFragment if they aren't logged in
+        // This function helps us with fragment navigation,
+        // it prepares them so they're ready to be shown properly
         findNavController(R.id.nav_host_fragment).addOnNavigatedListener { _, destination ->
             when (destination.id) {
+                // The home of our nav graph is the LoginFragment, but
+                // if users are already logged in, they are supposed to be
+                // redirected to the ServiceListFragment
                 R.id.loginFragment -> {
                     if (mAuth.currentUser != null) {
                         findNavController(R.id.nav_host_fragment).popBackStack(R.id.loginFragment, true)
@@ -43,7 +45,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     // We don't want to show the toolbar and bottom navigation
-    // On the login and registration screen, so we hide them
+    // on the login and registration screen, so we hide them
     private fun hideToolbarAndBottomNavigation() {
         supportActionBar?.hide()
         with(bottom_navigation_view) {
@@ -57,7 +59,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     // We do want to show the toolbar and bottom navigation
-    // On the other screens, so we make them visible again
+    // on the other screens, so we make them visible again
     private fun showToolbarAndBottomNavigation() {
         supportActionBar?.show()
         with(bottom_navigation_view) {
@@ -66,6 +68,12 @@ class MainActivity : AppCompatActivity() {
                     .alpha(1f)
                     .duration = 0
         }
+    }
+
+    // The behavior for the navigation arrow in the toolbar
+    override fun onSupportNavigateUp(): Boolean {
+        findNavController(R.id.nav_host_fragment).popBackStack()
+        return true
     }
 
 }
