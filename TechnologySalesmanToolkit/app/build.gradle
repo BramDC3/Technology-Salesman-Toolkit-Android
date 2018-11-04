@@ -40,20 +40,17 @@ dependencies {
     implementation 'com.android.support:cardview-v7:28.0.0'
 
     //Firebase and Google Authentication
-    implementation 'com.google.firebase:firebase-core:16.0.4'
+    implementation 'com.google.firebase:firebase-core:16.0.5'
     implementation 'com.google.firebase:firebase-auth:16.0.5'
     implementation 'com.google.android.gms:play-services-auth:16.0.1'
 
     //Firebase Firestore database
     implementation 'com.google.firebase:firebase-firestore:17.1.2'
 
-    //Custom Google Sign-In Button
-    implementation 'com.shobhitpuri.custombuttons:google-signin:1.0.0'
-
     //Glide is used to load images from a URL
     implementation "com.github.bumptech.glide:glide:4.8.0"
 
     //Navigation Component of Android Jetpack
-    implementation "android.arch.navigation:navigation-fragment-ktx:1.0.0-alpha06"
-    implementation "android.arch.navigation:navigation-ui-ktx:1.0.0-alpha06"
+    implementation "android.arch.navigation:navigation-fragment-ktx:1.0.0-alpha07"
+    implementation "android.arch.navigation:navigation-ui-ktx:1.0.0-alpha07"
 }
