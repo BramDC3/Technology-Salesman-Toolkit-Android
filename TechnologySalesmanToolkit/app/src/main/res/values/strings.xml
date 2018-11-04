@@ -6,17 +6,14 @@
     <string name="welcome">Welkom, %1$s!</string>
     <string name="email">E-mailadres</string>
     <string name="password">Wachtwoord</string>
-    <string name="sign_in_button_text">Log in</string>
-    <string name="google_button_text">Log in met Google</string>
+    <string name="logo_description">Logo of Technology Salesmen Toolkit</string>
     <string name="email_is_not_verified">Gelieve uw e-mailadres te bevestigen aan de hand van de verzonden e-mail.</string>
     <string name="empty_field">"Gelieve alle velden in te vullen."</string>
 
     <!-- RegistrationActivity -->
     <string name="firstname">Voornaam</string>
-    <string name="lastname">Achternaam</string>
+    <string name="lastname">Familienaam</string>
     <string name="repeatpassword">Herhaal wachtwoord</string>
-    <string name="register_button_text">Maak uw account aan</string>
-    <string name="back_to_login_text">Heeft u al een account? Klik hier!</string>
     <string name="account_not_created">Er is iets fout gelopen tijdens het aanmaken van uw account. Gelieve het opnieuw te proberen.</string>
     <string name="account_created">Uw account werd succesvol aangemaakt!</string>
     <string name="invalid_email">Gelieve een geldig e-mailadres in te voeren.</string>
