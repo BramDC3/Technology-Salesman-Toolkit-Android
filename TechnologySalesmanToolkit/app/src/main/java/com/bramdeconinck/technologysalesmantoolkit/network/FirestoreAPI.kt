@@ -5,16 +5,26 @@ import com.bramdeconinck.technologysalesmantoolkit.models.Category
 import com.bramdeconinck.technologysalesmantoolkit.models.Service
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.QueryDocumentSnapshot
+import com.google.firebase.firestore.FirebaseFirestoreSettings
+
+
 
 class FirestoreAPI {
 
     // Access a Firebase Firestore instance
-    private val db = FirebaseFirestore.getInstance()
+    private val firestore = FirebaseFirestore.getInstance()
+
+    // These settings are used to hide a warning about dates and timestamps
+    private val firetoreSettings = FirebaseFirestoreSettings.Builder()
+            .setTimestampsInSnapshotsEnabled(true)
+            .build()
 
     // Get all services from the Firestore
     fun getServicesFromFirestore(firebaseCallback: IFirebaseCallback) {
+        firestore.firestoreSettings = firetoreSettings
+
         firebaseCallback.showProgress()
-        db.collection("Services").get()
+        firestore.collection("Services").get()
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         val servicesList: MutableList<Service> = mutableListOf()
