@@ -101,23 +101,28 @@ class LoginFragment : Fragment() {
                         } else {
                             mAuth.signOut()
                             Utils.makeToast(this.requireContext(), getString(R.string.email_is_not_verified))
+                            btn_signIn.isEnabled = true
                         }
                     } else {
                         Utils.makeToast(this.requireContext(), getString(R.string.sign_in_error))
+                        btn_signIn.isEnabled = true
                     }
                 }
     }
 
     private fun validateLoginForm() {
+        btn_signIn.isEnabled = false
         if (!txt_email.text.isBlank()
                 && !txt_password.text.isBlank()) {
             if (Utils.isValid(txt_email.text.toString())) {
                 logInWithFirebaseAccount()
             } else {
                 Utils.makeToast(this.requireContext(), getString(R.string.invalid_email))
+                btn_signIn.isEnabled = true
             }
         } else {
             Utils.makeToast(this.requireContext(), getString(R.string.empty_field))
+            btn_signIn.isEnabled = true
         }
     }
 

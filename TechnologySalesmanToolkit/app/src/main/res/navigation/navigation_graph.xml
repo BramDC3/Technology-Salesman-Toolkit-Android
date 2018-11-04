@@ -1,27 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/navigation_graph"
-    app:startDestination="@id/serviceListFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_graph"
+    app:startDestination="@id/loginFragment">
 
-    <fragment
-        android:id="@+id/serviceListFragment"
-        android:name="com.bramdeconinck.technologysalesmantoolkit.fragments.ServiceListFragment"
-        android:label="ServiceListFragment" >
-        <action
-            android:id="@+id/toServiceDetail"
-            app:destination="@id/serviceDetailFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/serviceDetailFragment"
-        android:name="com.bramdeconinck.technologysalesmantoolkit.fragments.ServiceDetailFragment"
-        android:label="ServiceDetailFragment" />
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.bramdeconinck.technologysalesmantoolkit.fragments.LoginFragment"
-        android:label="LoginFragment" >
+        android:label="LoginFragment"
+        tools:layout="@layout/fragment_login">
         <action
             android:id="@+id/toServiceList"
-            app:destination="@id/serviceListFragment" />
+            app:destination="@id/serviceListFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@+id/navigation_graph"
+            app:popUpToInclusive="true" />
         <action
             android:id="@+id/toRegistration"
             app:destination="@id/registrationFragment" />
@@ -29,5 +23,20 @@
     <fragment
         android:id="@+id/registrationFragment"
         android:name="com.bramdeconinck.technologysalesmantoolkit.fragments.RegistrationFragment"
-        android:label="RegistrationFragment" ></fragment>
+        android:label="RegistrationFragment"
+        tools:layout="@layout/fragment_registration"/>
+    <fragment
+        android:id="@+id/serviceListFragment"
+        android:name="com.bramdeconinck.technologysalesmantoolkit.fragments.ServiceListFragment"
+        android:label="ServiceListFragment"
+        tools:layout="@layout/fragment_service_list">
+        <action
+            android:id="@+id/toServiceDetail"
+            app:destination="@id/serviceDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/serviceDetailFragment"
+        android:name="com.bramdeconinck.technologysalesmantoolkit.fragments.ServiceDetailFragment"
+        android:label="ServiceDetailFragment"
+        tools:layout="@layout/fragment_service_detail" />
 </navigation>

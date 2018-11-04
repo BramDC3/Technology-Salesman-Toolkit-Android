@@ -19,6 +19,9 @@
     <string name="invalid_email">Gelieve een geldig e-mailadres in te voeren.</string>
     <string name="passwords_dont_match">De twee ingevoerde wachtwoorden komen niet overeen.</string>
 
+    <!-- ServiceListItem -->
+    <string name="service_image_description">Image of a service</string>
+
     <!-- Firebase errors  -->
     <string name="sign_in_error">Er is een fout opgetreden tijdens het aanmelden. Gelieve het opnieuw te proberen.</string>
     <string name="fetching_data_error">Er is een fout opgetreden tijdens het ophalen van de gegevens.</string>

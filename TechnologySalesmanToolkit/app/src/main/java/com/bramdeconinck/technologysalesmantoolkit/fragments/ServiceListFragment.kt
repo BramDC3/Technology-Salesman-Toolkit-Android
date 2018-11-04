@@ -74,7 +74,7 @@ class ServiceListFragment : Fragment(), IFirebaseCallback {
 
     // Deze methode haalt de loading indicator weg
     override fun hideProgress() {
-        if (progress_bar.visibility == View.VISIBLE) progress_bar.visibility = View.GONE
+        if (progress_bar?.visibility == View.VISIBLE) progress_bar?.visibility = View.GONE
     }
 
     // Deze methode toont een foutmelding indien er geen gegevens opgehaald kunnen worden.
