@@ -23,48 +23,28 @@
             android:contentDescription="profile image" />
 
         <TextView
-            android:id="@+id/lbl_profile_firstname"
+            android:id="@+id/lbl_profile_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="32dp"
-            android:text="Voornaam:"
+            android:text="Naam:"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/img_profile_image" />
 
         <EditText
-            android:id="@+id/txt_profile_firstname"
+            android:id="@+id/txt_profile_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:ems="10"
-            android:inputType="textPersonName"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
             android:enabled="false"
-            app:layout_constraintTop_toBottomOf="@+id/lbl_profile_firstname" />
-
-        <TextView
-            android:id="@+id/lbl_profile_familyname"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:text="Familienaam:"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txt_profile_firstname" />
-
-        <EditText
-            android:id="@+id/txt_profile_familyname"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:ems="10"
             android:inputType="textPersonName"
-            android:enabled="false"
+            android:text="Bram De Coninck"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/lbl_profile_familyname" />
+            app:layout_constraintTop_toBottomOf="@+id/lbl_profile_name" />
 
         <TextView
             android:id="@+id/lbl_profile_email"
@@ -74,7 +54,7 @@
             android:text="E-mailadres:"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txt_profile_familyname" />
+            app:layout_constraintTop_toBottomOf="@+id/txt_profile_name" />
 
         <EditText
             android:id="@+id/txt_profile_email"
@@ -82,8 +62,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:ems="10"
-            android:inputType="textEmailAddress"
             android:enabled="false"
+            android:inputType="textEmailAddress"
+            android:text="bram@bramdeconinck.com"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/lbl_profile_email" />
