@@ -33,7 +33,7 @@ class RegistrationFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        btn_register.setOnClickListener { _: View? -> validateRegistrationForm() }
+        btn_register.setOnClickListener { validateRegistrationForm() }
 
         lbl_backToLogin.setOnClickListener {
             it.findNavController().popBackStack()
