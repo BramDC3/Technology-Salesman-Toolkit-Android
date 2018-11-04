@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.bramdeconinck.technologysalesmantoolkit.R
-import com.bramdeconinck.technologysalesmantoolkit.activities.MainActivity
 import com.bramdeconinck.technologysalesmantoolkit.adapters.ServiceAdapter
 import com.bramdeconinck.technologysalesmantoolkit.interfaces.IFirebaseCallback
 import com.bramdeconinck.technologysalesmantoolkit.models.Service
