@@ -6,14 +6,8 @@ import android.support.v7.app.AppCompatActivity
 import android.view.View
 import androidx.navigation.findNavController
 import com.bramdeconinck.technologysalesmantoolkit.R
-import com.bramdeconinck.technologysalesmantoolkit.fragments.ProfileFragment
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_main.*
-import android.content.Intent
-import android.support.v4.app.Fragment
-import android.util.Log
-import com.bramdeconinck.technologysalesmantoolkit.fragments.LoginFragment
-
 
 class MainActivity : AppCompatActivity() {
 
@@ -28,6 +22,9 @@ class MainActivity : AppCompatActivity() {
 
         // Using a custom toolbar as support action bar
         setSupportActionBar(custom_toolbar)
+
+        // Selecting the service list as initially selected item in the bottom navigation view
+        bottom_navigation_view.selectedItemId = R.id.navigation_services
 
         // This function helps us with fragment navigation,
         // it prepares them so they're ready to be shown properly
