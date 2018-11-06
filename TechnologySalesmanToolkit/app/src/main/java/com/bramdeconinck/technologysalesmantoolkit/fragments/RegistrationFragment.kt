@@ -51,8 +51,6 @@ class RegistrationFragment : Fragment() {
     }
 
     private fun updateUserInfo(firebaseUser: FirebaseUser?) {
-        mAuth.signOut()
-
         val profileUpdates = UserProfileChangeRequest.Builder()
                 .setDisplayName("${txt_firstname.text} ${txt_lastname.text}")
                 .build()
@@ -61,6 +59,7 @@ class RegistrationFragment : Fragment() {
                 ?.addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         firebaseUser.sendEmailVerification()
+                        mAuth.signOut()
                         Utils.makeToast(this.requireContext(), getString(R.string.account_created))
                     }
                 }
