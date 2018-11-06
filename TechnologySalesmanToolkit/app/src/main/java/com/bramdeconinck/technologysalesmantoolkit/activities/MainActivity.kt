@@ -1,10 +1,12 @@
 package com.bramdeconinck.technologysalesmantoolkit.activities
 
 import android.os.Bundle
+import android.support.design.widget.BottomNavigationView
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 import androidx.navigation.findNavController
 import com.bramdeconinck.technologysalesmantoolkit.R
+import com.bramdeconinck.technologysalesmantoolkit.fragments.ProfileFragment
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -42,6 +44,9 @@ class MainActivity : AppCompatActivity() {
                 else -> showToolbarAndBottomNavigation()
             }
         }
+
+
+        bottom_navigation_view.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
     }
 
     // We don't want to show the toolbar and bottom navigation
@@ -74,6 +79,19 @@ class MainActivity : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         findNavController(R.id.nav_host_fragment).popBackStack()
         return true
+    }
+
+    private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
+        supportFragmentManager.popBackStack()
+        when (item.itemId) {
+            R.id.navigation_albums -> {
+                supportFragmentManager.beginTransaction()
+                        .replace(R.id.nav_host_fragment, ProfileFragment())
+                        .commit()
+                return@OnNavigationItemSelectedListener true
+            }
+        }
+        false
     }
 
 }

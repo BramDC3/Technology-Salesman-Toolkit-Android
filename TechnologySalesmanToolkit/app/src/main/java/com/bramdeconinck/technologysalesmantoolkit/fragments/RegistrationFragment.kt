@@ -51,6 +51,8 @@ class RegistrationFragment : Fragment() {
     }
 
     private fun updateUserInfo(firebaseUser: FirebaseUser?) {
+        mAuth.signOut()
+
         val profileUpdates = UserProfileChangeRequest.Builder()
                 .setDisplayName("${txt_firstname.text} ${txt_lastname.text}")
                 .build()
