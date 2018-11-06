@@ -28,5 +28,8 @@
 
     <!-- Titles of certain fragments for the action bar -->
     <string name="title_service_list_fragment">Dienstlijst</string>
+    <string name="navigation_settings">Instellingen</string>
+    <string name="navigation_profile">Profiel</string>
+    <string name="navigation_services">Diensten</string>
 
 </resources>

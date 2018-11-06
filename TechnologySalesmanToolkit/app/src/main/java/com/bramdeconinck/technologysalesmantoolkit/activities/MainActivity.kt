@@ -9,6 +9,10 @@ import com.bramdeconinck.technologysalesmantoolkit.R
 import com.bramdeconinck.technologysalesmantoolkit.fragments.ProfileFragment
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_main.*
+import android.content.Intent
+import android.support.v4.app.Fragment
+import android.util.Log
+import com.bramdeconinck.technologysalesmantoolkit.fragments.LoginFragment
 
 
 class MainActivity : AppCompatActivity() {
@@ -81,13 +85,18 @@ class MainActivity : AppCompatActivity() {
         return true
     }
 
+    //
     private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         supportFragmentManager.popBackStack()
         when (item.itemId) {
-            R.id.navigation_albums -> {
-                supportFragmentManager.beginTransaction()
-                        .replace(R.id.nav_host_fragment, ProfileFragment())
-                        .commit()
+            R.id.navigation_services -> {
+                findNavController(R.id.nav_host_fragment).popBackStack()
+                findNavController(R.id.nav_host_fragment).navigate(R.id.serviceListFragment)
+                return@OnNavigationItemSelectedListener true
+            }
+            R.id.navigation_profile -> {
+                findNavController(R.id.nav_host_fragment).popBackStack()
+                findNavController(R.id.nav_host_fragment).navigate(R.id.profileFragment)
                 return@OnNavigationItemSelectedListener true
             }
         }
