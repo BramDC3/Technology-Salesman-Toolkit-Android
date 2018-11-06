@@ -2,18 +2,18 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/navigation_songs"
-        android:icon="@drawable/common_google_signin_btn_icon_dark"
-        android:title="Songs"/>
+        android:id="@+id/navigation_profile"
+        android:icon="@drawable/ic_account_circle_black_24dp"
+        android:title="@string/title_profile_fragment"/>
 
     <item
-        android:id="@+id/navigation_albums"
-        android:icon="@drawable/common_google_signin_btn_icon_dark"
-        android:title="Albums"/>
+        android:id="@+id/navigation_services"
+        android:icon="@drawable/ic_format_list_bulleted_black_24dp"
+        android:title="@string/title_service_list_fragment"/>
 
     <item
-        android:id="@+id/navigation_artists"
-        android:icon="@drawable/common_google_signin_btn_icon_dark"
-        android:title="Artists"/>
+        android:id="@+id/navigation_settings"
+        android:icon="@drawable/ic_settings_black_24dp"
+        android:title="@string/title_settings_fragment"/>
 
 </menu>

@@ -39,4 +39,9 @@
         android:name="com.bramdeconinck.technologysalesmantoolkit.fragments.ServiceDetailFragment"
         android:label="ServiceDetailFragment"
         tools:layout="@layout/fragment_service_detail" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.bramdeconinck.technologysalesmantoolkit.fragments.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
 </navigation>
