@@ -86,14 +86,19 @@ class MainActivity : AppCompatActivity() {
     private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         supportFragmentManager.popBackStack()
         when (item.itemId) {
+            R.id.navigation_profile -> {
+                findNavController(R.id.nav_host_fragment).popBackStack()
+                findNavController(R.id.nav_host_fragment).navigate(R.id.profileFragment)
+                return@OnNavigationItemSelectedListener true
+            }
             R.id.navigation_services -> {
                 findNavController(R.id.nav_host_fragment).popBackStack()
                 findNavController(R.id.nav_host_fragment).navigate(R.id.serviceListFragment)
                 return@OnNavigationItemSelectedListener true
             }
-            R.id.navigation_profile -> {
+            R.id.navigation_settings -> {
                 findNavController(R.id.nav_host_fragment).popBackStack()
-                findNavController(R.id.nav_host_fragment).navigate(R.id.profileFragment)
+                findNavController(R.id.nav_host_fragment).navigate(R.id.settingsFragment)
                 return@OnNavigationItemSelectedListener true
             }
         }

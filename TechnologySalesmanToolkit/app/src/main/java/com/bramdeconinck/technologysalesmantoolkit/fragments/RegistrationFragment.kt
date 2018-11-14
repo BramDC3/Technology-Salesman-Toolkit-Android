@@ -71,7 +71,7 @@ class RegistrationFragment : Fragment() {
                 && !txt_email_r.text.isBlank()
                 && !txt_password_r.text.isBlank()
                 && !txt_repeatpassword.text.isBlank()) {
-            if (Utils.isValid(txt_email_r.text.toString())) {
+            if (Utils.isEmailValid(txt_email_r.text.toString())) {
                 if (txt_password_r.text.toString() == txt_repeatpassword.text.toString()) {
                     createFirebaseAccount()
                 } else {

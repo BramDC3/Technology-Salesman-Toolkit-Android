@@ -114,7 +114,7 @@ class LoginFragment : Fragment() {
         btn_signIn.isEnabled = false
         if (!txt_email.text.isBlank()
                 && !txt_password.text.isBlank()) {
-            if (Utils.isValid(txt_email.text.toString())) {
+            if (Utils.isEmailValid(txt_email.text.toString())) {
                 logInWithFirebaseAccount()
             } else {
                 Utils.makeToast(this.requireContext(), getString(R.string.invalid_email))

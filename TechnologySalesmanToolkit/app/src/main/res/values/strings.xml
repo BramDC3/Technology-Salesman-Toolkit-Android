@@ -30,5 +30,10 @@
     <string name="title_service_list_fragment">Diensten</string>
     <string name="title_profile_fragment">Profiel</string>
     <string name="title_settings_fragment">Instellingen</string>
+    <string name="settings_website">Bezoek de website</string>
+    <string name="settings_darkmode">Donkere modus</string>
+    <string name="settings_privacypolicy">Bekijk het privacybeleid</string>
+    <string name="settings_suggestion">Verstuur een suggestie</string>
+    <string name="settings_signout">Meld af</string>
 
 </resources>

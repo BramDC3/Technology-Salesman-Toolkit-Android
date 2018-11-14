@@ -48,4 +48,15 @@
         android:name="com.bramdeconinck.technologysalesmantoolkit.fragments.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.bramdeconinck.technologysalesmantoolkit.fragments.SettingsFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" >
+        <action
+            android:id="@+id/signOut"
+            app:destination="@id/loginFragment"
+            app:popUpTo="@+id/navigation_graph"
+            app:popUpToInclusive="true" />
+    </fragment>
 </navigation>
