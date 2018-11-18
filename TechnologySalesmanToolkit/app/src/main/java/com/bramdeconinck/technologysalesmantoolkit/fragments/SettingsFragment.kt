@@ -50,12 +50,6 @@ class SettingsFragment : Fragment() {
         }
     }
 
-    override fun onResume() {
-        super.onResume()
-
-        (activity as MainActivity).supportActionBar?.title = getString(R.string.title_settings_fragment)
-    }
-
     private fun openWebPage(url: String) {
         try {
             val webpage = Uri.parse(url)

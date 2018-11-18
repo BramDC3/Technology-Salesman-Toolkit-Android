@@ -54,12 +54,6 @@ class ServiceListFragment : Fragment(), IFirebaseCallback {
         fillRecyclerview()
     }
 
-    override fun onResume() {
-        super.onResume()
-
-        (activity as MainActivity).supportActionBar?.title = getString(R.string.title_service_list_fragment)
-    }
-
     private fun fillRecyclerview() {
         firestoreApi.getServicesFromFirestore(this)
     }

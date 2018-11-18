@@ -31,19 +31,6 @@ class ServiceDetailFragment : Fragment() {
         return rootView
     }
 
-    override fun onResume() {
-        super.onResume()
-
-        (activity as MainActivity).supportActionBar?.title = service?.name
-        (activity as MainActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
-    }
-
-    override fun onStop() {
-        super.onStop()
-
-        (activity as MainActivity).supportActionBar?.setDisplayHomeAsUpEnabled(false)
-    }
-
     private fun loadWebpage(webview: WebView) {
         webview.loadUrl(defaultUrl)
         try {

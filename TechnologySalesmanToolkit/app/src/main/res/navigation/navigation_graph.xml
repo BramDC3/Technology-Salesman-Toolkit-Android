@@ -32,7 +32,7 @@
     <fragment
         android:id="@+id/serviceListFragment"
         android:name="com.bramdeconinck.technologysalesmantoolkit.fragments.ServiceListFragment"
-        android:label="ServiceListFragment"
+        android:label="@string/title_service_list_fragment"
         tools:layout="@layout/fragment_service_list">
         <action
             android:id="@+id/toServiceDetail"
@@ -50,12 +50,12 @@
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.bramdeconinck.technologysalesmantoolkit.fragments.ProfileFragment"
-        android:label="fragment_profile"
+        android:label="@string/title_profile_fragment"
         tools:layout="@layout/fragment_profile" />
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.bramdeconinck.technologysalesmantoolkit.fragments.SettingsFragment"
-        android:label="fragment_settings"
+        android:label="@string/title_settings_fragment"
         tools:layout="@layout/fragment_settings" >
         <action
             android:id="@+id/signOut"

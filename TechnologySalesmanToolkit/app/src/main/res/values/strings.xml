@@ -2,7 +2,7 @@
     <!-- App name -->
     <string name="app_name">Technology Salesman Toolkit</string>
 
-    <!-- LoginActivity -->
+    <!-- LoginFragment-->
     <string name="welcome">Welkom, %1$s!</string>
     <string name="email">E-mailadres</string>
     <string name="password">Wachtwoord</string>
@@ -10,7 +10,7 @@
     <string name="email_is_not_verified">Gelieve uw e-mailadres te bevestigen aan de hand van de verzonden e-mail.</string>
     <string name="empty_field">"Gelieve alle velden in te vullen."</string>
 
-    <!-- RegistrationActivity -->
+    <!-- RegistrationFragment -->
     <string name="firstname">Voornaam</string>
     <string name="lastname">Familienaam</string>
     <string name="repeatpassword">Herhaal wachtwoord</string>
@@ -30,6 +30,8 @@
     <string name="title_service_list_fragment">Diensten</string>
     <string name="title_profile_fragment">Profiel</string>
     <string name="title_settings_fragment">Instellingen</string>
+
+    <!-- SettingsFragment -->
     <string name="settings_website">Bezoek de website</string>
     <string name="settings_darkmode">Donkere modus</string>
     <string name="settings_privacypolicy">Bekijk het privacybeleid</string>
