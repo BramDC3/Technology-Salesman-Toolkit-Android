@@ -5,6 +5,7 @@ import android.support.design.widget.BottomNavigationView
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 import androidx.navigation.findNavController
+import androidx.navigation.ui.setupWithNavController
 import com.bramdeconinck.technologysalesmantoolkit.R
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_main.*
@@ -22,9 +23,6 @@ class MainActivity : AppCompatActivity() {
 
         // Using a custom toolbar as support action bar
         setSupportActionBar(custom_toolbar)
-
-        // Selecting the service list as initially selected item in the bottom navigation view
-        bottom_navigation_view.selectedItemId = R.id.navigation_services
 
         // This function helps us with fragment navigation,
         // it prepares them so they're ready to be shown properly
@@ -46,8 +44,8 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-
-        bottom_navigation_view.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
+        val navController = findNavController(R.id.nav_host_fragment)
+        bottom_navigation_view.setupWithNavController(navController)
     }
 
     // We don't want to show the toolbar and bottom navigation
@@ -77,32 +75,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     // The behavior for the navigation arrow in the toolbar
-    override fun onSupportNavigateUp(): Boolean {
-        findNavController(R.id.nav_host_fragment).popBackStack()
-        return true
-    }
-
-    //
-    private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
-        supportFragmentManager.popBackStack()
-        when (item.itemId) {
-            R.id.navigation_profile -> {
-                findNavController(R.id.nav_host_fragment).popBackStack()
-                findNavController(R.id.nav_host_fragment).navigate(R.id.profileFragment)
-                return@OnNavigationItemSelectedListener true
-            }
-            R.id.navigation_services -> {
-                findNavController(R.id.nav_host_fragment).popBackStack()
-                findNavController(R.id.nav_host_fragment).navigate(R.id.serviceListFragment)
-                return@OnNavigationItemSelectedListener true
-            }
-            R.id.navigation_settings -> {
-                findNavController(R.id.nav_host_fragment).popBackStack()
-                findNavController(R.id.nav_host_fragment).navigate(R.id.settingsFragment)
-                return@OnNavigationItemSelectedListener true
-            }
-        }
-        false
-    }
+    override fun onSupportNavigateUp() = findNavController(R.id.nav_host_fragment).navigateUp()
 
 }
