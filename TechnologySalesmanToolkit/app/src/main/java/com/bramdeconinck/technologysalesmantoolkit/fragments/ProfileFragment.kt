@@ -32,12 +32,6 @@ class ProfileFragment : Fragment() {
         return rootView
     }
 
-    override fun onResume() {
-        super.onResume()
-
-        (activity as MainActivity).supportActionBar?.title = getString(R.string.title_profile_fragment)
-    }
-
     companion object {
         const val DEFAULT_PROFILE_IMAGE: String = "https://firebasestorage.googleapis.com/v0/b/technology-salesman-toolkit.appspot.com/o/default_profile_image.jpg?alt=media&token=24bc7608-c16d-4c6d-8c7c-dcb10bd4d3d5"
     }

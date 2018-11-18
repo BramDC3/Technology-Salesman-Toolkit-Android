@@ -18,7 +18,11 @@
             app:popUpToInclusive="true" />
         <action
             android:id="@+id/toRegistration"
-            app:destination="@id/registrationFragment" />
+            app:destination="@id/registrationFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/registrationFragment"
@@ -28,11 +32,15 @@
     <fragment
         android:id="@+id/serviceListFragment"
         android:name="com.bramdeconinck.technologysalesmantoolkit.fragments.ServiceListFragment"
-        android:label="ServiceListFragment"
+        android:label="@string/title_service_list_fragment"
         tools:layout="@layout/fragment_service_list">
         <action
             android:id="@+id/toServiceDetail"
-            app:destination="@id/serviceDetailFragment" />
+            app:destination="@id/serviceDetailFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
     </fragment>
     <fragment
         android:id="@+id/serviceDetailFragment"
@@ -42,6 +50,17 @@
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.bramdeconinck.technologysalesmantoolkit.fragments.ProfileFragment"
-        android:label="fragment_profile"
+        android:label="@string/title_profile_fragment"
         tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.bramdeconinck.technologysalesmantoolkit.fragments.SettingsFragment"
+        android:label="@string/title_settings_fragment"
+        tools:layout="@layout/fragment_settings" >
+        <action
+            android:id="@+id/signOut"
+            app:destination="@id/loginFragment"
+            app:popUpTo="@+id/navigation_graph"
+            app:popUpToInclusive="true" />
+    </fragment>
 </navigation>

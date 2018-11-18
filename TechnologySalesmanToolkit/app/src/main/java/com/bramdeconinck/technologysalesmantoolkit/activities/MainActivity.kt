@@ -4,7 +4,10 @@ import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v7.app.AppCompatActivity
 import android.view.View
+import androidx.navigation.NavController
 import androidx.navigation.findNavController
+import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
 import com.bramdeconinck.technologysalesmantoolkit.R
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_main.*
@@ -12,31 +15,45 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : AppCompatActivity() {
 
     private lateinit var mAuth: FirebaseAuth
+    private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // Firebase Authentication instance
+        // This object is used for Firebase authentication
+        // It is used to see if the user is logged in and to get their information
         mAuth = FirebaseAuth.getInstance()
 
-        // Using a custom toolbar as support action bar
+        // Navigation with a support action bar and a bottom navigation bar
+        // Thankfully, the new Navigation Component helps us with this
+        setupNavigation()
+    }
+
+    // This function is all that is required to set up the navigation of the entire app
+    private fun setupNavigation() {
+
+        // The toolbar that is defined in the MainActivity layout is used as support action bar
         setSupportActionBar(custom_toolbar)
 
-        // Selecting the service list as initially selected item in the bottom navigation view
-        bottom_navigation_view.selectedItemId = R.id.navigation_services
+        // This navigation controller allows us to navigate between fragments
+        navController = findNavController(R.id.nav_host_fragment)
 
-        // This function helps us with fragment navigation,
-        // it prepares them so they're ready to be shown properly
-        findNavController(R.id.nav_host_fragment).addOnNavigatedListener { _, destination ->
+        // The setup of the action bar and bottom navigation bar with the navigation controller
+        setupActionBarWithNavController(navController)
+        bottom_navigation_view.setupWithNavController(navController)
+
+        // This listener helps us with fragment navigation
+        // It prepares them so they're ready to be shown properly
+        navController.addOnNavigatedListener { _, destination ->
             when (destination.id) {
                 // The home of our nav graph is the LoginFragment, but
                 // if users are already logged in, they are supposed to be
                 // redirected to the ServiceListFragment
                 R.id.loginFragment -> {
                     if (mAuth.currentUser != null) {
-                        findNavController(R.id.nav_host_fragment).popBackStack(R.id.loginFragment, true)
-                        findNavController(R.id.nav_host_fragment).navigate(R.id.serviceListFragment)
+                        navController.popBackStack(R.id.loginFragment, true)
+                        navController.navigate(R.id.serviceListFragment)
                     } else {
                         hideToolbarAndBottomNavigation()
                     }
@@ -45,10 +62,10 @@ class MainActivity : AppCompatActivity() {
                 else -> showToolbarAndBottomNavigation()
             }
         }
-
-
-        bottom_navigation_view.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
     }
+
+    // The behavior for the navigation arrow in the toolbar
+    override fun onSupportNavigateUp() = findNavController(R.id.nav_host_fragment).navigateUp()
 
     // We don't want to show the toolbar and bottom navigation
     // on the login and registration screen, so we hide them
@@ -74,30 +91,6 @@ class MainActivity : AppCompatActivity() {
                     .alpha(1f)
                     .duration = 0
         }
-    }
-
-    // The behavior for the navigation arrow in the toolbar
-    override fun onSupportNavigateUp(): Boolean {
-        findNavController(R.id.nav_host_fragment).popBackStack()
-        return true
-    }
-
-    //
-    private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
-        supportFragmentManager.popBackStack()
-        when (item.itemId) {
-            R.id.navigation_services -> {
-                findNavController(R.id.nav_host_fragment).popBackStack()
-                findNavController(R.id.nav_host_fragment).navigate(R.id.serviceListFragment)
-                return@OnNavigationItemSelectedListener true
-            }
-            R.id.navigation_profile -> {
-                findNavController(R.id.nav_host_fragment).popBackStack()
-                findNavController(R.id.nav_host_fragment).navigate(R.id.profileFragment)
-                return@OnNavigationItemSelectedListener true
-            }
-        }
-        false
     }
 
 }

@@ -2,17 +2,17 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/navigation_profile"
+        android:id="@+id/profileFragment"
         android:icon="@drawable/ic_account_circle_black_24dp"
         android:title="@string/title_profile_fragment"/>
 
     <item
-        android:id="@+id/navigation_services"
+        android:id="@+id/serviceListFragment"
         android:icon="@drawable/ic_format_list_bulleted_black_24dp"
         android:title="@string/title_service_list_fragment"/>
 
     <item
-        android:id="@+id/navigation_settings"
+        android:id="@+id/settingsFragment"
         android:icon="@drawable/ic_settings_black_24dp"
         android:title="@string/title_settings_fragment"/>
 
