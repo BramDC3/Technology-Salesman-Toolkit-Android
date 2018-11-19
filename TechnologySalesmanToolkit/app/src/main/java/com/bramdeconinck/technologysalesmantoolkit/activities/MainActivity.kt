@@ -65,7 +65,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     // The behavior for the navigation arrow in the toolbar
-    override fun onSupportNavigateUp() = findNavController(R.id.nav_host_fragment).navigateUp()
+    override fun onSupportNavigateUp() = navController.popBackStack()
 
     // We don't want to show the toolbar and bottom navigation
     // on the login and registration screen, so we hide them

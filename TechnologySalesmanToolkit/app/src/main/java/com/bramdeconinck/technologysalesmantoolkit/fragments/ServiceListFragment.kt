@@ -37,9 +37,7 @@ class ServiceListFragment : Fragment(), IFirebaseCallback {
 
         //If the service detail container is not null,
         //then the app is opened with a tablet
-        if (rootView.service_detail_container != null) {
-            twoPane = true
-        }
+        if (rootView.service_detail_container != null) twoPane = true
 
         serviceAdapter = ServiceAdapter(this, serviceData, twoPane)
 
