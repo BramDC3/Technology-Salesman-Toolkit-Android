@@ -8,8 +8,6 @@
     tools:context=".activities.MainActivity">
 
     <android.support.v7.widget.Toolbar
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/custom_toolbar"
         android:layout_width="0dp"
         android:layout_height="?attr/actionBarSize"

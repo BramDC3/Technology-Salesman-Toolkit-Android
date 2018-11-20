@@ -50,21 +50,21 @@ class MainActivity : AppCompatActivity() {
                 // The home of our nav graph is the LoginFragment, but
                 // if users are already logged in, they are supposed to be
                 // redirected to the ServiceListFragment
-                R.id.loginFragment -> {
-                    if (mAuth.currentUser != null) {
-                        navController.navigate(R.id.toServiceList)
-                    } else {
+                R.id.serviceListFragment -> {
+                    if (mAuth.currentUser == null) {
+                        navController.navigate(R.id.notSignedIn)
                         hideToolbarAndBottomNavigation()
+                    } else {
+                        showToolbarAndBottomNavigation()
                     }
                 }
-                R.id.registrationFragment -> hideToolbarAndBottomNavigation()
-                else -> showToolbarAndBottomNavigation()
+                R.id.loginFragment -> hideToolbarAndBottomNavigation()
             }
         }
     }
 
     // The behavior for the navigation arrow in the toolbar
-    override fun onSupportNavigateUp() = navController.navigateUp()
+    override fun onSupportNavigateUp() = navController.popBackStack()
 
     // We don't want to show the toolbar and bottom navigation
     // on the login and registration screen, so we hide them
