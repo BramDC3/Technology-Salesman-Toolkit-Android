@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.bramdeconinck.technologysalesmantoolkit.R
-import com.bramdeconinck.technologysalesmantoolkit.activities.MainActivity
 import com.bramdeconinck.technologysalesmantoolkit.adapters.ServiceAdapter
 import com.bramdeconinck.technologysalesmantoolkit.interfaces.IFirebaseCallback
 import com.bramdeconinck.technologysalesmantoolkit.models.Service
@@ -37,9 +36,7 @@ class ServiceListFragment : Fragment(), IFirebaseCallback {
 
         //If the service detail container is not null,
         //then the app is opened with a tablet
-        if (rootView.service_detail_container != null) {
-            twoPane = true
-        }
+        if (rootView.service_detail_container != null) twoPane = true
 
         serviceAdapter = ServiceAdapter(this, serviceData, twoPane)
 

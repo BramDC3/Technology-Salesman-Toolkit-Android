@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_graph"
-    app:startDestination="@id/loginFragment">
+    app:startDestination="@id/serviceListFragment">
 
     <fragment
         android:id="@+id/loginFragment"
@@ -14,13 +14,14 @@
             android:id="@+id/toServiceList"
             app:destination="@id/serviceListFragment"
             app:launchSingleTop="true"
-            app:popUpTo="@+id/navigation_graph"
+            app:popUpTo="@+id/loginFragment"
             app:popUpToInclusive="true" />
         <action
             android:id="@+id/toRegistration"
             app:destination="@id/registrationFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
+            app:launchSingleTop="true"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
     </fragment>
@@ -39,8 +40,19 @@
             app:destination="@id/serviceDetailFragment"
             app:enterAnim="@anim/nav_default_enter_anim"
             app:exitAnim="@anim/nav_default_exit_anim"
+            app:launchSingleTop="true"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
             app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        <action
+            android:id="@+id/notSignedIn"
+            app:destination="@id/loginFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:launchSingleTop="true"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"
+            app:popUpTo="@+id/serviceListFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/serviceDetailFragment"
@@ -60,7 +72,8 @@
         <action
             android:id="@+id/signOut"
             app:destination="@id/loginFragment"
-            app:popUpTo="@+id/navigation_graph"
+            app:launchSingleTop="true"
+            app:popUpTo="@+id/settingsFragment"
             app:popUpToInclusive="true" />
     </fragment>
 </navigation>
