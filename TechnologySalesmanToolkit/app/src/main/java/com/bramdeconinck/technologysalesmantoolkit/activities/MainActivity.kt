@@ -52,8 +52,7 @@ class MainActivity : AppCompatActivity() {
                 // redirected to the ServiceListFragment
                 R.id.loginFragment -> {
                     if (mAuth.currentUser != null) {
-                        navController.popBackStack(R.id.loginFragment, true)
-                        navController.navigate(R.id.serviceListFragment)
+                        navController.navigate(R.id.toServiceList)
                     } else {
                         hideToolbarAndBottomNavigation()
                     }
@@ -65,7 +64,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     // The behavior for the navigation arrow in the toolbar
-    override fun onSupportNavigateUp() = navController.popBackStack()
+    override fun onSupportNavigateUp() = navController.navigateUp()
 
     // We don't want to show the toolbar and bottom navigation
     // on the login and registration screen, so we hide them

@@ -60,6 +60,7 @@
         <action
             android:id="@+id/signOut"
             app:destination="@id/loginFragment"
+            app:launchSingleTop="true"
             app:popUpTo="@+id/navigation_graph"
             app:popUpToInclusive="true" />
     </fragment>
