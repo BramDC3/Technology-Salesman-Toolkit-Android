@@ -57,7 +57,6 @@
     <fragment
         android:id="@+id/serviceDetailFragment"
         android:name="com.bramdeconinck.technologysalesmantoolkit.fragments.ServiceDetailFragment"
-        android:label="ServiceDetailFragment"
         tools:layout="@layout/fragment_service_detail" />
     <fragment
         android:id="@+id/profileFragment"

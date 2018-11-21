@@ -2,6 +2,7 @@ package com.bramdeconinck.technologysalesmantoolkit.fragments
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,7 +10,7 @@ import android.webkit.WebView
 import com.bramdeconinck.technologysalesmantoolkit.models.Service
 import android.webkit.WebViewClient
 import com.bramdeconinck.technologysalesmantoolkit.R
-import com.bramdeconinck.technologysalesmantoolkit.activities.MainActivity
+import com.bramdeconinck.technologysalesmantoolkit.interfaces.IToolbarTitleListener
 import kotlinx.android.synthetic.main.fragment_service_detail.view.*
 
 class ServiceDetailFragment : Fragment() {
@@ -29,6 +30,16 @@ class ServiceDetailFragment : Fragment() {
         loadWebpage(rootView.service_detail)
 
         return rootView
+    }
+
+    override fun onStart() {
+        super.onStart()
+
+        setSupportActionBarTitle(service?.name)
+    }
+
+    private fun setSupportActionBarTitle(title: String?) {
+        (activity as IToolbarTitleListener).updateTitle(title)
     }
 
     private fun loadWebpage(webview: WebView) {
