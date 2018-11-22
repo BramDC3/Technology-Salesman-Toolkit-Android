@@ -1,7 +1,6 @@
 package com.bramdeconinck.technologysalesmantoolkit.activities
 
 import android.os.Bundle
-import android.support.design.widget.BottomNavigationView
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 import androidx.navigation.NavController
@@ -9,10 +8,11 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.bramdeconinck.technologysalesmantoolkit.R
+import com.bramdeconinck.technologysalesmantoolkit.interfaces.IToolbarTitleListener
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), IToolbarTitleListener {
 
     private lateinit var mAuth: FirebaseAuth
     private lateinit var navController: NavController
@@ -64,7 +64,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     // The behavior for the navigation arrow in the toolbar
-    override fun onSupportNavigateUp() = navController.popBackStack()
+    override fun onSupportNavigateUp() = navController.navigateUp()
 
     // We don't want to show the toolbar and bottom navigation
     // on the login and registration screen, so we hide them
@@ -90,6 +90,16 @@ class MainActivity : AppCompatActivity() {
                     .alpha(1f)
                     .duration = 0
         }
+    }
+
+    // Thanks to the navigation component, when you navigate to
+    // a fragment, the toolbar title is automatically changed
+    // based on the current label. This behaviour is great, but we
+    // need something different for the ServiceDetailFragment because
+    // the title needs to be the name of the service. This function
+    // changes the title of the toolbar.
+    override fun updateTitle(title: String?) {
+        supportActionBar?.title = title
     }
 
 }
