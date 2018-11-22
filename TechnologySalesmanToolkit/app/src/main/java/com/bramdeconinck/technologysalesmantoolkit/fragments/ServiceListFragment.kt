@@ -11,7 +11,7 @@ import com.bramdeconinck.technologysalesmantoolkit.adapters.ServiceAdapter
 import com.bramdeconinck.technologysalesmantoolkit.interfaces.IFirebaseCallback
 import com.bramdeconinck.technologysalesmantoolkit.models.Service
 import com.bramdeconinck.technologysalesmantoolkit.network.FirestoreAPI
-import com.bramdeconinck.technologysalesmantoolkit.utils.Utils
+import com.bramdeconinck.technologysalesmantoolkit.utils.MessageUtils
 import kotlinx.android.synthetic.main.fragment_service_list.*
 import kotlinx.android.synthetic.main.fragment_service_list.view.*
 
@@ -76,7 +76,7 @@ class ServiceListFragment : Fragment(), IFirebaseCallback {
 
     // Deze methode toont een foutmelding indien er geen gegevens opgehaald kunnen worden.
     override fun showMessage() {
-        Utils.makeToast(this.requireContext(), getString(R.string.fetching_data_error))
+        MessageUtils.makeToast(this.requireContext(), getString(R.string.fetching_data_error))
     }
 
 }

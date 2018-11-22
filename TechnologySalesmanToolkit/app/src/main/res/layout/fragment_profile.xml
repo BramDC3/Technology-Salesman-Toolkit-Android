@@ -1,75 +1,145 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragments.ProfileFragment">
 
-    <android.support.constraint.ConstraintLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@drawable/login_background"
+        tools:ignore="UselessParent">
 
-        <ImageView
-            android:id="@+id/img_profile_image"
-            android:layout_width="175dp"
-            android:layout_height="175dp"
-            android:layout_marginTop="48dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:src="@tools:sample/avatars[12]"
-            android:contentDescription="profile image" />
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/lbl_profile_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="56dp"
-            android:text="Naam:"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.488"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/img_profile_image" />
+            <ImageView
+                android:id="@+id/img_profile_image"
+                android:layout_width="175dp"
+                android:layout_height="175dp"
+                android:layout_marginTop="48dp"
+                android:contentDescription="@string/profile_picture_description"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@drawable/default_profile_image" />
 
-        <EditText
-            android:id="@+id/txt_profile_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:ems="10"
-            android:enabled="false"
-            android:inputType="textPersonName"
-            android:text="Bram De Coninck"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/lbl_profile_name" />
+            <TextView
+                android:id="@+id/lbl_profile_fullname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/profile_fullname_example"
+                android:textColor="@android:color/white"
+                android:textSize="26sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/img_profile_image" />
 
-        <TextView
-            android:id="@+id/lbl_profile_email"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:text="E-mailadres:"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txt_profile_name" />
 
-        <EditText
-            android:id="@+id/txt_profile_email"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:ems="10"
-            android:enabled="false"
-            android:inputType="textEmailAddress"
-            android:text="bram@bramdeconinck.com"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/lbl_profile_email" />
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/profile_fields"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="48dp"
+                android:layout_marginBottom="32dp"
+                android:paddingTop="8dp"
+                android:paddingBottom="18dp"
+                android:paddingStart="14dp"
+                android:paddingEnd="14dp"
+                android:background="@drawable/rounded_corners"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/lbl_profile_fullname"
+                app:layout_constraintBottom_toTopOf="@+id/lbl_profile_change_password">
 
-    </android.support.constraint.ConstraintLayout>
+                <EditText
+                    android:id="@+id/txt_profile_firstname"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:inputType="textPersonName"
+                    android:hint="@string/firstname"
+                    android:textSize="16sp"
+                    android:background="@drawable/reg_firstname"
+                    android:paddingStart="40dp"
+                    android:paddingEnd="20dp"
+                    android:textColor="@drawable/profile_edit_text_selector"
+                    android:ems="10"
+                    android:enabled="false"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="Autofill" />
+
+                <EditText
+                    android:id="@+id/txt_profile_familyname"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:inputType="textPersonName"
+                    android:hint="@string/lastname"
+                    android:background="@drawable/reg_familyname"
+                    android:textSize="16sp"
+                    android:paddingStart="40dp"
+                    android:paddingEnd="20dp"
+                    android:textColor="@drawable/profile_edit_text_selector"
+                    android:ems="10"
+                    android:enabled="false"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/txt_profile_firstname"
+                    tools:ignore="Autofill" />
+
+                <EditText
+                    android:id="@+id/txt_profile_email"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:inputType="textEmailAddress"
+                    android:hint="@string/email"
+                    android:background="@drawable/reg_email"
+                    android:textSize="16sp"
+                    android:paddingStart="40dp"
+                    android:paddingEnd="20dp"
+                    android:textColor="@drawable/profile_edit_text_selector"
+                    android:ems="10"
+                    android:enabled="false"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/txt_profile_familyname"
+                    tools:ignore="Autofill" />
+
+                <Button
+                    android:id="@+id/btn_profile_edit_profile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/edit_profile"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/txt_profile_email" />
+
+            </android.support.constraint.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/lbl_profile_change_password"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edit_password"
+                android:layout_marginBottom="10dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/profile_fields" />
+
+
+        </android.support.constraint.ConstraintLayout>
+
+    </ScrollView>
 
 </FrameLayout>

@@ -8,7 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.findNavController
 import com.bramdeconinck.technologysalesmantoolkit.R
-import com.bramdeconinck.technologysalesmantoolkit.utils.Utils
+import com.bramdeconinck.technologysalesmantoolkit.utils.MessageUtils
+import com.bramdeconinck.technologysalesmantoolkit.utils.ValidationUtils
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.UserProfileChangeRequest
@@ -45,7 +46,7 @@ class RegistrationFragment : Fragment() {
                         val firebaseUser = mAuth.currentUser
                         updateUserInfo(firebaseUser)
                     } else {
-                        Utils.makeToast(this.requireContext(), getString(R.string.account_not_created))
+                        MessageUtils.makeToast(this.requireContext(), getString(R.string.account_not_created))
                     }
                 }
     }
@@ -60,7 +61,7 @@ class RegistrationFragment : Fragment() {
                     if (task.isSuccessful) {
                         firebaseUser.sendEmailVerification()
                         mAuth.signOut()
-                        Utils.makeToast(this.requireContext(), getString(R.string.account_created))
+                        MessageUtils.makeToast(this.requireContext(), getString(R.string.account_created))
                     }
                 }
     }
@@ -71,17 +72,17 @@ class RegistrationFragment : Fragment() {
                 && !txt_email_r.text.isBlank()
                 && !txt_password_r.text.isBlank()
                 && !txt_repeatpassword.text.isBlank()) {
-            if (Utils.isEmailValid(txt_email_r.text.toString())) {
+            if (ValidationUtils.isEmailValid(txt_email_r.text.toString())) {
                 if (txt_password_r.text.toString() == txt_repeatpassword.text.toString()) {
                     createFirebaseAccount()
                 } else {
-                    Utils.makeToast(this.requireContext(), getString(R.string.passwords_dont_match))
+                    MessageUtils.makeToast(this.requireContext(), getString(R.string.passwords_dont_match))
                 }
             } else {
-                Utils.makeToast(this.requireContext(), getString(R.string.invalid_email))
+                MessageUtils.makeToast(this.requireContext(), getString(R.string.invalid_email))
             }
         } else {
-            Utils.makeToast(this.requireContext(), getString(R.string.empty_field))
+            MessageUtils.makeToast(this.requireContext(), getString(R.string.empty_field))
         }
     }
 

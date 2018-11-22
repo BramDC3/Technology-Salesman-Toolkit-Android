@@ -37,7 +37,7 @@
                 android:layout_marginTop="48dp"
                 android:layout_marginBottom="32dp"
                 android:paddingTop="8dp"
-                android:paddingBottom="16dp"
+                android:paddingBottom="18dp"
                 android:paddingStart="4dp"
                 android:paddingEnd="4dp"
                 android:background="@drawable/rounded_corners"
