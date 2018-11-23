@@ -26,7 +26,7 @@ object MessageUtils {
         AlertDialog.Builder(context)
                 .setTitle(title)
                 .setMessage(message)
-                .setNegativeButton("Oké") { dialog, _ -> dialog?.dismiss() }
+                .setPositiveButton("Oké") { dialog, _ -> dialog?.dismiss() }
                 .create()
                 .show()
     }
