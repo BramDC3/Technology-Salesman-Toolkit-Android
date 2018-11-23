@@ -23,7 +23,7 @@
                                           <PersistentState>
                                             <option name="values">
                                               <map>
-                                                <entry key="scalingPercent" value="54" />
+                                                <entry key="scalingPercent" value="61" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -34,8 +34,8 @@
                                   <option name="values">
                                     <map>
                                       <entry key="backgroundAssetType" value="COLOR" />
-                                      <entry key="backgroundColor" value="ffffff" />
-                                      <entry key="foregroundImage" value="D:\Gebruikers\Bram\Downloads\Logo.png" />
+                                      <entry key="backgroundColor" value="3f51b5" />
+                                      <entry key="foregroundImage" value="$USER_HOME$/Downloads/Logo.png" />
                                     </map>
                                   </option>
                                 </PersistentState>
