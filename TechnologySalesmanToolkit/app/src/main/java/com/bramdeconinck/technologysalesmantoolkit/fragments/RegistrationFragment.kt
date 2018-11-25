@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.bramdeconinck.technologysalesmantoolkit.R
 import com.bramdeconinck.technologysalesmantoolkit.utils.MessageUtils
 import com.bramdeconinck.technologysalesmantoolkit.utils.ValidationUtils
@@ -62,6 +63,7 @@ class RegistrationFragment : Fragment() {
                         firebaseUser.sendEmailVerification()
                         mAuth.signOut()
                         MessageUtils.makeToast(this.requireContext(), getString(R.string.account_created))
+                        this.findNavController().popBackStack()
                     }
                 }
     }
