@@ -5,13 +5,16 @@ import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.*
+import androidx.navigation.fragment.findNavController
 import com.bramdeconinck.technologysalesmantoolkit.R
 import com.bramdeconinck.technologysalesmantoolkit.utils.MessageUtils
 import com.bramdeconinck.technologysalesmantoolkit.utils.StringUtils
+import com.bramdeconinck.technologysalesmantoolkit.utils.ValidationUtils
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.auth.UserProfileChangeRequest
 import kotlinx.android.synthetic.main.fragment_profile.*
 
 class ProfileFragment : Fragment() {
@@ -41,11 +44,11 @@ class ProfileFragment : Fragment() {
         }
 
         img_profile_image.setOnClickListener{
-            if (editable) showChangeProfilePictureDialog(context!!, "Profielfoto wijzigen", "Wilt u een nieuwe foto maken met de camera of wilt u een foto uit uw gallerij gebruiken als nieuwe profielfoto?")
+            MessageUtils.showDialog(context!!, "Profielfoto wijzigen", "Momenteel kan u enkel uw profielfoto wijzigen door aan te melden met uw Google account. ")
         }
 
         btn_profile_edit_profile.setOnClickListener {
-            toggleEditMode()
+            validateProfileForm()
         }
     }
 
@@ -136,16 +139,74 @@ class ProfileFragment : Fragment() {
         updateUI()
     }
 
-    // Function to show the dialog which asks the user how to user wants to edit their profile picture
-    private fun showChangeProfilePictureDialog(context: Context, title: String, message: String) {
+    private fun validateProfileForm() {
+        btn_profile_edit_profile.isEnabled = false
+        if (!txt_profile_firstname.text.isBlank()
+                && !txt_profile_familyname.text.isBlank()
+                && !txt_profile_email.text.isBlank()) {
+            if (ValidationUtils.isEmailValid(txt_profile_email.text.toString())) {
+                showEditProfileDialog(context!!, "Profiel wijzigen", "Bent u zeker dat u uw profiel wilt wijzigen?")
+            } else {
+                MessageUtils.makeToast(this.requireContext(), getString(R.string.invalid_email))
+                btn_profile_edit_profile.isEnabled = true
+            }
+        } else {
+            MessageUtils.makeToast(this.requireContext(), getString(R.string.empty_field))
+            btn_profile_edit_profile.isEnabled = true
+        }
+    }
+
+    // Function to show the dialog which asks the user if they want to change their password
+    private fun showEditProfileDialog(context: Context, title: String, message: String) {
         AlertDialog.Builder(context)
                 .setTitle(title)
                 .setMessage(message)
-                .setPositiveButton("Camera") { _, _ -> sendResetPasswordEmail()}
-                .setNegativeButton("Gallerij") { dialog, _ -> dialog?.dismiss() }
-                .setNeutralButton("Annuleren") { dialog, _ -> dialog?.dismiss() }
+                .setPositiveButton("Ja") { _, _ -> applyProfileChanges()}
+                .setNegativeButton("Nee") { _, _ -> btn_profile_edit_profile.isEnabled = true }
+                .setNeutralButton("Annuleren") { _, _ -> btn_profile_edit_profile.isEnabled = true }
                 .create()
                 .show()
+    }
+
+    private fun applyProfileChanges() {
+        if (firebaseUser.displayName != "${txt_profile_firstname.text} ${txt_profile_familyname.text}") {
+            val profileUpdates = UserProfileChangeRequest.Builder()
+                    .setDisplayName("${txt_profile_firstname.text} ${txt_profile_familyname.text}")
+                    .build()
+
+            firebaseUser.updateProfile(profileUpdates)
+                    .addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
+                            MessageUtils.showDialog(context!!, "Naam wijzigen", "Uw naam werd succesvol gewijzigd")
+                            updateUI()
+                            if (editable) toggleEditMode()
+                        }
+                    }
+                    .addOnFailureListener {
+                        MessageUtils.showDialog(context!!, "Naam wijzigen", "Er is een fout opgetreden tijdens het wijzigen van uw naam.")
+                    }
+        }
+
+        if (firebaseUser.email != txt_profile_email.text.toString()) {
+            firebaseUser.updateEmail(txt_profile_email.text.toString())
+                    .addOnCompleteListener { task1 ->
+                        if (task1.isSuccessful) {
+                            firebaseUser.sendEmailVerification()
+                                    .addOnCompleteListener { task2 ->
+                                        if (task2.isSuccessful) {
+                                            MessageUtils.showDialog(context!!, "E-mailadres wijzigen", "Uw e-mailadres werd succesvol gewijzigd.")
+                                            mAuth.signOut()
+                                            this.findNavController().navigate(R.id.signOutFromProfile)
+                                        }
+                                    }
+                        }
+                    }
+                    .addOnFailureListener {
+                        MessageUtils.showDialog(context!!, "E-mailadres wijzigen", "Er is een fout opgetreden tijdens het wijzigen van uw e-mailadres.")
+                    }
+        }
+
+        btn_profile_edit_profile.isEnabled = true
     }
 
 }

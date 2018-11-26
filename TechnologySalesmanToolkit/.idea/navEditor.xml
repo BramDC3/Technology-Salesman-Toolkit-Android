@@ -39,9 +39,18 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="-364" />
-                            <option name="y" value="18" />
+                            <option name="x" value="81" />
+                            <option name="y" value="-475" />
                           </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="signOutFromProfile">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
                         </option>
                       </LayoutPositions>
                     </value>
@@ -107,7 +116,7 @@
                         </option>
                         <option name="myPositions">
                           <map>
-                            <entry key="signOut">
+                            <entry key="signOutFromSettings">
                               <value>
                                 <LayoutPositions />
                               </value>
