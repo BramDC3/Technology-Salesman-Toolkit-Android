@@ -62,14 +62,21 @@
         android:id="@+id/profileFragment"
         android:name="com.bramdeconinck.technologysalesmantoolkit.fragments.ProfileFragment"
         android:label="@string/title_profile_fragment"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/signOutFromProfile"
+            app:destination="@id/loginFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@+id/profileFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.bramdeconinck.technologysalesmantoolkit.fragments.SettingsFragment"
         android:label="@string/title_settings_fragment"
         tools:layout="@layout/fragment_settings" >
         <action
-            android:id="@+id/signOut"
+            android:id="@+id/signOutFromSettings"
             app:destination="@id/loginFragment"
             app:launchSingleTop="true"
             app:popUpTo="@+id/settingsFragment"

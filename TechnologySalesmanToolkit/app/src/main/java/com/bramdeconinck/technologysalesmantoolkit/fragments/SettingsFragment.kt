@@ -13,6 +13,7 @@ import android.net.Uri
 import androidx.navigation.fragment.findNavController
 import com.bramdeconinck.technologysalesmantoolkit.utils.MessageUtils
 import com.bramdeconinck.technologysalesmantoolkit.utils.MessageUtils.showDialog
+import com.bramdeconinck.technologysalesmantoolkit.utils.website
 import kotlinx.android.synthetic.main.fragment_settings.*
 
 class SettingsFragment : Fragment() {
@@ -31,18 +32,22 @@ class SettingsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         btn_settings_website.setOnClickListener{ openWebPage(website) }
+
         btn_settings_darkmode.setOnClickListener{
             MessageUtils.makeSnackBar(this.activity!!.findViewById(android.R.id.content), "Donkere modus is momenteel nog niet beschikbaar.")
         }
+
         btn_settings_privacypolicy.setOnClickListener{
             showDialog(this.requireContext(),"Privacybeleid", "Er is momenteel nog geen privacy beleid.")
         }
+
         btn_settings_suggestion.setOnClickListener{
             MessageUtils.showDialog(this.requireContext(), "Verstuur een suggestie","Suggesties versturen kan momenteel nog niet.")
         }
+
         btn_settings_signout.setOnClickListener{
             mAuth.signOut()
-            this.findNavController().navigate(R.id.signOut)
+            this.findNavController().navigate(R.id.signOutFromSettings)
         }
     }
 
@@ -52,13 +57,9 @@ class SettingsFragment : Fragment() {
             val myIntent = Intent(Intent.ACTION_VIEW, webpage)
             startActivity(myIntent)
         } catch (e: ActivityNotFoundException) {
-            MessageUtils.makeToast(this.requireContext(), "No application can handle this request. Please install a web browser or check your URL.")
+            MessageUtils.makeToast(this.requireContext(), "Er werd geen webbrowser gedetecteerd op uw toestel.")
             e.printStackTrace()
         }
-    }
-
-    companion object {
-        private const val website: String = "https://bramdeconinck.com"
     }
 
 }
