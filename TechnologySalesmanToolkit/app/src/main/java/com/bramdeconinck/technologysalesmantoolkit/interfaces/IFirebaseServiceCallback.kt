@@ -2,7 +2,7 @@ package com.bramdeconinck.technologysalesmantoolkit.interfaces
 
 import com.bramdeconinck.technologysalesmantoolkit.models.Service
 
-interface IFirebaseCallback {
+interface IFirebaseServiceCallback {
     fun showProgress()
     fun hideProgress()
     fun showMessage()

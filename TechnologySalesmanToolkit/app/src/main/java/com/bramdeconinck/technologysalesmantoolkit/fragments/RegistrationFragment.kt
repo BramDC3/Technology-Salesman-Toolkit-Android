@@ -1,6 +1,10 @@
 package com.bramdeconinck.technologysalesmantoolkit.fragments
 
+import android.app.AlertDialog
+import android.content.ActivityNotFoundException
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
@@ -9,8 +13,7 @@ import android.view.ViewGroup
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.bramdeconinck.technologysalesmantoolkit.R
-import com.bramdeconinck.technologysalesmantoolkit.utils.MessageUtils
-import com.bramdeconinck.technologysalesmantoolkit.utils.ValidationUtils
+import com.bramdeconinck.technologysalesmantoolkit.utils.*
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.UserProfileChangeRequest
@@ -76,7 +79,7 @@ class RegistrationFragment : Fragment() {
                 && !txt_repeatpassword.text.isBlank()) {
             if (ValidationUtils.isEmailValid(txt_email_r.text.toString())) {
                 if (txt_password_r.text.toString() == txt_repeatpassword.text.toString()) {
-                    createFirebaseAccount()
+                    showPrivacyPolicyDialog(context!!, "Privacybeleid", "Door op 'Ja' te drukken, gaat u akkoord met het privacybeleid en wordt uw account aangemaakt.")
                 } else {
                     MessageUtils.makeToast(this.requireContext(), getString(R.string.passwords_dont_match))
                 }
@@ -85,6 +88,28 @@ class RegistrationFragment : Fragment() {
             }
         } else {
             MessageUtils.makeToast(this.requireContext(), getString(R.string.empty_field))
+        }
+    }
+
+    private fun showPrivacyPolicyDialog(context: Context, title: String, message: String) {
+        AlertDialog.Builder(context)
+                .setTitle(title)
+                .setMessage(message)
+                .setPositiveButton("Ja") { _, _ -> createFirebaseAccount() }
+                .setNegativeButton("Nee") { dialog, _ -> dialog.dismiss() }
+                .setNeutralButton("Bekijk privacybeleid") { _, _ -> openWebPage(privacyPolicy) }
+                .create()
+                .show()
+    }
+
+    private fun openWebPage(url: String) {
+        try {
+            val webpage = Uri.parse(url)
+            val myIntent = Intent(Intent.ACTION_VIEW, webpage)
+            startActivity(myIntent)
+        } catch (e: ActivityNotFoundException) {
+            MessageUtils.makeToast(this.requireContext(), "Er werd geen webbrowser gedetecteerd op uw toestel.")
+            e.printStackTrace()
         }
     }
 
