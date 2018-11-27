@@ -1,13 +1,14 @@
 package com.bramdeconinck.technologysalesmantoolkit.network
 
-import com.bramdeconinck.technologysalesmantoolkit.interfaces.IFirebaseCallback
+import com.bramdeconinck.technologysalesmantoolkit.interfaces.IFirebaseServiceCallback
+import com.bramdeconinck.technologysalesmantoolkit.interfaces.IFirebaseSuggestionCallback
 import com.bramdeconinck.technologysalesmantoolkit.models.Category
 import com.bramdeconinck.technologysalesmantoolkit.models.Service
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.QueryDocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestoreSettings
-
-
 
 class FirestoreAPI {
 
@@ -19,11 +20,13 @@ class FirestoreAPI {
             .setTimestampsInSnapshotsEnabled(true)
             .build()
 
-    // Get all services from the Firestore
-    fun getServicesFromFirestore(firebaseCallback: IFirebaseCallback) {
+    init {
         firestore.firestoreSettings = firetoreSettings
+    }
 
-        firebaseCallback.showProgress()
+    // Get all services from the Firestore
+    fun getServicesFromFirestore(firebaseServiceCallback: IFirebaseServiceCallback) {
+        firebaseServiceCallback.showProgress()
         firestore.collection("Services").get()
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
@@ -31,12 +34,12 @@ class FirestoreAPI {
                         for (doc in task.result!!) {
                             servicesList.add(fromSnapshotToService(doc))
                         }
-                        firebaseCallback.onCallBack(servicesList)
+                        firebaseServiceCallback.onCallBack(servicesList)
                     }
                     else {
-                        firebaseCallback.showMessage()
+                        firebaseServiceCallback.showMessage()
                     }
-                    firebaseCallback.hideProgress()
+                    firebaseServiceCallback.hideProgress()
                 }
     }
 
@@ -62,6 +65,18 @@ class FirestoreAPI {
             2 -> Category.Apple
             else -> Category.Other
         }
+    }
+
+    // Post a suggestion to the Firestore
+    fun postSuggestiontoFirestore(callback: IFirebaseSuggestionCallback, suggestion: String) {
+        val data = HashMap<String, Any>()
+
+        data["message"] = suggestion
+        data["sender"] = FirebaseAuth.getInstance().currentUser?.uid ?: "Anonymous"
+
+        firestore.collection("Suggestions").add(data)
+                .addOnSuccessListener { callback.showSuccesMessage() }
+                .addOnFailureListener { callback.showFailureMessage() }
     }
 
 }

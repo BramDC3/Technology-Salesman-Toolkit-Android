@@ -8,14 +8,14 @@ import android.view.View
 import android.view.ViewGroup
 import com.bramdeconinck.technologysalesmantoolkit.R
 import com.bramdeconinck.technologysalesmantoolkit.adapters.ServiceAdapter
-import com.bramdeconinck.technologysalesmantoolkit.interfaces.IFirebaseCallback
+import com.bramdeconinck.technologysalesmantoolkit.interfaces.IFirebaseServiceCallback
 import com.bramdeconinck.technologysalesmantoolkit.models.Service
 import com.bramdeconinck.technologysalesmantoolkit.network.FirestoreAPI
 import com.bramdeconinck.technologysalesmantoolkit.utils.MessageUtils
 import kotlinx.android.synthetic.main.fragment_service_list.*
 import kotlinx.android.synthetic.main.fragment_service_list.view.*
 
-class ServiceListFragment : Fragment(), IFirebaseCallback {
+class ServiceListFragment : Fragment(), IFirebaseServiceCallback {
 
     private lateinit var firestoreApi: FirestoreAPI
     private lateinit var serviceData: MutableList<Service>
@@ -55,7 +55,7 @@ class ServiceListFragment : Fragment(), IFirebaseCallback {
         firestoreApi.getServicesFromFirestore(this)
     }
 
-    // De methodes van de interface IFirebaseCallback worden gebruikt
+    // De methodes van de interface IFirebaseServiceCallback worden gebruikt
     // voor het ophalen van gegevens uit de Firebase en de
     // RecyclerView er mee te vullen.
     override fun onCallBack(list: MutableList<Service>) {
