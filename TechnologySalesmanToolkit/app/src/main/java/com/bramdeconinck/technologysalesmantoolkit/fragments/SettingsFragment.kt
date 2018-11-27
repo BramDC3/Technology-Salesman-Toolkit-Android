@@ -1,5 +1,6 @@
 package com.bramdeconinck.technologysalesmantoolkit.fragments
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
@@ -8,12 +9,16 @@ import android.view.ViewGroup
 import com.bramdeconinck.technologysalesmantoolkit.R
 import com.google.firebase.auth.FirebaseAuth
 import android.content.ActivityNotFoundException
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import android.support.v4.content.ContextCompat.startActivity
 import androidx.navigation.fragment.findNavController
 import com.bramdeconinck.technologysalesmantoolkit.utils.MessageUtils
 import com.bramdeconinck.technologysalesmantoolkit.utils.MessageUtils.showDialog
+import com.bramdeconinck.technologysalesmantoolkit.utils.privacyPolicy
 import com.bramdeconinck.technologysalesmantoolkit.utils.website
+import kotlinx.android.synthetic.main.fragment_profile.*
 import kotlinx.android.synthetic.main.fragment_settings.*
 
 class SettingsFragment : Fragment() {
@@ -33,21 +38,16 @@ class SettingsFragment : Fragment() {
 
         btn_settings_website.setOnClickListener{ openWebPage(website) }
 
-        btn_settings_darkmode.setOnClickListener{
-            MessageUtils.makeSnackBar(this.activity!!.findViewById(android.R.id.content), "Donkere modus is momenteel nog niet beschikbaar.")
-        }
+        btn_settings_darkmode.setOnClickListener{ switch_settings_darkmode.isChecked = !switch_settings_darkmode.isChecked }
 
-        btn_settings_privacypolicy.setOnClickListener{
-            showDialog(this.requireContext(),"Privacybeleid", "Er is momenteel nog geen privacy beleid.")
-        }
+        btn_settings_privacypolicy.setOnClickListener { openWebPage(privacyPolicy) }
 
         btn_settings_suggestion.setOnClickListener{
-            MessageUtils.showDialog(this.requireContext(), "Verstuur een suggestie","Suggesties versturen kan momenteel nog niet.")
+            MessageUtils.showDialog(context!!, "Verstuur een suggestie","Suggesties versturen kan momenteel nog niet.")
         }
 
         btn_settings_signout.setOnClickListener{
-            mAuth.signOut()
-            this.findNavController().navigate(R.id.signOutFromSettings)
+            showSignOutDialog(context!!, "Afmelden", "Bent u zeker dat u zich wilt afmelden?")
         }
     }
 
@@ -60,6 +60,20 @@ class SettingsFragment : Fragment() {
             MessageUtils.makeToast(this.requireContext(), "Er werd geen webbrowser gedetecteerd op uw toestel.")
             e.printStackTrace()
         }
+    }
+
+    private fun showSignOutDialog(context: Context, title: String, message: String) {
+        AlertDialog.Builder(context)
+                .setTitle(title)
+                .setMessage(message)
+                .setPositiveButton("Ja") { _, _ ->
+                    mAuth.signOut()
+                    this.findNavController().navigate(R.id.signOutFromSettings)
+                }
+                .setNegativeButton("Nee") { dialog, _ -> dialog.dismiss() }
+                .setNeutralButton("Annuleren") { dialog, _ -> dialog.dismiss() }
+                .create()
+                .show()
     }
 
 }
