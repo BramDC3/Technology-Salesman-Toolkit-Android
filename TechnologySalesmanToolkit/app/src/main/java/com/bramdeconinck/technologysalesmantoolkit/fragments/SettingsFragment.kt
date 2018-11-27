@@ -12,13 +12,10 @@ import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
-import android.support.v4.content.ContextCompat.startActivity
 import androidx.navigation.fragment.findNavController
 import com.bramdeconinck.technologysalesmantoolkit.utils.MessageUtils
-import com.bramdeconinck.technologysalesmantoolkit.utils.MessageUtils.showDialog
 import com.bramdeconinck.technologysalesmantoolkit.utils.privacyPolicy
 import com.bramdeconinck.technologysalesmantoolkit.utils.website
-import kotlinx.android.synthetic.main.fragment_profile.*
 import kotlinx.android.synthetic.main.fragment_settings.*
 
 class SettingsFragment : Fragment() {
