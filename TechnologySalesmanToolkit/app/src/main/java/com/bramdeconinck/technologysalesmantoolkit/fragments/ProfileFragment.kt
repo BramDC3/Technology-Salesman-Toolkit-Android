@@ -141,19 +141,27 @@ class ProfileFragment : Fragment() {
 
     private fun validateProfileForm() {
         btn_profile_edit_profile.isEnabled = false
-        if (!txt_profile_firstname.text.isBlank()
-                && !txt_profile_familyname.text.isBlank()
-                && !txt_profile_email.text.isBlank()) {
-            if (ValidationUtils.isEmailValid(txt_profile_email.text.toString())) {
-                showEditProfileDialog(context!!, "Profiel wijzigen", "Bent u zeker dat u uw profiel wilt wijzigen?")
+        if (!(txt_profile_email.text.toString() == firebaseUser.email
+            && txt_profile_firstname.text.toString() == StringUtils.getFirstName(firebaseUser.displayName.toString())
+            && txt_profile_familyname.text.toString() == StringUtils.getFamilyName(firebaseUser.displayName.toString()))) {
+            if (!txt_profile_firstname.text.isBlank()
+                    && !txt_profile_familyname.text.isBlank()
+                    && !txt_profile_email.text.isBlank()) {
+                if (ValidationUtils.isEmailValid(txt_profile_email.text.toString())) {
+                    showEditProfileDialog(context!!, "Profiel wijzigen", "Bent u zeker dat u uw profiel wilt wijzigen?")
+                } else {
+                    MessageUtils.makeToast(this.requireContext(), getString(R.string.invalid_email))
+                    btn_profile_edit_profile.isEnabled = true
+                }
             } else {
-                MessageUtils.makeToast(this.requireContext(), getString(R.string.invalid_email))
+                MessageUtils.makeToast(this.requireContext(), getString(R.string.empty_field))
                 btn_profile_edit_profile.isEnabled = true
             }
         } else {
-            MessageUtils.makeToast(this.requireContext(), getString(R.string.empty_field))
+            toggleEditMode()
             btn_profile_edit_profile.isEnabled = true
         }
+
     }
 
     // Function to show the dialog which asks the user if they want to change their password

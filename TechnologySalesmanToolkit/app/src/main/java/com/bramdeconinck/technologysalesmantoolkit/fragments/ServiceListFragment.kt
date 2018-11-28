@@ -1,5 +1,8 @@
 package com.bramdeconinck.technologysalesmantoolkit.fragments
 
+import android.arch.lifecycle.ViewModelProviders
+import android.databinding.DataBindingUtil
+import android.databinding.ViewDataBinding
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
@@ -11,6 +14,7 @@ import com.bramdeconinck.technologysalesmantoolkit.interfaces.IFirebaseServiceCa
 import com.bramdeconinck.technologysalesmantoolkit.models.Service
 import com.bramdeconinck.technologysalesmantoolkit.network.FirestoreAPI
 import com.bramdeconinck.technologysalesmantoolkit.utils.MessageUtils
+import com.bramdeconinck.technologysalesmantoolkit.viewmodels.ServiceViewModel
 import kotlinx.android.synthetic.main.fragment_service_list.*
 import kotlinx.android.synthetic.main.fragment_service_list.view.*
 
@@ -19,6 +23,8 @@ class ServiceListFragment : Fragment(), IFirebaseServiceCallback {
     private lateinit var firestoreApi: FirestoreAPI
     private lateinit var serviceData: MutableList<Service>
     private lateinit var serviceAdapter: ServiceAdapter
+
+    private lateinit var serviceViewModel: ServiceViewModel
 
     // Variable to check whether the app is running on a tablet or not
     private var twoPane: Boolean = false
@@ -32,6 +38,13 @@ class ServiceListFragment : Fragment(), IFirebaseServiceCallback {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val rootView = inflater.inflate(R.layout.fragment_service_list, container, false)
+
+
+
+        serviceViewModel = ViewModelProviders.of(this).get(ServiceViewModel::class.java)
+
+
+
 
         // If the service detail container is not null,
         // then the app is running on a tablet

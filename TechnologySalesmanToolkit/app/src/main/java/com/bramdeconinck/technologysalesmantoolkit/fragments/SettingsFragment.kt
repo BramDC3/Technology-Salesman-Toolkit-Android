@@ -44,7 +44,7 @@ class SettingsFragment : Fragment(), IFirebaseSuggestionCallback {
 
         btn_settings_privacypolicy.setOnClickListener { openWebPage(privacyPolicy) }
 
-        btn_settings_suggestion.setOnClickListener{ showMakeSuggestionDialog(context!!, "Verstuur een suggestie","Suggesties versturen kan momenteel nog niet.") }
+        btn_settings_suggestion.setOnClickListener{ showMakeSuggestionDialog(context!!, "Verstuur een suggestie","Vul hieronder uw suggestie in en druk op de knop 'Verzend'.") }
 
         btn_settings_signout.setOnClickListener{ showSignOutDialog(context!!, "Afmelden", "Bent u zeker dat u zich wilt afmelden?") }
     }
