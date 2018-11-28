@@ -2,6 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'com.google.gms.google-services'
+apply plugin: 'kotlin-kapt'
 
 android {
     androidExtensions {
@@ -59,4 +60,7 @@ dependencies {
 
     // ViewModel
     implementation "android.arch.lifecycle:extensions:1.1.1"
+
+    // Data binding
+    annotationProcessor "com.android.databinding:compiler:3.1.4"
 }

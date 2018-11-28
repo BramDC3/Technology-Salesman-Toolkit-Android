@@ -7,7 +7,7 @@ import com.bramdeconinck.technologysalesmantoolkit.network.FirestoreAPI
 
 class ServiceViewModel : ViewModel() {
 
-    private val firestoreApi = FirestoreAPI()
+    private val firestoreApi: FirestoreAPI = FirestoreAPI()
     private var serviceData = MutableLiveData<MutableList<Service>>()
 
     init {
