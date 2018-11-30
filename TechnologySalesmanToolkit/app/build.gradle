@@ -3,6 +3,7 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'com.google.gms.google-services'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'org.jetbrains.dokka-android'
 
 android {
     androidExtensions {
@@ -25,6 +26,10 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    dokka {
+        outputFormat = 'html'
+        outputDirectory = "$buildDir/javadoc"
     }
 }
 
@@ -63,4 +68,17 @@ dependencies {
 
     // Data binding
     annotationProcessor "com.android.databinding:compiler:3.1.4"
+
+    // Adds libraries defining annotations to only the compile classpath.
+    implementation "com.google.dagger:dagger:2.16"
+    implementation "com.google.dagger:dagger-android-support:2.16"
+
+    // Adds the annotation processor dependency to the annotation processor classpath.
+    //Android Studio by default will not allow you to navigate to generated Dagger 2
+    // code as legitimate classes because they are not normally added to the source path.
+    // Adding the annotationProcessor plugin will add these files into the IDE classpath
+    // and enable you to have more visibility.
+    annotationProcessor "com.google.dagger:dagger-compiler:2.16"
+    kapt "com.google.dagger:dagger-compiler:2.16"
+    annotationProcessor "com.google.dagger:dagger-android-processor:2.16"
 }
