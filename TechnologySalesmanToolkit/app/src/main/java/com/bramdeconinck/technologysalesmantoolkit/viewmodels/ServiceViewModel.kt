@@ -13,33 +13,27 @@ class ServiceViewModel : InjectedViewModel(), IFirebaseServiceCallback {
     @Inject
     lateinit var firestoreAPI: FirestoreAPI
 
-    private var serviceData = MutableLiveData<MutableList<Service>>()
+    private var services = MutableLiveData<List<Service>>()
+
+    private var isLoading = MutableLiveData<Boolean>()
 
     init {
-        serviceData.value = mutableListOf()
+        services.value = mutableListOf()
+
+        isLoading.value = false
 
         firestoreAPI.getServicesFromFirestore(this)
     }
 
-    fun getServices(): MutableLiveData<MutableList<Service>> {
-        return serviceData
-    }
+    fun getServices(): MutableLiveData<List<Service>> { return services }
 
-    override fun showProgress() {
-        Log.d("HALLO", "SHOW PROGRESS")
-    }
+    fun getIsLoading(): MutableLiveData<Boolean> { return isLoading }
 
-    override fun hideProgress() {
-        Log.d("HALLO", "HIDE PROGRESS")
-    }
+    override fun onCallBack(list: MutableList<Service>) { services.value = list }
 
-    override fun showMessage() {
-        Log.d("BOOOEEE", "TIS KAPOT")
-    }
+    override fun showProgress() { isLoading.value = true }
 
-    override fun onCallBack(list: MutableList<Service>) {
-        Log.d("HALLO", "CALLBACK")
-        serviceData.value = list
-    }
+    override fun hideProgress() { isLoading.value = false }
 
+    override fun showMessage() { Log.d("BOOOEEE", "TIS KAPOT") }
 }

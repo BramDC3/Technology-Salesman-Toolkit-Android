@@ -30,14 +30,19 @@ class ServiceListFragment : Fragment() {
         // then the app is running on a tablet
         if (rootView.service_detail_container != null) twoPane = true
 
-        val serviceData = serviceViewModel.getServices()
+        val services = serviceViewModel.getServices()
 
-        serviceAdapter = ServiceAdapter(this, serviceData, twoPane)
+        val isLoading = serviceViewModel.getIsLoading()
 
-        serviceData.observe(this, Observer {
-            Log.d("TEST", "OBSERVE")
-            Log.d("TEST", serviceData.value!!.size.toString())
+        serviceAdapter = ServiceAdapter(this, services, twoPane)
+
+        services.observe(this, Observer {
             serviceAdapter.notifyDataSetChanged()
+        })
+
+        isLoading.observe(this, Observer {
+            if (isLoading.value!!) rootView.progress_bar.visibility = View.VISIBLE
+            else rootView.progress_bar.visibility = View.GONE
         })
 
         rootView.service_list.adapter = serviceAdapter

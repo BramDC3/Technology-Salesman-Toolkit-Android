@@ -18,7 +18,7 @@ import kotlinx.android.synthetic.main.service_list_content.view.*
 
 class ServiceAdapter(
         private val fragment: ServiceListFragment,
-        private val services: MutableLiveData<MutableList<Service>>,
+        private val services: MutableLiveData<List<Service>>,
         private val twoPane: Boolean) :
         RecyclerView.Adapter<ServiceAdapter.ViewHolder>() {
 

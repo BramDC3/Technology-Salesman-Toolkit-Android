@@ -58,6 +58,7 @@ dependencies {
 
     // Glide is used to load images from a URL
     implementation "com.github.bumptech.glide:glide:4.8.0"
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.8.0'
 
     // Navigation Component of Android Jetpack
     implementation "android.arch.navigation:navigation-fragment-ktx:1.0.0-alpha07"
