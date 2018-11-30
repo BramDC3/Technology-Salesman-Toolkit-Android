@@ -1,5 +1,6 @@
 package com.bramdeconinck.technologysalesmantoolkit.adapters
 
+import android.arch.lifecycle.MutableLiveData
 import android.os.Bundle
 import android.support.v7.widget.RecyclerView
 import android.text.TextUtils.replace
@@ -15,7 +16,10 @@ import com.bramdeconinck.technologysalesmantoolkit.models.Service
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.service_list_content.view.*
 
-class ServiceAdapter(private val fragment: ServiceListFragment, private val values: List<Service>, private val twoPane: Boolean) :
+class ServiceAdapter(
+        private val fragment: ServiceListFragment,
+        private val services: MutableLiveData<MutableList<Service>>,
+        private val twoPane: Boolean) :
         RecyclerView.Adapter<ServiceAdapter.ViewHolder>() {
 
     private val onClickListener: View.OnClickListener
@@ -49,7 +53,7 @@ class ServiceAdapter(private val fragment: ServiceListFragment, private val valu
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item = values[position]
+        val item = services.value!![position]
         Glide.with(fragment).load(item.image).into(holder.afbeeldingView)
         holder.naamView.text = item.name
         holder.beschrijvingView.text = item.description
@@ -62,7 +66,7 @@ class ServiceAdapter(private val fragment: ServiceListFragment, private val valu
         }
     }
 
-    override fun getItemCount() = values.size
+    override fun getItemCount() = services.value!!.size
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val afbeeldingView = view.iv_afbeelding

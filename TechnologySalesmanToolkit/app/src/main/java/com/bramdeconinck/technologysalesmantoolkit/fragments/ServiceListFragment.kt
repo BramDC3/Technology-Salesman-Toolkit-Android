@@ -1,8 +1,10 @@
 package com.bramdeconinck.technologysalesmantoolkit.fragments
 
+import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -28,9 +30,15 @@ class ServiceListFragment : Fragment() {
         // then the app is running on a tablet
         if (rootView.service_detail_container != null) twoPane = true
 
-        val serviceData = serviceViewModel.getServices().value
+        val serviceData = serviceViewModel.getServices()
 
-        serviceAdapter = ServiceAdapter(this, serviceData!!, twoPane)
+        serviceAdapter = ServiceAdapter(this, serviceData, twoPane)
+
+        serviceData.observe(this, Observer {
+            Log.d("TEST", "OBSERVE")
+            Log.d("TEST", serviceData.value!!.size.toString())
+            serviceAdapter.notifyDataSetChanged()
+        })
 
         rootView.service_list.adapter = serviceAdapter
 

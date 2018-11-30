@@ -10,13 +10,12 @@ import javax.inject.Inject
 
 class ServiceViewModel : InjectedViewModel(), IFirebaseServiceCallback {
 
-    private var serviceData = MutableLiveData<MutableList<Service>>()
-
     @Inject
     lateinit var firestoreAPI: FirestoreAPI
 
+    private var serviceData = MutableLiveData<MutableList<Service>>()
+
     init {
-        Log.d("HALLO", "IK BEN HIER")
         serviceData.value = mutableListOf()
 
         firestoreAPI.getServicesFromFirestore(this)
@@ -39,7 +38,8 @@ class ServiceViewModel : InjectedViewModel(), IFirebaseServiceCallback {
     }
 
     override fun onCallBack(list: MutableList<Service>) {
-        serviceData.value!!.addAll(list)
+        Log.d("HALLO", "CALLBACK")
+        serviceData.value = list
     }
 
 }
