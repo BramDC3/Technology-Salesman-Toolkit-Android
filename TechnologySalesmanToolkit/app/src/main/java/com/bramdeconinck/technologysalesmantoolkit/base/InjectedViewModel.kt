@@ -1,25 +1,13 @@
 package com.bramdeconinck.technologysalesmantoolkit.base
 
 import android.arch.lifecycle.ViewModel
-import com.bramdeconinck.technologysalesmantoolkit.injection.component.ViewModelComponent
-import com.bramdeconinck.technologysalesmantoolkit.injection.component.DaggerViewModelComponent
-import com.bramdeconinck.technologysalesmantoolkit.injection.module.NetworkModule
+import com.bramdeconinck.technologysalesmantoolkit.context.App.Companion.injector
 import com.bramdeconinck.technologysalesmantoolkit.viewmodels.ServiceViewModel
 
 /**
  * Base class for all ViewModels that require injection through Dagger.
  */
 abstract class InjectedViewModel : ViewModel() {
-
-    /**
-     * An ViewModelComponent is required to do the actual injecting.
-     * Every Component has a default builder to which you can add all
-     * modules that will be needed for the injection.
-     */
-    private val injector: ViewModelComponent = DaggerViewModelComponent
-            .builder()
-            .networkModule(NetworkModule)
-            .build()
 
     /**
      * Perform the injection when the ViewModel is created

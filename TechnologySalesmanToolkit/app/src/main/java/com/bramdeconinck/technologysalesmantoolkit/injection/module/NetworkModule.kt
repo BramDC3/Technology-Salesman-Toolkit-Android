@@ -1,5 +1,6 @@
 package com.bramdeconinck.technologysalesmantoolkit.injection.module
 
+import android.content.Context
 import com.bramdeconinck.technologysalesmantoolkit.network.FirestoreAPI
 import dagger.Module
 import dagger.Provides
@@ -17,7 +18,7 @@ import javax.inject.Singleton
  *  once and provide that some object on further requests.
  */
 @Module
-object NetworkModule {
+class NetworkModule(private val context: Context) {
 
 
     /**
@@ -28,5 +29,16 @@ object NetworkModule {
     @Singleton
     internal fun provideFirestoreApi(): FirestoreAPI {
         return FirestoreAPI()
+    }
+
+    /**
+     * Provides context
+     * Normal context would cause huge memory leaks, but because application context
+     * has the lifetime of the app, it is safe to store/reference in singletons
+     */
+    @Provides
+    @Singleton
+    internal fun provideApplicationContext(): Context {
+        return context.applicationContext
     }
 }
