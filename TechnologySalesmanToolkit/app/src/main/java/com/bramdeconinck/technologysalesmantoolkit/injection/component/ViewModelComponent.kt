@@ -1,6 +1,7 @@
 package com.bramdeconinck.technologysalesmantoolkit.injection.component
 
 import com.bramdeconinck.technologysalesmantoolkit.injection.module.NetworkModule
+import com.bramdeconinck.technologysalesmantoolkit.viewmodels.LoginViewModel
 import com.bramdeconinck.technologysalesmantoolkit.viewmodels.ServiceViewModel
 import dagger.Component
 import javax.inject.Singleton
@@ -25,4 +26,5 @@ interface ViewModelComponent {
      * @param serviceViewModel the [ServiceViewModel] in which to inject the dependencies.
      */
     fun inject(serviceViewModel: ServiceViewModel)
+    fun inject(loginViewModel: LoginViewModel)
 }

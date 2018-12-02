@@ -3,11 +3,13 @@ package com.bramdeconinck.technologysalesmantoolkit.utils
 import com.bramdeconinck.technologysalesmantoolkit.models.Category
 import com.bramdeconinck.technologysalesmantoolkit.models.Service
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.QueryDocumentSnapshot
 
 object FirebaseUtils {
 
-    private val mAuth = FirebaseAuth.getInstance()
+    val firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()
+    val firebaseUser: FirebaseUser? = FirebaseAuth.getInstance().currentUser
 
     @JvmStatic
     // Converting the data of a snapshot to a Service object
@@ -28,7 +30,7 @@ object FirebaseUtils {
     fun createSuggestionData(suggestion: String): HashMap<String, Any> {
         val data = HashMap<String, Any>()
         data["message"] = suggestion
-        data["sender"] = mAuth.currentUser?.uid ?: "Anonymous"
+        data["sender"] = firebaseUser?.uid ?: "Anonymous"
         return data
     }
 

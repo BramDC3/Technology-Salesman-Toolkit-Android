@@ -1,5 +1,6 @@
 package com.bramdeconinck.technologysalesmantoolkit.fragments
 
+import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -12,6 +13,8 @@ import androidx.navigation.fragment.findNavController
 import com.bramdeconinck.technologysalesmantoolkit.R
 import com.bramdeconinck.technologysalesmantoolkit.utils.MessageUtils
 import com.bramdeconinck.technologysalesmantoolkit.utils.ValidationUtils
+import com.bramdeconinck.technologysalesmantoolkit.viewmodels.LoginViewModel
+import com.bramdeconinck.technologysalesmantoolkit.viewmodels.ServiceViewModel
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -23,6 +26,8 @@ import com.google.firebase.auth.GoogleAuthProvider
 import kotlinx.android.synthetic.main.fragment_login.*
 
 class LoginFragment : Fragment() {
+
+    private lateinit var loginViewModel: LoginViewModel
 
     private lateinit var gso: GoogleSignInOptions
     private lateinit var mAuth: FirebaseAuth
@@ -43,6 +48,8 @@ class LoginFragment : Fragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        loginViewModel =  ViewModelProviders.of(activity!!).get(LoginViewModel::class.java)
+
         return inflater.inflate(R.layout.fragment_login, container, false)
     }
 
