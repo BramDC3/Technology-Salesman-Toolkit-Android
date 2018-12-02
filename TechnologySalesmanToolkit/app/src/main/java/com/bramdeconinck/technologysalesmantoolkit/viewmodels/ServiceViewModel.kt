@@ -22,7 +22,7 @@ class ServiceViewModel : InjectedViewModel(), IFirebaseServiceCallback {
 
         isLoading.value = false
 
-        firestoreAPI.getServicesFromFirestore(this)
+        firestoreAPI.getAllServices(this)
     }
 
     fun getServices(): MutableLiveData<List<Service>> { return services }

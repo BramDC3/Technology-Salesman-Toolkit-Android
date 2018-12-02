@@ -88,7 +88,7 @@ class SettingsFragment : Fragment(), IFirebaseSuggestionCallback {
     }
 
     private fun validateSuggestion(suggestion: String) {
-        if (suggestion.isNotBlank()) firestoreApi.postSuggestiontoFirestore(this, suggestion)
+        if (suggestion.isNotBlank()) firestoreApi.postSuggestion(this, suggestion)
         else MessageUtils.makeToast(context!!, "Een lege suggestie kan niet worden verstuurd.")
     }
 
