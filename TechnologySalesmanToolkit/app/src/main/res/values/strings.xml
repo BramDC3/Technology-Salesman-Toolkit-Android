@@ -3,24 +3,24 @@
     <string name="app_name">Technology Salesman Toolkit</string>
 
     <!-- LoginFragment-->
-    <string name="welcome">Welkom, %1$s!</string>
-    <string name="email">E-mailadres</string>
-    <string name="password">Wachtwoord</string>
-    <string name="logo_description">Logo of Technology Salesmen Toolkit</string>
-    <string name="email_is_not_verified">Gelieve uw e-mailadres te bevestigen aan de hand van de verzonden e-mail.</string>
-    <string name="empty_field">"Gelieve alle velden in te vullen."</string>
+    <string name="message_welcome">Welkom, %1$s!</string>
+    <string name="placeholder_email">E-mailadres</string>
+    <string name="placeholder_password">Wachtwoord</string>
+    <string name="description_app_logo">Logo of Technology Salesmen Toolkit</string>
+    <string name="error_email_is_not_verified">Gelieve uw e-mailadres te bevestigen aan de hand van de verzonden e-mail.</string>
+    <string name="error_empty_fields">"Gelieve alle velden in te vullen."</string>
 
     <!-- RegistrationFragment -->
-    <string name="firstname">Voornaam</string>
-    <string name="lastname">Familienaam</string>
-    <string name="repeatpassword">Herhaal wachtwoord</string>
-    <string name="account_not_created">Er is iets fout gelopen tijdens het aanmaken van uw account. Gelieve het opnieuw te proberen.</string>
-    <string name="account_created">Uw account werd succesvol aangemaakt!</string>
-    <string name="invalid_email">Gelieve een geldig e-mailadres in te voeren.</string>
-    <string name="passwords_dont_match">De twee ingevoerde wachtwoorden komen niet overeen.</string>
+    <string name="placeholder_firstname">Voornaam</string>
+    <string name="placeholder_lastname">Familienaam</string>
+    <string name="placeholder_repeatpassword">Herhaal wachtwoord</string>
+    <string name="error_account_not_created">Er is iets fout gelopen tijdens het aanmaken van uw account. Gelieve het opnieuw te proberen.</string>
+    <string name="message_account_created">Uw account werd succesvol aangemaakt!</string>
+    <string name="error_invalid_email">Gelieve een geldig e-mailadres in te voeren.</string>
+    <string name="error_passwords_dont_match">De twee ingevoerde wachtwoorden komen niet overeen.</string>
 
     <!-- ServiceListItem -->
-    <string name="service_image_description">Image of a service</string>
+    <string name="description_service_image">Afbeelding van een dienst</string>
 
     <!-- Firebase errors  -->
     <string name="sign_in_error">Er is een fout opgetreden tijdens het aanmelden. Gelieve het opnieuw te proberen.</string>
@@ -41,7 +41,7 @@
     <!-- ProfileFragment -->
     <string name="title_action_edit_profile">Wijzig profiel</string>
     <string name="title_action_stop_editing_profile">Stop met wijzigen profiel</string>
-    <string name="profile_fullname_example">Andy Droidon</string>
-    <string name="profile_picture_description">profielfoto van de gebruiker</string>
+    <string name="placeholder_profile_fullname">Andy Droidon</string>
+    <string name="dscription_profile_picture">Profielfoto van de gebruiker</string>
 
 </resources>

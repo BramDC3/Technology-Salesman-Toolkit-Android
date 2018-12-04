@@ -14,7 +14,6 @@ import com.bramdeconinck.technologysalesmantoolkit.R
 import com.bramdeconinck.technologysalesmantoolkit.utils.MessageUtils
 import com.bramdeconinck.technologysalesmantoolkit.utils.ValidationUtils
 import com.bramdeconinck.technologysalesmantoolkit.viewmodels.LoginViewModel
-import com.bramdeconinck.technologysalesmantoolkit.viewmodels.ServiceViewModel
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -56,11 +55,11 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        btn_signIn.setOnClickListener { validateLoginForm() }
+        btn_login_signIn.setOnClickListener { validateLoginForm() }
 
-        btn_signInWithGoogle.setOnClickListener { signInWithGoogle() }
+        btn_login_signInWithGoogle.setOnClickListener { signInWithGoogle() }
 
-        lbl_goToRegistration.setOnClickListener {
+        tv_login_goToRegistration.setOnClickListener {
             it.findNavController().navigate(R.id.toRegistration)
         }
     }
@@ -90,7 +89,7 @@ class LoginFragment : Fragment() {
                 .addOnCompleteListener(this.requireActivity()) { task ->
                     if (task.isSuccessful) {
                         val firebaseUser = mAuth.currentUser
-                        MessageUtils.makeToast(this.requireContext(), getString(R.string.welcome, firebaseUser?.displayName))
+                        MessageUtils.makeToast(this.requireContext(), getString(R.string.message_welcome, firebaseUser?.displayName))
                         this.findNavController().navigate(R.id.toServiceList)
                     } else {
                         MessageUtils.makeToast(this.requireContext(), getString(R.string.sign_in_error))
@@ -99,39 +98,41 @@ class LoginFragment : Fragment() {
     }
 
     private fun logInWithFirebaseAccount() {
-        mAuth.signInWithEmailAndPassword(txt_email.text.toString(), txt_password.text.toString())
-                .addOnCompleteListener(this.requireActivity()) { task ->
+        mAuth.signInWithEmailAndPassword(et_login_email.text.toString(), et_login_password.text.toString())
+                .addOnCompleteListener(activity!!) { task ->
                     if (task.isSuccessful) {
                         if (mAuth.currentUser!!.isEmailVerified) {
                             val firebaseUser = mAuth.currentUser
-                            MessageUtils.makeToast(this.requireContext(), getString(R.string.welcome, firebaseUser?.displayName))
+                            MessageUtils.makeToast(context!!, getString(R.string.message_welcome, firebaseUser?.displayName))
                             this.findNavController().navigate(R.id.toServiceList)
                         } else {
                             mAuth.signOut()
-                            MessageUtils.makeToast(this.requireContext(), getString(R.string.email_is_not_verified))
-                            btn_signIn.isEnabled = true
+                            MessageUtils.makeToast(context!!, getString(R.string.error_email_is_not_verified))
+                            btn_login_signIn.isEnabled = true
                         }
                     } else {
-                        MessageUtils.makeToast(this.requireContext(), getString(R.string.sign_in_error))
-                        btn_signIn.isEnabled = true
+                        MessageUtils.makeToast(context!!, getString(R.string.sign_in_error))
+                        btn_login_signIn.isEnabled = true
                     }
                 }
     }
 
     private fun validateLoginForm() {
-        btn_signIn.isEnabled = false
-        if (!txt_email.text.isBlank()
-                && !txt_password.text.isBlank()) {
-            if (ValidationUtils.isEmailValid(txt_email.text.toString())) {
-                logInWithFirebaseAccount()
-            } else {
-                MessageUtils.makeToast(this.requireContext(), getString(R.string.invalid_email))
-                btn_signIn.isEnabled = true
-            }
-        } else {
-            MessageUtils.makeToast(this.requireContext(), getString(R.string.empty_field))
-            btn_signIn.isEnabled = true
+        btn_login_signIn.isEnabled = false
+
+        if (!ValidationUtils.everyFieldHasValue(listOf(et_login_email.text.toString(), et_login_password.text.toString()))) {
+            MessageUtils.makeToast(context!!, getString(R.string.error_empty_fields))
+            btn_login_signIn.isEnabled = true
+            return
         }
+
+        if (!ValidationUtils.isEmailValid(et_login_email.text.toString())) {
+            MessageUtils.makeToast(context!!, getString(R.string.error_invalid_email))
+            btn_login_signIn.isEnabled = true
+            return
+        }
+
+        logInWithFirebaseAccount()
     }
 
 }

@@ -20,18 +20,18 @@
             android:focusableInTouchMode="true">
 
             <ImageView
-                android:id="@+id/img_logo"
+                android:id="@+id/iv_login_logo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="32dp"
-                android:contentDescription="@string/logo_description"
+                android:contentDescription="@string/description_app_logo"
                 app:layout_constraintBottom_toTopOf="@+id/guideline"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:srcCompat="@drawable/logo" />
 
             <EditText
-                android:id="@+id/txt_email"
+                android:id="@+id/et_login_email"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
@@ -39,7 +39,7 @@
                 android:layout_marginTop="16dp"
                 android:background="@drawable/email"
                 android:ems="10"
-                android:hint="@string/email"
+                android:hint="@string/placeholder_email"
                 android:inputType="textEmailAddress"
                 android:paddingStart="40dp"
                 android:paddingEnd="20dp"
@@ -51,7 +51,7 @@
                 tools:ignore="Autofill" />
 
             <EditText
-                android:id="@+id/txt_password"
+                android:id="@+id/et_login_password"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
@@ -59,7 +59,7 @@
                 android:layout_marginTop="8dp"
                 android:background="@drawable/password"
                 android:ems="10"
-                android:hint="@string/password"
+                android:hint="@string/placeholder_password"
                 android:inputType="textPassword"
                 android:paddingStart="40dp"
                 android:paddingEnd="20dp"
@@ -67,11 +67,11 @@
                 android:textColor="@color/colorFormFieldText"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txt_email"
+                app:layout_constraintTop_toBottomOf="@+id/et_login_email"
                 tools:ignore="Autofill" />
 
             <Button
-                android:id="@+id/btn_signIn"
+                android:id="@+id/btn_login_signIn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
@@ -80,10 +80,10 @@
                 android:background="@drawable/login"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txt_password" />
+                app:layout_constraintTop_toBottomOf="@+id/et_login_password" />
 
             <Button
-                android:id="@+id/btn_signInWithGoogle"
+                android:id="@+id/btn_login_signInWithGoogle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
@@ -91,13 +91,13 @@
                 android:layout_marginTop="32dp"
                 android:layout_marginBottom="32dp"
                 android:background="@drawable/login_google"
-                app:layout_constraintBottom_toTopOf="@+id/lbl_goToRegistration"
+                app:layout_constraintBottom_toTopOf="@+id/tv_login_goToRegistration"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btn_signIn" />
+                app:layout_constraintTop_toBottomOf="@+id/btn_login_signIn" />
 
             <TextView
-                android:id="@+id/lbl_goToRegistration"
+                android:id="@+id/tv_login_goToRegistration"
                 android:layout_width="wrap_content"
                 android:layout_height="19dp"
                 android:layout_alignParentStart="true"

@@ -50,7 +50,7 @@ class RegistrationFragment : Fragment() {
                         val firebaseUser = mAuth.currentUser
                         updateUserInfo(firebaseUser)
                     } else {
-                        MessageUtils.makeToast(this.requireContext(), getString(R.string.account_not_created))
+                        MessageUtils.makeToast(this.requireContext(), getString(R.string.error_account_not_created))
                     }
                 }
     }
@@ -65,7 +65,7 @@ class RegistrationFragment : Fragment() {
                     if (task.isSuccessful) {
                         firebaseUser.sendEmailVerification()
                         mAuth.signOut()
-                        MessageUtils.makeToast(this.requireContext(), getString(R.string.account_created))
+                        MessageUtils.makeToast(this.requireContext(), getString(R.string.message_account_created))
                         this.findNavController().popBackStack()
                     }
                 }
@@ -81,13 +81,13 @@ class RegistrationFragment : Fragment() {
                 if (txt_password_r.text.toString() == txt_repeatpassword.text.toString()) {
                     showPrivacyPolicyDialog(context!!, "Privacybeleid", "Door op 'Ja' te drukken, gaat u akkoord met het privacybeleid en wordt uw account aangemaakt.")
                 } else {
-                    MessageUtils.makeToast(this.requireContext(), getString(R.string.passwords_dont_match))
+                    MessageUtils.makeToast(this.requireContext(), getString(R.string.error_passwords_dont_match))
                 }
             } else {
-                MessageUtils.makeToast(this.requireContext(), getString(R.string.invalid_email))
+                MessageUtils.makeToast(this.requireContext(), getString(R.string.error_invalid_email))
             }
         } else {
-            MessageUtils.makeToast(this.requireContext(), getString(R.string.empty_field))
+            MessageUtils.makeToast(this.requireContext(), getString(R.string.error_empty_fields))
         }
     }
 

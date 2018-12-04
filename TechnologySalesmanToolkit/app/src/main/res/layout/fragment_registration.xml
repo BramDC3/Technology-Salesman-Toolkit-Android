@@ -28,7 +28,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/logo"
-                android:contentDescription="@string/logo_description" />
+                android:contentDescription="@string/description_app_logo" />
 
             <EditText
                 android:id="@+id/txt_firstname"
@@ -37,7 +37,7 @@
                 android:layout_marginTop="56dp"
                 android:background="@drawable/reg_firstname"
                 android:ems="10"
-                android:hint="@string/firstname"
+                android:hint="@string/placeholder_firstname"
                 android:inputType="textPersonName"
                 android:paddingStart="40dp"
                 android:paddingEnd="20dp"
@@ -55,7 +55,7 @@
                 android:layout_marginTop="8dp"
                 android:background="@drawable/reg_familyname"
                 android:ems="10"
-                android:hint="@string/lastname"
+                android:hint="@string/placeholder_lastname"
                 android:inputType="textPersonName"
                 android:paddingStart="40dp"
                 android:paddingEnd="20dp"
@@ -73,7 +73,7 @@
                 android:layout_marginTop="8dp"
                 android:background="@drawable/reg_email"
                 android:ems="10"
-                android:hint="@string/email"
+                android:hint="@string/placeholder_email"
                 android:inputType="textEmailAddress"
                 android:paddingStart="40dp"
                 android:paddingEnd="20dp"
@@ -91,7 +91,7 @@
                 android:layout_marginTop="8dp"
                 android:background="@drawable/reg_password"
                 android:ems="10"
-                android:hint="@string/password"
+                android:hint="@string/placeholder_password"
                 android:inputType="textPassword"
                 android:paddingStart="40dp"
                 android:paddingEnd="20dp"
@@ -109,7 +109,7 @@
                 android:layout_marginTop="8dp"
                 android:background="@drawable/reg_password"
                 android:ems="10"
-                android:hint="@string/repeatpassword"
+                android:hint="@string/placeholder_repeatpassword"
                 android:inputType="textPassword"
                 android:paddingStart="40dp"
                 android:paddingEnd="20dp"
