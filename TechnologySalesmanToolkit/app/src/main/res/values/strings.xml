@@ -39,7 +39,7 @@
     <string name="settings_signout">Meld af</string>
 
     <!-- ProfileFragment -->
-    <string name="title_action_edit_profile">Bewerk profiel</string>
+    <string name="title_action_edit_profile">Wijzig profiel</string>
     <string name="title_action_stop_editing_profile">Stop met wijzigen profiel</string>
     <string name="profile_fullname_example">Andy Droidon</string>
     <string name="profile_picture_description">profielfoto van de gebruiker</string>
