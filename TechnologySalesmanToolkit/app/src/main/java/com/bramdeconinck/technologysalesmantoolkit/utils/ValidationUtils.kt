@@ -3,10 +3,25 @@ package com.bramdeconinck.technologysalesmantoolkit.utils
 object ValidationUtils {
 
     @JvmStatic
-    // Checks whether or not the entered string is a valid email address
+    // Validates whether or not the entered string is a valid email address
     fun isEmailValid(email: String): Boolean {
         val matcher = validEmailAddressRegex.matcher(email)
         return matcher.find()
     }
+
+    @JvmStatic
+    // Validates whether every field of a form has a value
+    fun everyFieldHasValue(fields: List<String?>): Boolean {
+        fields.forEach { if (it.isNullOrBlank()) return false }
+        return true
+    }
+
+    @JvmStatic
+    // Validates whether two entered passwords match
+    fun passwordsMatch(password: String, repeatPassword: String): Boolean { return (password == repeatPassword) }
+
+    @JvmStatic
+    // Validates whether the chosen password is valid
+    fun isPasswordValid(password: String): Boolean { return (password.length >= 6) }
 
 }

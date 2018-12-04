@@ -8,7 +8,9 @@ import com.google.firebase.firestore.QueryDocumentSnapshot
 
 object FirebaseUtils {
 
+    @JvmStatic
     val firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()
+    @JvmStatic
     val firebaseUser: FirebaseUser? = FirebaseAuth.getInstance().currentUser
 
     @JvmStatic

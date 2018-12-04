@@ -36,9 +36,7 @@ class ServiceListFragment : Fragment() {
 
         serviceAdapter = ServiceAdapter(this, services, twoPane)
 
-        services.observe(this, Observer {
-            serviceAdapter.notifyDataSetChanged()
-        })
+        services.observe(this, Observer { serviceAdapter.notifyDataSetChanged() })
 
         isLoading.observe(this, Observer {
             if (isLoading.value!!) rootView.progress_bar.visibility = View.VISIBLE

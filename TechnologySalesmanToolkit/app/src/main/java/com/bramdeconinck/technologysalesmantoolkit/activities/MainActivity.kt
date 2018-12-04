@@ -99,8 +99,6 @@ class MainActivity : AppCompatActivity(), IToolbarTitleListener {
     // need something different for the ServiceDetailFragment because
     // the title needs to be the name of the service. This function
     // changes the title of the toolbar.
-    override fun updateTitle(title: String?) {
-        supportActionBar?.title = title
-    }
+    override fun updateTitle(title: String?) { supportActionBar?.title = title }
 
 }
