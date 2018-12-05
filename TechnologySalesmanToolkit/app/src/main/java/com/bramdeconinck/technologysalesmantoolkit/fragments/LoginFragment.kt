@@ -87,6 +87,7 @@ class LoginFragment : Fragment() {
         firebaseAuth.signInWithCredential(credential)
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
+                        firebaseUser = firebaseAuth.currentUser
                         MessageUtils.makeToast(context!!, getString(R.string.message_welcome, firebaseUser!!.displayName))
                         this.findNavController().navigate(R.id.toServiceList)
                     } else {
@@ -99,7 +100,8 @@ class LoginFragment : Fragment() {
         firebaseAuth.signInWithEmailAndPassword(et_login_email.text.toString(), et_login_password.text.toString())
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
-                        if (firebaseAuth.currentUser!!.isEmailVerified) {
+                        firebaseUser = firebaseAuth.currentUser
+                        if (firebaseUser!!.isEmailVerified) {
                             MessageUtils.makeToast(context!!, getString(R.string.message_welcome, firebaseUser!!.displayName))
                             this.findNavController().navigate(R.id.toServiceList)
                         } else {

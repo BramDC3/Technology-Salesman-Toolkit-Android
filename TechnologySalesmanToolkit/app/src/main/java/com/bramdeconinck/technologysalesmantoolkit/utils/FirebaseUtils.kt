@@ -11,7 +11,7 @@ object FirebaseUtils {
     @JvmStatic
     val firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()
     @JvmStatic
-    val firebaseUser: FirebaseUser? = firebaseAuth.currentUser
+    var firebaseUser: FirebaseUser? = firebaseAuth.currentUser
 
     @JvmStatic
     // Converting the data of a snapshot to a Service object
