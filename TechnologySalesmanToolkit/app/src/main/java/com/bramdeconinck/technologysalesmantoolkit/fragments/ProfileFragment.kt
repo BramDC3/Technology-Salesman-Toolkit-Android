@@ -1,7 +1,5 @@
 package com.bramdeconinck.technologysalesmantoolkit.fragments
 
-import android.app.AlertDialog
-import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.*
@@ -10,6 +8,8 @@ import com.bramdeconinck.technologysalesmantoolkit.R
 import com.bramdeconinck.technologysalesmantoolkit.utils.FirebaseUtils.firebaseAuth
 import com.bramdeconinck.technologysalesmantoolkit.utils.FirebaseUtils.firebaseUser
 import com.bramdeconinck.technologysalesmantoolkit.utils.MessageUtils
+import com.bramdeconinck.technologysalesmantoolkit.utils.MessageUtils.showEditProfileDialog
+import com.bramdeconinck.technologysalesmantoolkit.utils.MessageUtils.showThreeButtonsPositiveFuncDialog
 import com.bramdeconinck.technologysalesmantoolkit.utils.StringUtils
 import com.bramdeconinck.technologysalesmantoolkit.utils.ValidationUtils
 import com.bumptech.glide.Glide
@@ -35,9 +35,9 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        lbl_profile_change_password.setOnClickListener { showChangePasswordDialog(context!!, "Wachtwoord wijzigen", "Bent u zeker dat u uw wachtwoord wilt wijzigen? Als u op 'Ja' drukt, zal er een e-mail verzonden worden waarmee uw wachtwoord opnieuw ingesteld kan worden.")  }
+        lbl_profile_change_password.setOnClickListener { showThreeButtonsPositiveFuncDialog(context!!, "Wachtwoord wijzigen", "Bent u zeker dat u uw wachtwoord wilt wijzigen? Als u op 'Ja' drukt, zal er een e-mail verzonden worden waarmee uw wachtwoord opnieuw ingesteld kan worden.", sendResetPasswordEmail())  }
 
-        img_profile_image.setOnClickListener{ MessageUtils.showDialog(context!!, "Profielfoto wijzigen", "Momenteel kan u enkel uw profielfoto wijzigen door aan te melden met uw Google account. ")  }
+        img_profile_image.setOnClickListener{ MessageUtils.showBasicDialog(context!!, "Profielfoto wijzigen", "Momenteel kan u enkel uw profielfoto wijzigen door aan te melden met uw Google account. ")  }
 
         btn_profile_edit_profile.setOnClickListener { validateProfileForm() }
     }
@@ -77,20 +77,8 @@ class ProfileFragment : Fragment() {
         txt_profile_email.setText(firebaseUser!!.email)
     }
 
-    // Function to show the dialog which asks the user if they want to change their password
-    private fun showChangePasswordDialog(context: Context, title: String, message: String) {
-        AlertDialog.Builder(context)
-                .setTitle(title)
-                .setMessage(message)
-                .setPositiveButton("Ja") { _, _ -> sendResetPasswordEmail()}
-                .setNegativeButton("Nee") { dialog, _ -> dialog?.dismiss() }
-                .setNeutralButton("Annuleren") { dialog, _ -> dialog?.dismiss() }
-                .create()
-                .show()
-    }
-
     // Function to send an e-mail to the current FirebaseUser containing a link to change their password
-    private fun sendResetPasswordEmail() {
+    private fun sendResetPasswordEmail(): () -> Unit = {
         firebaseAuth.sendPasswordResetEmail(firebaseUser!!.email!!)
                 .addOnSuccessListener { MessageUtils.makeToast(context!!, "Er werd een e-mail naar u verzonden waarmee u uw wachtwoord kunt wijzigen.") }
                 .addOnFailureListener { MessageUtils.makeToast(context!!, "Er is een fout opgetreden tijdens het proberen versturen van de e-mail.") }
@@ -148,22 +136,12 @@ class ProfileFragment : Fragment() {
             return
         }
 
-        showEditProfileDialog(context!!, "Profiel wijzigen", "Bent u zeker dat u uw profiel wilt wijzigen?")
+        showEditProfileDialog(context!!, "Profiel wijzigen", "Bent u zeker dat u uw profiel wilt wijzigen?", applyProfileChanges(), enableProfileEditButton())
     }
 
-    // Function to show the dialog which asks the user if they want to change their password
-    private fun showEditProfileDialog(context: Context, title: String, message: String) {
-        AlertDialog.Builder(context)
-                .setTitle(title)
-                .setMessage(message)
-                .setPositiveButton("Ja") { _, _ -> applyProfileChanges()}
-                .setNegativeButton("Nee") { _, _ -> btn_profile_edit_profile.isEnabled = true }
-                .setNeutralButton("Annuleren") { _, _ -> btn_profile_edit_profile.isEnabled = true }
-                .create()
-                .show()
-    }
+    private fun enableProfileEditButton() = { btn_profile_edit_profile.isEnabled = true }
 
-    private fun applyProfileChanges() {
+    private fun applyProfileChanges() =  {
         if (firebaseUser!!.displayName != "${txt_profile_firstname.text} ${txt_profile_familyname.text}") {
             val profileUpdates = UserProfileChangeRequest.Builder()
                     .setDisplayName("${txt_profile_firstname.text} ${txt_profile_familyname.text}")
@@ -172,13 +150,13 @@ class ProfileFragment : Fragment() {
             firebaseUser!!.updateProfile(profileUpdates)
                     .addOnCompleteListener { task ->
                         if (task.isSuccessful) {
-                            MessageUtils.showDialog(context!!, "Naam wijzigen", "Uw naam werd succesvol gewijzigd")
+                            MessageUtils.showBasicDialog(context!!, "Naam wijzigen", "Uw naam werd succesvol gewijzigd")
                             updateUI()
                             if (editable) toggleEditMode()
                         }
                     }
                     .addOnFailureListener {
-                        MessageUtils.showDialog(context!!, "Naam wijzigen", "Er is een fout opgetreden tijdens het wijzigen van uw naam.")
+                        MessageUtils.showBasicDialog(context!!, "Naam wijzigen", "Er is een fout opgetreden tijdens het wijzigen van uw naam.")
                     }
         }
 
@@ -189,7 +167,7 @@ class ProfileFragment : Fragment() {
                             firebaseUser!!.sendEmailVerification()
                                     .addOnCompleteListener { task2 ->
                                         if (task2.isSuccessful) {
-                                            MessageUtils.showDialog(context!!, "E-mailadres wijzigen", "Uw e-mailadres werd succesvol gewijzigd.")
+                                            MessageUtils.showBasicDialog(context!!, "E-mailadres wijzigen", "Uw e-mailadres werd succesvol gewijzigd.")
                                             firebaseAuth.signOut()
                                             this.findNavController().navigate(R.id.signOutFromProfile)
                                         }
@@ -197,7 +175,7 @@ class ProfileFragment : Fragment() {
                         }
                     }
                     .addOnFailureListener {
-                        MessageUtils.showDialog(context!!, "E-mailadres wijzigen", "Er is een fout opgetreden tijdens het wijzigen van uw e-mailadres.")
+                        MessageUtils.showBasicDialog(context!!, "E-mailadres wijzigen", "Er is een fout opgetreden tijdens het wijzigen van uw e-mailadres.")
                     }
         }
 

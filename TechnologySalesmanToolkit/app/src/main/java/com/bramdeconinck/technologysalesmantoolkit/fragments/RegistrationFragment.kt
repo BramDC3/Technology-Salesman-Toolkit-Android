@@ -1,10 +1,5 @@
 package com.bramdeconinck.technologysalesmantoolkit.fragments
 
-import android.app.AlertDialog
-import android.content.ActivityNotFoundException
-import android.content.Context
-import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
@@ -16,9 +11,7 @@ import com.bramdeconinck.technologysalesmantoolkit.R
 import com.bramdeconinck.technologysalesmantoolkit.utils.*
 import com.bramdeconinck.technologysalesmantoolkit.utils.FirebaseUtils.firebaseAuth
 import com.bramdeconinck.technologysalesmantoolkit.utils.FirebaseUtils.firebaseUser
-import com.bramdeconinck.technologysalesmantoolkit.utils.WebpageUtils.openWebPage
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
+import com.bramdeconinck.technologysalesmantoolkit.utils.MessageUtils.showPrivacyPolicyDialog
 import com.google.firebase.auth.UserProfileChangeRequest
 import kotlinx.android.synthetic.main.fragment_registration.*
 
@@ -36,7 +29,7 @@ class RegistrationFragment : Fragment() {
         tv_registration_backToLogin.setOnClickListener { it.findNavController().popBackStack() }
     }
 
-    private fun createFirebaseAccount() {
+    private fun createFirebaseAccount(): () -> Unit = {
         firebaseAuth.createUserWithEmailAndPassword(et_registration_email.text.toString(), et_registration_password.text.toString())
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
@@ -85,18 +78,7 @@ class RegistrationFragment : Fragment() {
             return
         }
 
-        showPrivacyPolicyDialog(context!!, "Privacybeleid", "Door op 'Ja' te drukken, gaat u akkoord met het privacybeleid en zal uw account aangemaakt worden. Er zal een bevestigingsmail naar uw e-mailadres verzonden worden.")
-    }
-
-    private fun showPrivacyPolicyDialog(context: Context, title: String, message: String) {
-        AlertDialog.Builder(context)
-                .setTitle(title)
-                .setMessage(message)
-                .setPositiveButton("Ja") { _, _ -> createFirebaseAccount() }
-                .setNegativeButton("Nee") { dialog, _ -> dialog.dismiss() }
-                .setNeutralButton("Bekijk privacybeleid") { _, _ -> openWebPage(privacyPolicy, context) }
-                .create()
-                .show()
+        showPrivacyPolicyDialog(context!!, "Privacybeleid", "Door op 'Ja' te drukken, gaat u akkoord met het privacybeleid en zal uw account aangemaakt worden. Er zal een bevestigingsmail naar uw e-mailadres verzonden worden.", createFirebaseAccount())
     }
 
 }
