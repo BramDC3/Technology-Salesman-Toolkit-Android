@@ -28,7 +28,6 @@ import kotlinx.android.synthetic.main.fragment_login.*
 class LoginFragment : Fragment() {
 
     private lateinit var loginViewModel: LoginViewModel
-
     private lateinit var gso: GoogleSignInOptions
     private lateinit var mGoogleSignInClient: GoogleSignInClient
     private val RC_SIGN_IN: Int = 1
@@ -42,7 +41,7 @@ class LoginFragment : Fragment() {
                 .build()
 
 
-        mGoogleSignInClient = GoogleSignIn.getClient(this.requireActivity(), gso)
+        mGoogleSignInClient = GoogleSignIn.getClient(context!!, gso)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -58,9 +57,7 @@ class LoginFragment : Fragment() {
 
         btn_login_signInWithGoogle.setOnClickListener { signInWithGoogle() }
 
-        tv_login_goToRegistration.setOnClickListener {
-            it.findNavController().navigate(R.id.toRegistration)
-        }
+        tv_login_goToRegistration.setOnClickListener { it.findNavController().navigate(R.id.toRegistration) }
     }
 
     private fun signInWithGoogle() {

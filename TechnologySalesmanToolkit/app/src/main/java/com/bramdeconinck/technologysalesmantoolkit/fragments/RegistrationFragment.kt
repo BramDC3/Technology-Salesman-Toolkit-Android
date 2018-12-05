@@ -16,6 +16,7 @@ import com.bramdeconinck.technologysalesmantoolkit.R
 import com.bramdeconinck.technologysalesmantoolkit.utils.*
 import com.bramdeconinck.technologysalesmantoolkit.utils.FirebaseUtils.firebaseAuth
 import com.bramdeconinck.technologysalesmantoolkit.utils.FirebaseUtils.firebaseUser
+import com.bramdeconinck.technologysalesmantoolkit.utils.WebpageUtils.openWebPage
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.UserProfileChangeRequest
@@ -93,20 +94,9 @@ class RegistrationFragment : Fragment() {
                 .setMessage(message)
                 .setPositiveButton("Ja") { _, _ -> createFirebaseAccount() }
                 .setNegativeButton("Nee") { dialog, _ -> dialog.dismiss() }
-                .setNeutralButton("Bekijk privacybeleid") { _, _ -> openWebPage(privacyPolicy) }
+                .setNeutralButton("Bekijk privacybeleid") { _, _ -> openWebPage(privacyPolicy, context) }
                 .create()
                 .show()
-    }
-
-    private fun openWebPage(url: String) {
-        try {
-            val webpage = Uri.parse(url)
-            val myIntent = Intent(Intent.ACTION_VIEW, webpage)
-            startActivity(myIntent)
-        } catch (e: ActivityNotFoundException) {
-            MessageUtils.makeToast(context!!, "Er werd geen webbrowser gedetecteerd op uw toestel.")
-            e.printStackTrace()
-        }
     }
 
 }

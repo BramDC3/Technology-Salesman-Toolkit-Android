@@ -45,4 +45,7 @@
     <string name="placeholder_profile_fullname">Andy Droidon</string>
     <string name="dscription_profile_picture">Profielfoto van de gebruiker</string>
 
+    <!-- Utils -->
+    <string name="error_no_browser_detected">"Er werd geen webbrowser gedetecteerd op uw toestel."</string>
+
 </resources>

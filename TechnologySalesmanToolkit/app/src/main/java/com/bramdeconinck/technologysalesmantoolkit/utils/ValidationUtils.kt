@@ -10,6 +10,14 @@ object ValidationUtils {
     }
 
     @JvmStatic
+    // Validates whether every field of a form has a value
+    fun atLeastOneFieldChanged(fields: Map<String, String>): Boolean {
+        var counter = 0
+        fields.forEach { if (it.key == it.value) counter++ }
+        return (counter < fields.size)
+    }
+
+    @JvmStatic
     // Validates whether or not the entered string is a valid email address
     fun isEmailValid(email: String): Boolean {
         val matcher = validEmailAddressRegex.matcher(email)
