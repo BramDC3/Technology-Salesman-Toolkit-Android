@@ -4,8 +4,8 @@ object ValidationUtils {
 
     @JvmStatic
     // Validates whether every field of a form has a value
-    fun everyFieldHasValue(fields: List<String?>): Boolean {
-        fields.forEach { if (it.isNullOrBlank()) return false }
+    fun everyFieldHasValue(fields: List<String>): Boolean {
+        fields.forEach { if (it.isBlank()) return false }
         return true
     }
 

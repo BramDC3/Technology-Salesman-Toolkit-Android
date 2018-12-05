@@ -11,16 +11,16 @@ object FirebaseUtils {
     @JvmStatic
     val firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()
     @JvmStatic
-    val firebaseUser: FirebaseUser? = FirebaseAuth.getInstance().currentUser
+    val firebaseUser: FirebaseUser? = firebaseAuth.currentUser
 
     @JvmStatic
     // Converting the data of a snapshot to a Service object
-    fun fromSnapshotToService(snapshot: QueryDocumentSnapshot): Service {
+    fun transformSnapshotToService(snapshot: QueryDocumentSnapshot): Service {
         return Service(
                 id = snapshot.id,
                 name = snapshot.getString("name")!!,
                 description = snapshot.getString("description")!!,
-                category = fromIntToCategory(snapshot.getDouble("category")!!.toInt()),
+                category = transformIntToCategory(snapshot.getDouble("category")!!.toInt()),
                 created = snapshot.getTimestamp("created")!!,
                 price = snapshot.getDouble("price")!!,
                 image = snapshot.getString("image")!!,
@@ -37,7 +37,7 @@ object FirebaseUtils {
     }
 
     // Retrieve the right category of a service based on an integer
-    private fun fromIntToCategory(i: Int): Category {
+    private fun transformIntToCategory(i: Int): Category {
         return when (i) {
             0 -> Category.Windows
             1 -> Category.Android

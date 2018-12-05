@@ -14,9 +14,10 @@
     <string name="placeholder_firstname">Voornaam</string>
     <string name="placeholder_lastname">Familienaam</string>
     <string name="placeholder_repeatpassword">Herhaal wachtwoord</string>
-    <string name="error_account_not_created">Er is iets fout gelopen tijdens het aanmaken van uw account. Gelieve het opnieuw te proberen.</string>
     <string name="message_account_created">Uw account werd succesvol aangemaakt!</string>
+    <string name="error_account_not_created">Er is iets fout gelopen tijdens het aanmaken van uw account. Gelieve het opnieuw te proberen.</string>
     <string name="error_invalid_email">Gelieve een geldig e-mailadres in te voeren.</string>
+    <string name="error_invalid_password">Gelieve een wachtwoord van meer dan 6 karakters in te voeren.</string>
     <string name="error_passwords_dont_match">De twee ingevoerde wachtwoorden komen niet overeen.</string>
 
     <!-- ServiceListItem -->

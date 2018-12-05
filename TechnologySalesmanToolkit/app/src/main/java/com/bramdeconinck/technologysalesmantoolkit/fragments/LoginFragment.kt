@@ -11,6 +11,8 @@ import android.view.ViewGroup
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.bramdeconinck.technologysalesmantoolkit.R
+import com.bramdeconinck.technologysalesmantoolkit.utils.FirebaseUtils.firebaseAuth
+import com.bramdeconinck.technologysalesmantoolkit.utils.FirebaseUtils.firebaseUser
 import com.bramdeconinck.technologysalesmantoolkit.utils.MessageUtils
 import com.bramdeconinck.technologysalesmantoolkit.utils.ValidationUtils
 import com.bramdeconinck.technologysalesmantoolkit.viewmodels.LoginViewModel
@@ -20,7 +22,6 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import kotlinx.android.synthetic.main.fragment_login.*
 
@@ -29,7 +30,6 @@ class LoginFragment : Fragment() {
     private lateinit var loginViewModel: LoginViewModel
 
     private lateinit var gso: GoogleSignInOptions
-    private lateinit var mAuth: FirebaseAuth
     private lateinit var mGoogleSignInClient: GoogleSignInClient
     private val RC_SIGN_IN: Int = 1
 
@@ -41,7 +41,6 @@ class LoginFragment : Fragment() {
                 .requestEmail()
                 .build()
 
-        mAuth = FirebaseAuth.getInstance()
 
         mGoogleSignInClient = GoogleSignIn.getClient(this.requireActivity(), gso)
     }
@@ -85,28 +84,26 @@ class LoginFragment : Fragment() {
 
     private fun firebaseAuthWithGoogle(acct: GoogleSignInAccount?) {
         val credential = GoogleAuthProvider.getCredential(acct?.idToken, null)
-        mAuth.signInWithCredential(credential)
-                .addOnCompleteListener(this.requireActivity()) { task ->
+        firebaseAuth.signInWithCredential(credential)
+                .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
-                        val firebaseUser = mAuth.currentUser
-                        MessageUtils.makeToast(this.requireContext(), getString(R.string.message_welcome, firebaseUser?.displayName))
+                        MessageUtils.makeToast(context!!, getString(R.string.message_welcome, firebaseUser!!.displayName))
                         this.findNavController().navigate(R.id.toServiceList)
                     } else {
-                        MessageUtils.makeToast(this.requireContext(), getString(R.string.sign_in_error))
+                        MessageUtils.makeToast(context!!, getString(R.string.sign_in_error))
                     }
                 }
     }
 
     private fun logInWithFirebaseAccount() {
-        mAuth.signInWithEmailAndPassword(et_login_email.text.toString(), et_login_password.text.toString())
-                .addOnCompleteListener(activity!!) { task ->
+        firebaseAuth.signInWithEmailAndPassword(et_login_email.text.toString(), et_login_password.text.toString())
+                .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
-                        if (mAuth.currentUser!!.isEmailVerified) {
-                            val firebaseUser = mAuth.currentUser
-                            MessageUtils.makeToast(context!!, getString(R.string.message_welcome, firebaseUser?.displayName))
+                        if (firebaseAuth.currentUser!!.isEmailVerified) {
+                            MessageUtils.makeToast(context!!, getString(R.string.message_welcome, firebaseUser!!.displayName))
                             this.findNavController().navigate(R.id.toServiceList)
                         } else {
-                            mAuth.signOut()
+                            firebaseAuth.signOut()
                             MessageUtils.makeToast(context!!, getString(R.string.error_email_is_not_verified))
                             btn_login_signIn.isEnabled = true
                         }

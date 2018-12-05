@@ -4,7 +4,7 @@ import com.bramdeconinck.technologysalesmantoolkit.interfaces.IFirebaseServiceCa
 import com.bramdeconinck.technologysalesmantoolkit.interfaces.IFirebaseSuggestionCallback
 import com.bramdeconinck.technologysalesmantoolkit.models.Service
 import com.bramdeconinck.technologysalesmantoolkit.utils.FirebaseUtils.createSuggestionData
-import com.bramdeconinck.technologysalesmantoolkit.utils.FirebaseUtils.fromSnapshotToService
+import com.bramdeconinck.technologysalesmantoolkit.utils.FirebaseUtils.transformSnapshotToService
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.FirebaseFirestoreSettings
 
@@ -27,7 +27,7 @@ class FirestoreAPI {
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         val servicesList: MutableList<Service> = mutableListOf()
-                        for (doc in task.result!!) { servicesList.add(fromSnapshotToService(doc)) }
+                        for (doc in task.result!!) { servicesList.add(transformSnapshotToService(doc)) }
                         firebaseServiceCallback.onCallBack(servicesList)
                     }
                     else { firebaseServiceCallback.showMessage() }

@@ -102,12 +102,8 @@ class ProfileFragment : Fragment() {
     // Function to send an e-mail to the current FirebaseUser containing a link to change their password
     private fun sendResetPasswordEmail() {
         mAuth.sendPasswordResetEmail(firebaseUser.email!!)
-                .addOnSuccessListener {
-                    MessageUtils.makeToast(context!!, "Er werd een e-mail naar u verzonden waarmee u uw wachtwoord kunt wijzigen.")
-                }
-                .addOnFailureListener {
-                    MessageUtils.makeToast(context!!, "Er is een fout opgetreden tijdens het proberen versturen van de e-mail.")
-                }
+                .addOnSuccessListener { MessageUtils.makeToast(context!!, "Er werd een e-mail naar u verzonden waarmee u uw wachtwoord kunt wijzigen.") }
+                .addOnFailureListener { MessageUtils.makeToast(context!!, "Er is een fout opgetreden tijdens het proberen versturen van de e-mail.") }
     }
 
     // Function to go from normal mode to editing mode and vice versa
@@ -161,6 +157,7 @@ class ProfileFragment : Fragment() {
             toggleEditMode()
             btn_profile_edit_profile.isEnabled = true
         }
+
 
     }
 
