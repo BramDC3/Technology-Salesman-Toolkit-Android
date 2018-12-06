@@ -1,7 +1,7 @@
 package com.bramdeconinck.technologysalesmantoolkit.fragments
 
+import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -11,10 +11,7 @@ import android.view.ViewGroup
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.bramdeconinck.technologysalesmantoolkit.R
-import com.bramdeconinck.technologysalesmantoolkit.utils.FirebaseUtils.firebaseAuth
-import com.bramdeconinck.technologysalesmantoolkit.utils.FirebaseUtils.firebaseUser
-import com.bramdeconinck.technologysalesmantoolkit.utils.MessageUtils
-import com.bramdeconinck.technologysalesmantoolkit.utils.ValidationUtils
+import com.bramdeconinck.technologysalesmantoolkit.utils.RC_SIGN_IN
 import com.bramdeconinck.technologysalesmantoolkit.viewmodels.LoginViewModel
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
@@ -22,7 +19,6 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
-import com.google.firebase.auth.GoogleAuthProvider
 import kotlinx.android.synthetic.main.fragment_login.*
 
 class LoginFragment : Fragment() {
@@ -30,22 +26,22 @@ class LoginFragment : Fragment() {
     private lateinit var loginViewModel: LoginViewModel
     private lateinit var gso: GoogleSignInOptions
     private lateinit var mGoogleSignInClient: GoogleSignInClient
-    private val RC_SIGN_IN: Int = 1
 
-    override fun onAttach(context: Context?) {
-        super.onAttach(context)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        loginViewModel =  ViewModelProviders.of(activity!!).get(LoginViewModel::class.java)
 
         gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
                 .build()
 
-
         mGoogleSignInClient = GoogleSignIn.getClient(context!!, gso)
-    }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        loginViewModel =  ViewModelProviders.of(activity!!).get(LoginViewModel::class.java)
+        loginViewModel.navigateToDetails.observe(this, Observer {
+            it!!.getContentIfNotHandled()?.let {// Only proceed if the event has never been handled
+                this.findNavController().navigate(R.id.toServiceList)
+            }
+        })
 
         return inflater.inflate(R.layout.fragment_login, container, false)
     }
@@ -53,7 +49,7 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        btn_login_signIn.setOnClickListener { validateLoginForm() }
+        btn_login_signIn.setOnClickListener { loginViewModel.validateLoginForm(et_login_email.text.toString(), et_login_password.text.toString()) }
 
         btn_login_signInWithGoogle.setOnClickListener { signInWithGoogle() }
 
@@ -72,63 +68,11 @@ class LoginFragment : Fragment() {
 
             try {
                 val account: GoogleSignInAccount? = task.getResult(ApiException::class.java)
-                firebaseAuthWithGoogle(account)
+                loginViewModel.firebaseAuthWithGoogle(account)
             } catch (e: ApiException) {
                 print(e.message)
             }
         }
-    }
-
-    private fun firebaseAuthWithGoogle(acct: GoogleSignInAccount?) {
-        val credential = GoogleAuthProvider.getCredential(acct?.idToken, null)
-        firebaseAuth.signInWithCredential(credential)
-                .addOnCompleteListener { task ->
-                    if (task.isSuccessful) {
-                        firebaseUser = firebaseAuth.currentUser
-                        MessageUtils.makeToast(context!!, getString(R.string.message_welcome, firebaseUser!!.displayName))
-                        this.findNavController().navigate(R.id.toServiceList)
-                    } else {
-                        MessageUtils.makeToast(context!!, getString(R.string.sign_in_error))
-                    }
-                }
-    }
-
-    private fun logInWithFirebaseAccount() {
-        firebaseAuth.signInWithEmailAndPassword(et_login_email.text.toString(), et_login_password.text.toString())
-                .addOnCompleteListener { task ->
-                    if (task.isSuccessful) {
-                        firebaseUser = firebaseAuth.currentUser
-                        if (firebaseUser!!.isEmailVerified) {
-                            MessageUtils.makeToast(context!!, getString(R.string.message_welcome, firebaseUser!!.displayName))
-                            this.findNavController().navigate(R.id.toServiceList)
-                        } else {
-                            firebaseAuth.signOut()
-                            MessageUtils.makeToast(context!!, getString(R.string.error_email_is_not_verified))
-                            btn_login_signIn.isEnabled = true
-                        }
-                    } else {
-                        MessageUtils.makeToast(context!!, getString(R.string.sign_in_error))
-                        btn_login_signIn.isEnabled = true
-                    }
-                }
-    }
-
-    private fun validateLoginForm() {
-        btn_login_signIn.isEnabled = false
-
-        if (!ValidationUtils.everyFieldHasValue(listOf(et_login_email.text.toString(), et_login_password.text.toString()))) {
-            MessageUtils.makeToast(context!!, getString(R.string.error_empty_fields))
-            btn_login_signIn.isEnabled = true
-            return
-        }
-
-        if (!ValidationUtils.isEmailValid(et_login_email.text.toString())) {
-            MessageUtils.makeToast(context!!, getString(R.string.error_invalid_email))
-            btn_login_signIn.isEnabled = true
-            return
-        }
-
-        logInWithFirebaseAccount()
     }
 
 }

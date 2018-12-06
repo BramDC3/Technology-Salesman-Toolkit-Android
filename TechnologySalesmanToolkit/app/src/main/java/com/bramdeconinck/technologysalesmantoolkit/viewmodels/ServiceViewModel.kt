@@ -8,7 +8,7 @@ import com.bramdeconinck.technologysalesmantoolkit.base.InjectedViewModel
 import com.bramdeconinck.technologysalesmantoolkit.interfaces.IFirebaseServiceCallback
 import com.bramdeconinck.technologysalesmantoolkit.models.Service
 import com.bramdeconinck.technologysalesmantoolkit.network.FirestoreAPI
-import com.bramdeconinck.technologysalesmantoolkit.utils.MessageUtils
+import com.bramdeconinck.technologysalesmantoolkit.utils.MessageUtils.makeToast
 import javax.inject.Inject
 
 class ServiceViewModel : InjectedViewModel(), IFirebaseServiceCallback {
@@ -42,5 +42,5 @@ class ServiceViewModel : InjectedViewModel(), IFirebaseServiceCallback {
 
     override fun hideProgress() { isLoading.value = false }
 
-    override fun showMessage() { MessageUtils.makeToast(context, context.getString(R.string.fetching_data_error)) }
+    override fun showMessage() { makeToast(context, context.getString(R.string.fetching_data_error)) }
 }
