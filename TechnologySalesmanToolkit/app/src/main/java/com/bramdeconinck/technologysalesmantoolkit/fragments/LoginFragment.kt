@@ -37,7 +37,7 @@ class LoginFragment : Fragment() {
 
         mGoogleSignInClient = GoogleSignIn.getClient(context!!, gso)
 
-        loginViewModel.navigateToDetails.observe(this, Observer {
+        loginViewModel.navigateToServiceList.observe(this, Observer {
             it!!.getContentIfNotHandled()?.let {// Only proceed if the event has never been handled
                 this.findNavController().navigate(R.id.toServiceList)
             }

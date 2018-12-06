@@ -3,6 +3,7 @@ package com.bramdeconinck.technologysalesmantoolkit.base
 import android.arch.lifecycle.ViewModel
 import com.bramdeconinck.technologysalesmantoolkit.context.App.Companion.injector
 import com.bramdeconinck.technologysalesmantoolkit.viewmodels.LoginViewModel
+import com.bramdeconinck.technologysalesmantoolkit.viewmodels.RegistrationViewModel
 import com.bramdeconinck.technologysalesmantoolkit.viewmodels.ServiceViewModel
 
 /**
@@ -27,6 +28,7 @@ abstract class InjectedViewModel : ViewModel() {
         when (this) {
             is ServiceViewModel -> injector.inject(this)
             is LoginViewModel -> injector.inject(this)
+            is RegistrationViewModel -> injector.inject(this)
         }
     }
 

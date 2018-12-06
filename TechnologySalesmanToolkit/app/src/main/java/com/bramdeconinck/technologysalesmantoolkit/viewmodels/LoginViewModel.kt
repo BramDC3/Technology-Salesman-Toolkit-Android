@@ -22,10 +22,10 @@ class LoginViewModel : InjectedViewModel() {
     @SuppressLint("StaticFieldLeak")
     lateinit var context: Context
 
-    private val _navigateToDetails = MutableLiveData<Event<String>>()
+    private val _navigateToServiceList = MutableLiveData<Event<String>>()
 
-    val navigateToDetails : LiveData<Event<String>>
-        get() = _navigateToDetails
+    val navigateToServiceList : LiveData<Event<String>>
+        get() = _navigateToServiceList
 
     fun validateLoginForm(email: String, password: String) {
         //btn_login_signIn.isEnabled = false
@@ -52,7 +52,7 @@ class LoginViewModel : InjectedViewModel() {
                         firebaseUser = firebaseAuth.currentUser
                         if (firebaseUser!!.isEmailVerified) {
                             makeToast(context, context.getString(R.string.message_welcome, firebaseUser!!.displayName))
-                            _navigateToDetails.value = Event("")
+                            _navigateToServiceList.value = Event("")
                         } else {
                             firebaseAuth.signOut()
                             makeToast(context, context.getString(R.string.error_email_is_not_verified))
@@ -72,7 +72,7 @@ class LoginViewModel : InjectedViewModel() {
                     if (task.isSuccessful) {
                         firebaseUser = firebaseAuth.currentUser
                         makeToast(context, context.getString(R.string.message_welcome, firebaseUser!!.displayName))
-                        _navigateToDetails.value = Event("")
+                        _navigateToServiceList.value = Event("")
                     } else {
                         makeToast(context, context.getString(R.string.sign_in_error))
                     }
