@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.bramdeconinck.technologysalesmantoolkit.R
+import com.bramdeconinck.technologysalesmantoolkit.utils.MessageUtils.showPrivacyPolicyDialog
 import com.bramdeconinck.technologysalesmantoolkit.viewmodels.RegistrationViewModel
 import kotlinx.android.synthetic.main.fragment_registration.*
 
@@ -23,6 +24,19 @@ class RegistrationFragment : Fragment() {
         registrationViewModel.navigateToLogin.observe(this, Observer {
             it!!.getContentIfNotHandled()?.let {// Only proceed if the event has never been handled
                 this.findNavController().popBackStack()
+            }
+        })
+
+        registrationViewModel.showPrivacyPolicyDialog.observe(this, Observer {
+            it!!.getContentIfNotHandled()?.let {
+                showPrivacyPolicyDialog(context!!,
+                        getString(R.string.title_privacy_policy_dialog),
+                        getString(R.string.message_privacy_policy_dialog),
+                        registrationViewModel.createFirebaseAccount(
+                                et_registration_firstname.text.toString(),
+                                et_registration_lastname.text.toString(),
+                                et_registration_email.text.toString(),
+                                et_registration_password.text.toString()))
             }
         })
 

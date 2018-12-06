@@ -4,6 +4,7 @@ import com.bramdeconinck.technologysalesmantoolkit.models.Category
 import com.bramdeconinck.technologysalesmantoolkit.models.Service
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.auth.UserProfileChangeRequest
 import com.google.firebase.firestore.QueryDocumentSnapshot
 
 object FirebaseUtils {
@@ -44,6 +45,13 @@ object FirebaseUtils {
             2 -> Category.Apple
             else -> Category.Other
         }
+    }
+
+    @JvmStatic
+    fun createProfileUpdates(firstname: String, familyname: String): UserProfileChangeRequest {
+        return UserProfileChangeRequest.Builder()
+                .setDisplayName("$firstname $familyname")
+                .build()
     }
 
 }
