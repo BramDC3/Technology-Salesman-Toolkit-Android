@@ -20,7 +20,7 @@
             android:focusableInTouchMode="true">
 
             <ImageView
-                android:id="@+id/img_logo_reg"
+                android:id="@+id/iv_registration_logo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
@@ -28,16 +28,16 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/logo"
-                android:contentDescription="@string/logo_description" />
+                android:contentDescription="@string/description_app_logo" />
 
             <EditText
-                android:id="@+id/txt_firstname"
+                android:id="@+id/et_registration_firstname"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="56dp"
                 android:background="@drawable/reg_firstname"
                 android:ems="10"
-                android:hint="@string/firstname"
+                android:hint="@string/placeholder_firstname"
                 android:inputType="textPersonName"
                 android:paddingStart="40dp"
                 android:paddingEnd="20dp"
@@ -45,17 +45,17 @@
                 android:textColor="@color/colorFormFieldText"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/img_logo_reg"
+                app:layout_constraintTop_toBottomOf="@+id/iv_registration_logo"
                 tools:ignore="Autofill" />
 
             <EditText
-                android:id="@+id/txt_lastname"
+                android:id="@+id/et_registration_lastname"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:background="@drawable/reg_familyname"
                 android:ems="10"
-                android:hint="@string/lastname"
+                android:hint="@string/placeholder_lastname"
                 android:inputType="textPersonName"
                 android:paddingStart="40dp"
                 android:paddingEnd="20dp"
@@ -63,17 +63,17 @@
                 android:textColor="@color/colorFormFieldText"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txt_firstname"
+                app:layout_constraintTop_toBottomOf="@+id/et_registration_firstname"
                 tools:ignore="Autofill" />
 
             <EditText
-                android:id="@+id/txt_email_r"
+                android:id="@+id/et_registration_email"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:background="@drawable/reg_email"
                 android:ems="10"
-                android:hint="@string/email"
+                android:hint="@string/placeholder_email"
                 android:inputType="textEmailAddress"
                 android:paddingStart="40dp"
                 android:paddingEnd="20dp"
@@ -81,17 +81,17 @@
                 android:textColor="@color/colorFormFieldText"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txt_lastname"
+                app:layout_constraintTop_toBottomOf="@+id/et_registration_lastname"
                 tools:ignore="Autofill" />
 
             <EditText
-                android:id="@+id/txt_password_r"
+                android:id="@+id/et_registration_password"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:background="@drawable/reg_password"
                 android:ems="10"
-                android:hint="@string/password"
+                android:hint="@string/placeholder_password"
                 android:inputType="textPassword"
                 android:paddingStart="40dp"
                 android:paddingEnd="20dp"
@@ -99,17 +99,17 @@
                 android:textColor="@color/colorFormFieldText"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txt_email_r"
+                app:layout_constraintTop_toBottomOf="@+id/et_registration_email"
                 tools:ignore="Autofill" />
 
             <EditText
-                android:id="@+id/txt_repeatpassword"
+                android:id="@+id/et_registration_repeatPassword"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:background="@drawable/reg_password"
                 android:ems="10"
-                android:hint="@string/repeatpassword"
+                android:hint="@string/placeholder_repeatpassword"
                 android:inputType="textPassword"
                 android:paddingStart="40dp"
                 android:paddingEnd="20dp"
@@ -117,11 +117,11 @@
                 android:textColor="@color/colorFormFieldText"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txt_password_r"
+                app:layout_constraintTop_toBottomOf="@+id/et_registration_password"
                 tools:ignore="Autofill" />
 
             <Button
-                android:id="@+id/btn_register"
+                android:id="@+id/btn_registration_register"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -130,10 +130,10 @@
                 android:background="@drawable/reg_create_account"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txt_repeatpassword" />
+                app:layout_constraintTop_toBottomOf="@+id/et_registration_repeatPassword" />
 
             <TextView
-                android:id="@+id/lbl_backToLogin"
+                android:id="@+id/tv_registration_backToLogin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -145,7 +145,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btn_register" />
+                app:layout_constraintTop_toBottomOf="@+id/btn_registration_register" />
         </android.support.constraint.ConstraintLayout>
     </ScrollView>
 

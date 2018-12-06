@@ -9,22 +9,17 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.bramdeconinck.technologysalesmantoolkit.R
 import com.bramdeconinck.technologysalesmantoolkit.interfaces.IToolbarTitleListener
-import com.google.firebase.auth.FirebaseAuth
+import com.bramdeconinck.technologysalesmantoolkit.utils.FirebaseUtils.firebaseAuth
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), IToolbarTitleListener {
 
-    private lateinit var mAuth: FirebaseAuth
     private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        // This object is used for Firebase authentication
-        // It is used to see if the user is logged in and to get their information
-        mAuth = FirebaseAuth.getInstance()
 
         // Navigation with a support action bar and a bottom navigation bar
         // Thankfully, the new Navigation Component helps us with this
@@ -52,7 +47,7 @@ class MainActivity : AppCompatActivity(), IToolbarTitleListener {
                 // if users are already logged in, they are supposed to be
                 // redirected to the ServiceListFragment
                 R.id.serviceListFragment -> {
-                    if (mAuth.currentUser == null) {
+                    if (firebaseAuth.currentUser == null) {
                         navController.navigate(R.id.notSignedIn)
                         hideToolbarAndBottomNavigation()
                     } else {
@@ -99,8 +94,6 @@ class MainActivity : AppCompatActivity(), IToolbarTitleListener {
     // need something different for the ServiceDetailFragment because
     // the title needs to be the name of the service. This function
     // changes the title of the toolbar.
-    override fun updateTitle(title: String?) {
-        supportActionBar?.title = title
-    }
+    override fun updateTitle(title: String?) { supportActionBar?.title = title }
 
 }
