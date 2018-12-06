@@ -4,6 +4,7 @@ import com.bramdeconinck.technologysalesmantoolkit.injection.module.NetworkModul
 import com.bramdeconinck.technologysalesmantoolkit.viewmodels.LoginViewModel
 import com.bramdeconinck.technologysalesmantoolkit.viewmodels.RegistrationViewModel
 import com.bramdeconinck.technologysalesmantoolkit.viewmodels.ServiceViewModel
+import com.bramdeconinck.technologysalesmantoolkit.viewmodels.SettingsViewModel
 import dagger.Component
 import javax.inject.Singleton
 
@@ -29,4 +30,5 @@ interface ViewModelComponent {
     fun inject(serviceViewModel: ServiceViewModel)
     fun inject(loginViewModel: LoginViewModel)
     fun inject(registrationViewModel: RegistrationViewModel)
+    fun inject(settingsViewModel: SettingsViewModel)
 }

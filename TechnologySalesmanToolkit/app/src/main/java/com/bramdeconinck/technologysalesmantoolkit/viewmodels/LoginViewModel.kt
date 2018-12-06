@@ -6,10 +6,10 @@ import android.arch.lifecycle.MutableLiveData
 import android.content.Context
 import com.bramdeconinck.technologysalesmantoolkit.R
 import com.bramdeconinck.technologysalesmantoolkit.base.InjectedViewModel
-import com.bramdeconinck.technologysalesmantoolkit.utils.Event
 import com.bramdeconinck.technologysalesmantoolkit.utils.FirebaseUtils.firebaseAuth
 import com.bramdeconinck.technologysalesmantoolkit.utils.FirebaseUtils.firebaseUser
 import com.bramdeconinck.technologysalesmantoolkit.utils.MessageUtils.makeToast
+import com.bramdeconinck.technologysalesmantoolkit.utils.SingleLiveEvent
 import com.bramdeconinck.technologysalesmantoolkit.utils.ValidationUtils.everyFieldHasValue
 import com.bramdeconinck.technologysalesmantoolkit.utils.ValidationUtils.isEmailValid
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
@@ -22,10 +22,7 @@ class LoginViewModel : InjectedViewModel() {
     @SuppressLint("StaticFieldLeak")
     lateinit var context: Context
 
-    private val _navigateToServiceList = MutableLiveData<Event<String>>()
-
-    val navigateToServiceList : LiveData<Event<String>>
-        get() = _navigateToServiceList
+    val navigateToServiceList = SingleLiveEvent<Any>()
 
     fun validateLoginForm(email: String, password: String) {
         //btn_login_signIn.isEnabled = false
@@ -52,7 +49,7 @@ class LoginViewModel : InjectedViewModel() {
                         firebaseUser = firebaseAuth.currentUser
                         if (firebaseUser!!.isEmailVerified) {
                             makeToast(context, context.getString(R.string.message_welcome, firebaseUser!!.displayName))
-                            _navigateToServiceList.value = Event("")
+                            navigateToServiceList.call()
                         } else {
                             firebaseAuth.signOut()
                             makeToast(context, context.getString(R.string.error_email_is_not_verified))
@@ -72,7 +69,7 @@ class LoginViewModel : InjectedViewModel() {
                     if (task.isSuccessful) {
                         firebaseUser = firebaseAuth.currentUser
                         makeToast(context, context.getString(R.string.message_welcome, firebaseUser!!.displayName))
-                        _navigateToServiceList.value = Event("")
+                        navigateToServiceList.call()
                     } else {
                         makeToast(context, context.getString(R.string.sign_in_error))
                     }

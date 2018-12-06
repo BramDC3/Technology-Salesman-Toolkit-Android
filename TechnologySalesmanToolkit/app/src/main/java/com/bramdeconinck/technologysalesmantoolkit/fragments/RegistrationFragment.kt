@@ -21,24 +21,9 @@ class RegistrationFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         registrationViewModel = ViewModelProviders.of(activity!!).get(RegistrationViewModel::class.java)
 
-        registrationViewModel.navigateToLogin.observe(this, Observer {
-            it!!.getContentIfNotHandled()?.let {// Only proceed if the event has never been handled
-                this.findNavController().popBackStack()
-            }
-        })
+        registrationViewModel.navigateToLogin.observe(this, Observer { navigateBackToLogin() })
 
-        registrationViewModel.showPrivacyPolicyDialog.observe(this, Observer {
-            it!!.getContentIfNotHandled()?.let {
-                showPrivacyPolicyDialog(context!!,
-                        getString(R.string.title_privacy_policy_dialog),
-                        getString(R.string.message_privacy_policy_dialog),
-                        registrationViewModel.createFirebaseAccount(
-                                et_registration_firstname.text.toString(),
-                                et_registration_lastname.text.toString(),
-                                et_registration_email.text.toString(),
-                                et_registration_password.text.toString()))
-            }
-        })
+        registrationViewModel.showPrivacyPolicyDialog.observe(this, Observer { callPrivacyPolicyDialog() })
 
         return inflater.inflate(R.layout.fragment_registration, container, false)
     }
@@ -46,15 +31,30 @@ class RegistrationFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        btn_registration_register.setOnClickListener { registrationViewModel.validateRegistrationForm(
+        btn_registration_register.setOnClickListener {
+            registrationViewModel.validateRegistrationForm(
                 et_registration_firstname.text.toString(),
                 et_registration_lastname.text.toString(),
                 et_registration_email.text.toString(),
                 et_registration_password.text.toString(),
-                et_registration_repeatPassword.text.toString())
+                et_registration_repeatPassword.text.toString()
+            )
         }
 
-        tv_registration_backToLogin.setOnClickListener { it.findNavController().popBackStack() }
+        tv_registration_backToLogin.setOnClickListener { navigateBackToLogin() }
     }
+
+    private fun callPrivacyPolicyDialog() {
+        showPrivacyPolicyDialog(context!!,
+                getString(R.string.title_privacy_policy_dialog),
+                getString(R.string.message_privacy_policy_dialog),
+                registrationViewModel.createFirebaseAccount(
+                        et_registration_firstname.text.toString(),
+                        et_registration_lastname.text.toString(),
+                        et_registration_email.text.toString(),
+                        et_registration_password.text.toString()))
+    }
+
+    private fun navigateBackToLogin() = this.findNavController().popBackStack()
 
 }

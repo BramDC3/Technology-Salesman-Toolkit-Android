@@ -38,6 +38,13 @@
     <string name="settings_privacypolicy">Bekijk het privacybeleid</string>
     <string name="settings_suggestion">Verstuur een suggestie</string>
     <string name="settings_signout">Meld af</string>
+    <string name="title_send_suggestion">Verstuur een suggestie</string>
+    <string name="title_sign_out">Afmelden</string>
+    <string name="message_send_suggestion">Vul hieronder uw suggestie in en druk op de knop \'Verzend\'.</string>
+    <string name="message_sign_out">Bent u zeker dat u zich wilt afmelden?</string>
+    <string name="send_suggestion_succes">Bedankt voor het verzenden van uw suggestie!</string>
+    <string name="send_suggestion_error">Er is iets fout gegaan tijdens het versturen van uw suggestie.</string>
+    <string name="send_suggestion_empty_error">Een lege suggestie kan niet worden verstuurd.</string>
 
     <!-- ProfileFragment -->
     <string name="title_action_edit_profile">Wijzig profiel</string>

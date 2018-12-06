@@ -5,6 +5,7 @@ import com.bramdeconinck.technologysalesmantoolkit.context.App.Companion.injecto
 import com.bramdeconinck.technologysalesmantoolkit.viewmodels.LoginViewModel
 import com.bramdeconinck.technologysalesmantoolkit.viewmodels.RegistrationViewModel
 import com.bramdeconinck.technologysalesmantoolkit.viewmodels.ServiceViewModel
+import com.bramdeconinck.technologysalesmantoolkit.viewmodels.SettingsViewModel
 
 /**
  * Base class for all ViewModels that require injection through Dagger.
@@ -29,6 +30,7 @@ abstract class InjectedViewModel : ViewModel() {
             is ServiceViewModel -> injector.inject(this)
             is LoginViewModel -> injector.inject(this)
             is RegistrationViewModel -> injector.inject(this)
+            is SettingsViewModel -> injector.inject(this)
         }
     }
 
