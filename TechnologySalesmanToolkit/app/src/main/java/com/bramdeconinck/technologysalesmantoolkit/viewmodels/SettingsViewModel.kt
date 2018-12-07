@@ -1,7 +1,5 @@
 package com.bramdeconinck.technologysalesmantoolkit.viewmodels
 
-import android.annotation.SuppressLint
-import android.content.Context
 import com.bramdeconinck.technologysalesmantoolkit.R
 import com.bramdeconinck.technologysalesmantoolkit.base.InjectedViewModel
 import com.bramdeconinck.technologysalesmantoolkit.interfaces.IFirebaseSuggestionCallback
@@ -15,18 +13,14 @@ class SettingsViewModel : InjectedViewModel(), IFirebaseSuggestionCallback {
     @Inject
     lateinit var firestoreAPI: FirestoreAPI
 
-    @Inject
-    @SuppressLint("StaticFieldLeak")
-    lateinit var context: Context
-
     fun getSuggestion() = { suggestion: String -> validateSuggestion(suggestion)}
 
-    fun validateSuggestion(suggestion: String) {
+    private fun validateSuggestion(suggestion: String) {
         if (everyFieldHasValue(listOf(suggestion))) firestoreAPI.postSuggestion(this, suggestion)
-        else makeToast(context, context.getString(R.string.send_suggestion_empty_error))
+        else makeToast(R.string.send_suggestion_empty_error)
     }
 
-    override fun showSuccesMessage() { makeToast(context, context.getString(R.string.send_suggestion_succes)) }
+    override fun showSuccesMessage() { makeToast(R.string.send_suggestion_succes) }
 
-    override fun showFailureMessage() { makeToast(context, context.getString(R.string.send_suggestion_error)) }
+    override fun showFailureMessage() { makeToast(R.string.send_suggestion_error) }
 }

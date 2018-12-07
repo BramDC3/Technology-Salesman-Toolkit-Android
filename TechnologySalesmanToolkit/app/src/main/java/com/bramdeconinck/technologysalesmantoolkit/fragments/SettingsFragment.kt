@@ -31,15 +31,25 @@ class SettingsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        btn_settings_website.setOnClickListener{ openWebPage(website, context!!) }
+        btn_settings_website.setOnClickListener{ openWebPage(website) }
 
         btn_settings_darkmode.setOnClickListener{ switch_settings_darkmode.isChecked = !switch_settings_darkmode.isChecked }
 
-        btn_settings_privacypolicy.setOnClickListener { openWebPage(privacyPolicy, context!!) }
+        btn_settings_privacypolicy.setOnClickListener { openWebPage(privacyPolicy) }
 
-        btn_settings_suggestion.setOnClickListener{ showMakeSuggestionDialog(context!!, getString(R.string.title_send_suggestion),getString(R.string.message_send_suggestion), settingsViewModel.getSuggestion()) }
+        btn_settings_suggestion.setOnClickListener{ showMakeSuggestionDialog(
+                getString(R.string.title_send_suggestion),
+                getString(R.string.message_send_suggestion),
+                settingsViewModel.getSuggestion()
+            )
+        }
 
-        btn_settings_signout.setOnClickListener{ showThreeButtonsPositiveFuncDialog(context!!, getString(R.string.title_sign_out), getString(R.string.message_sign_out), signOut()) }
+        btn_settings_signout.setOnClickListener{ showThreeButtonsPositiveFuncDialog(
+                getString(R.string.title_sign_out),
+                getString(R.string.message_sign_out),
+                signOut()
+            )
+        }
     }
 
     private fun signOut() = {

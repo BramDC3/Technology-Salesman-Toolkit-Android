@@ -1,9 +1,5 @@
 package com.bramdeconinck.technologysalesmantoolkit.viewmodels
 
-import android.annotation.SuppressLint
-import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.MutableLiveData
-import android.content.Context
 import com.bramdeconinck.technologysalesmantoolkit.R
 import com.bramdeconinck.technologysalesmantoolkit.base.InjectedViewModel
 import com.bramdeconinck.technologysalesmantoolkit.utils.FirebaseUtils.firebaseAuth
@@ -14,52 +10,40 @@ import com.bramdeconinck.technologysalesmantoolkit.utils.ValidationUtils.everyFi
 import com.bramdeconinck.technologysalesmantoolkit.utils.ValidationUtils.isEmailValid
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.firebase.auth.GoogleAuthProvider
-import javax.inject.Inject
 
 class LoginViewModel : InjectedViewModel() {
 
-    @Inject
-    @SuppressLint("StaticFieldLeak")
-    lateinit var context: Context
-
     val navigateToServiceList = SingleLiveEvent<Any>()
 
-    fun validateLoginForm(email: String, password: String) {
-        //btn_login_signIn.isEnabled = false
-
-        if (!everyFieldHasValue(listOf(email, password))) {
-            makeToast(context, context.getString(R.string.error_empty_fields))
-            //btn_login_signIn.isEnabled = true
-            return
-        }
-
-        if (!isEmailValid(email)) {
-            makeToast(context, context.getString(R.string.error_invalid_email))
-            //btn_login_signIn.isEnabled = true
-            return
-        }
-
-        logInWithFirebaseAccount(email, password)
-    }
-
-    private fun logInWithFirebaseAccount(email: String, password: String) {
+    fun logInWithFirebaseAccount(email: String, password: String) {
+        if (!loginFormIsValid(email, password)) return
         firebaseAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         firebaseUser = firebaseAuth.currentUser
                         if (firebaseUser!!.isEmailVerified) {
-                            makeToast(context, context.getString(R.string.message_welcome, firebaseUser!!.displayName))
+                            makeToast(R.string.message_welcome, firebaseUser!!.displayName)
                             navigateToServiceList.call()
                         } else {
                             firebaseAuth.signOut()
-                            makeToast(context, context.getString(R.string.error_email_is_not_verified))
-                            //btn_login_signIn.isEnabled = true
+                            makeToast(R.string.error_email_is_not_verified)
                         }
-                    } else {
-                        makeToast(context, context.getString(R.string.sign_in_error))
-                        //btn_login_signIn.isEnabled = true
-                    }
+                    } else { makeToast(R.string.sign_in_error) }
                 }
+    }
+
+    private fun loginFormIsValid(email: String, password: String): Boolean {
+        if (!everyFieldHasValue(listOf(email, password))) {
+            makeToast(R.string.error_empty_fields)
+            return false
+        }
+
+        if (!isEmailValid(email)) {
+            makeToast(R.string.error_invalid_email)
+            return false
+        }
+
+        return true
     }
 
     fun firebaseAuthWithGoogle(acct: GoogleSignInAccount?) {
@@ -68,11 +52,9 @@ class LoginViewModel : InjectedViewModel() {
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         firebaseUser = firebaseAuth.currentUser
-                        makeToast(context, context.getString(R.string.message_welcome, firebaseUser!!.displayName))
+                        makeToast(R.string.message_welcome, firebaseUser!!.displayName)
                         navigateToServiceList.call()
-                    } else {
-                        makeToast(context, context.getString(R.string.sign_in_error))
-                    }
+                    } else { makeToast(R.string.sign_in_error) }
                 }
     }
 }

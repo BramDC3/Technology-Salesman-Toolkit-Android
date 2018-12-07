@@ -1,9 +1,5 @@
 package com.bramdeconinck.technologysalesmantoolkit.viewmodels
 
-import android.annotation.SuppressLint
-import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.MutableLiveData
-import android.content.Context
 import com.bramdeconinck.technologysalesmantoolkit.R
 import com.bramdeconinck.technologysalesmantoolkit.base.InjectedViewModel
 import com.bramdeconinck.technologysalesmantoolkit.utils.FirebaseUtils.createProfileUpdates
@@ -15,13 +11,8 @@ import com.bramdeconinck.technologysalesmantoolkit.utils.ValidationUtils.everyFi
 import com.bramdeconinck.technologysalesmantoolkit.utils.ValidationUtils.isEmailValid
 import com.bramdeconinck.technologysalesmantoolkit.utils.ValidationUtils.isPasswordValid
 import com.bramdeconinck.technologysalesmantoolkit.utils.ValidationUtils.passwordsMatch
-import javax.inject.Inject
 
 class RegistrationViewModel : InjectedViewModel() {
-
-    @Inject
-    @SuppressLint("StaticFieldLeak")
-    lateinit var context: Context
 
     val navigateToLogin = SingleLiveEvent<Any>()
 
@@ -29,22 +20,22 @@ class RegistrationViewModel : InjectedViewModel() {
 
     fun validateRegistrationForm(firstname: String, familyname: String, email: String, password: String, repeatPassword: String) {
         if (!everyFieldHasValue(listOf(firstname, familyname, email, password, repeatPassword))) {
-            makeToast(context, context.getString(R.string.error_empty_fields))
+            makeToast(R.string.error_empty_fields)
             return
         }
 
         if (!isEmailValid(email)) {
-            makeToast(context, context.getString(R.string.error_invalid_email))
+            makeToast(R.string.error_invalid_email)
             return
         }
 
         if (!isPasswordValid(password)) {
-            makeToast(context, context.getString(R.string.error_invalid_password))
+            makeToast(R.string.error_invalid_password)
             return
         }
 
         if (!passwordsMatch(password, repeatPassword)) {
-            makeToast(context, context.getString(R.string.error_passwords_dont_match))
+            makeToast(R.string.error_passwords_dont_match)
             return
         }
 
@@ -61,11 +52,11 @@ class RegistrationViewModel : InjectedViewModel() {
                                     if (task2.isSuccessful) {
                                         firebaseUser!!.sendEmailVerification()
                                         firebaseAuth.signOut()
-                                        makeToast(context, context.getString(R.string.message_account_created))
+                                        makeToast(R.string.message_account_created)
                                         navigateToLogin.call()
-                                    } else { makeToast(context, context.getString(R.string.error_account_not_created)) }
+                                    } else { makeToast(R.string.error_account_not_created) }
                                 }
-                    } else { makeToast(context, context.getString(R.string.error_account_not_created)) }
+                    } else { makeToast(R.string.error_account_not_created) }
                 }
     }
 

@@ -11,7 +11,7 @@ import android.view.ViewGroup
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.bramdeconinck.technologysalesmantoolkit.R
-import com.bramdeconinck.technologysalesmantoolkit.utils.RC_SIGN_IN
+import com.bramdeconinck.technologysalesmantoolkit.utils.GOOGLE_SIGN_IN_REQUEST_CODE
 import com.bramdeconinck.technologysalesmantoolkit.viewmodels.LoginViewModel
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
@@ -45,7 +45,12 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        btn_login_signIn.setOnClickListener { loginViewModel.validateLoginForm(et_login_email.text.toString(), et_login_password.text.toString()) }
+        btn_login_signIn.setOnClickListener {
+            loginViewModel.logInWithFirebaseAccount(
+                    et_login_email.text.toString(),
+                    et_login_password.text.toString()
+            )
+        }
 
         btn_login_signInWithGoogle.setOnClickListener { signInWithGoogle() }
 
@@ -54,12 +59,12 @@ class LoginFragment : Fragment() {
 
     private fun signInWithGoogle() {
         val signInIntent: Intent = mGoogleSignInClient.signInIntent
-        startActivityForResult(signInIntent, RC_SIGN_IN)
+        startActivityForResult(signInIntent, GOOGLE_SIGN_IN_REQUEST_CODE)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == RC_SIGN_IN) {
+        if (requestCode == GOOGLE_SIGN_IN_REQUEST_CODE) {
             val task: Task<GoogleSignInAccount> = GoogleSignIn.getSignedInAccountFromIntent(data)
 
             try {

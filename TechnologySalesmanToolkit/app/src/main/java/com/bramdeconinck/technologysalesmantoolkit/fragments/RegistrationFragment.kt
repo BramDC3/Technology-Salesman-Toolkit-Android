@@ -45,8 +45,7 @@ class RegistrationFragment : Fragment() {
     }
 
     private fun callPrivacyPolicyDialog() {
-        showPrivacyPolicyDialog(context!!,
-                getString(R.string.title_privacy_policy_dialog),
+        showPrivacyPolicyDialog(getString(R.string.title_privacy_policy_dialog),
                 getString(R.string.message_privacy_policy_dialog),
                 registrationViewModel.createFirebaseAccount(
                         et_registration_firstname.text.toString(),

@@ -14,8 +14,8 @@ import kotlinx.android.synthetic.main.fragment_service_list.view.*
 
 class ServiceListFragment : Fragment() {
 
-    private lateinit var serviceAdapter: ServiceAdapter
     private lateinit var serviceViewModel: ServiceViewModel
+    private lateinit var serviceAdapter: ServiceAdapter
 
     // Variable to check whether the app is running on a tablet or not
     private var twoPane: Boolean = false
@@ -25,15 +25,17 @@ class ServiceListFragment : Fragment() {
 
         serviceViewModel = ViewModelProviders.of(activity!!).get(ServiceViewModel::class.java)
 
-        // If the service detail container is not null,
-        // then the app is running on a tablet
-        if (rootView.service_detail_container != null) twoPane = true
-
         val services = serviceViewModel.getServices()
 
         val isLoading = serviceViewModel.getIsLoading()
 
+        // If the service detail container is not null,
+        // then the app is running on a tablet
+        if (rootView.service_detail_container != null) twoPane = true
+
         serviceAdapter = ServiceAdapter(this, services, twoPane)
+
+        rootView.service_list.adapter = serviceAdapter
 
         services.observe(this, Observer { serviceAdapter.notifyDataSetChanged() })
 
@@ -41,8 +43,6 @@ class ServiceListFragment : Fragment() {
             if (isLoading.value!!) rootView.progress_bar.visibility = View.VISIBLE
             else rootView.progress_bar.visibility = View.GONE
         })
-
-        rootView.service_list.adapter = serviceAdapter
 
         return rootView
     }

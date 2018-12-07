@@ -1,8 +1,6 @@
 package com.bramdeconinck.technologysalesmantoolkit.viewmodels
 
-import android.annotation.SuppressLint
 import android.arch.lifecycle.MutableLiveData
-import android.content.Context
 import com.bramdeconinck.technologysalesmantoolkit.R
 import com.bramdeconinck.technologysalesmantoolkit.base.InjectedViewModel
 import com.bramdeconinck.technologysalesmantoolkit.interfaces.IFirebaseServiceCallback
@@ -15,10 +13,6 @@ class ServiceViewModel : InjectedViewModel(), IFirebaseServiceCallback {
 
     @Inject
     lateinit var firestoreAPI: FirestoreAPI
-
-    @Inject
-    @SuppressLint("StaticFieldLeak")
-    lateinit var context: Context
 
     private var services = MutableLiveData<List<Service>>()
 
@@ -42,5 +36,5 @@ class ServiceViewModel : InjectedViewModel(), IFirebaseServiceCallback {
 
     override fun hideProgress() { isLoading.value = false }
 
-    override fun showMessage() { makeToast(context, context.getString(R.string.fetching_data_error)) }
+    override fun showMessage() { makeToast(R.string.fetching_data_error) }
 }

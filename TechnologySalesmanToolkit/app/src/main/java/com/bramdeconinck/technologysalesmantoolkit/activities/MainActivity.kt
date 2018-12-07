@@ -1,5 +1,6 @@
 package com.bramdeconinck.technologysalesmantoolkit.activities
 
+import android.content.Context
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.View
@@ -95,5 +96,11 @@ class MainActivity : AppCompatActivity(), IToolbarTitleListener {
     // the title needs to be the name of the service. This function
     // changes the title of the toolbar.
     override fun updateTitle(title: String?) { supportActionBar?.title = title }
+
+    companion object {
+        private var instance: MainActivity? = null
+
+        fun getContext(): Context { return instance!!.applicationContext }
+    }
 
 }

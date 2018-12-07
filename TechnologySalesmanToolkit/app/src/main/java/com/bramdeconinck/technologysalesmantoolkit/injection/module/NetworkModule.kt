@@ -20,7 +20,6 @@ import javax.inject.Singleton
 @Module
 class NetworkModule(private val context: Context) {
 
-
     /**
      * Provides the Firestore implemenation
      * @param retrofit the retrofit object used to instantiate the service
@@ -31,14 +30,4 @@ class NetworkModule(private val context: Context) {
         return FirestoreAPI()
     }
 
-    /**
-     * Provides context
-     * Normal context would cause huge memory leaks, but because application context
-     * has the lifetime of the app, it is safe to store/reference in singletons
-     */
-    @Provides
-    @Singleton
-    internal fun provideApplicationContext(): Context {
-        return context.applicationContext
-    }
 }
