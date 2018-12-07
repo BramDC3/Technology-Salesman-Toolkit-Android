@@ -17,7 +17,6 @@ import com.bramdeconinck.technologysalesmantoolkit.utils.MessageUtils.showThreeB
 import com.bramdeconinck.technologysalesmantoolkit.utils.WebpageUtils.openWebPage
 import com.bramdeconinck.technologysalesmantoolkit.viewmodels.SettingsViewModel
 
-
 class SettingsFragment : Fragment() {
 
     private lateinit var settingsViewModel: SettingsViewModel
