@@ -9,7 +9,6 @@ import com.bramdeconinck.technologysalesmantoolkit.utils.FirebaseUtils.firebaseA
 import com.bramdeconinck.technologysalesmantoolkit.utils.FirebaseUtils.firebaseUser
 import com.bramdeconinck.technologysalesmantoolkit.utils.MessageUtils.makeToast
 import com.bramdeconinck.technologysalesmantoolkit.utils.MessageUtils.showBasicDialog
-import com.bramdeconinck.technologysalesmantoolkit.utils.MessageUtils.showEditProfileDialog
 import com.bramdeconinck.technologysalesmantoolkit.utils.MessageUtils.showThreeButtonsPositiveFuncDialog
 import com.bramdeconinck.technologysalesmantoolkit.utils.StringUtils
 import com.bramdeconinck.technologysalesmantoolkit.utils.ValidationUtils
@@ -38,6 +37,7 @@ class ProfileFragment : Fragment() {
 
         lbl_profile_change_password.setOnClickListener {
             showThreeButtonsPositiveFuncDialog(
+                    context!!,
                     getString(R.string.title_change_password),
                     getString(R.string.message_change_password),
                     sendResetPasswordEmail()
@@ -46,6 +46,7 @@ class ProfileFragment : Fragment() {
 
         img_profile_image.setOnClickListener{
             showBasicDialog(
+                    context!!,
                     getString(R.string.title_change_profile_picture),
                     getString(R.string.message_change_profile_picture)
             )
@@ -92,8 +93,8 @@ class ProfileFragment : Fragment() {
     // Function to send an e-mail to the current FirebaseUser containing a link to change their password
     private fun sendResetPasswordEmail(): () -> Unit = {
         firebaseAuth.sendPasswordResetEmail(firebaseUser!!.email!!)
-                .addOnSuccessListener { makeToast(R.string.change_password_succes) }
-                .addOnFailureListener { makeToast(R.string.change_password_failure) }
+                .addOnSuccessListener { makeToast(context!!, R.string.change_password_succes) }
+                .addOnFailureListener { makeToast(context!!, R.string.change_password_failure) }
     }
 
     // Function to go from normal mode to editing mode and vice versa
@@ -126,15 +127,12 @@ class ProfileFragment : Fragment() {
     }
 
     private fun validateProfileForm() {
-        btn_profile_edit_profile.isEnabled = false
-
         val profileFormMap = mapOf(txt_profile_email.text.toString() to firebaseUser!!.email!!,
                 txt_profile_firstname.text.toString() to StringUtils.getFirstName(firebaseUser!!.displayName!!),
                 txt_profile_familyname.text.toString() to StringUtils.getFamilyName(firebaseUser!!.displayName!!))
 
         if (!ValidationUtils.atLeastOneFieldChanged(profileFormMap)) {
             toggleEditMode()
-            btn_profile_edit_profile.isEnabled = true
             return
         }
 
@@ -143,24 +141,20 @@ class ProfileFragment : Fragment() {
                 txt_profile_email.text.toString())
 
         if (!ValidationUtils.everyFieldHasValue(profileFormList)) {
-            makeToast(R.string.error_empty_fields)
-            btn_profile_edit_profile.isEnabled = true
+            makeToast(context!!, R.string.error_empty_fields)
             return
         }
 
         if (!ValidationUtils.isEmailValid(txt_profile_email.text.toString())) {
-            makeToast(R.string.error_invalid_email)
-            btn_profile_edit_profile.isEnabled = true
+            makeToast(context!!,R.string.error_invalid_email)
             return
         }
 
-        showEditProfileDialog(getString(R.string.title_change_profile),
+        showThreeButtonsPositiveFuncDialog(context!!,
+                getString(R.string.title_change_profile),
                 getString(R.string.message_change_profile),
-                applyProfileChanges(),
-                enableProfileEditButton())
+                applyProfileChanges())
     }
-
-    private fun enableProfileEditButton() = { btn_profile_edit_profile.isEnabled = true }
 
     private fun applyProfileChanges() =  {
         if (firebaseUser!!.displayName != "${txt_profile_firstname.text} ${txt_profile_familyname.text}") {
@@ -171,12 +165,12 @@ class ProfileFragment : Fragment() {
             firebaseUser!!.updateProfile(profileUpdates)
                     .addOnCompleteListener { task ->
                         if (task.isSuccessful) {
-                            showBasicDialog(getString(R.string.title_change_name), getString(R.string.message_change_name))
+                            showBasicDialog(context!!, getString(R.string.title_change_name), getString(R.string.message_change_name))
                             updateUI()
                             if (editable) toggleEditMode()
                         }
                     }
-                    .addOnFailureListener { showBasicDialog(getString(R.string.title_change_name), getString(R.string.error_change_name)) }
+                    .addOnFailureListener { showBasicDialog(context!!, getString(R.string.title_change_name), getString(R.string.error_change_name)) }
         }
 
         if (firebaseUser!!.email != txt_profile_email.text.toString()) {
@@ -186,14 +180,14 @@ class ProfileFragment : Fragment() {
                             firebaseUser!!.sendEmailVerification()
                                     .addOnCompleteListener { task2 ->
                                         if (task2.isSuccessful) {
-                                            showBasicDialog(getString(R.string.title_change_email), getString(R.string.message_change_email))
+                                            showBasicDialog(context!!, getString(R.string.title_change_email), getString(R.string.message_change_email))
                                             firebaseAuth.signOut()
                                             this.findNavController().navigate(R.id.signOutFromProfile)
                                         }
                                     }
                         }
                     }
-                    .addOnFailureListener { showBasicDialog(getString(R.string.title_change_email), getString(R.string.error_change_email)) }
+                    .addOnFailureListener { showBasicDialog(context!!,getString(R.string.title_change_email), getString(R.string.error_change_email)) }
         }
     }
 

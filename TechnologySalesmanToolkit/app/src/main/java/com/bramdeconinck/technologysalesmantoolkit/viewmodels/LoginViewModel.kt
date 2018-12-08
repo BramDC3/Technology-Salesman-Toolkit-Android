@@ -1,10 +1,10 @@
 package com.bramdeconinck.technologysalesmantoolkit.viewmodels
 
 import com.bramdeconinck.technologysalesmantoolkit.R
+import com.bramdeconinck.technologysalesmantoolkit.utils.BaseCommand
 import com.bramdeconinck.technologysalesmantoolkit.base.InjectedViewModel
 import com.bramdeconinck.technologysalesmantoolkit.utils.FirebaseUtils.firebaseAuth
 import com.bramdeconinck.technologysalesmantoolkit.utils.FirebaseUtils.firebaseUser
-import com.bramdeconinck.technologysalesmantoolkit.utils.MessageUtils.makeToast
 import com.bramdeconinck.technologysalesmantoolkit.utils.SingleLiveEvent
 import com.bramdeconinck.technologysalesmantoolkit.utils.ValidationUtils.everyFieldHasValue
 import com.bramdeconinck.technologysalesmantoolkit.utils.ValidationUtils.isEmailValid
@@ -15,31 +15,36 @@ class LoginViewModel : InjectedViewModel() {
 
     val navigateToServiceList = SingleLiveEvent<Any>()
 
+    val emailIsNotVerified = SingleLiveEvent<Any>()
+
+    val signInErrorOccurred = SingleLiveEvent<Any>()
+
+    val loginFormValidation = SingleLiveEvent<BaseCommand>()
+
     fun logInWithFirebaseAccount(email: String, password: String) {
-        if (!loginFormIsValid(email, password)) return
+        if (!isLoginFormValid(email, password)) return
         firebaseAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         firebaseUser = firebaseAuth.currentUser
                         if (firebaseUser!!.isEmailVerified) {
-                            makeToast(R.string.message_welcome, firebaseUser!!.displayName)
                             navigateToServiceList.call()
                         } else {
                             firebaseAuth.signOut()
-                            makeToast(R.string.error_email_is_not_verified)
+                            emailIsNotVerified.call()
                         }
-                    } else { makeToast(R.string.sign_in_error) }
+                    } else { signInErrorOccurred.call() }
                 }
     }
 
-    private fun loginFormIsValid(email: String, password: String): Boolean {
+    private fun isLoginFormValid(email: String, password: String): Boolean {
         if (!everyFieldHasValue(listOf(email, password))) {
-            makeToast(R.string.error_empty_fields)
+            loginFormValidation.value = BaseCommand.Error(R.string.error_empty_fields)
             return false
         }
 
         if (!isEmailValid(email)) {
-            makeToast(R.string.error_invalid_email)
+            loginFormValidation.value = BaseCommand.Error(R.string.error_invalid_email)
             return false
         }
 
@@ -52,9 +57,8 @@ class LoginViewModel : InjectedViewModel() {
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         firebaseUser = firebaseAuth.currentUser
-                        makeToast(R.string.message_welcome, firebaseUser!!.displayName)
                         navigateToServiceList.call()
-                    } else { makeToast(R.string.sign_in_error) }
+                    } else { signInErrorOccurred.call() }
                 }
     }
 }

@@ -7,14 +7,16 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.bramdeconinck.technologysalesmantoolkit.R
+import com.bramdeconinck.technologysalesmantoolkit.utils.BaseCommand
+import com.bramdeconinck.technologysalesmantoolkit.interfaces.IToastMaker
+import com.bramdeconinck.technologysalesmantoolkit.utils.MessageUtils.makeToast
 import com.bramdeconinck.technologysalesmantoolkit.utils.MessageUtils.showPrivacyPolicyDialog
 import com.bramdeconinck.technologysalesmantoolkit.viewmodels.RegistrationViewModel
 import kotlinx.android.synthetic.main.fragment_registration.*
 
-class RegistrationFragment : Fragment() {
+class RegistrationFragment : Fragment(), IToastMaker {
 
     private lateinit var registrationViewModel: RegistrationViewModel
 
@@ -25,6 +27,19 @@ class RegistrationFragment : Fragment() {
 
         registrationViewModel.showPrivacyPolicyDialog.observe(this, Observer { callPrivacyPolicyDialog() })
 
+        registrationViewModel.registrationFormValidation.observe(this, Observer {
+            when(it) {
+                is BaseCommand.Error -> showToast(it.error!!)
+            }
+        })
+
+        registrationViewModel.firebaseAccountCreation.observe(this, Observer {
+            when(it) {
+                is BaseCommand.Success -> showToast(it.message!!)
+                is BaseCommand.Error -> showToast(it.error!!)
+            }
+        })
+
         return inflater.inflate(R.layout.fragment_registration, container, false)
     }
 
@@ -32,7 +47,7 @@ class RegistrationFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         btn_registration_register.setOnClickListener {
-            registrationViewModel.validateRegistrationForm(
+            registrationViewModel.isRegistrationFormValid(
                 et_registration_firstname.text.toString(),
                 et_registration_lastname.text.toString(),
                 et_registration_email.text.toString(),
@@ -45,7 +60,8 @@ class RegistrationFragment : Fragment() {
     }
 
     private fun callPrivacyPolicyDialog() {
-        showPrivacyPolicyDialog(getString(R.string.title_privacy_policy_dialog),
+        showPrivacyPolicyDialog(context!!,
+                getString(R.string.title_privacy_policy_dialog),
                 getString(R.string.message_privacy_policy_dialog),
                 registrationViewModel.createFirebaseAccount(
                         et_registration_firstname.text.toString(),
@@ -55,5 +71,7 @@ class RegistrationFragment : Fragment() {
     }
 
     private fun navigateBackToLogin() = this.findNavController().popBackStack()
+
+    override fun showToast(message: Int) { makeToast(context!!, message) }
 
 }

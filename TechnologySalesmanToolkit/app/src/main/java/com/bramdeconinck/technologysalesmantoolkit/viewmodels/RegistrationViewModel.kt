@@ -1,11 +1,11 @@
 package com.bramdeconinck.technologysalesmantoolkit.viewmodels
 
 import com.bramdeconinck.technologysalesmantoolkit.R
+import com.bramdeconinck.technologysalesmantoolkit.utils.BaseCommand
 import com.bramdeconinck.technologysalesmantoolkit.base.InjectedViewModel
 import com.bramdeconinck.technologysalesmantoolkit.utils.FirebaseUtils.createProfileUpdates
 import com.bramdeconinck.technologysalesmantoolkit.utils.FirebaseUtils.firebaseAuth
 import com.bramdeconinck.technologysalesmantoolkit.utils.FirebaseUtils.firebaseUser
-import com.bramdeconinck.technologysalesmantoolkit.utils.MessageUtils.makeToast
 import com.bramdeconinck.technologysalesmantoolkit.utils.SingleLiveEvent
 import com.bramdeconinck.technologysalesmantoolkit.utils.ValidationUtils.everyFieldHasValue
 import com.bramdeconinck.technologysalesmantoolkit.utils.ValidationUtils.isEmailValid
@@ -18,24 +18,28 @@ class RegistrationViewModel : InjectedViewModel() {
 
     val showPrivacyPolicyDialog = SingleLiveEvent<Any>()
 
-    fun validateRegistrationForm(firstname: String, familyname: String, email: String, password: String, repeatPassword: String) {
+    val registrationFormValidation = SingleLiveEvent<BaseCommand>()
+
+    val firebaseAccountCreation = SingleLiveEvent<BaseCommand>()
+
+    fun isRegistrationFormValid(firstname: String, familyname: String, email: String, password: String, repeatPassword: String) {
         if (!everyFieldHasValue(listOf(firstname, familyname, email, password, repeatPassword))) {
-            makeToast(R.string.error_empty_fields)
+            registrationFormValidation.value = BaseCommand.Error(R.string.error_empty_fields)
             return
         }
 
         if (!isEmailValid(email)) {
-            makeToast(R.string.error_invalid_email)
+            registrationFormValidation.value = BaseCommand.Error(R.string.error_invalid_email)
             return
         }
 
         if (!isPasswordValid(password)) {
-            makeToast(R.string.error_invalid_password)
+            registrationFormValidation.value = BaseCommand.Error(R.string.error_invalid_password)
             return
         }
 
         if (!passwordsMatch(password, repeatPassword)) {
-            makeToast(R.string.error_passwords_dont_match)
+            registrationFormValidation.value = BaseCommand.Error(R.string.error_passwords_dont_match)
             return
         }
 
@@ -52,11 +56,11 @@ class RegistrationViewModel : InjectedViewModel() {
                                     if (task2.isSuccessful) {
                                         firebaseUser!!.sendEmailVerification()
                                         firebaseAuth.signOut()
-                                        makeToast(R.string.message_account_created)
+                                        firebaseAccountCreation.value = BaseCommand.Success(R.string.message_account_created)
                                         navigateToLogin.call()
-                                    } else { makeToast(R.string.error_account_not_created) }
+                                    } else { firebaseAccountCreation.value = BaseCommand.Error(R.string.error_account_not_created) }
                                 }
-                    } else { makeToast(R.string.error_account_not_created) }
+                    } else { firebaseAccountCreation.value = BaseCommand.Error(R.string.error_account_not_created) }
                 }
     }
 

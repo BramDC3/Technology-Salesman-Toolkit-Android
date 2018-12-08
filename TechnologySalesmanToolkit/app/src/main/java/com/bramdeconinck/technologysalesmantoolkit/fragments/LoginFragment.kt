@@ -11,7 +11,11 @@ import android.view.ViewGroup
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.bramdeconinck.technologysalesmantoolkit.R
+import com.bramdeconinck.technologysalesmantoolkit.interfaces.IToastMaker
+import com.bramdeconinck.technologysalesmantoolkit.utils.BaseCommand
+import com.bramdeconinck.technologysalesmantoolkit.utils.FirebaseUtils.firebaseUser
 import com.bramdeconinck.technologysalesmantoolkit.utils.GOOGLE_SIGN_IN_REQUEST_CODE
+import com.bramdeconinck.technologysalesmantoolkit.utils.MessageUtils.makeToast
 import com.bramdeconinck.technologysalesmantoolkit.viewmodels.LoginViewModel
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
@@ -21,7 +25,7 @@ import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
 import kotlinx.android.synthetic.main.fragment_login.*
 
-class LoginFragment : Fragment() {
+class LoginFragment : Fragment(), IToastMaker {
 
     private lateinit var loginViewModel: LoginViewModel
     private lateinit var gso: GoogleSignInOptions
@@ -37,7 +41,20 @@ class LoginFragment : Fragment() {
 
         mGoogleSignInClient = GoogleSignIn.getClient(context!!, gso)
 
-        loginViewModel.navigateToServiceList.observe(this, Observer { this.findNavController().navigate(R.id.toServiceList) })
+        loginViewModel.emailIsNotVerified.observe(this, Observer { showToast(R.string.error_email_is_not_verified) })
+
+        loginViewModel.signInErrorOccurred.observe(this, Observer { showToast(R.string.sign_in_error) })
+
+        loginViewModel.loginFormValidation.observe(this, Observer {
+            when (it) {
+                is BaseCommand.Error -> showToast(it.error!!)
+            }
+        })
+
+        loginViewModel.navigateToServiceList.observe(this, Observer {
+            makeToast(context!!, R.string.message_welcome, firebaseUser!!.displayName)
+            this.findNavController().navigate(R.id.toServiceList)
+        })
 
         return inflater.inflate(R.layout.fragment_login, container, false)
     }
@@ -75,5 +92,7 @@ class LoginFragment : Fragment() {
             }
         }
     }
+
+    override fun showToast(message: Int) {makeToast(context!!, message)}
 
 }

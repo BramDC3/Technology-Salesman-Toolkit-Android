@@ -9,10 +9,12 @@ import android.view.View
 import android.view.ViewGroup
 import com.bramdeconinck.technologysalesmantoolkit.R
 import com.bramdeconinck.technologysalesmantoolkit.adapters.ServiceAdapter
+import com.bramdeconinck.technologysalesmantoolkit.interfaces.IToastMaker
+import com.bramdeconinck.technologysalesmantoolkit.utils.MessageUtils.makeToast
 import com.bramdeconinck.technologysalesmantoolkit.viewmodels.ServiceViewModel
 import kotlinx.android.synthetic.main.fragment_service_list.view.*
 
-class ServiceListFragment : Fragment() {
+class ServiceListFragment : Fragment(), IToastMaker {
 
     private lateinit var serviceViewModel: ServiceViewModel
     private lateinit var serviceAdapter: ServiceAdapter
@@ -44,7 +46,11 @@ class ServiceListFragment : Fragment() {
             else rootView.progress_bar.visibility = View.GONE
         })
 
+        serviceViewModel.firestoreErrorOccured.observe(this, Observer { showToast(R.string.fetching_data_error) })
+
         return rootView
     }
+
+    override fun showToast(message: Int) { makeToast(context!!, message) }
 
 }
