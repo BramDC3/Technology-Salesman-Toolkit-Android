@@ -1,17 +1,25 @@
 package com.bramdeconinck.technologysalesmantoolkit.fragments
 
+import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProviders
+import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.*
 import androidx.navigation.fragment.findNavController
 import com.bramdeconinck.technologysalesmantoolkit.R
+import com.bramdeconinck.technologysalesmantoolkit.databinding.FragmentProfileBinding
 import com.bramdeconinck.technologysalesmantoolkit.utils.FirebaseUtils.firebaseAuth
 import com.bramdeconinck.technologysalesmantoolkit.utils.FirebaseUtils.firebaseUser
 import com.bramdeconinck.technologysalesmantoolkit.utils.MessageUtils.makeToast
 import com.bramdeconinck.technologysalesmantoolkit.utils.MessageUtils.showBasicDialog
 import com.bramdeconinck.technologysalesmantoolkit.utils.MessageUtils.showThreeButtonsPositiveFuncDialog
-import com.bramdeconinck.technologysalesmantoolkit.utils.StringUtils
-import com.bramdeconinck.technologysalesmantoolkit.utils.ValidationUtils
+import com.bramdeconinck.technologysalesmantoolkit.utils.StringUtils.getFamilyName
+import com.bramdeconinck.technologysalesmantoolkit.utils.StringUtils.getFirstName
+import com.bramdeconinck.technologysalesmantoolkit.utils.ValidationUtils.atLeastOneFieldChanged
+import com.bramdeconinck.technologysalesmantoolkit.utils.ValidationUtils.everyFieldHasValue
+import com.bramdeconinck.technologysalesmantoolkit.utils.ValidationUtils.isEmailValid
+import com.bramdeconinck.technologysalesmantoolkit.viewmodels.ProfileViewModel
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.google.firebase.auth.UserProfileChangeRequest
@@ -19,8 +27,9 @@ import kotlinx.android.synthetic.main.fragment_profile.*
 
 class ProfileFragment : Fragment() {
 
+    private lateinit var profileViewModel: ProfileViewModel
+    private lateinit var binding: FragmentProfileBinding
     private lateinit var menuItem: MenuItem
-    private var editable: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,7 +38,15 @@ class ProfileFragment : Fragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_profile, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_profile, container, false)
+
+        profileViewModel = ViewModelProviders.of(activity!!).get(ProfileViewModel::class.java)
+
+        val rootView = binding.root
+        binding.profileViewModel = profileViewModel
+        binding.setLifecycleOwner(activity)
+
+        return rootView
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -64,16 +81,30 @@ class ProfileFragment : Fragment() {
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
         inflater?.inflate(R.menu.menu_edit_profile, menu)
         menuItem = menu!!.findItem(R.id.action_edit_profile)
+        initListeners()
         super.onCreateOptionsMenu(menu, inflater)
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         return (when(item?.itemId) {
             R.id.action_edit_profile -> {
-                toggleEditMode()
+                profileViewModel.toggleEditMode()
                 true
             }
             else -> super.onOptionsItemSelected(item)
+        })
+    }
+
+    private fun initListeners() {
+        profileViewModel.isEditable.observe(this, Observer {
+            if (it!!) {
+                menuItem.icon = context!!.getDrawable(R.drawable.ic_close_black_24dp)
+                menuItem.title = getString(R.string.title_action_stop_editing_profile)
+            } else {
+                menuItem.icon = context!!.getDrawable(R.drawable.ic_edit_black_24dp)
+                menuItem.title = getString(R.string.title_action_edit_profile)
+                updateUI()
+            }
         })
     }
 
@@ -85,8 +116,8 @@ class ProfileFragment : Fragment() {
                 .into(img_profile_image)
 
         lbl_profile_fullname.text = firebaseUser!!.displayName
-        txt_profile_firstname.setText(StringUtils.getFirstName(firebaseUser!!.displayName!!))
-        txt_profile_familyname.setText(StringUtils.getFamilyName(firebaseUser!!.displayName!!))
+        txt_profile_firstname.setText(getFirstName(firebaseUser!!.displayName!!))
+        txt_profile_familyname.setText(getFamilyName(firebaseUser!!.displayName!!))
         txt_profile_email.setText(firebaseUser!!.email)
     }
 
@@ -97,42 +128,13 @@ class ProfileFragment : Fragment() {
                 .addOnFailureListener { makeToast(context!!, R.string.change_password_failure) }
     }
 
-    // Function to go from normal mode to editing mode and vice versa
-    private fun toggleEditMode() {
-        editable = !editable
-
-        txt_profile_email.isEnabled = editable
-        txt_profile_firstname.isEnabled = editable
-        txt_profile_familyname.isEnabled = editable
-
-        if (editable) enterProfileEditMode() else exitProfileEditMode()
-    }
-
-    // Changes for the UI on entering the edit mode
-    private fun enterProfileEditMode() {
-        btn_profile_edit_profile.visibility = View.VISIBLE
-        lbl_profile_change_password.visibility = View.GONE
-        menuItem.icon = context!!.getDrawable(R.drawable.ic_close_black_24dp)
-        menuItem.title = getString(R.string.title_action_stop_editing_profile)
-    }
-
-    // Changes for the UI on exiting the edit mode
-    private fun exitProfileEditMode() {
-        btn_profile_edit_profile.visibility = View.GONE
-        lbl_profile_change_password.visibility = View.VISIBLE
-        menuItem.icon = context!!.getDrawable(R.drawable.ic_edit_black_24dp)
-        menuItem.title = getString(R.string.title_action_edit_profile)
-
-        updateUI()
-    }
-
     private fun validateProfileForm() {
         val profileFormMap = mapOf(txt_profile_email.text.toString() to firebaseUser!!.email!!,
-                txt_profile_firstname.text.toString() to StringUtils.getFirstName(firebaseUser!!.displayName!!),
-                txt_profile_familyname.text.toString() to StringUtils.getFamilyName(firebaseUser!!.displayName!!))
+                txt_profile_firstname.text.toString() to getFirstName(firebaseUser!!.displayName!!),
+                txt_profile_familyname.text.toString() to getFamilyName(firebaseUser!!.displayName!!))
 
-        if (!ValidationUtils.atLeastOneFieldChanged(profileFormMap)) {
-            toggleEditMode()
+        if (!atLeastOneFieldChanged(profileFormMap)) {
+            profileViewModel.toggleEditMode()
             return
         }
 
@@ -140,12 +142,12 @@ class ProfileFragment : Fragment() {
                 txt_profile_familyname.text.toString(),
                 txt_profile_email.text.toString())
 
-        if (!ValidationUtils.everyFieldHasValue(profileFormList)) {
+        if (!everyFieldHasValue(profileFormList)) {
             makeToast(context!!, R.string.error_empty_fields)
             return
         }
 
-        if (!ValidationUtils.isEmailValid(txt_profile_email.text.toString())) {
+        if (!isEmailValid(txt_profile_email.text.toString())) {
             makeToast(context!!,R.string.error_invalid_email)
             return
         }
@@ -167,7 +169,7 @@ class ProfileFragment : Fragment() {
                         if (task.isSuccessful) {
                             showBasicDialog(context!!, getString(R.string.title_change_name), getString(R.string.message_change_name))
                             updateUI()
-                            if (editable) toggleEditMode()
+                            if (profileViewModel.isEditable.value!!) profileViewModel.toggleEditMode()
                         }
                     }
                     .addOnFailureListener { showBasicDialog(context!!, getString(R.string.title_change_name), getString(R.string.error_change_name)) }
