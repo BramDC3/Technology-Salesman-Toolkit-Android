@@ -1,14 +1,11 @@
 package com.bramdeconinck.technologysalesmantoolkit.viewmodels
 
-import android.annotation.SuppressLint
 import android.arch.lifecycle.MutableLiveData
-import android.content.Context
-import com.bramdeconinck.technologysalesmantoolkit.R
 import com.bramdeconinck.technologysalesmantoolkit.base.InjectedViewModel
 import com.bramdeconinck.technologysalesmantoolkit.interfaces.IFirebaseServiceCallback
 import com.bramdeconinck.technologysalesmantoolkit.models.Service
 import com.bramdeconinck.technologysalesmantoolkit.network.FirestoreAPI
-import com.bramdeconinck.technologysalesmantoolkit.utils.MessageUtils.makeToast
+import com.bramdeconinck.technologysalesmantoolkit.utils.SingleLiveEvent
 import javax.inject.Inject
 
 class ServiceViewModel : InjectedViewModel(), IFirebaseServiceCallback {
@@ -16,9 +13,7 @@ class ServiceViewModel : InjectedViewModel(), IFirebaseServiceCallback {
     @Inject
     lateinit var firestoreAPI: FirestoreAPI
 
-    @Inject
-    @SuppressLint("StaticFieldLeak")
-    lateinit var context: Context
+    val firestoreErrorOccured = SingleLiveEvent<Any>()
 
     private var services = MutableLiveData<List<Service>>()
 
@@ -42,5 +37,5 @@ class ServiceViewModel : InjectedViewModel(), IFirebaseServiceCallback {
 
     override fun hideProgress() { isLoading.value = false }
 
-    override fun showMessage() { makeToast(context, context.getString(R.string.fetching_data_error)) }
+    override fun showMessage() { firestoreErrorOccured.call() }
 }

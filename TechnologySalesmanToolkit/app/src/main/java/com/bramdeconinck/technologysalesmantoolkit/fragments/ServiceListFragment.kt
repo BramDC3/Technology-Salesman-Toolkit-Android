@@ -9,13 +9,15 @@ import android.view.View
 import android.view.ViewGroup
 import com.bramdeconinck.technologysalesmantoolkit.R
 import com.bramdeconinck.technologysalesmantoolkit.adapters.ServiceAdapter
+import com.bramdeconinck.technologysalesmantoolkit.interfaces.IToastMaker
+import com.bramdeconinck.technologysalesmantoolkit.utils.MessageUtils.makeToast
 import com.bramdeconinck.technologysalesmantoolkit.viewmodels.ServiceViewModel
 import kotlinx.android.synthetic.main.fragment_service_list.view.*
 
-class ServiceListFragment : Fragment() {
+class ServiceListFragment : Fragment(), IToastMaker {
 
-    private lateinit var serviceAdapter: ServiceAdapter
     private lateinit var serviceViewModel: ServiceViewModel
+    private lateinit var serviceAdapter: ServiceAdapter
 
     // Variable to check whether the app is running on a tablet or not
     private var twoPane: Boolean = false
@@ -25,15 +27,17 @@ class ServiceListFragment : Fragment() {
 
         serviceViewModel = ViewModelProviders.of(activity!!).get(ServiceViewModel::class.java)
 
-        // If the service detail container is not null,
-        // then the app is running on a tablet
-        if (rootView.service_detail_container != null) twoPane = true
-
         val services = serviceViewModel.getServices()
 
         val isLoading = serviceViewModel.getIsLoading()
 
+        // If the service detail container is not null,
+        // then the app is running on a tablet
+        if (rootView.service_detail_container != null) twoPane = true
+
         serviceAdapter = ServiceAdapter(this, services, twoPane)
+
+        rootView.service_list.adapter = serviceAdapter
 
         services.observe(this, Observer { serviceAdapter.notifyDataSetChanged() })
 
@@ -42,9 +46,11 @@ class ServiceListFragment : Fragment() {
             else rootView.progress_bar.visibility = View.GONE
         })
 
-        rootView.service_list.adapter = serviceAdapter
+        serviceViewModel.firestoreErrorOccured.observe(this, Observer { showToast(R.string.fetching_data_error) })
 
         return rootView
     }
+
+    override fun showToast(message: Int) { makeToast(context!!, message) }
 
 }

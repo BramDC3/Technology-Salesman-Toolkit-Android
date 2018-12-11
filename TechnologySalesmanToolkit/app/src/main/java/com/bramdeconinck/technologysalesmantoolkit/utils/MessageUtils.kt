@@ -12,8 +12,11 @@ import com.bramdeconinck.technologysalesmantoolkit.utils.WebpageUtils.openWebPag
 object MessageUtils {
 
     @JvmStatic
-    // Shows a toast on the screen for a chosen amount of time with a given message
-    fun makeToast(context: Context, message: String, duration: Int = Toast.LENGTH_LONG) { Toast.makeText(context, message, duration).show() }
+    // Shows a toast on the screen for a chosen amount of time with a given stringResourceId
+    fun makeToast(context: Context, stringResourceId: Int, message: String? = null, duration: Int = Toast.LENGTH_LONG) {
+        if (message == null) Toast.makeText(context, stringResourceId, duration).show()
+        else Toast.makeText(context, context.getString(stringResourceId, message), duration).show()
+    }
 
     @JvmStatic
     // Show a dialog on the screen with a given title and message
@@ -60,26 +63,13 @@ object MessageUtils {
     }
 
     @JvmStatic
-    // Function to show the dialog which asks the user if they want to change their password
-    fun showEditProfileDialog(context: Context, title: String, message: String, funcPositive: () -> Unit, funcNegative: () -> Unit) {
-        AlertDialog.Builder(context)
-                .setTitle(title)
-                .setMessage(message)
-                .setPositiveButton("Ja") { _, _ -> funcPositive()}
-                .setNegativeButton("Nee") { _, _ -> funcNegative() }
-                .setNeutralButton("Annuleren") { _, _ -> funcNegative() }
-                .create()
-                .show()
-    }
-
-    @JvmStatic
     fun showPrivacyPolicyDialog(context: Context, title: String, message: String, func: () -> Unit) {
         AlertDialog.Builder(context)
                 .setTitle(title)
                 .setMessage(message)
                 .setPositiveButton("Ja") { _, _ -> func() }
                 .setNegativeButton("Nee") { dialog, _ -> dialog.dismiss() }
-                .setNeutralButton("Bekijk privacybeleid") { _, _ -> openWebPage(privacyPolicy, context) }
+                .setNeutralButton("Bekijk privacybeleid") { _, _ -> openWebPage(context, privacyPolicy) }
                 .create()
                 .show()
     }

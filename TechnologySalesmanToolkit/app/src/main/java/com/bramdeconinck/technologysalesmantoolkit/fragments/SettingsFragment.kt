@@ -1,5 +1,6 @@
 package com.bramdeconinck.technologysalesmantoolkit.fragments
 
+import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -8,22 +9,33 @@ import android.view.View
 import android.view.ViewGroup
 import com.bramdeconinck.technologysalesmantoolkit.R
 import androidx.navigation.fragment.findNavController
+import com.bramdeconinck.technologysalesmantoolkit.utils.BaseCommand
+import com.bramdeconinck.technologysalesmantoolkit.interfaces.IToastMaker
 import com.bramdeconinck.technologysalesmantoolkit.utils.privacyPolicy
 import com.bramdeconinck.technologysalesmantoolkit.utils.website
 import kotlinx.android.synthetic.main.fragment_settings.*
 import com.bramdeconinck.technologysalesmantoolkit.utils.FirebaseUtils.firebaseAuth
+import com.bramdeconinck.technologysalesmantoolkit.utils.MessageUtils.makeToast
 import com.bramdeconinck.technologysalesmantoolkit.utils.MessageUtils.showMakeSuggestionDialog
 import com.bramdeconinck.technologysalesmantoolkit.utils.MessageUtils.showThreeButtonsPositiveFuncDialog
 import com.bramdeconinck.technologysalesmantoolkit.utils.WebpageUtils.openWebPage
 import com.bramdeconinck.technologysalesmantoolkit.viewmodels.SettingsViewModel
 
-
-class SettingsFragment : Fragment() {
+class SettingsFragment : Fragment(), IToastMaker {
 
     private lateinit var settingsViewModel: SettingsViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         settingsViewModel = ViewModelProviders.of(activity!!).get(SettingsViewModel::class.java)
+
+        settingsViewModel.emptySuggestion.observe(this, Observer { showToast(R.string.send_suggestion_empty_error) })
+
+        settingsViewModel.suggestionCallback.observe(this, Observer {
+            when (it) {
+                is BaseCommand.Success -> showToast(it.message!!)
+                is BaseCommand.Error -> showToast(it.error!!)
+            }
+        })
 
         return inflater.inflate(R.layout.fragment_settings, container, false)
     }
@@ -31,20 +43,34 @@ class SettingsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        btn_settings_website.setOnClickListener{ openWebPage(website, context!!) }
+        btn_settings_website.setOnClickListener{ openWebPage(context!!, website) }
 
         btn_settings_darkmode.setOnClickListener{ switch_settings_darkmode.isChecked = !switch_settings_darkmode.isChecked }
 
-        btn_settings_privacypolicy.setOnClickListener { openWebPage(privacyPolicy, context!!) }
+        btn_settings_privacypolicy.setOnClickListener { openWebPage(context!!, privacyPolicy) }
 
-        btn_settings_suggestion.setOnClickListener{ showMakeSuggestionDialog(context!!, getString(R.string.title_send_suggestion),getString(R.string.message_send_suggestion), settingsViewModel.getSuggestion()) }
+        btn_settings_suggestion.setOnClickListener{ showMakeSuggestionDialog(
+                context!!,
+                getString(R.string.title_send_suggestion),
+                getString(R.string.message_send_suggestion),
+                settingsViewModel.getSuggestion()
+            )
+        }
 
-        btn_settings_signout.setOnClickListener{ showThreeButtonsPositiveFuncDialog(context!!, getString(R.string.title_sign_out), getString(R.string.message_sign_out), signOut()) }
+        btn_settings_signout.setOnClickListener{ showThreeButtonsPositiveFuncDialog(
+                context!!,
+                getString(R.string.title_sign_out),
+                getString(R.string.message_sign_out),
+                signOut()
+            )
+        }
     }
 
     private fun signOut() = {
         firebaseAuth.signOut()
         this.findNavController().navigate(R.id.signOutFromSettings)
     }
+
+    override fun showToast(message: Int) { makeToast(context!!, message) }
 
 }

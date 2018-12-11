@@ -1,144 +1,159 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".fragments.ProfileFragment">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <import type="android.view.View"/>
 
-    <ScrollView
+        <variable
+            name="profileViewModel"
+            type="com.bramdeconinck.technologysalesmantoolkit.viewmodels.ProfileViewModel"/>
+    </data>
+
+    <FrameLayout
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/login_background"
-        tools:ignore="UselessParent">
+        tools:context=".fragments.ProfileFragment">
 
-        <android.support.constraint.ConstraintLayout
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <ImageView
-                android:id="@+id/img_profile_image"
-                android:layout_width="175dp"
-                android:layout_height="175dp"
-                android:layout_marginTop="48dp"
-                android:contentDescription="@string/dscription_profile_picture"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:src="@drawable/default_profile_image" />
-
-            <TextView
-                android:id="@+id/lbl_profile_fullname"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="@string/placeholder_profile_fullname"
-                android:textColor="@android:color/white"
-                android:textSize="26sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/img_profile_image" />
-
+            android:layout_height="match_parent"
+            android:background="@drawable/login_background"
+            tools:ignore="UselessParent">
 
             <android.support.constraint.ConstraintLayout
-                android:id="@+id/profile_fields"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="48dp"
-                android:layout_marginBottom="32dp"
-                android:paddingTop="8dp"
-                android:paddingBottom="18dp"
-                android:paddingStart="14dp"
-                android:paddingEnd="14dp"
-                android:background="@drawable/rounded_corners"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/lbl_profile_fullname"
-                app:layout_constraintBottom_toTopOf="@+id/lbl_profile_change_password">
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-                <EditText
-                    android:id="@+id/txt_profile_firstname"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:inputType="textPersonName"
-                    android:hint="@string/placeholder_firstname"
-                    android:textSize="16sp"
-                    android:background="@drawable/reg_firstname"
-                    android:paddingStart="40dp"
-                    android:paddingEnd="20dp"
-                    android:textColor="@drawable/profile_edit_text_selector"
-                    android:ems="10"
-                    android:enabled="false"
+                <ImageView
+                    android:id="@+id/iv_profile_profile_picture"
+                    android:layout_width="175dp"
+                    android:layout_height="175dp"
+                    android:layout_marginTop="48dp"
+                    android:contentDescription="@string/description_profile_picture"
+                    android:onClick="@{() -> profileViewModel.changeProfilePicture()}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    tools:ignore="Autofill" />
+                    tools:src="@drawable/default_profile_image" />
 
-                <EditText
-                    android:id="@+id/txt_profile_familyname"
+                <TextView
+                    android:id="@+id/tv_profile_fullname"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:inputType="textPersonName"
-                    android:hint="@string/placeholder_lastname"
-                    android:background="@drawable/reg_familyname"
-                    android:textSize="16sp"
-                    android:paddingStart="40dp"
-                    android:paddingEnd="20dp"
-                    android:textColor="@drawable/profile_edit_text_selector"
-                    android:ems="10"
-                    android:enabled="false"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/placeholder_profile_fullname"
+                    android:textColor="@android:color/white"
+                    android:textSize="26sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/txt_profile_firstname"
-                    tools:ignore="Autofill" />
+                    app:layout_constraintTop_toBottomOf="@id/iv_profile_profile_picture" />
 
-                <EditText
-                    android:id="@+id/txt_profile_email"
+
+                <android.support.constraint.ConstraintLayout
+                    android:id="@+id/cl_profile_form"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:inputType="textEmailAddress"
-                    android:hint="@string/placeholder_email"
-                    android:background="@drawable/reg_email"
-                    android:textSize="16sp"
-                    android:paddingStart="40dp"
-                    android:paddingEnd="20dp"
-                    android:textColor="@drawable/profile_edit_text_selector"
-                    android:ems="10"
-                    android:enabled="false"
+                    android:layout_marginTop="48dp"
+                    android:layout_marginBottom="32dp"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="18dp"
+                    android:paddingStart="14dp"
+                    android:paddingEnd="14dp"
+                    android:background="@drawable/rounded_corners"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/txt_profile_familyname"
-                    tools:ignore="Autofill" />
+                    app:layout_constraintTop_toBottomOf="@id/tv_profile_fullname"
+                    app:layout_constraintBottom_toTopOf="@+id/tv_profile_change_password">
 
-                <Button
-                    android:id="@+id/btn_profile_edit_profile"
+                    <EditText
+                        android:id="@+id/et_profile_firstname"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:inputType="textPersonName"
+                        android:hint="@string/placeholder_firstname"
+                        android:textSize="16sp"
+                        android:background="@drawable/reg_firstname"
+                        android:paddingStart="40dp"
+                        android:paddingEnd="20dp"
+                        android:textColor="@drawable/profile_edit_text_selector"
+                        android:ems="10"
+                        android:enabled="@{profileViewModel.isEditable}"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:ignore="Autofill" />
+
+                    <EditText
+                        android:id="@+id/et_profile_familyname"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:inputType="textPersonName"
+                        android:hint="@string/placeholder_lastname"
+                        android:background="@drawable/reg_familyname"
+                        android:textSize="16sp"
+                        android:paddingStart="40dp"
+                        android:paddingEnd="20dp"
+                        android:textColor="@drawable/profile_edit_text_selector"
+                        android:ems="10"
+                        android:enabled="@{profileViewModel.isEditable}"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/et_profile_firstname"
+                        tools:ignore="Autofill" />
+
+                    <EditText
+                        android:id="@+id/et_profile_email"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:inputType="textEmailAddress"
+                        android:hint="@string/placeholder_email"
+                        android:background="@drawable/reg_email"
+                        android:textSize="16sp"
+                        android:paddingStart="40dp"
+                        android:paddingEnd="20dp"
+                        android:textColor="@drawable/profile_edit_text_selector"
+                        android:ems="10"
+                        android:enabled="@{profileViewModel.isEditable}"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/et_profile_familyname"
+                        tools:ignore="Autofill" />
+
+                    <Button
+                        android:id="@+id/btn_profile_edit_profile"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/edit_profile"
+                        android:visibility="@{profileViewModel.isEditable ? View.VISIBLE : View.GONE}"
+                        android:onClick="@{() -> profileViewModel.editProfile()}"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/et_profile_email" />
+
+                </android.support.constraint.ConstraintLayout>
+
+                <TextView
+                    android:id="@+id/tv_profile_change_password"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:background="@drawable/edit_profile"
-                    android:visibility="gone"
+                    android:background="@drawable/edit_password"
+                    android:layout_marginBottom="10dp"
+                    android:visibility="@{profileViewModel.isEditable ? View.GONE : View.VISIBLE}"
+                    android:onClick="@{() -> profileViewModel.resetPassword()}"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/txt_profile_email" />
+                    app:layout_constraintTop_toBottomOf="@id/cl_profile_form" />
 
             </android.support.constraint.ConstraintLayout>
 
-            <TextView
-                android:id="@+id/lbl_profile_change_password"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/edit_password"
-                android:layout_marginBottom="10dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/profile_fields" />
+        </ScrollView>
 
-        </android.support.constraint.ConstraintLayout>
+    </FrameLayout>
 
-    </ScrollView>
-
-</FrameLayout>
+</layout>
