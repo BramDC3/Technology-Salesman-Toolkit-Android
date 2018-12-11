@@ -31,7 +31,7 @@ class ServiceViewModel : InjectedViewModel(), IFirebaseServiceCallback {
 
     fun getIsLoading(): MutableLiveData<Boolean> { return isLoading }
 
-    override fun onCallBack(list: MutableList<Service>) { services.value = list }
+    override fun onCallBack(list: List<Any>) { services.value = list.map { it as Service } }
 
     override fun showProgress() { isLoading.value = true }
 

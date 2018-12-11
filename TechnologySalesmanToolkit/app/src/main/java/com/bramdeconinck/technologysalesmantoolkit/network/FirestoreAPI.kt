@@ -2,8 +2,10 @@ package com.bramdeconinck.technologysalesmantoolkit.network
 
 import com.bramdeconinck.technologysalesmantoolkit.interfaces.IFirebaseServiceCallback
 import com.bramdeconinck.technologysalesmantoolkit.interfaces.IFirebaseSuggestionCallback
+import com.bramdeconinck.technologysalesmantoolkit.models.Instruction
 import com.bramdeconinck.technologysalesmantoolkit.models.Service
 import com.bramdeconinck.technologysalesmantoolkit.utils.FirebaseUtils.createSuggestionData
+import com.bramdeconinck.technologysalesmantoolkit.utils.FirebaseUtils.transformSnapshotToSInstruction
 import com.bramdeconinck.technologysalesmantoolkit.utils.FirebaseUtils.transformSnapshotToService
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.FirebaseFirestoreSettings
@@ -26,9 +28,24 @@ class FirestoreAPI {
         firestore.collection("Services").get()
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
-                        val servicesList: MutableList<Service> = mutableListOf()
+                        val servicesList: MutableList<Any> = mutableListOf()
                         for (doc in task.result!!) { servicesList.add(transformSnapshotToService(doc)) }
-                        firebaseServiceCallback.onCallBack(servicesList)
+                        firebaseServiceCallback.onCallBack(servicesList.toList())
+                    }
+                    else { firebaseServiceCallback.showMessage() }
+                    firebaseServiceCallback.hideProgress()
+                }
+    }
+
+    // Get all instructions of a service from the Firestore
+    fun getAllInstructionsFrom(serviceId: String, firebaseServiceCallback: IFirebaseServiceCallback) {
+        firebaseServiceCallback.showProgress()
+        firestore.collection("Instructions").whereEqualTo("serviceId", serviceId).orderBy("index").get()
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        val instructionsList: MutableList<Any> = mutableListOf()
+                        for (doc in task.result!!) { instructionsList.add(transformSnapshotToSInstruction(doc)) }
+                        firebaseServiceCallback.onCallBack(instructionsList.toList())
                     }
                     else { firebaseServiceCallback.showMessage() }
                     firebaseServiceCallback.hideProgress()

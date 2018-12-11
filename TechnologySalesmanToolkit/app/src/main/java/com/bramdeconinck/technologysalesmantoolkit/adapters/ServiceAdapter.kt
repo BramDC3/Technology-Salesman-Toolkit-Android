@@ -3,16 +3,17 @@ package com.bramdeconinck.technologysalesmantoolkit.adapters
 import android.arch.lifecycle.MutableLiveData
 import android.os.Bundle
 import android.support.v7.widget.RecyclerView
-import android.text.TextUtils.replace
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.navigation.fragment.findNavController
 import com.bramdeconinck.technologysalesmantoolkit.R
-import com.bramdeconinck.technologysalesmantoolkit.activities.MainActivity
 import com.bramdeconinck.technologysalesmantoolkit.fragments.ServiceDetailFragment
 import com.bramdeconinck.technologysalesmantoolkit.fragments.ServiceListFragment
 import com.bramdeconinck.technologysalesmantoolkit.models.Service
+import com.bramdeconinck.technologysalesmantoolkit.utils.ARG_ITEM_ID
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.service_list_content.view.*
 
@@ -30,7 +31,7 @@ class ServiceAdapter(
             if (twoPane) {
                 val detailFragment = ServiceDetailFragment().apply {
                     arguments = Bundle().apply {
-                        putParcelable(ServiceDetailFragment.ARG_ITEM_ID, item)
+                        putParcelable(ARG_ITEM_ID, item)
                     }
                 }
                 fragment.activity!!.supportFragmentManager
@@ -39,7 +40,7 @@ class ServiceAdapter(
                         .commit()
             } else {
                 val arguments = Bundle().apply {
-                    putParcelable(ServiceDetailFragment.ARG_ITEM_ID, item)
+                    putParcelable(ARG_ITEM_ID, item)
                 }
                 fragment.findNavController().navigate(R.id.toServiceDetail, arguments)
             }
@@ -54,11 +55,11 @@ class ServiceAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = services.value!![position]
-        Glide.with(fragment).load(item.image).into(holder.afbeeldingView)
-        holder.naamView.text = item.name
-        holder.beschrijvingView.text = item.description
-        holder.categorieView.text = item.category.toString()
-        if (item.price != 0.0) holder.prijsView.text = String.format("€ %.2f", item.price)
+        Glide.with(fragment).load(item.image).into(holder.imageView)
+        holder.nameView.text = item.name
+        holder.descriptionView.text = item.description
+        holder.categoryView.text = item.category.toString()
+        if (item.price != 0.0) holder.priceView.text = String.format("€ %.2f", item.price)
 
         with(holder.itemView) {
             tag = item
@@ -69,10 +70,10 @@ class ServiceAdapter(
     override fun getItemCount() = services.value!!.size
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val afbeeldingView = view.iv_afbeelding
-        val naamView = view.tv_naam
-        val beschrijvingView = view.tv_beschrijving
-        val categorieView = view.tv_categorie
-        val prijsView = view.tv_prijs
+        val imageView: ImageView = view.iv_afbeelding
+        val nameView: TextView = view.tv_naam
+        val descriptionView: TextView = view.tv_beschrijving
+        val categoryView: TextView = view.tv_categorie
+        val priceView: TextView = view.tv_prijs
     }
 }
