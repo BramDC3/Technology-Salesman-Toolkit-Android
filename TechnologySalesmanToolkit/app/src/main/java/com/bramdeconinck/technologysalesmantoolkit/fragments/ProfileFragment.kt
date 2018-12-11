@@ -9,23 +9,20 @@ import android.view.*
 import androidx.navigation.fragment.findNavController
 import com.bramdeconinck.technologysalesmantoolkit.R
 import com.bramdeconinck.technologysalesmantoolkit.databinding.FragmentProfileBinding
-import com.bramdeconinck.technologysalesmantoolkit.utils.FirebaseUtils.firebaseAuth
+import com.bramdeconinck.technologysalesmantoolkit.interfaces.IToastMaker
+import com.bramdeconinck.technologysalesmantoolkit.utils.BaseCommand
 import com.bramdeconinck.technologysalesmantoolkit.utils.FirebaseUtils.firebaseUser
 import com.bramdeconinck.technologysalesmantoolkit.utils.MessageUtils.makeToast
 import com.bramdeconinck.technologysalesmantoolkit.utils.MessageUtils.showBasicDialog
 import com.bramdeconinck.technologysalesmantoolkit.utils.MessageUtils.showThreeButtonsPositiveFuncDialog
 import com.bramdeconinck.technologysalesmantoolkit.utils.StringUtils.getFamilyName
 import com.bramdeconinck.technologysalesmantoolkit.utils.StringUtils.getFirstName
-import com.bramdeconinck.technologysalesmantoolkit.utils.ValidationUtils.atLeastOneFieldChanged
-import com.bramdeconinck.technologysalesmantoolkit.utils.ValidationUtils.everyFieldHasValue
-import com.bramdeconinck.technologysalesmantoolkit.utils.ValidationUtils.isEmailValid
 import com.bramdeconinck.technologysalesmantoolkit.viewmodels.ProfileViewModel
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import com.google.firebase.auth.UserProfileChangeRequest
 import kotlinx.android.synthetic.main.fragment_profile.*
 
-class ProfileFragment : Fragment() {
+class ProfileFragment : Fragment(), IToastMaker {
 
     private lateinit var profileViewModel: ProfileViewModel
     private lateinit var binding: FragmentProfileBinding
@@ -49,33 +46,16 @@ class ProfileFragment : Fragment() {
         return rootView
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        lbl_profile_change_password.setOnClickListener {
-            showThreeButtonsPositiveFuncDialog(
-                    context!!,
-                    getString(R.string.title_change_password),
-                    getString(R.string.message_change_password),
-                    sendResetPasswordEmail()
-            )
-        }
-
-        img_profile_image.setOnClickListener{
-            showBasicDialog(
-                    context!!,
-                    getString(R.string.title_change_profile_picture),
-                    getString(R.string.message_change_profile_picture)
-            )
-        }
-
-        btn_profile_edit_profile.setOnClickListener { validateProfileForm() }
-    }
-
     override fun onStart() {
         super.onStart()
 
         updateUI()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+
+        if (profileViewModel.isEditable.value!!) profileViewModel.toggleEditMode()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
@@ -95,6 +75,19 @@ class ProfileFragment : Fragment() {
         })
     }
 
+    // Function to update the UI with data of the current FirebaseUser
+    private fun updateUI() {
+        Glide.with(this)
+                .load(firebaseUser!!.photoUrl ?: R.drawable.default_profile_image)
+                .apply(RequestOptions.circleCropTransform())
+                .into(iv_profile_profile_picture)
+
+        tv_profile_fullname.text = firebaseUser!!.displayName
+        et_profile_firstname.setText(getFirstName(firebaseUser!!.displayName!!))
+        et_profile_familyname.setText(getFamilyName(firebaseUser!!.displayName!!))
+        et_profile_email.setText(firebaseUser!!.email)
+    }
+
     private fun initListeners() {
         profileViewModel.isEditable.observe(this, Observer {
             if (it!!) {
@@ -106,91 +99,77 @@ class ProfileFragment : Fragment() {
                 updateUI()
             }
         })
+
+        profileViewModel.profileEditFormValidation.observe(this, Observer {
+            when (it) {
+                is BaseCommand.Error -> showToast(it.error!!)
+                is BaseCommand.Success -> showThreeButtonsPositiveFuncDialog(
+                        context!!,
+                        getString(R.string.title_change_profile),
+                        getString(R.string.message_change_profile),
+                        profileViewModel.applyProfileChanges(
+                                et_profile_firstname.text.toString(),
+                                et_profile_familyname.text.toString(),
+                                et_profile_email.text.toString()
+                        )
+                )
+            }
+        })
+
+        profileViewModel.appliedNameChanges.observe(this, Observer {
+            when (it) {
+                is BaseCommand.Success -> {
+                    showDialog(R.string.title_change_name, it.message!!)
+                    updateUI()
+                }
+                is BaseCommand.Error -> { showDialog(R.string.title_change_name, it.error!!) }
+            }
+        })
+
+        profileViewModel.appliedEmailChanges.observe(this, Observer {
+            when (it) {
+                is BaseCommand.Success -> {
+                    showDialog(R.string.title_change_email, it.message!!)
+                    this.findNavController().navigate(R.id.signOutFromProfile)
+                }
+                is BaseCommand.Error -> { showDialog(R.string.title_change_email, it.error!!) }
+            }
+        })
+
+        profileViewModel.resetPasswordButtonClicked.observe(this, Observer {
+            showThreeButtonsPositiveFuncDialog(
+                    context!!,
+                    getString(R.string.title_change_password),
+                    getString(R.string.message_change_password),
+                    profileViewModel.sendResetPasswordEmail()
+            )
+        })
+
+        profileViewModel.requestedPasswordReset.observe(this, Observer {
+            when (it) {
+                is BaseCommand.Success -> { showDialog(R.string.title_change_password, it.message!!) }
+                is BaseCommand.Error -> { showDialog(R.string.title_change_password, it.error!!) }
+            }
+        })
+
+        profileViewModel.profilePictureClicked.observe(this, Observer {
+            showDialog(
+                    R.string.title_change_profile_picture,
+                    R.string.message_change_profile_picture
+            )
+        })
+
+        profileViewModel.editProfileButtonClicked.observe(this, Observer {
+            profileViewModel.validateProfileForm(
+                    et_profile_firstname.text.toString(),
+                    et_profile_familyname.text.toString(),
+                    et_profile_email.text.toString()
+            )
+        })
     }
 
-    // Function to update the UI with data of the current FirebaseUser
-    private fun updateUI() {
-        Glide.with(this)
-                .load(firebaseUser!!.photoUrl ?: R.drawable.default_profile_image)
-                .apply(RequestOptions.circleCropTransform())
-                .into(img_profile_image)
+    private fun showDialog(title: Int, message: Int) { showBasicDialog(context!!, getString(title), getString(message)) }
 
-        lbl_profile_fullname.text = firebaseUser!!.displayName
-        txt_profile_firstname.setText(getFirstName(firebaseUser!!.displayName!!))
-        txt_profile_familyname.setText(getFamilyName(firebaseUser!!.displayName!!))
-        txt_profile_email.setText(firebaseUser!!.email)
-    }
-
-    // Function to send an e-mail to the current FirebaseUser containing a link to change their password
-    private fun sendResetPasswordEmail(): () -> Unit = {
-        firebaseAuth.sendPasswordResetEmail(firebaseUser!!.email!!)
-                .addOnSuccessListener { makeToast(context!!, R.string.change_password_succes) }
-                .addOnFailureListener { makeToast(context!!, R.string.change_password_failure) }
-    }
-
-    private fun validateProfileForm() {
-        val profileFormMap = mapOf(txt_profile_email.text.toString() to firebaseUser!!.email!!,
-                txt_profile_firstname.text.toString() to getFirstName(firebaseUser!!.displayName!!),
-                txt_profile_familyname.text.toString() to getFamilyName(firebaseUser!!.displayName!!))
-
-        if (!atLeastOneFieldChanged(profileFormMap)) {
-            profileViewModel.toggleEditMode()
-            return
-        }
-
-        val profileFormList = listOf(txt_profile_firstname.text.toString(),
-                txt_profile_familyname.text.toString(),
-                txt_profile_email.text.toString())
-
-        if (!everyFieldHasValue(profileFormList)) {
-            makeToast(context!!, R.string.error_empty_fields)
-            return
-        }
-
-        if (!isEmailValid(txt_profile_email.text.toString())) {
-            makeToast(context!!,R.string.error_invalid_email)
-            return
-        }
-
-        showThreeButtonsPositiveFuncDialog(context!!,
-                getString(R.string.title_change_profile),
-                getString(R.string.message_change_profile),
-                applyProfileChanges())
-    }
-
-    private fun applyProfileChanges() =  {
-        if (firebaseUser!!.displayName != "${txt_profile_firstname.text} ${txt_profile_familyname.text}") {
-            val profileUpdates = UserProfileChangeRequest.Builder()
-                    .setDisplayName("${txt_profile_firstname.text} ${txt_profile_familyname.text}")
-                    .build()
-
-            firebaseUser!!.updateProfile(profileUpdates)
-                    .addOnCompleteListener { task ->
-                        if (task.isSuccessful) {
-                            showBasicDialog(context!!, getString(R.string.title_change_name), getString(R.string.message_change_name))
-                            updateUI()
-                            if (profileViewModel.isEditable.value!!) profileViewModel.toggleEditMode()
-                        }
-                    }
-                    .addOnFailureListener { showBasicDialog(context!!, getString(R.string.title_change_name), getString(R.string.error_change_name)) }
-        }
-
-        if (firebaseUser!!.email != txt_profile_email.text.toString()) {
-            firebaseUser!!.updateEmail(txt_profile_email.text.toString())
-                    .addOnCompleteListener { task1 ->
-                        if (task1.isSuccessful) {
-                            firebaseUser!!.sendEmailVerification()
-                                    .addOnCompleteListener { task2 ->
-                                        if (task2.isSuccessful) {
-                                            showBasicDialog(context!!, getString(R.string.title_change_email), getString(R.string.message_change_email))
-                                            firebaseAuth.signOut()
-                                            this.findNavController().navigate(R.id.signOutFromProfile)
-                                        }
-                                    }
-                        }
-                    }
-                    .addOnFailureListener { showBasicDialog(context!!,getString(R.string.title_change_email), getString(R.string.error_change_email)) }
-        }
-    }
+    override fun showToast(message: Int) { makeToast(context!!, message) }
 
 }
