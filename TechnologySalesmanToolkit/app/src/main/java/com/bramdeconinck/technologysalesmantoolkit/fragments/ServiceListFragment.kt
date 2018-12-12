@@ -46,7 +46,7 @@ class ServiceListFragment : Fragment(), IToastMaker {
             else rootView.progress_bar.visibility = View.GONE
         })
 
-        serviceViewModel.firestoreErrorOccured.observe(this, Observer { showToast(R.string.fetching_data_error) })
+        serviceViewModel.servicesErrorOccurred.observe(this, Observer { showToast(R.string.fetching_data_error) })
 
         return rootView
     }
