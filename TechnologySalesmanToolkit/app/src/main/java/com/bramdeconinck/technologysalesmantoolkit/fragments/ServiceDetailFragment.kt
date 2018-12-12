@@ -1,5 +1,6 @@
 package com.bramdeconinck.technologysalesmantoolkit.fragments
 
+import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
@@ -9,10 +10,12 @@ import com.bramdeconinck.technologysalesmantoolkit.models.Service
 import com.bramdeconinck.technologysalesmantoolkit.R
 import com.bramdeconinck.technologysalesmantoolkit.interfaces.IToolbarTitleListener
 import com.bramdeconinck.technologysalesmantoolkit.utils.ARG_ITEM_ID
+import com.bramdeconinck.technologysalesmantoolkit.viewmodels.ServiceViewModel
 
 class ServiceDetailFragment : Fragment() {
 
     private var service: Service? = null
+    private lateinit var serviceViewModel: ServiceViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,6 +24,8 @@ class ServiceDetailFragment : Fragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        serviceViewModel = ViewModelProviders.of(activity!!).get(ServiceViewModel::class.java)
+
         return inflater.inflate(R.layout.fragment_service_detail, container, false)
     }
 
