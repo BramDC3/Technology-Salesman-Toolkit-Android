@@ -75,7 +75,7 @@ dependencies {
     implementation "com.google.dagger:dagger-android-support:2.16"
 
     // Adds the annotation processor dependency to the annotation processor classpath.
-    //Android Studio by default will not allow you to navigate to generated Dagger 2
+    // Android Studio by default will not allow you to navigate to generated Dagger 2
     // code as legitimate classes because they are not normally added to the source path.
     // Adding the annotationProcessor plugin will add these files into the IDE classpath
     // and enable you to have more visibility.

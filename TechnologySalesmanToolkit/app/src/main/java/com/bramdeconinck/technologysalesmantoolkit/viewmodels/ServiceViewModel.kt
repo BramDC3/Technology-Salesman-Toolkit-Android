@@ -41,6 +41,8 @@ class ServiceViewModel : InjectedViewModel(), IFirebaseServiceCallback, IFirebas
 
     fun getIsLoading(): MutableLiveData<Boolean> { return isLoading }
 
+    fun fetchInstructions(serviceId: String) { firestoreAPI.getAllInstructionsFrom(serviceId, this) }
+
     override fun onServicesCallBack(list: List<Any>) { services.value = list.map { it as Service } }
 
     override fun showProgress() { isLoading.value = true }

@@ -1,5 +1,6 @@
 package com.bramdeconinck.technologysalesmantoolkit.utils
 
+import android.util.Log
 import com.bramdeconinck.technologysalesmantoolkit.models.Category
 import com.bramdeconinck.technologysalesmantoolkit.models.Instruction
 import com.bramdeconinck.technologysalesmantoolkit.models.Service
@@ -40,7 +41,7 @@ object FirebaseUtils {
                 content = snapshot.getString("content")!!,
                 serviceId = snapshot.getString("serviceId")!!,
                 image = snapshot.getString("image")!!,
-                index =  snapshot.getString("index")!!.toInt()
+                index =  snapshot.getDouble("index")!!.toInt()
         )
     }
 
