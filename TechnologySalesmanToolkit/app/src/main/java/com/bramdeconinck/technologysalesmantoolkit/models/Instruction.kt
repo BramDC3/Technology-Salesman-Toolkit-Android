@@ -1,5 +1,9 @@
 package com.bramdeconinck.technologysalesmantoolkit.models
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
 data class Instruction(
         val id: String,
         val title: String,
@@ -8,3 +12,4 @@ data class Instruction(
         val image: String,
         val serviceId: String,
         val index: Int)
+    : Parcelable

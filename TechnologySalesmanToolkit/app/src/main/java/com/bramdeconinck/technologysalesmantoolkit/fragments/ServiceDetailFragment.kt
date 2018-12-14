@@ -12,7 +12,7 @@ import com.bramdeconinck.technologysalesmantoolkit.R
 import com.bramdeconinck.technologysalesmantoolkit.adapters.InstructionAdapter
 import com.bramdeconinck.technologysalesmantoolkit.interfaces.IToastMaker
 import com.bramdeconinck.technologysalesmantoolkit.interfaces.IToolbarTitleListener
-import com.bramdeconinck.technologysalesmantoolkit.utils.ARG_ITEM_ID
+import com.bramdeconinck.technologysalesmantoolkit.utils.SERVICE_ITEM
 import com.bramdeconinck.technologysalesmantoolkit.utils.MessageUtils
 import com.bramdeconinck.technologysalesmantoolkit.viewmodels.ServiceViewModel
 import kotlinx.android.synthetic.main.fragment_service_detail.view.*
@@ -25,7 +25,7 @@ class ServiceDetailFragment : Fragment(), IToastMaker {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        service = arguments?.getParcelable(ARG_ITEM_ID) as Service
+        service = arguments?.getParcelable(SERVICE_ITEM) as Service
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

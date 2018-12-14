@@ -13,7 +13,7 @@ import com.bramdeconinck.technologysalesmantoolkit.R
 import com.bramdeconinck.technologysalesmantoolkit.fragments.ServiceDetailFragment
 import com.bramdeconinck.technologysalesmantoolkit.fragments.ServiceListFragment
 import com.bramdeconinck.technologysalesmantoolkit.models.Service
-import com.bramdeconinck.technologysalesmantoolkit.utils.ARG_ITEM_ID
+import com.bramdeconinck.technologysalesmantoolkit.utils.SERVICE_ITEM
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.service_list_content.view.*
 
@@ -31,7 +31,7 @@ class ServiceAdapter(
             if (twoPane) {
                 val detailFragment = ServiceDetailFragment().apply {
                     arguments = Bundle().apply {
-                        putParcelable(ARG_ITEM_ID, item)
+                        putParcelable(SERVICE_ITEM, item)
                     }
                 }
                 fragment.activity!!.supportFragmentManager
@@ -40,7 +40,7 @@ class ServiceAdapter(
                         .commit()
             } else {
                 val arguments = Bundle().apply {
-                    putParcelable(ARG_ITEM_ID, item)
+                    putParcelable(SERVICE_ITEM, item)
                 }
                 fragment.findNavController().navigate(R.id.toServiceDetail, arguments)
             }
