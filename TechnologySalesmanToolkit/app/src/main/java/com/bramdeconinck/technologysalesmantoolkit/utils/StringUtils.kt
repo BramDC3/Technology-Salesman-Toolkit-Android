@@ -14,4 +14,11 @@ object StringUtils {
         return name.substring(name.indexOf(' ') + 1)
     }
 
+    @JvmStatic
+    fun createFormattedInstructionsList(content: List<String>): String {
+        var string = ""
+        content.forEachIndexed { index, s -> string += String.format("%d. %s\n\n", index + 1, s) }
+        return string
+    }
+
 }

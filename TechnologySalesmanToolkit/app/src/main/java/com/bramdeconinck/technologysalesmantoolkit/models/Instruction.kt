@@ -8,7 +8,7 @@ data class Instruction(
         val id: String,
         val title: String,
         val description: String,
-        val content: String,
+        val content: List<String>,
         val image: String,
         val serviceId: String,
         val index: Int)

@@ -31,6 +31,7 @@ object FirebaseUtils {
         )
     }
 
+    @Suppress("UNCHECKED_CAST")
     @JvmStatic
     // Converting the data of a snapshot to an Instruction object
     fun transformSnapshotToSInstruction(snapshot: QueryDocumentSnapshot): Instruction {
@@ -38,7 +39,7 @@ object FirebaseUtils {
                 id = snapshot.id,
                 title = snapshot.getString("title")!!,
                 description = snapshot.getString("description")!!,
-                content = snapshot.getString("content")!!,
+                content = snapshot.get("content") as List<String>,
                 serviceId = snapshot.getString("serviceId")!!,
                 image = snapshot.getString("image")!!,
                 index =  snapshot.getDouble("index")!!.toInt()
