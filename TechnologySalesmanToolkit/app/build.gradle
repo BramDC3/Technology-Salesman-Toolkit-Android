@@ -49,12 +49,12 @@ dependencies {
     implementation 'com.android.support:cardview-v7:28.0.0'
 
     // Firebase and Google Authentication
-    implementation 'com.google.firebase:firebase-core:16.0.5'
-    implementation 'com.google.firebase:firebase-auth:16.0.5'
+    implementation 'com.google.firebase:firebase-core:16.0.6'
+    implementation 'com.google.firebase:firebase-auth:16.1.0'
     implementation 'com.google.android.gms:play-services-auth:16.0.1'
 
     // Firebase Firestore database
-    implementation 'com.google.firebase:firebase-firestore:17.1.3'
+    implementation 'com.google.firebase:firebase-firestore:17.1.4'
 
     // Glide is used to load images from a URL
     implementation "com.github.bumptech.glide:glide:4.8.0"
@@ -75,7 +75,7 @@ dependencies {
     implementation "com.google.dagger:dagger-android-support:2.16"
 
     // Adds the annotation processor dependency to the annotation processor classpath.
-    //Android Studio by default will not allow you to navigate to generated Dagger 2
+    // Android Studio by default will not allow you to navigate to generated Dagger 2
     // code as legitimate classes because they are not normally added to the source path.
     // Adding the annotationProcessor plugin will add these files into the IDE classpath
     // and enable you to have more visibility.

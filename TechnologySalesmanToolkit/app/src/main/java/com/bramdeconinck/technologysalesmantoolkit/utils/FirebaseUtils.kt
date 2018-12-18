@@ -1,6 +1,8 @@
 package com.bramdeconinck.technologysalesmantoolkit.utils
 
+import android.util.Log
 import com.bramdeconinck.technologysalesmantoolkit.models.Category
+import com.bramdeconinck.technologysalesmantoolkit.models.Instruction
 import com.bramdeconinck.technologysalesmantoolkit.models.Service
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -29,6 +31,21 @@ object FirebaseUtils {
         )
     }
 
+    @Suppress("UNCHECKED_CAST")
+    @JvmStatic
+    // Converting the data of a snapshot to an Instruction object
+    fun transformSnapshotToSInstruction(snapshot: QueryDocumentSnapshot): Instruction {
+        return Instruction(
+                id = snapshot.id,
+                title = snapshot.getString("title")!!,
+                description = snapshot.getString("description")!!,
+                content = snapshot.get("content") as List<String>,
+                serviceId = snapshot.getString("serviceId")!!,
+                image = snapshot.getString("image")!!,
+                index =  snapshot.getDouble("index")!!.toInt()
+        )
+    }
+
     @JvmStatic
     fun createSuggestionData(suggestion: String): HashMap<String, Any> {
         val data = HashMap<String, Any>()
@@ -43,7 +60,7 @@ object FirebaseUtils {
             0 -> Category.Windows
             1 -> Category.Android
             2 -> Category.Apple
-            else -> Category.Other
+            else -> Category.Anders
         }
     }
 

@@ -61,7 +61,7 @@ class ProfileFragment : Fragment(), IToastMaker {
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
         inflater?.inflate(R.menu.menu_edit_profile, menu)
         menuItem = menu!!.findItem(R.id.action_edit_profile)
-        initListeners()
+        initObservers()
         super.onCreateOptionsMenu(menu, inflater)
     }
 
@@ -88,7 +88,7 @@ class ProfileFragment : Fragment(), IToastMaker {
         et_profile_email.setText(firebaseUser!!.email)
     }
 
-    private fun initListeners() {
+    private fun initObservers() {
         profileViewModel.isEditable.observe(this, Observer {
             if (it!!) {
                 menuItem.icon = context!!.getDrawable(R.drawable.ic_close_black_24dp)
