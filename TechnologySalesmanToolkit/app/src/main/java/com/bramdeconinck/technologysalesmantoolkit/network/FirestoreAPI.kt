@@ -8,6 +8,7 @@ import com.bramdeconinck.technologysalesmantoolkit.utils.FirebaseUtils.transform
 import com.bramdeconinck.technologysalesmantoolkit.utils.FirebaseUtils.transformSnapshotToService
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.FirebaseFirestoreSettings
+import com.google.firebase.firestore.Source
 
 class FirestoreAPI {
 
@@ -24,7 +25,7 @@ class FirestoreAPI {
     // Get all services from the Firestore
     fun getAllServices(firebaseServiceCallback: IFirebaseServiceCallback) {
         firebaseServiceCallback.showProgress()
-        firestore.collection("Services").get()
+        firestore.collection("Services").get(Source.SERVER)
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         val servicesList: MutableList<Any> = mutableListOf()
@@ -38,7 +39,7 @@ class FirestoreAPI {
 
     // Get all instructions of a service from the Firestore
     fun getAllInstructionsFrom(serviceId: String, firebaseInstructionCallback: IFirebaseInstructionCallback) {
-        firestore.collection("Instructions").whereEqualTo("serviceId", serviceId).orderBy("index").get()
+        firestore.collection("Instructions").whereEqualTo("serviceId", serviceId).orderBy("index").get(Source.SERVER)
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         val instructionsList: MutableList<Any> = mutableListOf()
