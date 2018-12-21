@@ -3,7 +3,7 @@
     <!-- The primary colors of the app theme -->
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#73A1C7 </color>
+    <color name="colorAccent">#73A1C7</color>
 
     <!-- Background of certain groups of views -->
     <color name="colorLightBlueBackground">#45FFFFFF</color>
