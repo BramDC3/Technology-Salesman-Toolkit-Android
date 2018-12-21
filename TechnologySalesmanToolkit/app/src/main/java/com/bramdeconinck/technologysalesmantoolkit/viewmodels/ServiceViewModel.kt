@@ -5,6 +5,7 @@ import android.arch.lifecycle.MutableLiveData
 import com.bramdeconinck.technologysalesmantoolkit.base.InjectedViewModel
 import com.bramdeconinck.technologysalesmantoolkit.interfaces.IFirebaseInstructionCallback
 import com.bramdeconinck.technologysalesmantoolkit.interfaces.IFirebaseServiceCallback
+import com.bramdeconinck.technologysalesmantoolkit.models.Category
 import com.bramdeconinck.technologysalesmantoolkit.models.Instruction
 import com.bramdeconinck.technologysalesmantoolkit.models.Service
 import com.bramdeconinck.technologysalesmantoolkit.network.FirestoreAPI
@@ -30,6 +31,10 @@ class ServiceViewModel : InjectedViewModel(), IFirebaseServiceCallback, IFirebas
     val isLoading: LiveData<Boolean>
         get() = _isLoading
 
+    private var selectedCategory: Category?
+
+    private var searchQuery: String
+
     val servicesErrorOccurred = SingleLiveEvent<Any>()
 
     val instructionsErrorOccurred = SingleLiveEvent<Any>()
@@ -43,19 +48,38 @@ class ServiceViewModel : InjectedViewModel(), IFirebaseServiceCallback, IFirebas
 
         _isLoading.value = false
 
+        selectedCategory = null
+
+        searchQuery = ""
+
         firestoreAPI.getAllServices(this)
     }
 
     fun fetchInstructions(serviceId: String) { firestoreAPI.getAllInstructionsFrom(serviceId, this) }
 
+    private fun refreshServiceList() {
+        if (selectedCategory != null) _services.value = allServices.value!!.filter { it.name.toLowerCase().contains(searchQuery) && it.category == selectedCategory }
+        else _services.value = allServices.value!!.filter { it.name.toLowerCase().contains(searchQuery) }
+    }
+
     fun applySearchQuery(query: String) {
-        if (query.isEmpty()) _services.value = allServices.value
-        else _services.value = allServices.value!!.filter { it.name.toLowerCase().contains(query.toLowerCase()) }
+        searchQuery = query.toLowerCase()
+        refreshServiceList()
+    }
+
+    fun applyCategoryQuery(category: Category?) {
+        selectedCategory = category
+        refreshServiceList()
+    }
+
+    fun clearFilters() {
+        selectedCategory = null
+        searchQuery = ""
     }
 
     override fun onServicesCallBack(list: List<Any>) {
         allServices.value = list.map { it as Service }
-        _services.value = allServices.value
+        refreshServiceList()
     }
 
     override fun showProgress() { _isLoading.value = true }

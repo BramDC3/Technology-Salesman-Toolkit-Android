@@ -22,6 +22,11 @@
 
     <!-- ServiceListFragment -->
     <string name="search_hint">Zoek hier…</string>
+    <string name="title_action_filter_everything">Toon alles</string>
+    <string name="title_action_filter_windows">Filter op Windows</string>
+    <string name="title_action_filter_android">Filter op Android</string>
+    <string name="title_action_filter_apple">Filter op Apple</string>
+    <string name="title_action_filter_other">Toon alle andere</string>
 
     <!-- ServiceListItem -->
     <string name="description_service_image">Afbeelding van een dienst</string>
