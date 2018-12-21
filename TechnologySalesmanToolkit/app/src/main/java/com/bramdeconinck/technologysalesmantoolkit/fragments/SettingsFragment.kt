@@ -2,6 +2,7 @@ package com.bramdeconinck.technologysalesmantoolkit.fragments
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
+import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
@@ -9,12 +10,11 @@ import android.view.View
 import android.view.ViewGroup
 import com.bramdeconinck.technologysalesmantoolkit.R
 import androidx.navigation.fragment.findNavController
+import com.bramdeconinck.technologysalesmantoolkit.databinding.FragmentSettingsBinding
 import com.bramdeconinck.technologysalesmantoolkit.utils.BaseCommand
 import com.bramdeconinck.technologysalesmantoolkit.interfaces.IToastMaker
 import com.bramdeconinck.technologysalesmantoolkit.utils.privacyPolicy
 import com.bramdeconinck.technologysalesmantoolkit.utils.website
-import kotlinx.android.synthetic.main.fragment_settings.*
-import com.bramdeconinck.technologysalesmantoolkit.utils.FirebaseUtils.firebaseAuth
 import com.bramdeconinck.technologysalesmantoolkit.utils.MessageUtils.makeToast
 import com.bramdeconinck.technologysalesmantoolkit.utils.MessageUtils.showMakeSuggestionDialog
 import com.bramdeconinck.technologysalesmantoolkit.utils.MessageUtils.showThreeButtonsPositiveFuncDialog
@@ -24,9 +24,38 @@ import com.bramdeconinck.technologysalesmantoolkit.viewmodels.SettingsViewModel
 class SettingsFragment : Fragment(), IToastMaker {
 
     private lateinit var settingsViewModel: SettingsViewModel
+    private lateinit var binding: FragmentSettingsBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_settings, container, false)
+
         settingsViewModel = ViewModelProviders.of(activity!!).get(SettingsViewModel::class.java)
+
+        val rootView = binding.root
+        binding.settingsViewModel = settingsViewModel
+        binding.setLifecycleOwner(activity)
+
+        settingsViewModel.visitWebsiteClicked.observe(this, Observer { openWebPage(context!!, website) })
+
+        settingsViewModel.visitPrivacyPolicyClicked.observe(this, Observer { openWebPage(context!!, privacyPolicy) })
+
+        settingsViewModel.makeSuggestionClicked.observe(this, Observer {
+            showMakeSuggestionDialog(
+                    context!!,
+                    getString(R.string.title_send_suggestion),
+                    getString(R.string.message_send_suggestion),
+                    settingsViewModel.getSuggestion()
+            )
+        })
+
+        settingsViewModel.showSignOutDialogClicked.observe(this, Observer {
+            showThreeButtonsPositiveFuncDialog(
+                    context!!,
+                    getString(R.string.title_sign_out),
+                    getString(R.string.message_sign_out),
+                    settingsViewModel.signOut()
+            )
+        })
 
         settingsViewModel.emptySuggestion.observe(this, Observer { showToast(R.string.send_suggestion_empty_error) })
 
@@ -37,38 +66,9 @@ class SettingsFragment : Fragment(), IToastMaker {
             }
         })
 
-        return inflater.inflate(R.layout.fragment_settings, container, false)
-    }
+        settingsViewModel.signOutTriggered.observe(this, Observer { findNavController().navigate(R.id.signOutFromSettings) })
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        btn_settings_website.setOnClickListener{ openWebPage(context!!, website) }
-
-        btn_settings_darkmode.setOnClickListener{ switch_settings_darkmode.isChecked = !switch_settings_darkmode.isChecked }
-
-        btn_settings_privacypolicy.setOnClickListener { openWebPage(context!!, privacyPolicy) }
-
-        btn_settings_suggestion.setOnClickListener{ showMakeSuggestionDialog(
-                context!!,
-                getString(R.string.title_send_suggestion),
-                getString(R.string.message_send_suggestion),
-                settingsViewModel.getSuggestion()
-            )
-        }
-
-        btn_settings_signout.setOnClickListener{ showThreeButtonsPositiveFuncDialog(
-                context!!,
-                getString(R.string.title_sign_out),
-                getString(R.string.message_sign_out),
-                signOut()
-            )
-        }
-    }
-
-    private fun signOut() = {
-        firebaseAuth.signOut()
-        this.findNavController().navigate(R.id.signOutFromSettings)
+        return rootView
     }
 
     override fun showToast(message: Int) { makeToast(context!!, message) }
