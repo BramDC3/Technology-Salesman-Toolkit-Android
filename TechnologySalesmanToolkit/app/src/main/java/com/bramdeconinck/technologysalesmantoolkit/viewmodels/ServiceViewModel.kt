@@ -2,14 +2,17 @@ package com.bramdeconinck.technologysalesmantoolkit.viewmodels
 
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
+import android.util.Log
 import com.bramdeconinck.technologysalesmantoolkit.base.InjectedViewModel
 import com.bramdeconinck.technologysalesmantoolkit.interfaces.IFirebaseInstructionCallback
 import com.bramdeconinck.technologysalesmantoolkit.interfaces.IFirebaseServiceCallback
 import com.bramdeconinck.technologysalesmantoolkit.models.Category
 import com.bramdeconinck.technologysalesmantoolkit.models.Instruction
 import com.bramdeconinck.technologysalesmantoolkit.models.Service
+import com.bramdeconinck.technologysalesmantoolkit.models.ServiceRepository
 import com.bramdeconinck.technologysalesmantoolkit.network.FirestoreAPI
 import com.bramdeconinck.technologysalesmantoolkit.utils.SingleLiveEvent
+import org.jetbrains.anko.doAsync
 import javax.inject.Inject
 
 class ServiceViewModel : InjectedViewModel(), IFirebaseServiceCallback, IFirebaseInstructionCallback {
@@ -17,7 +20,14 @@ class ServiceViewModel : InjectedViewModel(), IFirebaseServiceCallback, IFirebas
     @Inject
     lateinit var firestoreAPI: FirestoreAPI
 
+    @Inject
+    lateinit var serviceRepository: ServiceRepository
+
     private val allServices = MutableLiveData<List<Service>>()
+
+    private val _roomServices: LiveData<List<Service>>
+    val roomServices: LiveData<List<Service>>
+        get() = _roomServices
 
     private val _services = MutableLiveData<List<Service>>()
     val services: MutableLiveData<List<Service>>
@@ -41,6 +51,8 @@ class ServiceViewModel : InjectedViewModel(), IFirebaseServiceCallback, IFirebas
 
     init {
         allServices.value = mutableListOf()
+
+        _roomServices = serviceRepository.services
 
         _services.value = mutableListOf()
 
@@ -82,8 +94,16 @@ class ServiceViewModel : InjectedViewModel(), IFirebaseServiceCallback, IFirebas
 
     fun fetchInstructions(serviceId: String) { firestoreAPI.getAllInstructionsFrom(serviceId, this) }
 
+    fun onDatabaseReady() {
+        if (allServices.value!!.isEmpty() && roomServices.value!!.isNotEmpty()) {
+            allServices.value = roomServices.value
+            refreshServiceList()
+        }
+    }
+
     override fun onServicesCallBack(list: List<Any>) {
         allServices.value = list.map { it as Service }
+        doAsync { serviceRepository.insert(allServices.value!!) }
         refreshServiceList()
     }
 

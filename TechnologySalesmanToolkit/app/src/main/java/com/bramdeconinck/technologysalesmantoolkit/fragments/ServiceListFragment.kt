@@ -55,6 +55,8 @@ class ServiceListFragment : Fragment(), IToastMaker {
 
         services.observe(this, Observer { serviceAdapter.notifyDataSetChanged() })
 
+        serviceViewModel.roomServices.observe(this, Observer { serviceViewModel.onDatabaseReady() })
+
         serviceViewModel.servicesErrorOccurred.observe(this, Observer { showToast(R.string.fetching_data_error) })
 
         return rootView
