@@ -57,23 +57,29 @@ class ServiceViewModel : InjectedViewModel(), IFirebaseServiceCallback, IFirebas
 
     fun fetchInstructions(serviceId: String) { firestoreAPI.getAllInstructionsFrom(serviceId, this) }
 
-    fun applySearchStringQuery(query: String) {
-        if (query.isEmpty()) _services.value = allServices.value
-        else _services.value = allServices.value!!.filter { it.name.toLowerCase().contains(query.toLowerCase()) }
+    private fun refreshServiceList() {
+        if (selectedCategory != null) _services.value = allServices.value!!.filter { it.name.toLowerCase().contains(searchQuery) && it.category == selectedCategory }
+        else _services.value = allServices.value!!.filter { it.name.toLowerCase().contains(searchQuery) }
+    }
+
+    fun applySearchQuery(query: String) {
+        searchQuery = query.toLowerCase()
+        refreshServiceList()
     }
 
     fun applyCategoryQuery(category: Category?) {
-        if (category == null) _services.value = allServices.value
-        else _services.value = allServices.value!!.filter { it.category == category }
+        selectedCategory = category
+        refreshServiceList()
     }
 
-    fun refreshServiceList() {
-
+    fun clearFilters() {
+        selectedCategory = null
+        searchQuery = ""
     }
 
     override fun onServicesCallBack(list: List<Any>) {
         allServices.value = list.map { it as Service }
-        _services.value = allServices.value
+        refreshServiceList()
     }
 
     override fun showProgress() { _isLoading.value = true }

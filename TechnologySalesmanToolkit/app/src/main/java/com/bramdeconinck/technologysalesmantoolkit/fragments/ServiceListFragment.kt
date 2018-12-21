@@ -59,6 +59,12 @@ class ServiceListFragment : Fragment(), IToastMaker {
         return rootView
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+
+        serviceViewModel.clearFilters()
+    }
+
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater?) {
         inflater?.inflate(R.menu.menu_search_bar, menu)
         inflater?.inflate(R.menu.menu_search_filters, menu)
@@ -73,7 +79,7 @@ class ServiceListFragment : Fragment(), IToastMaker {
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean { return false }
             override fun onQueryTextChange(newText: String): Boolean {
-                serviceViewModel.applySearchStringQuery(newText)
+                serviceViewModel.applySearchQuery(newText)
                 return true
             }
         })
