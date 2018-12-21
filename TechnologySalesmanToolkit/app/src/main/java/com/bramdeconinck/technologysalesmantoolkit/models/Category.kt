@@ -4,5 +4,5 @@ enum class Category {
     Windows,
     Android,
     Apple,
-    Anders
+    Andere
 }

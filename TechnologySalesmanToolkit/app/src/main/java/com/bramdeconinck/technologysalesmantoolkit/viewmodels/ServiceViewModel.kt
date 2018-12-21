@@ -5,6 +5,7 @@ import android.arch.lifecycle.MutableLiveData
 import com.bramdeconinck.technologysalesmantoolkit.base.InjectedViewModel
 import com.bramdeconinck.technologysalesmantoolkit.interfaces.IFirebaseInstructionCallback
 import com.bramdeconinck.technologysalesmantoolkit.interfaces.IFirebaseServiceCallback
+import com.bramdeconinck.technologysalesmantoolkit.models.Category
 import com.bramdeconinck.technologysalesmantoolkit.models.Instruction
 import com.bramdeconinck.technologysalesmantoolkit.models.Service
 import com.bramdeconinck.technologysalesmantoolkit.network.FirestoreAPI
@@ -30,6 +31,10 @@ class ServiceViewModel : InjectedViewModel(), IFirebaseServiceCallback, IFirebas
     val isLoading: LiveData<Boolean>
         get() = _isLoading
 
+    private var selectedCategory: Category?
+
+    private var searchQuery: String
+
     val servicesErrorOccurred = SingleLiveEvent<Any>()
 
     val instructionsErrorOccurred = SingleLiveEvent<Any>()
@@ -43,14 +48,27 @@ class ServiceViewModel : InjectedViewModel(), IFirebaseServiceCallback, IFirebas
 
         _isLoading.value = false
 
+        selectedCategory = null
+
+        searchQuery = ""
+
         firestoreAPI.getAllServices(this)
     }
 
     fun fetchInstructions(serviceId: String) { firestoreAPI.getAllInstructionsFrom(serviceId, this) }
 
-    fun applySearchQuery(query: String) {
+    fun applySearchStringQuery(query: String) {
         if (query.isEmpty()) _services.value = allServices.value
         else _services.value = allServices.value!!.filter { it.name.toLowerCase().contains(query.toLowerCase()) }
+    }
+
+    fun applyCategoryQuery(category: Category?) {
+        if (category == null) _services.value = allServices.value
+        else _services.value = allServices.value!!.filter { it.category == category }
+    }
+
+    fun refreshServiceList() {
+
     }
 
     override fun onServicesCallBack(list: List<Any>) {

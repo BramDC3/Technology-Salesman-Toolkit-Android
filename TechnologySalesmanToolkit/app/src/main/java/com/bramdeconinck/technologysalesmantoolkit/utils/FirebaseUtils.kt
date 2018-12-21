@@ -1,6 +1,5 @@
 package com.bramdeconinck.technologysalesmantoolkit.utils
 
-import android.util.Log
 import com.bramdeconinck.technologysalesmantoolkit.models.Category
 import com.bramdeconinck.technologysalesmantoolkit.models.Instruction
 import com.bramdeconinck.technologysalesmantoolkit.models.Service
@@ -60,7 +59,7 @@ object FirebaseUtils {
             0 -> Category.Windows
             1 -> Category.Android
             2 -> Category.Apple
-            else -> Category.Anders
+            else -> Category.Andere
         }
     }
 

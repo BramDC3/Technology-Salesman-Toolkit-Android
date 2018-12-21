@@ -24,9 +24,6 @@
     <!-- Splash Screen theme -->
     <style name="AppTheme.Launcher">
         <item name="android:windowBackground">@drawable/splash_screen</item>
-        <!--
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        -->
     </style>
 
 </resources>

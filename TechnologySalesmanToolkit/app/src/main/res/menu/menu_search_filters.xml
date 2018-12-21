@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/action_filter_everything"
+        android:title="@string/title_action_filter_everything"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_filter_windows"
+        android:title="@string/title_action_filter_windows"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_filter_android"
+        android:title="@string/title_action_filter_android"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_filter_apple"
+        android:title="@string/title_action_filter_apple"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_filter_other"
+        android:title="@string/title_action_filter_other"
+        app:showAsAction="never" />
+
+</menu>
