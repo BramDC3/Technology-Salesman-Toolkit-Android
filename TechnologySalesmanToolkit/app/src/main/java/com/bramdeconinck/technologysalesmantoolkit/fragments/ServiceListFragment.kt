@@ -2,12 +2,16 @@ package com.bramdeconinck.technologysalesmantoolkit.fragments
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.provider.CalendarContract
 import android.support.v4.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.support.v7.widget.SearchView
+import android.view.*
+import android.widget.EditText
 import com.bramdeconinck.technologysalesmantoolkit.R
+import com.bramdeconinck.technologysalesmantoolkit.activities.MainActivity
 import com.bramdeconinck.technologysalesmantoolkit.adapters.ServiceAdapter
 import com.bramdeconinck.technologysalesmantoolkit.interfaces.IToastMaker
 import com.bramdeconinck.technologysalesmantoolkit.utils.MessageUtils.makeToast
@@ -21,6 +25,12 @@ class ServiceListFragment : Fragment(), IToastMaker {
 
     // Variable to check whether the app is running on a tablet or not
     private var twoPane: Boolean = false
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        setHasOptionsMenu(true)
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val rootView = inflater.inflate(R.layout.fragment_service_list, container, false)
@@ -49,6 +59,28 @@ class ServiceListFragment : Fragment(), IToastMaker {
         serviceViewModel.servicesErrorOccurred.observe(this, Observer { showToast(R.string.fetching_data_error) })
 
         return rootView
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater?) {
+        inflater?.inflate(R.menu.menu_search_bar, menu)
+
+        val searchView = menu.findItem(R.id.action_search).actionView as SearchView
+        val searchViewText = searchView.findViewById<EditText>(android.support.v7.appcompat.R.id.search_src_text)
+        searchViewText.hint = getString(R.string.search_hint)
+        searchViewText.setHintTextColor(Color.WHITE)
+        searchViewText.setTextColor(Color.WHITE)
+
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String): Boolean {
+                return false
+            }
+        })
+
+        super.onCreateOptionsMenu(menu, inflater)
     }
 
     override fun showToast(message: Int) { makeToast(context!!, message) }

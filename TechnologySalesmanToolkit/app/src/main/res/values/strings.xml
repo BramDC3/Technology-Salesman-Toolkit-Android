@@ -20,6 +20,9 @@
     <string name="error_invalid_password">Gelieve een wachtwoord van meer dan 6 karakters in te voeren.</string>
     <string name="error_passwords_dont_match">De twee ingevoerde wachtwoorden komen niet overeen.</string>
 
+    <!-- ServiceListFragment -->
+    <string name="search_hint">Zoek hier…</string>
+
     <!-- ServiceListItem -->
     <string name="description_service_image">Afbeelding van een dienst</string>
 
@@ -70,6 +73,6 @@
     <string name="error_no_browser_detected">Er werd geen webbrowser gedetecteerd op uw toestel.</string>
     <string name="title_privacy_policy_dialog">Privacybeleid</string>
     <string name="message_privacy_policy_dialog">Door op \'Ja\' te drukken, gaat u akkoord met het privacybeleid en zal uw account aangemaakt worden. Er zal een bevestigingsmail naar uw e-mailadres verzonden worden.</string>
-    <string name="descripition_service_instruction_image">Afbeelding van de huidige instructie</string>
+    <string name="description_service_instruction_image">Afbeelding van de huidige instructie</string>
 
 </resources>
