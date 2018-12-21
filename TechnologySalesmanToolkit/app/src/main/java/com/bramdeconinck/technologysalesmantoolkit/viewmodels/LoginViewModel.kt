@@ -1,7 +1,7 @@
 package com.bramdeconinck.technologysalesmantoolkit.viewmodels
 
+import android.arch.lifecycle.MutableLiveData
 import com.bramdeconinck.technologysalesmantoolkit.R
-import com.bramdeconinck.technologysalesmantoolkit.utils.BaseCommand
 import com.bramdeconinck.technologysalesmantoolkit.base.InjectedViewModel
 import com.bramdeconinck.technologysalesmantoolkit.utils.FirebaseUtils.firebaseAuth
 import com.bramdeconinck.technologysalesmantoolkit.utils.FirebaseUtils.firebaseUser
@@ -13,17 +13,30 @@ import com.google.firebase.auth.GoogleAuthProvider
 
 class LoginViewModel : InjectedViewModel() {
 
+    private val _email = MutableLiveData<String>()
+    val email: MutableLiveData<String>
+        get() = _email
+
+    private val _password = MutableLiveData<String>()
+    val password: MutableLiveData<String>
+        get() = _password
+
     val navigateToServiceList = SingleLiveEvent<Any>()
 
-    val emailIsNotVerified = SingleLiveEvent<Any>()
+    val signInWithGoogleClicked = SingleLiveEvent<Any>()
 
-    val signInErrorOccurred = SingleLiveEvent<Any>()
+    val goToRegistrationClicked = SingleLiveEvent<Any>()
 
-    val loginFormValidation = SingleLiveEvent<BaseCommand>()
+    val loginErrorOccurred = SingleLiveEvent<Int>()
 
-    fun logInWithFirebaseAccount(email: String, password: String) {
-        if (!isLoginFormValid(email, password)) return
-        firebaseAuth.signInWithEmailAndPassword(email, password)
+    init {
+        _email.value = ""
+        _password.value = ""
+    }
+
+    fun logInWithFirebaseAccount() {
+        if (!isLoginFormValid(email.value!!, password.value!!)) return
+        firebaseAuth.signInWithEmailAndPassword(email.value!!, password.value!!)
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         firebaseUser = firebaseAuth.currentUser
@@ -31,20 +44,20 @@ class LoginViewModel : InjectedViewModel() {
                             navigateToServiceList.call()
                         } else {
                             firebaseAuth.signOut()
-                            emailIsNotVerified.call()
+                            loginErrorOccurred.value = R.string.error_email_is_not_verified
                         }
-                    } else { signInErrorOccurred.call() }
+                    } else { loginErrorOccurred.value = R.string.sign_in_error }
                 }
     }
 
     private fun isLoginFormValid(email: String, password: String): Boolean {
         if (!everyFieldHasValue(listOf(email, password))) {
-            loginFormValidation.value = BaseCommand.Error(R.string.error_empty_fields)
+            loginErrorOccurred.value = R.string.error_empty_fields
             return false
         }
 
         if (!isEmailValid(email)) {
-            loginFormValidation.value = BaseCommand.Error(R.string.error_invalid_email)
+            loginErrorOccurred.value = R.string.error_invalid_email
             return false
         }
 
@@ -58,7 +71,11 @@ class LoginViewModel : InjectedViewModel() {
                     if (task.isSuccessful) {
                         firebaseUser = firebaseAuth.currentUser
                         navigateToServiceList.call()
-                    } else { signInErrorOccurred.call() }
+                    } else { loginErrorOccurred.value = R.string.sign_in_error }
                 }
     }
+
+    fun signInWithGoogle() { signInWithGoogleClicked.call() }
+
+    fun goToRegistration() { goToRegistrationClicked.call() }
 }
