@@ -32,12 +32,13 @@ object RoomConvertersUtils {
 
     @TypeConverter
     @JvmStatic
-    fun toCategory(category: Category): Int? {
+    fun toCategory(category: Category?): Int? {
         return when (category) {
             Category.Windows -> 0
             Category.Android -> 1
             Category.Apple -> 2
             Category.Andere -> 3
+            else -> 3
         }
     }
 
