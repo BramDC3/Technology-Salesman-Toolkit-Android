@@ -1,152 +1,171 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
+<layout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".fragments.RegistrationFragment">
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <import type="android.view.View"/>
 
-    <ScrollView
+        <variable
+            name="registrationViewModel"
+            type="com.bramdeconinck.technologysalesmantoolkit.viewmodels.RegistrationViewModel"/>
+    </data>
+
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/login_background"
-        tools:ignore="UselessParent">
+        tools:context=".fragments.RegistrationFragment">
 
-        <android.support.constraint.ConstraintLayout
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:focusable="true"
-            android:focusableInTouchMode="true">
+            android:layout_height="match_parent"
+            android:background="@drawable/login_background"
+            tools:ignore="UselessParent">
 
-            <ImageView
-                android:id="@+id/iv_registration_logo"
-                android:layout_width="wrap_content"
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/logo"
-                android:contentDescription="@string/description_app_logo" />
+                android:focusable="true"
+                android:focusableInTouchMode="true">
 
-            <EditText
-                android:id="@+id/et_registration_firstname"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="56dp"
-                android:background="@drawable/reg_firstname"
-                android:ems="10"
-                android:hint="@string/placeholder_firstname"
-                android:inputType="textPersonName"
-                android:paddingStart="40dp"
-                android:paddingEnd="20dp"
-                android:textSize="16sp"
-                android:textColor="@color/colorFormFieldText"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/iv_registration_logo"
-                tools:ignore="Autofill" />
+                <ImageView
+                    android:id="@+id/iv_registration_logo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/logo"
+                    android:contentDescription="@string/description_app_logo" />
 
-            <EditText
-                android:id="@+id/et_registration_lastname"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:background="@drawable/reg_familyname"
-                android:ems="10"
-                android:hint="@string/placeholder_lastname"
-                android:inputType="textPersonName"
-                android:paddingStart="40dp"
-                android:paddingEnd="20dp"
-                android:textSize="16sp"
-                android:textColor="@color/colorFormFieldText"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/et_registration_firstname"
-                tools:ignore="Autofill" />
+                <EditText
+                    android:id="@+id/et_registration_firstname"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="56dp"
+                    android:background="@drawable/reg_firstname"
+                    android:ems="10"
+                    android:hint="@string/placeholder_firstname"
+                    android:inputType="textPersonName"
+                    android:paddingStart="40dp"
+                    android:paddingEnd="20dp"
+                    android:textSize="16sp"
+                    android:textColor="@color/colorFormFieldText"
+                    android:text="@={registrationViewModel.firstname}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/iv_registration_logo"
+                    tools:ignore="Autofill" />
 
-            <EditText
-                android:id="@+id/et_registration_email"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:background="@drawable/reg_email"
-                android:ems="10"
-                android:hint="@string/placeholder_email"
-                android:inputType="textEmailAddress"
-                android:paddingStart="40dp"
-                android:paddingEnd="20dp"
-                android:textSize="16sp"
-                android:textColor="@color/colorFormFieldText"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/et_registration_lastname"
-                tools:ignore="Autofill" />
+                <EditText
+                    android:id="@+id/et_registration_lastname"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/reg_familyname"
+                    android:ems="10"
+                    android:hint="@string/placeholder_lastname"
+                    android:inputType="textPersonName"
+                    android:paddingStart="40dp"
+                    android:paddingEnd="20dp"
+                    android:textSize="16sp"
+                    android:textColor="@color/colorFormFieldText"
+                    android:text="@={registrationViewModel.familyname}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/et_registration_firstname"
+                    tools:ignore="Autofill" />
 
-            <EditText
-                android:id="@+id/et_registration_password"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:background="@drawable/reg_password"
-                android:ems="10"
-                android:hint="@string/placeholder_password"
-                android:inputType="textPassword"
-                android:paddingStart="40dp"
-                android:paddingEnd="20dp"
-                android:textSize="16sp"
-                android:textColor="@color/colorFormFieldText"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/et_registration_email"
-                tools:ignore="Autofill" />
+                <EditText
+                    android:id="@+id/et_registration_email"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/reg_email"
+                    android:ems="10"
+                    android:hint="@string/placeholder_email"
+                    android:inputType="textEmailAddress"
+                    android:paddingStart="40dp"
+                    android:paddingEnd="20dp"
+                    android:textSize="16sp"
+                    android:textColor="@color/colorFormFieldText"
+                    android:text="@={registrationViewModel.email}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/et_registration_lastname"
+                    tools:ignore="Autofill" />
 
-            <EditText
-                android:id="@+id/et_registration_repeatPassword"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:background="@drawable/reg_password"
-                android:ems="10"
-                android:hint="@string/placeholder_repeatpassword"
-                android:inputType="textPassword"
-                android:paddingStart="40dp"
-                android:paddingEnd="20dp"
-                android:textSize="16sp"
-                android:textColor="@color/colorFormFieldText"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/et_registration_password"
-                tools:ignore="Autofill" />
+                <EditText
+                    android:id="@+id/et_registration_password"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/reg_password"
+                    android:ems="10"
+                    android:hint="@string/placeholder_password"
+                    android:inputType="textPassword"
+                    android:paddingStart="40dp"
+                    android:paddingEnd="20dp"
+                    android:textSize="16sp"
+                    android:textColor="@color/colorFormFieldText"
+                    android:text="@={registrationViewModel.password}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/et_registration_email"
+                    tools:ignore="Autofill" />
 
-            <Button
-                android:id="@+id/btn_registration_register"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="36dp"
-                android:layout_marginEnd="8dp"
-                android:background="@drawable/reg_create_account"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/et_registration_repeatPassword" />
+                <EditText
+                    android:id="@+id/et_registration_repeatPassword"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/reg_password"
+                    android:ems="10"
+                    android:hint="@string/placeholder_repeatpassword"
+                    android:inputType="textPassword"
+                    android:paddingStart="40dp"
+                    android:paddingEnd="20dp"
+                    android:textSize="16sp"
+                    android:textColor="@color/colorFormFieldText"
+                    android:text="@={registrationViewModel.repeatPassword}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/et_registration_password"
+                    tools:ignore="Autofill" />
 
-            <TextView
-                android:id="@+id/tv_registration_backToLogin"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="36dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="10dp"
-                android:background="@drawable/reg_already_an_account"
-                android:textAlignment="center"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btn_registration_register" />
-        </android.support.constraint.ConstraintLayout>
-    </ScrollView>
+                <Button
+                    android:id="@+id/btn_registration_register"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="36dp"
+                    android:layout_marginEnd="8dp"
+                    android:background="@drawable/reg_create_account"
+                    android:onClick="@{() -> registrationViewModel.isRegistrationFormValid()}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/et_registration_repeatPassword" />
 
-</FrameLayout>
+                <TextView
+                    android:id="@+id/tv_registration_backToLogin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="36dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/reg_already_an_account"
+                    android:textAlignment="center"
+                    android:onClick="@{() -> registrationViewModel.goToLogin()}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/btn_registration_register" />
+
+            </android.support.constraint.ConstraintLayout>
+        </ScrollView>
+
+    </FrameLayout>
+
+</layout>

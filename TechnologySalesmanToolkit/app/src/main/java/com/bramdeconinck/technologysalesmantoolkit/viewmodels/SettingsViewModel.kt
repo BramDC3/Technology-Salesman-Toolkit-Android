@@ -63,4 +63,5 @@ class SettingsViewModel : InjectedViewModel(), IFirebaseSuggestionCallback {
     override fun showSuccesMessage() { suggestionCallback.value = BaseCommand.Success(R.string.send_suggestion_succes) }
 
     override fun showFailureMessage() { suggestionCallback.value = BaseCommand.Error(R.string.send_suggestion_error) }
+
 }

@@ -78,4 +78,10 @@ class LoginViewModel : InjectedViewModel() {
     fun signInWithGoogle() { signInWithGoogleClicked.call() }
 
     fun goToRegistration() { goToRegistrationClicked.call() }
+
+    fun clearLoginForm() {
+        _email.value = ""
+        _password.value = ""
+    }
+
 }

@@ -61,6 +61,12 @@ class LoginFragment : Fragment(), IToastMaker {
         return rootView
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+
+        loginViewModel.clearLoginForm()
+    }
+
     private fun signInWithGoogle() {
         val signInIntent: Intent = mGoogleSignInClient.signInIntent
         startActivityForResult(signInIntent, GOOGLE_SIGN_IN_REQUEST_CODE)
