@@ -15,33 +15,21 @@ import com.bramdeconinck.technologysalesmantoolkit.utils.ValidationUtils.passwor
 
 class RegistrationViewModel : InjectedViewModel() {
 
-    private val _firstname = MutableLiveData<String>()
-    val firstname: MutableLiveData<String>
-        get() = _firstname
+    val firstname = MutableLiveData<String>()
 
-    private val _familyname = MutableLiveData<String>()
-    val familyname: MutableLiveData<String>
-        get() = _familyname
+    val familyname = MutableLiveData<String>()
 
-    private val _email = MutableLiveData<String>()
-    val email: MutableLiveData<String>
-        get() = _email
+    val email = MutableLiveData<String>()
 
-    private val _password = MutableLiveData<String>()
-    val password: MutableLiveData<String>
-        get() = _password
+    val password = MutableLiveData<String>()
 
-    private val _repeatPassword = MutableLiveData<String>()
-    val repeatPassword: MutableLiveData<String>
-        get() = _repeatPassword
+    val repeatPassword = MutableLiveData<String>()
 
     val goToLoginClicked = SingleLiveEvent<Any>()
 
     val showPrivacyPolicyDialog = SingleLiveEvent<Any>()
 
-    val registrationErrorOccured = SingleLiveEvent<Int>()
-
-    val firebaseAccountCreation = SingleLiveEvent<BaseCommand>()
+    val registrationEvent = SingleLiveEvent<Int>()
 
     init {
         firstname.value = ""
@@ -53,22 +41,22 @@ class RegistrationViewModel : InjectedViewModel() {
 
     fun isRegistrationFormValid() {
         if (!everyFieldHasValue(listOf(firstname.value!!, familyname.value!!, email.value!!, password.value!!, repeatPassword.value!!))) {
-            registrationErrorOccured.value = R.string.error_empty_fields
+            registrationEvent.value = R.string.error_empty_fields
             return
         }
 
         if (!isEmailValid(email.value!!)) {
-            registrationErrorOccured.value = R.string.error_invalid_email
+            registrationEvent.value = R.string.error_invalid_email
             return
         }
 
         if (!isPasswordValid(password.value!!)) {
-            registrationErrorOccured.value = R.string.error_invalid_password
+            registrationEvent.value = R.string.error_invalid_password
             return
         }
 
         if (!passwordsMatch(password.value!!, repeatPassword.value!!)) {
-            registrationErrorOccured.value = R.string.error_passwords_dont_match
+            registrationEvent.value = R.string.error_passwords_dont_match
             return
         }
 
@@ -85,11 +73,11 @@ class RegistrationViewModel : InjectedViewModel() {
                                     if (task2.isSuccessful) {
                                         firebaseUser!!.sendEmailVerification()
                                         firebaseAuth.signOut()
-                                        firebaseAccountCreation.value = BaseCommand.Success(R.string.message_account_created)
+                                        registrationEvent.value = R.string.message_account_created
                                         goToLoginClicked.call()
-                                    } else { firebaseAccountCreation.value = BaseCommand.Error(R.string.error_account_not_created) }
+                                    } else { registrationEvent.value = R.string.error_account_not_created }
                                 }
-                    } else { firebaseAccountCreation.value = BaseCommand.Error(R.string.error_account_not_created) }
+                    } else { registrationEvent.value = R.string.error_account_not_created }
                 }
     }
 

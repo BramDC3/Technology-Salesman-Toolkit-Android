@@ -56,6 +56,7 @@ class ProfileFragment : Fragment(), IToastMaker {
         super.onDestroyView()
 
         if (profileViewModel.isEditable.value!!) profileViewModel.toggleEditMode()
+        profileViewModel.clearProfileForm()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
@@ -89,83 +90,80 @@ class ProfileFragment : Fragment(), IToastMaker {
     }
 
     private fun initObservers() {
-        profileViewModel.isEditable.observe(this, Observer {
-            if (it!!) {
-                menuItem.icon = context!!.getDrawable(R.drawable.ic_close_black_24dp)
-                menuItem.title = getString(R.string.title_action_stop_editing_profile)
-            } else {
-                menuItem.icon = context!!.getDrawable(R.drawable.ic_edit_black_24dp)
-                menuItem.title = getString(R.string.title_action_edit_profile)
-                updateUI()
-            }
-        })
+        profileViewModel.isEditable.observe(this, Observer { toggleEditMode(it!!) })
 
         profileViewModel.profileEditFormValidation.observe(this, Observer {
             when (it) {
+                is BaseCommand.Success -> showChangeProfileDialog()
                 is BaseCommand.Error -> showToast(it.error!!)
-                is BaseCommand.Success -> showThreeButtonsPositiveFuncDialog(
-                        context!!,
-                        getString(R.string.title_change_profile),
-                        getString(R.string.message_change_profile),
-                        profileViewModel.applyProfileChanges(
-                                et_profile_firstname.text.toString(),
-                                et_profile_familyname.text.toString(),
-                                et_profile_email.text.toString()
-                        )
-                )
             }
         })
 
         profileViewModel.appliedNameChanges.observe(this, Observer {
             when (it) {
-                is BaseCommand.Success -> {
-                    showDialog(R.string.title_change_name, it.message!!)
-                    updateUI()
-                }
+                is BaseCommand.Success -> { applyNameChanges(it.message!! )}
                 is BaseCommand.Error -> { showDialog(R.string.title_change_name, it.error!!) }
             }
         })
 
         profileViewModel.appliedEmailChanges.observe(this, Observer {
             when (it) {
-                is BaseCommand.Success -> {
-                    showDialog(R.string.title_change_email, it.message!!)
-                    this.findNavController().navigate(R.id.signOutFromProfile)
-                }
+                is BaseCommand.Success -> { applyEmailChanges(it.message!!) }
                 is BaseCommand.Error -> { showDialog(R.string.title_change_email, it.error!!) }
             }
         })
 
-        profileViewModel.resetPasswordButtonClicked.observe(this, Observer {
-            showThreeButtonsPositiveFuncDialog(
-                    context!!,
-                    getString(R.string.title_change_password),
-                    getString(R.string.message_change_password),
-                    profileViewModel.sendResetPasswordEmail()
-            )
-        })
+        profileViewModel.resetPasswordButtonClicked.observe(this, Observer { showResetPasswordDialog() })
 
-        profileViewModel.requestedPasswordReset.observe(this, Observer {
-            when (it) {
-                is BaseCommand.Success -> { showDialog(R.string.title_change_password, it.message!!) }
-                is BaseCommand.Error -> { showDialog(R.string.title_change_password, it.error!!) }
-            }
-        })
+        profileViewModel.profilePictureClicked.observe(this, Observer { showProfilePictureDialog() })
 
-        profileViewModel.profilePictureClicked.observe(this, Observer {
-            showDialog(
-                    R.string.title_change_profile_picture,
-                    R.string.message_change_profile_picture
-            )
-        })
+        profileViewModel.profileEventOccured.observe(this, Observer { showToast(it!!) })
+    }
 
-        profileViewModel.editProfileButtonClicked.observe(this, Observer {
-            profileViewModel.validateProfileForm(
-                    et_profile_firstname.text.toString(),
-                    et_profile_familyname.text.toString(),
-                    et_profile_email.text.toString()
-            )
-        })
+    private fun toggleEditMode(isEditable: Boolean) {
+        if (isEditable) {
+            menuItem.icon = context!!.getDrawable(R.drawable.ic_close_black_24dp)
+            menuItem.title = getString(R.string.title_action_stop_editing_profile)
+        } else {
+            menuItem.icon = context!!.getDrawable(R.drawable.ic_edit_black_24dp)
+            menuItem.title = getString(R.string.title_action_edit_profile)
+            updateUI()
+        }
+    }
+
+    private fun showChangeProfileDialog() {
+        showThreeButtonsPositiveFuncDialog(
+                context!!,
+                getString(R.string.title_change_profile),
+                getString(R.string.message_change_profile),
+                profileViewModel.applyProfileChanges()
+        )
+    }
+
+    private fun applyNameChanges(message: Int) {
+        showDialog(R.string.title_change_name, message)
+        updateUI()
+    }
+
+    private fun applyEmailChanges(message: Int) {
+        showDialog(R.string.title_change_email, message)
+        findNavController().navigate(R.id.signOutFromProfile)
+    }
+
+    private fun showResetPasswordDialog() {
+        showThreeButtonsPositiveFuncDialog(
+                context!!,
+                getString(R.string.title_change_password),
+                getString(R.string.message_change_password),
+                profileViewModel.sendResetPasswordEmail()
+        )
+    }
+
+    private fun showProfilePictureDialog() {
+        showDialog(
+            R.string.title_change_profile_picture,
+            R.string.message_change_profile_picture
+        )
     }
 
     private fun showDialog(title: Int, message: Int) { showBasicDialog(context!!, getString(title), getString(message)) }

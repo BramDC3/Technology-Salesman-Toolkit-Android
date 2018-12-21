@@ -11,7 +11,6 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.bramdeconinck.technologysalesmantoolkit.R
 import com.bramdeconinck.technologysalesmantoolkit.databinding.FragmentRegistrationBinding
-import com.bramdeconinck.technologysalesmantoolkit.utils.BaseCommand
 import com.bramdeconinck.technologysalesmantoolkit.interfaces.IToastMaker
 import com.bramdeconinck.technologysalesmantoolkit.utils.MessageUtils.makeToast
 import com.bramdeconinck.technologysalesmantoolkit.utils.MessageUtils.showPrivacyPolicyDialog
@@ -33,16 +32,9 @@ class RegistrationFragment : Fragment(), IToastMaker {
 
         registrationViewModel.goToLoginClicked.observe(this, Observer { findNavController().popBackStack() })
 
-        registrationViewModel.showPrivacyPolicyDialog.observe(this, Observer { callPrivacyPolicyDialog() })
+        registrationViewModel.showPrivacyPolicyDialog.observe(this, Observer { showPrivacyPolicyDialog() })
 
-        registrationViewModel.registrationErrorOccured.observe(this, Observer { showToast(it!!)  })
-
-        registrationViewModel.firebaseAccountCreation.observe(this, Observer {
-            when(it) {
-                is BaseCommand.Success -> showToast(it.message!!)
-                is BaseCommand.Error -> showToast(it.error!!)
-            }
-        })
+        registrationViewModel.registrationEvent.observe(this, Observer { showToast(it!!)  })
 
         return rootView
     }
@@ -53,8 +45,9 @@ class RegistrationFragment : Fragment(), IToastMaker {
         registrationViewModel.clearRegistrationForm()
     }
 
-    private fun callPrivacyPolicyDialog() {
-        showPrivacyPolicyDialog(context!!,
+    private fun showPrivacyPolicyDialog() {
+        showPrivacyPolicyDialog(
+                context!!,
                 getString(R.string.title_privacy_policy_dialog),
                 getString(R.string.message_privacy_policy_dialog),
                 registrationViewModel.createFirebaseAccount()

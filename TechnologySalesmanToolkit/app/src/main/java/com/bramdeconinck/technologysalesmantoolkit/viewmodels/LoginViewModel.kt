@@ -13,13 +13,9 @@ import com.google.firebase.auth.GoogleAuthProvider
 
 class LoginViewModel : InjectedViewModel() {
 
-    private val _email = MutableLiveData<String>()
-    val email: MutableLiveData<String>
-        get() = _email
+    val email = MutableLiveData<String>()
 
-    private val _password = MutableLiveData<String>()
-    val password: MutableLiveData<String>
-        get() = _password
+    val password = MutableLiveData<String>()
 
     val navigateToServiceList = SingleLiveEvent<Any>()
 
@@ -30,8 +26,8 @@ class LoginViewModel : InjectedViewModel() {
     val loginErrorOccurred = SingleLiveEvent<Int>()
 
     init {
-        _email.value = ""
-        _password.value = ""
+        email.value = ""
+        password.value = ""
     }
 
     fun logInWithFirebaseAccount() {
@@ -80,8 +76,8 @@ class LoginViewModel : InjectedViewModel() {
     fun goToRegistration() { goToRegistrationClicked.call() }
 
     fun clearLoginForm() {
-        _email.value = ""
-        _password.value = ""
+        email.value = ""
+        password.value = ""
     }
 
 }

@@ -47,14 +47,11 @@ class LoginFragment : Fragment(), IToastMaker {
 
         mGoogleSignInClient = GoogleSignIn.getClient(context!!, gso)
 
-        loginViewModel.navigateToServiceList.observe(this, Observer {
-            makeToast(context!!, R.string.message_welcome, firebaseUser!!.displayName)
-            findNavController().navigate(R.id.toServiceList)
-        })
+        loginViewModel.navigateToServiceList.observe(this, Observer { goToServiceList()})
 
         loginViewModel.signInWithGoogleClicked.observe(this, Observer { signInWithGoogle() })
 
-        loginViewModel.goToRegistrationClicked.observe(this, Observer { findNavController().navigate(R.id.toRegistration) })
+        loginViewModel.goToRegistrationClicked.observe(this, Observer { goToRegistration() })
 
         loginViewModel.loginErrorOccurred.observe(this, Observer { showToast(it!!) })
 
@@ -85,6 +82,13 @@ class LoginFragment : Fragment(), IToastMaker {
             }
         }
     }
+
+    private fun goToServiceList() {
+        makeToast(context!!, R.string.message_welcome, firebaseUser!!.displayName)
+        findNavController().navigate(R.id.toServiceList)
+    }
+
+    private fun goToRegistration() { findNavController().navigate(R.id.toRegistration) }
 
     override fun showToast(message: Int) {makeToast(context!!, message)}
 

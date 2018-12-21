@@ -17,29 +17,34 @@ import com.bramdeconinck.technologysalesmantoolkit.utils.ValidationUtils.isEmail
 
 class ProfileViewModel : InjectedViewModel() {
 
+    val firstname = MutableLiveData<String>()
+
+    val familyname = MutableLiveData<String>()
+
+    val email = MutableLiveData<String>()
+
     private val _isEditable = MutableLiveData<Boolean>()
     val isEditable: LiveData<Boolean>
         get() = _isEditable
 
     val profileEditFormValidation = SingleLiveEvent<BaseCommand>()
 
-    val appliedNameChanges = SingleLiveEvent<BaseCommand>()
-
-    val appliedEmailChanges = SingleLiveEvent<BaseCommand>()
-
-    val editProfileButtonClicked = SingleLiveEvent<Any>()
-
     val resetPasswordButtonClicked = SingleLiveEvent<Any>()
 
     val profilePictureClicked = SingleLiveEvent<Any>()
 
-    val requestedPasswordReset = SingleLiveEvent<BaseCommand>()
+    val appliedEmailChanges = SingleLiveEvent<BaseCommand>()
+
+    val appliedNameChanges = SingleLiveEvent<BaseCommand>()
+
+    val profileEventOccured = SingleLiveEvent<Int>()
 
     init {
+        firstname.value = ""
+        familyname.value = ""
+        email.value = ""
         _isEditable.value = false
     }
-
-    fun editProfile() { editProfileButtonClicked.call() }
 
     fun changeProfilePicture() { profilePictureClicked.call() }
 
@@ -50,26 +55,26 @@ class ProfileViewModel : InjectedViewModel() {
     // Function to send an e-mail to the current FirebaseUser containing a link to change their password
     fun sendResetPasswordEmail(): () -> Unit = {
         firebaseAuth.sendPasswordResetEmail(firebaseUser!!.email!!)
-                .addOnSuccessListener { requestedPasswordReset.value = BaseCommand.Success(R.string.change_password_succes) }
-                .addOnFailureListener { requestedPasswordReset.value = BaseCommand.Success(R.string.change_password_failure) }
+                .addOnSuccessListener { profileEventOccured.value = R.string.change_password_succes }
+                .addOnFailureListener { profileEventOccured.value = R.string.change_password_failure }
     }
 
-    fun validateProfileForm(firstname: String, familyname: String, email: String) {
-        val profileFormMap = mapOf(email to firebaseUser!!.email!!,
-                firstname to getFirstName(firebaseUser!!.displayName!!),
-                familyname to getFamilyName(firebaseUser!!.displayName!!))
+    fun validateProfileForm() {
+        val profileFormMap = mapOf(email.value!! to firebaseUser!!.email!!,
+                firstname.value!! to getFirstName(firebaseUser!!.displayName!!),
+                familyname.value!! to getFamilyName(firebaseUser!!.displayName!!))
 
         if (!atLeastOneFieldChanged(profileFormMap)) {
             toggleEditMode()
             return
         }
 
-        if (!everyFieldHasValue(listOf(firstname, familyname, email))) {
+        if (!everyFieldHasValue(listOf(firstname.value!!, familyname.value!!, email.value!!))) {
             profileEditFormValidation.value = BaseCommand.Error(R.string.error_empty_fields)
             return
         }
 
-        if (!isEmailValid(email)) {
+        if (!isEmailValid(email.value!!)) {
             profileEditFormValidation.value = BaseCommand.Error(R.string.error_invalid_email)
             return
         }
@@ -77,9 +82,9 @@ class ProfileViewModel : InjectedViewModel() {
         profileEditFormValidation.value = BaseCommand.Success(null)
     }
 
-    fun applyProfileChanges(firstname: String, familyname: String, email: String) =  {
+    fun applyProfileChanges() =  {
         if (firebaseUser!!.displayName != "$firstname $familyname") {
-            firebaseUser!!.updateProfile(createProfileUpdates(firstname, familyname))
+            firebaseUser!!.updateProfile(createProfileUpdates(firstname.value!!, familyname.value!!))
                     .addOnCompleteListener { task ->
                         if (task.isSuccessful) {
                             appliedNameChanges.value = BaseCommand.Success(R.string.message_change_name)
@@ -89,8 +94,8 @@ class ProfileViewModel : InjectedViewModel() {
                     .addOnFailureListener { appliedNameChanges.value = BaseCommand.Error(R.string.error_change_name) }
         }
 
-        if (firebaseUser!!.email != email) {
-            firebaseUser!!.updateEmail(email)
+        if (firebaseUser!!.email != email.value!!) {
+            firebaseUser!!.updateEmail(email.value!!)
                     .addOnCompleteListener { task1 ->
                         if (task1.isSuccessful) {
                             firebaseUser!!.sendEmailVerification()
@@ -104,6 +109,12 @@ class ProfileViewModel : InjectedViewModel() {
                     }
                     .addOnFailureListener { appliedEmailChanges.value = BaseCommand.Error(R.string.error_change_email) }
         }
+    }
+
+    fun clearProfileForm() {
+        firstname.value = ""
+        familyname.value = ""
+        email.value = ""
     }
 
 }

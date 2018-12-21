@@ -16,9 +16,7 @@ class SettingsViewModel : InjectedViewModel(), IFirebaseSuggestionCallback {
     @Inject
     lateinit var firestoreAPI: FirestoreAPI
 
-    private val _isDarkModeEnabled = MutableLiveData<Boolean>()
-    val isDarkModeEnabled: MutableLiveData<Boolean>
-        get() = _isDarkModeEnabled
+    val isDarkModeEnabled = MutableLiveData<Boolean>()
 
     val visitWebsiteClicked = SingleLiveEvent<Any>()
 
@@ -35,12 +33,12 @@ class SettingsViewModel : InjectedViewModel(), IFirebaseSuggestionCallback {
     val signOutTriggered = SingleLiveEvent<Any>()
 
     init {
-        _isDarkModeEnabled.value = false
+        isDarkModeEnabled.value = false
     }
 
     fun visitWebsite() { visitWebsiteClicked.call() }
 
-    fun toggleDarkMode() { _isDarkModeEnabled.value = !_isDarkModeEnabled.value!! }
+    fun toggleDarkMode() { isDarkModeEnabled.value = !isDarkModeEnabled.value!! }
 
     fun visitPrivacyPolicy() { visitPrivacyPolicyClicked.call() }
 
