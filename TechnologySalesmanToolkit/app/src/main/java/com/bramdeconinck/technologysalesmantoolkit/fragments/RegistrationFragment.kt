@@ -2,6 +2,7 @@ package com.bramdeconinck.technologysalesmantoolkit.fragments
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
+import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
@@ -9,68 +10,49 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.bramdeconinck.technologysalesmantoolkit.R
-import com.bramdeconinck.technologysalesmantoolkit.utils.BaseCommand
+import com.bramdeconinck.technologysalesmantoolkit.databinding.FragmentRegistrationBinding
 import com.bramdeconinck.technologysalesmantoolkit.interfaces.IToastMaker
 import com.bramdeconinck.technologysalesmantoolkit.utils.MessageUtils.makeToast
 import com.bramdeconinck.technologysalesmantoolkit.utils.MessageUtils.showPrivacyPolicyDialog
 import com.bramdeconinck.technologysalesmantoolkit.viewmodels.RegistrationViewModel
-import kotlinx.android.synthetic.main.fragment_registration.*
 
 class RegistrationFragment : Fragment(), IToastMaker {
 
     private lateinit var registrationViewModel: RegistrationViewModel
+    private lateinit var binding: FragmentRegistrationBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_registration, container, false)
+
         registrationViewModel = ViewModelProviders.of(activity!!).get(RegistrationViewModel::class.java)
 
-        registrationViewModel.navigateToLogin.observe(this, Observer { navigateBackToLogin() })
+        val rootView = binding.root
+        binding.registrationViewModel = registrationViewModel
+        binding.setLifecycleOwner(activity)
 
-        registrationViewModel.showPrivacyPolicyDialog.observe(this, Observer { callPrivacyPolicyDialog() })
+        registrationViewModel.goToLoginClicked.observe(this, Observer { findNavController().popBackStack() })
 
-        registrationViewModel.registrationFormValidation.observe(this, Observer {
-            when(it) {
-                is BaseCommand.Error -> showToast(it.error!!)
-            }
-        })
+        registrationViewModel.showPrivacyPolicyDialog.observe(this, Observer { showPrivacyPolicyDialog() })
 
-        registrationViewModel.firebaseAccountCreation.observe(this, Observer {
-            when(it) {
-                is BaseCommand.Success -> showToast(it.message!!)
-                is BaseCommand.Error -> showToast(it.error!!)
-            }
-        })
+        registrationViewModel.registrationEvent.observe(this, Observer { showToast(it!!)  })
 
-        return inflater.inflate(R.layout.fragment_registration, container, false)
+        return rootView
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onDestroyView() {
+        super.onDestroyView()
 
-        btn_registration_register.setOnClickListener {
-            registrationViewModel.isRegistrationFormValid(
-                et_registration_firstname.text.toString(),
-                et_registration_lastname.text.toString(),
-                et_registration_email.text.toString(),
-                et_registration_password.text.toString(),
-                et_registration_repeatPassword.text.toString()
-            )
-        }
-
-        tv_registration_backToLogin.setOnClickListener { navigateBackToLogin() }
+        registrationViewModel.clearRegistrationForm()
     }
 
-    private fun callPrivacyPolicyDialog() {
-        showPrivacyPolicyDialog(context!!,
+    private fun showPrivacyPolicyDialog() {
+        showPrivacyPolicyDialog(
+                context!!,
                 getString(R.string.title_privacy_policy_dialog),
                 getString(R.string.message_privacy_policy_dialog),
-                registrationViewModel.createFirebaseAccount(
-                        et_registration_firstname.text.toString(),
-                        et_registration_lastname.text.toString(),
-                        et_registration_email.text.toString(),
-                        et_registration_password.text.toString()))
+                registrationViewModel.createFirebaseAccount()
+        )
     }
-
-    private fun navigateBackToLogin() = this.findNavController().popBackStack()
 
     override fun showToast(message: Int) { makeToast(context!!, message) }
 

@@ -1,123 +1,139 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
+<layout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".fragments.LoginFragment">
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <import type="android.view.View"/>
 
-    <ScrollView
-        android:background="@drawable/login_background"
+        <variable
+            name="loginViewModel"
+            type="com.bramdeconinck.technologysalesmantoolkit.viewmodels.LoginViewModel"/>
+    </data>
+
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:ignore="UselessParent">
+        tools:context=".fragments.LoginFragment">
 
-        <android.support.constraint.ConstraintLayout
+        <ScrollView
+            android:background="@drawable/login_background"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:focusable="true"
-            android:focusableInTouchMode="true">
+            android:layout_height="match_parent"
+            tools:ignore="UselessParent">
 
-            <ImageView
-                android:id="@+id/iv_login_logo"
-                android:layout_width="wrap_content"
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="32dp"
-                android:contentDescription="@string/description_app_logo"
-                app:layout_constraintBottom_toTopOf="@+id/guideline"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:srcCompat="@drawable/logo" />
+                android:focusable="true"
+                android:focusableInTouchMode="true">
 
-            <EditText
-                android:id="@+id/et_login_email"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="16dp"
-                android:background="@drawable/email"
-                android:ems="10"
-                android:hint="@string/placeholder_email"
-                android:inputType="textEmailAddress"
-                android:paddingStart="40dp"
-                android:paddingEnd="20dp"
-                android:textSize="16sp"
-                android:textColor="@color/colorFormFieldText"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/guideline"
-                tools:ignore="Autofill" />
+                <ImageView
+                    android:id="@+id/iv_login_logo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="32dp"
+                    android:contentDescription="@string/description_app_logo"
+                    app:layout_constraintBottom_toTopOf="@+id/guideline"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:srcCompat="@drawable/logo" />
 
-            <EditText
-                android:id="@+id/et_login_password"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="8dp"
-                android:background="@drawable/password"
-                android:ems="10"
-                android:hint="@string/placeholder_password"
-                android:inputType="textPassword"
-                android:paddingStart="40dp"
-                android:paddingEnd="20dp"
-                android:textSize="16sp"
-                android:textColor="@color/colorFormFieldText"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/et_login_email"
-                tools:ignore="Autofill" />
+                <EditText
+                    android:id="@+id/et_login_email"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/email"
+                    android:ems="10"
+                    android:hint="@string/placeholder_email"
+                    android:inputType="textEmailAddress"
+                    android:paddingStart="40dp"
+                    android:paddingEnd="20dp"
+                    android:textSize="16sp"
+                    android:textColor="@color/colorFormFieldText"
+                    android:text="@={loginViewModel.email}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/guideline"
+                    tools:ignore="Autofill" />
 
-            <Button
-                android:id="@+id/btn_login_signIn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentBottom="true"
-                android:layout_marginTop="8dp"
-                android:background="@drawable/login"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/et_login_password" />
+                <EditText
+                    android:id="@+id/et_login_password"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/password"
+                    android:ems="10"
+                    android:hint="@string/placeholder_password"
+                    android:inputType="textPassword"
+                    android:paddingStart="40dp"
+                    android:paddingEnd="20dp"
+                    android:textSize="16sp"
+                    android:textColor="@color/colorFormFieldText"
+                    android:text="@={loginViewModel.password}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/et_login_email"
+                    tools:ignore="Autofill" />
 
-            <Button
-                android:id="@+id/btn_login_signInWithGoogle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="32dp"
-                android:layout_marginBottom="32dp"
-                android:background="@drawable/login_google"
-                app:layout_constraintBottom_toTopOf="@+id/tv_login_goToRegistration"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btn_login_signIn" />
+                <Button
+                    android:id="@+id/btn_login_signIn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/login"
+                    android:onClick="@{() -> loginViewModel.logInWithFirebaseAccount()}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/et_login_password" />
 
-            <TextView
-                android:id="@+id/tv_login_goToRegistration"
-                android:layout_width="wrap_content"
-                android:layout_height="19dp"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentBottom="true"
-                android:layout_marginBottom="10dp"
-                android:background="@drawable/no_account_yet"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                <Button
+                    android:id="@+id/btn_login_signInWithGoogle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="32dp"
+                    android:layout_marginBottom="32dp"
+                    android:background="@drawable/login_google"
+                    android:onClick="@{() -> loginViewModel.signInWithGoogle()}"
+                    app:layout_constraintBottom_toTopOf="@+id/tv_login_goToRegistration"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/btn_login_signIn" />
 
-            <android.support.constraint.Guideline
-                android:id="@+id/guideline"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layout_constraintGuide_percent="0.5" />
+                <TextView
+                    android:id="@+id/tv_login_goToRegistration"
+                    android:layout_width="wrap_content"
+                    android:layout_height="19dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/no_account_yet"
+                    android:onClick="@{() -> loginViewModel.goToRegistration()}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
 
-        </android.support.constraint.ConstraintLayout>
+                <android.support.constraint.Guideline
+                    android:id="@+id/guideline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintGuide_percent="0.5" />
 
-    </ScrollView>
+            </android.support.constraint.ConstraintLayout>
 
-</FrameLayout>
+        </ScrollView>
+
+    </FrameLayout>
+
+</layout>

@@ -1,137 +1,154 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
+<layout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".fragments.SettingsFragment">
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <import type="android.view.View"/>
 
-    <ScrollView
-        android:background="@drawable/login_background"
+        <variable
+            name="settingsViewModel"
+            type="com.bramdeconinck.technologysalesmantoolkit.viewmodels.SettingsViewModel"/>
+    </data>
+
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:ignore="UselessParent">
+        tools:context=".fragments.SettingsFragment">
 
-        <android.support.constraint.ConstraintLayout
+        <ScrollView
+            android:background="@drawable/login_background"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:focusable="true"
-            android:focusableInTouchMode="true" >
-
-            <ImageView
-                android:id="@+id/iv_login_logo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
-                android:contentDescription="@string/description_app_logo"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/logo" />
+            android:layout_height="match_parent"
+            tools:ignore="UselessParent">
 
             <android.support.constraint.ConstraintLayout
-                android:id="@+id/settings_buttons"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="48dp"
-                android:layout_marginBottom="32dp"
-                android:paddingTop="8dp"
-                android:paddingBottom="18dp"
-                android:paddingStart="4dp"
-                android:paddingEnd="4dp"
-                android:background="@drawable/rounded_corners"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/iv_login_logo"
-                app:layout_constraintBottom_toTopOf="@+id/lbl_settings_copyright">
+                android:focusable="true"
+                android:focusableInTouchMode="true" >
 
-                <Button
-                    android:id="@+id/btn_settings_website"
+                <ImageView
+                    android:id="@+id/iv_login_logo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:background="@drawable/visit_website"
+                    android:layout_marginTop="32dp"
+                    android:contentDescription="@string/description_app_logo"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/logo" />
 
-                <Button
-                    android:id="@+id/btn_settings_darkmode"
+                <android.support.constraint.ConstraintLayout
+                    android:id="@+id/settings_buttons"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:background="@drawable/dark_mode"
+                    android:layout_marginTop="48dp"
+                    android:layout_marginBottom="32dp"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="18dp"
+                    android:paddingStart="4dp"
+                    android:paddingEnd="4dp"
+                    android:background="@drawable/rounded_corners"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/btn_settings_website" />
+                    app:layout_constraintTop_toBottomOf="@id/iv_login_logo"
+                    app:layout_constraintBottom_toTopOf="@+id/lbl_settings_copyright">
 
-                <Switch
-                    android:id="@+id/switch_settings_darkmode"
+                    <Button
+                        android:id="@+id/btn_settings_website"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:background="@drawable/visit_website"
+                        android:onClick="@{() -> settingsViewModel.visitWebsite()}"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <Button
+                        android:id="@+id/btn_settings_darkmode"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:background="@drawable/dark_mode"
+                        android:onClick="@{() -> settingsViewModel.toggleDarkMode()}"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/btn_settings_website" />
+
+                    <Switch
+                        android:id="@+id/switch_settings_darkmode"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="20dp"
+                        android:elevation="10dp"
+                        android:checked="@={settingsViewModel.isDarkModeEnabled}"
+                        app:layout_constraintBottom_toBottomOf="@+id/btn_settings_darkmode"
+                        app:layout_constraintEnd_toEndOf="@+id/btn_settings_darkmode"
+                        app:layout_constraintTop_toTopOf="@+id/btn_settings_darkmode" />
+
+                    <Button
+                        android:id="@+id/btn_settings_privacypolicy"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:background="@drawable/privacy_policy"
+                        android:onClick="@{() -> settingsViewModel.visitPrivacyPolicy()}"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/btn_settings_darkmode" />
+
+                    <Button
+                        android:id="@+id/btn_settings_suggestion"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:background="@drawable/send_suggestion"
+                        android:onClick="@{() -> settingsViewModel.makeSuggestion()}"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/btn_settings_privacypolicy" />
+
+                    <Button
+                        android:id="@+id/btn_settings_signout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:background="@drawable/sign_out"
+                        android:onClick="@{() -> settingsViewModel.showSignOutDialog()}"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/btn_settings_suggestion" />
+
+                </android.support.constraint.ConstraintLayout>
+
+                <TextView
+                    android:id="@+id/lbl_settings_copyright"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="20dp"
-                    android:elevation="10dp"
-                    app:layout_constraintBottom_toBottomOf="@+id/btn_settings_darkmode"
-                    app:layout_constraintEnd_toEndOf="@+id/btn_settings_darkmode"
-                    app:layout_constraintTop_toTopOf="@+id/btn_settings_darkmode" />
-
-                <Button
-                    android:id="@+id/btn_settings_privacypolicy"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:background="@drawable/privacy_policy"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/copyright"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/btn_settings_darkmode" />
-
-                <Button
-                    android:id="@+id/btn_settings_suggestion"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:background="@drawable/send_suggestion"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/btn_settings_privacypolicy" />
-
-                <Button
-                    android:id="@+id/btn_settings_signout"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginBottom="8dp"
-                    android:background="@drawable/sign_out"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/btn_settings_suggestion" />
+                    app:layout_constraintTop_toBottomOf="@+id/settings_buttons" />
 
             </android.support.constraint.ConstraintLayout>
 
-            <TextView
-                android:id="@+id/lbl_settings_copyright"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:background="@drawable/copyright"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/settings_buttons" />
+        </ScrollView>
 
-        </android.support.constraint.ConstraintLayout>
+    </FrameLayout>
 
-    </ScrollView>
-
-</FrameLayout>
+</layout>

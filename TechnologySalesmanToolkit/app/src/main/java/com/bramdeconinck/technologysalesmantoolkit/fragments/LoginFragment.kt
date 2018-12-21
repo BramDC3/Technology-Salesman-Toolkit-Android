@@ -3,16 +3,16 @@ package com.bramdeconinck.technologysalesmantoolkit.fragments
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
+import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.bramdeconinck.technologysalesmantoolkit.R
+import com.bramdeconinck.technologysalesmantoolkit.databinding.FragmentLoginBinding
 import com.bramdeconinck.technologysalesmantoolkit.interfaces.IToastMaker
-import com.bramdeconinck.technologysalesmantoolkit.utils.BaseCommand
 import com.bramdeconinck.technologysalesmantoolkit.utils.FirebaseUtils.firebaseUser
 import com.bramdeconinck.technologysalesmantoolkit.utils.GOOGLE_SIGN_IN_REQUEST_CODE
 import com.bramdeconinck.technologysalesmantoolkit.utils.MessageUtils.makeToast
@@ -23,16 +23,22 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
-import kotlinx.android.synthetic.main.fragment_login.*
 
 class LoginFragment : Fragment(), IToastMaker {
 
     private lateinit var loginViewModel: LoginViewModel
+    private lateinit var binding: FragmentLoginBinding
     private lateinit var gso: GoogleSignInOptions
     private lateinit var mGoogleSignInClient: GoogleSignInClient
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_login, container, false)
+
         loginViewModel =  ViewModelProviders.of(activity!!).get(LoginViewModel::class.java)
+
+        val rootView = binding.root
+        binding.loginViewModel = loginViewModel
+        binding.setLifecycleOwner(activity)
 
         gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
@@ -41,37 +47,21 @@ class LoginFragment : Fragment(), IToastMaker {
 
         mGoogleSignInClient = GoogleSignIn.getClient(context!!, gso)
 
-        loginViewModel.emailIsNotVerified.observe(this, Observer { showToast(R.string.error_email_is_not_verified) })
+        loginViewModel.navigateToServiceList.observe(this, Observer { goToServiceList()})
 
-        loginViewModel.signInErrorOccurred.observe(this, Observer { showToast(R.string.sign_in_error) })
+        loginViewModel.signInWithGoogleClicked.observe(this, Observer { signInWithGoogle() })
 
-        loginViewModel.loginFormValidation.observe(this, Observer {
-            when (it) {
-                is BaseCommand.Error -> showToast(it.error!!)
-            }
-        })
+        loginViewModel.goToRegistrationClicked.observe(this, Observer { goToRegistration() })
 
-        loginViewModel.navigateToServiceList.observe(this, Observer {
-            makeToast(context!!, R.string.message_welcome, firebaseUser!!.displayName)
-            this.findNavController().navigate(R.id.toServiceList)
-        })
+        loginViewModel.loginErrorOccurred.observe(this, Observer { showToast(it!!) })
 
-        return inflater.inflate(R.layout.fragment_login, container, false)
+        return rootView
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onDestroyView() {
+        super.onDestroyView()
 
-        btn_login_signIn.setOnClickListener {
-            loginViewModel.logInWithFirebaseAccount(
-                    et_login_email.text.toString(),
-                    et_login_password.text.toString()
-            )
-        }
-
-        btn_login_signInWithGoogle.setOnClickListener { signInWithGoogle() }
-
-        tv_login_goToRegistration.setOnClickListener { it.findNavController().navigate(R.id.toRegistration) }
+        loginViewModel.clearLoginForm()
     }
 
     private fun signInWithGoogle() {
@@ -92,6 +82,13 @@ class LoginFragment : Fragment(), IToastMaker {
             }
         }
     }
+
+    private fun goToServiceList() {
+        makeToast(context!!, R.string.message_welcome, firebaseUser!!.displayName)
+        findNavController().navigate(R.id.toServiceList)
+    }
+
+    private fun goToRegistration() { findNavController().navigate(R.id.toRegistration) }
 
     override fun showToast(message: Int) {makeToast(context!!, message)}
 
