@@ -16,6 +16,7 @@ import com.bramdeconinck.technologysalesmantoolkit.interfaces.IToastMaker
 import com.bramdeconinck.technologysalesmantoolkit.models.Category
 import com.bramdeconinck.technologysalesmantoolkit.utils.MessageUtils.makeToast
 import com.bramdeconinck.technologysalesmantoolkit.viewmodels.ServiceViewModel
+import kotlinx.android.synthetic.main.fragment_service_list.*
 import kotlinx.android.synthetic.main.fragment_service_list.view.*
 
 class ServiceListFragment : Fragment(), IToastMaker {
@@ -57,6 +58,17 @@ class ServiceListFragment : Fragment(), IToastMaker {
         serviceViewModel.servicesErrorOccurred.observe(this, Observer { showToast(R.string.fetching_data_error) })
 
         return rootView
+    }
+
+    override fun onStart() {
+        super.onStart()
+
+        srl_service_list_swiper.setColorSchemeColors(Color.argb(1, 115, 161, 199))
+
+        srl_service_list_swiper.setOnRefreshListener {
+            srl_service_list_swiper.isRefreshing = false
+            serviceViewModel.fetchServices()
+        }
     }
 
     override fun onDestroyView() {

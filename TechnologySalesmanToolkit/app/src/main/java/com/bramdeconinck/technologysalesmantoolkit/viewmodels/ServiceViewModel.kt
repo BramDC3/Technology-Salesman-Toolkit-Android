@@ -52,10 +52,8 @@ class ServiceViewModel : InjectedViewModel(), IFirebaseServiceCallback, IFirebas
 
         searchQuery = ""
 
-        firestoreAPI.getAllServices(this)
+        fetchServices()
     }
-
-    fun fetchInstructions(serviceId: String) { firestoreAPI.getAllInstructionsFrom(serviceId, this) }
 
     private fun refreshServiceList() {
         if (selectedCategory != null) _services.value = allServices.value!!.filter { it.name.toLowerCase().contains(searchQuery) && it.category == selectedCategory }
@@ -76,6 +74,13 @@ class ServiceViewModel : InjectedViewModel(), IFirebaseServiceCallback, IFirebas
         selectedCategory = null
         searchQuery = ""
     }
+
+    fun fetchServices() {
+        clearFilters()
+        firestoreAPI.getAllServices(this)
+    }
+
+    fun fetchInstructions(serviceId: String) { firestoreAPI.getAllInstructionsFrom(serviceId, this) }
 
     override fun onServicesCallBack(list: List<Any>) {
         allServices.value = list.map { it as Service }
