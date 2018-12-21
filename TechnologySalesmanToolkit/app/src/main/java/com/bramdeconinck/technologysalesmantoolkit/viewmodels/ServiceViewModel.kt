@@ -1,5 +1,6 @@
 package com.bramdeconinck.technologysalesmantoolkit.viewmodels
 
+import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import com.bramdeconinck.technologysalesmantoolkit.base.InjectedViewModel
 import com.bramdeconinck.technologysalesmantoolkit.interfaces.IFirebaseInstructionCallback
@@ -15,22 +16,24 @@ class ServiceViewModel : InjectedViewModel(), IFirebaseServiceCallback, IFirebas
     @Inject
     lateinit var firestoreAPI: FirestoreAPI
 
-    val servicesErrorOccurred = SingleLiveEvent<Any>()
-
-    val instructionsErrorOccurred = SingleLiveEvent<Any>()
-
     private var services = MutableLiveData<List<Service>>()
 
     private var instructions = MutableLiveData<List<Instruction>>()
 
-    private var isLoading = MutableLiveData<Boolean>()
+    private val _isLoading = MutableLiveData<Boolean>()
+    val isLoading: LiveData<Boolean>
+        get() = _isLoading
+
+    val servicesErrorOccurred = SingleLiveEvent<Any>()
+
+    val instructionsErrorOccurred = SingleLiveEvent<Any>()
 
     init {
         services.value = mutableListOf()
 
         instructions.value = mutableListOf()
 
-        isLoading.value = false
+        _isLoading.value = false
 
         firestoreAPI.getAllServices(this)
     }
@@ -39,15 +42,13 @@ class ServiceViewModel : InjectedViewModel(), IFirebaseServiceCallback, IFirebas
 
     fun getInstructions(): MutableLiveData<List<Instruction>> { return instructions }
 
-    fun getIsLoading(): MutableLiveData<Boolean> { return isLoading }
-
     fun fetchInstructions(serviceId: String) { firestoreAPI.getAllInstructionsFrom(serviceId, this) }
 
     override fun onServicesCallBack(list: List<Any>) { services.value = list.map { it as Service } }
 
-    override fun showProgress() { isLoading.value = true }
+    override fun showProgress() { _isLoading.value = true }
 
-    override fun hideProgress() { isLoading.value = false }
+    override fun hideProgress() { _isLoading.value = false }
 
     override fun showServicesMessage() { servicesErrorOccurred.call() }
 
