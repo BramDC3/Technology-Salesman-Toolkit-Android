@@ -1,6 +1,9 @@
 package com.bramdeconinck.technologysalesmantoolkit.injection.module
 
 import android.content.Context
+import com.bramdeconinck.technologysalesmantoolkit.database.ServiceDao
+import com.bramdeconinck.technologysalesmantoolkit.database.ServiceDatabase
+import com.bramdeconinck.technologysalesmantoolkit.models.ServiceRepository
 import com.bramdeconinck.technologysalesmantoolkit.network.FirestoreAPI
 import dagger.Module
 import dagger.Provides
@@ -22,12 +25,35 @@ class NetworkModule(private val context: Context) {
 
     /**
      * Provides the Firestore implemenation
-     * @param retrofit the retrofit object used to instantiate the service
      */
     @Provides
     @Singleton
     internal fun provideFirestoreApi(): FirestoreAPI {
         return FirestoreAPI()
+    }
+
+    @Provides
+    @Singleton
+    fun provideServiceRepository(serviceDao: ServiceDao): ServiceRepository {
+        return ServiceRepository(serviceDao)
+    }
+
+    @Provides
+    @Singleton
+    fun provideServiceDao(serviceDatabase: ServiceDatabase): ServiceDao {
+        return serviceDatabase.serviceDao()
+    }
+
+    @Provides
+    @Singleton
+    fun provideServiceDatabase(context: Context): ServiceDatabase {
+        return ServiceDatabase.getInstance(context)
+    }
+
+    @Provides
+    @Singleton
+    fun provideApplicationContext(): Context {
+        return context.applicationContext
     }
 
 }
