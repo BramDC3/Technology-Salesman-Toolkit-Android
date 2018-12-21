@@ -41,7 +41,7 @@ class ServiceListFragment : Fragment(), IToastMaker {
         binding.serviceViewModel = serviceViewModel
         binding.setLifecycleOwner(activity)
 
-        val services = serviceViewModel.getServices()
+        val services = serviceViewModel.services
 
         // If the service detail container is not null,
         // then the app is running on a tablet
@@ -70,7 +70,10 @@ class ServiceListFragment : Fragment(), IToastMaker {
 
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean { return false }
-            override fun onQueryTextChange(newText: String): Boolean { return false }
+            override fun onQueryTextChange(newText: String): Boolean {
+                serviceViewModel.applySearchQuery(newText)
+                return true
+            }
         })
 
         super.onCreateOptionsMenu(menu, inflater)

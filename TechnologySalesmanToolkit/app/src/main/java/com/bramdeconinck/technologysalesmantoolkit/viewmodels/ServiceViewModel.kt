@@ -16,9 +16,15 @@ class ServiceViewModel : InjectedViewModel(), IFirebaseServiceCallback, IFirebas
     @Inject
     lateinit var firestoreAPI: FirestoreAPI
 
-    private var services = MutableLiveData<List<Service>>()
+    private val allServices = MutableLiveData<List<Service>>()
 
-    private var instructions = MutableLiveData<List<Instruction>>()
+    private val _services = MutableLiveData<List<Service>>()
+    val services: MutableLiveData<List<Service>>
+        get() = _services
+
+    private val _instructions = MutableLiveData<List<Instruction>>()
+    val instructions: MutableLiveData<List<Instruction>>
+        get() = _instructions
 
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean>
@@ -29,22 +35,28 @@ class ServiceViewModel : InjectedViewModel(), IFirebaseServiceCallback, IFirebas
     val instructionsErrorOccurred = SingleLiveEvent<Any>()
 
     init {
-        services.value = mutableListOf()
+        allServices.value = mutableListOf()
 
-        instructions.value = mutableListOf()
+        _services.value = mutableListOf()
+
+        _instructions.value = mutableListOf()
 
         _isLoading.value = false
 
         firestoreAPI.getAllServices(this)
     }
 
-    fun getServices(): MutableLiveData<List<Service>> { return services }
-
-    fun getInstructions(): MutableLiveData<List<Instruction>> { return instructions }
-
     fun fetchInstructions(serviceId: String) { firestoreAPI.getAllInstructionsFrom(serviceId, this) }
 
-    override fun onServicesCallBack(list: List<Any>) { services.value = list.map { it as Service } }
+    fun applySearchQuery(query: String) {
+        if (query.isEmpty()) _services.value = allServices.value
+        else _services.value = allServices.value!!.filter { it.name.toLowerCase().contains(query.toLowerCase()) }
+    }
+
+    override fun onServicesCallBack(list: List<Any>) {
+        allServices.value = list.map { it as Service }
+        _services.value = allServices.value
+    }
 
     override fun showProgress() { _isLoading.value = true }
 
@@ -52,7 +64,7 @@ class ServiceViewModel : InjectedViewModel(), IFirebaseServiceCallback, IFirebas
 
     override fun showServicesMessage() { servicesErrorOccurred.call() }
 
-    override fun onInstructionsCallBack(list: List<Any>) { instructions.value = list.map { it as Instruction } }
+    override fun onInstructionsCallBack(list: List<Any>) { _instructions.value = list.map { it as Instruction } }
 
     override fun showInstructionsMessage() { instructionsErrorOccurred.call() }
 

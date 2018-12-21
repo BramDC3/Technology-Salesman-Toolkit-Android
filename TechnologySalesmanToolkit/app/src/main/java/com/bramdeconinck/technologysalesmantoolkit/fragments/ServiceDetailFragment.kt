@@ -35,7 +35,7 @@ class ServiceDetailFragment : Fragment(), IToastMaker {
 
         serviceViewModel.fetchInstructions(service!!.id)
 
-        val instructions = serviceViewModel.getInstructions()
+        val instructions = serviceViewModel.instructions
 
         val pagerAdapter = InstructionAdapter(instructions, childFragmentManager)
 
