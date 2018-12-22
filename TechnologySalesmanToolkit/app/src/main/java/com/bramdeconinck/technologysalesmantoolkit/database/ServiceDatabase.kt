@@ -5,10 +5,11 @@ import android.arch.persistence.room.Room
 import android.arch.persistence.room.RoomDatabase
 import android.arch.persistence.room.TypeConverters
 import android.content.Context
+import com.bramdeconinck.technologysalesmantoolkit.models.Instruction
 import com.bramdeconinck.technologysalesmantoolkit.models.Service
 import com.bramdeconinck.technologysalesmantoolkit.utils.RoomConvertersUtils
 
-@Database(entities = [Service::class], version = 1)
+@Database(entities = [Service::class, Instruction::class], version = 1)
 @TypeConverters(RoomConvertersUtils::class)
 abstract class ServiceDatabase : RoomDatabase() {
 

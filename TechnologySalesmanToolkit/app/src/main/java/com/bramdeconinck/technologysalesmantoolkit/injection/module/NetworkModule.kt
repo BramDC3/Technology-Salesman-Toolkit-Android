@@ -3,6 +3,7 @@ package com.bramdeconinck.technologysalesmantoolkit.injection.module
 import android.content.Context
 import com.bramdeconinck.technologysalesmantoolkit.database.ServiceDao
 import com.bramdeconinck.technologysalesmantoolkit.database.ServiceDatabase
+import com.bramdeconinck.technologysalesmantoolkit.models.InstructionRepository
 import com.bramdeconinck.technologysalesmantoolkit.models.ServiceRepository
 import com.bramdeconinck.technologysalesmantoolkit.network.FirestoreAPI
 import dagger.Module
@@ -30,6 +31,12 @@ class NetworkModule(private val context: Context) {
     @Singleton
     internal fun provideFirestoreApi(): FirestoreAPI {
         return FirestoreAPI()
+    }
+
+    @Provides
+    @Singleton
+    fun provideInstructionRepository(serviceDao: ServiceDao): InstructionRepository {
+        return InstructionRepository(serviceDao)
     }
 
     @Provides

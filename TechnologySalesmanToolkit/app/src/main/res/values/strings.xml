@@ -34,6 +34,8 @@
     <!-- Firebase errors  -->
     <string name="sign_in_error">Er is een fout opgetreden tijdens het aanmelden. Gelieve het opnieuw te proberen.</string>
     <string name="fetching_data_error">Er is een fout opgetreden tijdens het ophalen van de gegevens.</string>
+    <string name="fetching_services_error">Er is een fout opgetreden tijdens het ophalen van de diensten.</string>
+    <string name="fetching_instructions_error">Er is een fout opgetreden tijdens het ophalen van de instructies.</string>
 
     <!-- Titles of certain fragments for the action bar and bottom navigation bar -->
     <string name="title_service_list_fragment">Diensten</string>

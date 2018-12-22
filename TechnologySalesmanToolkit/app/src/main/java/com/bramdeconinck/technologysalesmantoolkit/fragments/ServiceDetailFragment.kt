@@ -43,7 +43,7 @@ class ServiceDetailFragment : Fragment(), IToastMaker {
 
         instructions.observe(this, Observer { pagerAdapter.notifyDataSetChanged() })
 
-        serviceViewModel.instructionsErrorOccurred.observe(this, Observer { showToast(R.string.fetching_data_error) })
+        serviceViewModel.instructionsErrorOccurred.observe(this, Observer { showToast(R.string.fetching_instructions_error) })
 
         return rootView
     }

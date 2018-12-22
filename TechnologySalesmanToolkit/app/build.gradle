@@ -81,6 +81,9 @@ dependencies {
     kapt "android.arch.persistence.room:compiler:1.1.1"
     androidTestImplementation "android.arch.persistence.room:testing:1.1.1"
 
+    // Gson
+    implementation "com.google.code.gson:gson:2.8.5"
+
     // Anko is used for async tasks
     implementation 'org.jetbrains.anko:anko-common:0.10.4'
 
