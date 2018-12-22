@@ -95,4 +95,7 @@ dependencies {
     annotationProcessor "com.google.dagger:dagger-compiler:2.16"
     kapt "com.google.dagger:dagger-compiler:2.16"
     annotationProcessor "com.google.dagger:dagger-android-processor:2.16"
+
+    // EasyFlipViewPager is used to add animations to a viewpager
+    implementation "com.wajahatkarim3.easyflipviewpager:easyflipviewpager:1.0.0"
 }
