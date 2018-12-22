@@ -2,7 +2,6 @@ package com.bramdeconinck.technologysalesmantoolkit.viewmodels
 
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
-import android.util.Log
 import com.bramdeconinck.technologysalesmantoolkit.base.InjectedViewModel
 import com.bramdeconinck.technologysalesmantoolkit.interfaces.IFirebaseInstructionCallback
 import com.bramdeconinck.technologysalesmantoolkit.interfaces.IFirebaseServiceCallback
@@ -102,11 +101,19 @@ class ServiceViewModel : InjectedViewModel(), IFirebaseServiceCallback, IFirebas
         firestoreAPI.getAllInstructionsFrom(serviceId, this)
     }
 
+    fun clearInstructions() { _instructions.value = mutableListOf() }
+
     fun onDatabaseServicesReady() {
         if (allServices.value!!.isEmpty() && roomServices.value!!.isNotEmpty()) {
             allServices.value = roomServices.value
             _isLoading.value = false
             refreshServiceList()
+        }
+    }
+
+    fun onDatabaseInstructionsReady(id: String) {
+        if (_instructions.value!!.isEmpty() && !roomInstructions.value.isNullOrEmpty()) {
+            _instructions.value = roomInstructions.value!!.filter { it.serviceId == id }
         }
     }
 
@@ -130,12 +137,6 @@ class ServiceViewModel : InjectedViewModel(), IFirebaseServiceCallback, IFirebas
         }
     }
 
-    override fun showInstructionsMessage() {
-        instructionsErrorOccurred.call()
-        Log.e("LOL", "IK BEN HIER")
-        if (_instructions.value!!.isEmpty() && !roomInstructions.value.isNullOrEmpty()) {
-            _instructions.value = roomInstructions.value
-        }
-    }
+    override fun showInstructionsMessage() { instructionsErrorOccurred.call() }
 
 }
