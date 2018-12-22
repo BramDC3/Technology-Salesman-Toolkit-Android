@@ -54,7 +54,7 @@ dependencies {
     implementation 'com.google.android.gms:play-services-auth:16.0.1'
 
     // Firebase Firestore database
-    implementation 'com.google.firebase:firebase-firestore:17.1.4'
+    implementation 'com.google.firebase:firebase-firestore:17.1.5'
 
     // Glide is used to load images from a URL
     implementation "com.github.bumptech.glide:glide:4.8.0"
@@ -64,15 +64,28 @@ dependencies {
     implementation "android.arch.navigation:navigation-fragment-ktx:1.0.0-alpha07"
     implementation "android.arch.navigation:navigation-ui-ktx:1.0.0-alpha07"
 
-    // ViewModel
+    // Dagger
+    // Adds libraries defining annotations to only the compile classpath
+    implementation "com.google.dagger:dagger:2.16"
+    implementation "com.google.dagger:dagger-android-support:2.16"
+
+    // Lifecycle components (including ViewModel)
     implementation "android.arch.lifecycle:extensions:1.1.1"
+    kapt "android.arch.lifecycle:compiler:1.1.1"
 
     // Data binding
     annotationProcessor "com.android.databinding:compiler:3.1.4"
 
-    // Adds libraries defining annotations to only the compile classpath.
-    implementation "com.google.dagger:dagger:2.16"
-    implementation "com.google.dagger:dagger-android-support:2.16"
+    // Room components, for local persistense
+    implementation "android.arch.persistence.room:runtime:1.1.1"
+    kapt "android.arch.persistence.room:compiler:1.1.1"
+    androidTestImplementation "android.arch.persistence.room:testing:1.1.1"
+
+    // Gson
+    implementation "com.google.code.gson:gson:2.8.5"
+
+    // Anko is used for async tasks
+    implementation 'org.jetbrains.anko:anko-common:0.10.4'
 
     // Adds the annotation processor dependency to the annotation processor classpath.
     // Android Studio by default will not allow you to navigate to generated Dagger 2

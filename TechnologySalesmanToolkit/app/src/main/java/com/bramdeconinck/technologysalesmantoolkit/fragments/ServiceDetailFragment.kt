@@ -43,7 +43,12 @@ class ServiceDetailFragment : Fragment(), IToastMaker {
 
         instructions.observe(this, Observer { pagerAdapter.notifyDataSetChanged() })
 
-        serviceViewModel.instructionsErrorOccurred.observe(this, Observer { showToast(R.string.fetching_data_error) })
+        serviceViewModel.roomInstructions.observe(this, Observer { serviceViewModel.onDatabaseInstructionsReady(service!!.id) })
+
+        serviceViewModel.instructionsErrorOccurred.observe(this, Observer {
+            showToast(R.string.fetching_instructions_error)
+            serviceViewModel.onDatabaseInstructionsReady(service!!.id)
+        })
 
         return rootView
     }
@@ -52,6 +57,12 @@ class ServiceDetailFragment : Fragment(), IToastMaker {
         super.onStart()
 
         setSupportActionBarTitle(service?.name)
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+
+        serviceViewModel.clearInstructions()
     }
 
     private fun setSupportActionBarTitle(title: String?) { (activity as IToolbarTitleListener).updateTitle(title) }

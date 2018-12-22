@@ -5,11 +5,10 @@ import android.arch.lifecycle.MutableLiveData
 import com.bramdeconinck.technologysalesmantoolkit.base.InjectedViewModel
 import com.bramdeconinck.technologysalesmantoolkit.interfaces.IFirebaseInstructionCallback
 import com.bramdeconinck.technologysalesmantoolkit.interfaces.IFirebaseServiceCallback
-import com.bramdeconinck.technologysalesmantoolkit.models.Category
-import com.bramdeconinck.technologysalesmantoolkit.models.Instruction
-import com.bramdeconinck.technologysalesmantoolkit.models.Service
+import com.bramdeconinck.technologysalesmantoolkit.models.*
 import com.bramdeconinck.technologysalesmantoolkit.network.FirestoreAPI
 import com.bramdeconinck.technologysalesmantoolkit.utils.SingleLiveEvent
+import org.jetbrains.anko.doAsync
 import javax.inject.Inject
 
 class ServiceViewModel : InjectedViewModel(), IFirebaseServiceCallback, IFirebaseInstructionCallback {
@@ -17,15 +16,29 @@ class ServiceViewModel : InjectedViewModel(), IFirebaseServiceCallback, IFirebas
     @Inject
     lateinit var firestoreAPI: FirestoreAPI
 
+    @Inject
+    lateinit var serviceRepository: ServiceRepository
+
+    @Inject
+    lateinit var instructionRepository: InstructionRepository
+
     private val allServices = MutableLiveData<List<Service>>()
 
     private val _services = MutableLiveData<List<Service>>()
     val services: MutableLiveData<List<Service>>
         get() = _services
 
+    private val _roomServices: LiveData<List<Service>>
+    val roomServices: LiveData<List<Service>>
+        get() = _roomServices
+
     private val _instructions = MutableLiveData<List<Instruction>>()
     val instructions: MutableLiveData<List<Instruction>>
         get() = _instructions
+
+    private val _roomInstructions: LiveData<List<Instruction>>
+    val roomInstructions: LiveData<List<Instruction>>
+        get() = _roomInstructions
 
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean>
@@ -44,7 +57,11 @@ class ServiceViewModel : InjectedViewModel(), IFirebaseServiceCallback, IFirebas
 
         _services.value = mutableListOf()
 
+        _roomServices = serviceRepository.services
+
         _instructions.value = mutableListOf()
+
+        _roomInstructions = instructionRepository.instructions
 
         _isLoading.value = false
 
@@ -80,10 +97,29 @@ class ServiceViewModel : InjectedViewModel(), IFirebaseServiceCallback, IFirebas
         firestoreAPI.getAllServices(this)
     }
 
-    fun fetchInstructions(serviceId: String) { firestoreAPI.getAllInstructionsFrom(serviceId, this) }
+    fun fetchInstructions(serviceId: String) {
+        firestoreAPI.getAllInstructionsFrom(serviceId, this)
+    }
+
+    fun clearInstructions() { _instructions.value = mutableListOf() }
+
+    fun onDatabaseServicesReady() {
+        if (allServices.value!!.isEmpty() && roomServices.value!!.isNotEmpty()) {
+            allServices.value = roomServices.value
+            _isLoading.value = false
+            refreshServiceList()
+        }
+    }
+
+    fun onDatabaseInstructionsReady(id: String) {
+        if (_instructions.value!!.isEmpty() && !roomInstructions.value.isNullOrEmpty()) {
+            _instructions.value = roomInstructions.value!!.filter { it.serviceId == id }
+        }
+    }
 
     override fun onServicesCallBack(list: List<Any>) {
         allServices.value = list.map { it as Service }
+        doAsync { serviceRepository.insert(allServices.value!!) }
         refreshServiceList()
     }
 
@@ -93,7 +129,13 @@ class ServiceViewModel : InjectedViewModel(), IFirebaseServiceCallback, IFirebas
 
     override fun showServicesMessage() { servicesErrorOccurred.call() }
 
-    override fun onInstructionsCallBack(list: List<Any>) { _instructions.value = list.map { it as Instruction } }
+    override fun onInstructionsCallBack(list: List<Any>) {
+        _instructions.value = list.map { it as Instruction }
+        doAsync {
+            instructionRepository.clearInstructionsByServiceId(_instructions.value!![0].serviceId)
+            instructionRepository.insert(_instructions.value!!)
+        }
+    }
 
     override fun showInstructionsMessage() { instructionsErrorOccurred.call() }
 
