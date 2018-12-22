@@ -90,6 +90,7 @@ class ServiceViewModel : InjectedViewModel(), IFirebaseServiceCallback, IFirebas
     fun clearFilters() {
         selectedCategory = null
         searchQuery = ""
+        services.value = allServices.value
     }
 
     fun fetchServices() {

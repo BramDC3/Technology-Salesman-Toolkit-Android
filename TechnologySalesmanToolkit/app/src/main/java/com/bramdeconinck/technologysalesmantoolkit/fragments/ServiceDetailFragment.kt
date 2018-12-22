@@ -15,6 +15,7 @@ import com.bramdeconinck.technologysalesmantoolkit.interfaces.IToolbarTitleListe
 import com.bramdeconinck.technologysalesmantoolkit.utils.SERVICE_ITEM
 import com.bramdeconinck.technologysalesmantoolkit.utils.MessageUtils
 import com.bramdeconinck.technologysalesmantoolkit.viewmodels.ServiceViewModel
+import com.wajahatkarim3.easyflipviewpager.BookFlipPageTransformer
 import kotlinx.android.synthetic.main.fragment_service_detail.view.*
 
 class ServiceDetailFragment : Fragment(), IToastMaker {
@@ -40,6 +41,12 @@ class ServiceDetailFragment : Fragment(), IToastMaker {
         val pagerAdapter = InstructionAdapter(instructions, childFragmentManager)
 
         rootView.vp_service_detail_instructions.adapter = pagerAdapter
+
+        // Add animation to viewpager
+        val transformer = BookFlipPageTransformer()
+        transformer.isEnableScale = true
+        transformer.scaleAmountPercent = 10f
+        rootView.vp_service_detail_instructions.setPageTransformer(true, transformer)
 
         instructions.observe(this, Observer { pagerAdapter.notifyDataSetChanged() })
 
