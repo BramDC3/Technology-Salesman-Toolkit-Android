@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- The primary colors of the app theme -->
+    <color name="colorPrimary">#212121</color>
+    <color name="colorPrimaryDark">#000000</color>
+    <color name="colorAccent">#3E50B4</color>
+
+    <!-- Background of certain groups of views -->
+    <color name="colorLightBlueBackground">#45FFFFFF</color>
+
+    <!-- Form field text color -->
+    <color name="colorFormFieldText">#655E5E</color>
+
+</resources>

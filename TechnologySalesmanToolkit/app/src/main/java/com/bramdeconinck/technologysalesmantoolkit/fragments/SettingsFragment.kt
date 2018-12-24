@@ -5,6 +5,8 @@ import android.arch.lifecycle.ViewModelProviders
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.app.AppCompatActivity
+import android.support.v7.app.AppCompatDelegate
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -38,6 +40,11 @@ class SettingsFragment : Fragment(), IToastMaker {
         settingsViewModel.visitWebsiteClicked.observe(this, Observer { openWebPage(context!!, website) })
 
         settingsViewModel.visitPrivacyPolicyClicked.observe(this, Observer { openWebPage(context!!, privacyPolicy) })
+
+        settingsViewModel.isDarkModeEnabled.observe(this, Observer {
+            if (it!!) (activity as AppCompatActivity).delegate.setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            else (activity as AppCompatActivity).delegate.setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        })
 
         settingsViewModel.makeSuggestionClicked.observe(this, Observer {
             showMakeSuggestionDialog(
