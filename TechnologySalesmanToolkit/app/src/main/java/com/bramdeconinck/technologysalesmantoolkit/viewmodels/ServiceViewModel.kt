@@ -3,15 +3,15 @@ package com.bramdeconinck.technologysalesmantoolkit.viewmodels
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import com.bramdeconinck.technologysalesmantoolkit.base.InjectedViewModel
-import com.bramdeconinck.technologysalesmantoolkit.interfaces.IFirebaseInstructionCallback
-import com.bramdeconinck.technologysalesmantoolkit.interfaces.IFirebaseServiceCallback
+import com.bramdeconinck.technologysalesmantoolkit.interfaces.FirebaseInstructionCallback
+import com.bramdeconinck.technologysalesmantoolkit.interfaces.FirebaseServiceCallback
 import com.bramdeconinck.technologysalesmantoolkit.models.*
 import com.bramdeconinck.technologysalesmantoolkit.network.FirestoreAPI
 import com.bramdeconinck.technologysalesmantoolkit.utils.SingleLiveEvent
 import org.jetbrains.anko.doAsync
 import javax.inject.Inject
 
-class ServiceViewModel : InjectedViewModel(), IFirebaseServiceCallback, IFirebaseInstructionCallback {
+class ServiceViewModel : InjectedViewModel(), FirebaseServiceCallback, FirebaseInstructionCallback {
 
     @Inject
     lateinit var firestoreAPI: FirestoreAPI
@@ -95,11 +95,11 @@ class ServiceViewModel : InjectedViewModel(), IFirebaseServiceCallback, IFirebas
 
     fun fetchServices() {
         clearFilters()
-        firestoreAPI.getAllServices(this)
+        firestoreAPI.fetchAllServices(this)
     }
 
     fun fetchInstructions(serviceId: String) {
-        firestoreAPI.getAllInstructionsFrom(serviceId, this)
+        firestoreAPI.fetchAllInstructionsFrom(serviceId, this)
     }
 
     fun clearInstructions() { _instructions.value = mutableListOf() }
@@ -133,7 +133,7 @@ class ServiceViewModel : InjectedViewModel(), IFirebaseServiceCallback, IFirebas
     override fun onInstructionsCallBack(list: List<Any>) {
         _instructions.value = list.map { it as Instruction }
         doAsync {
-            instructionRepository.clearInstructionsByServiceId(_instructions.value!![0].serviceId)
+            instructionRepository.deleteInstructionsByServiceId(_instructions.value!![0].serviceId)
             instructionRepository.insert(_instructions.value!!)
         }
     }

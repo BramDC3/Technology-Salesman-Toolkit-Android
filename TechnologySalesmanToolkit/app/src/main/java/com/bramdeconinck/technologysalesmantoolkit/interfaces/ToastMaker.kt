@@ -1,5 +1,3 @@
 package com.bramdeconinck.technologysalesmantoolkit.interfaces
 
-interface IToastMaker {
-    fun showToast(message: Int)
-}
+interface ToastMaker { fun showToast(message: Int) }

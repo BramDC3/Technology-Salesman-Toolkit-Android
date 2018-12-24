@@ -29,38 +29,26 @@ class NetworkModule(private val context: Context) {
      */
     @Provides
     @Singleton
-    internal fun provideFirestoreApi(): FirestoreAPI {
-        return FirestoreAPI()
-    }
+    internal fun provideFirestoreApi(): FirestoreAPI { return FirestoreAPI() }
 
     @Provides
     @Singleton
-    fun provideInstructionRepository(serviceDao: ServiceDao): InstructionRepository {
-        return InstructionRepository(serviceDao)
-    }
+    fun provideInstructionRepository(serviceDao: ServiceDao): InstructionRepository { return InstructionRepository(serviceDao) }
 
     @Provides
     @Singleton
-    fun provideServiceRepository(serviceDao: ServiceDao): ServiceRepository {
-        return ServiceRepository(serviceDao)
-    }
+    fun provideServiceRepository(serviceDao: ServiceDao): ServiceRepository { return ServiceRepository(serviceDao) }
 
     @Provides
     @Singleton
-    fun provideServiceDao(serviceDatabase: ServiceDatabase): ServiceDao {
-        return serviceDatabase.serviceDao()
-    }
+    fun provideServiceDao(serviceDatabase: ServiceDatabase): ServiceDao { return serviceDatabase.serviceDao() }
 
     @Provides
     @Singleton
-    fun provideServiceDatabase(context: Context): ServiceDatabase {
-        return ServiceDatabase.getInstance(context)
-    }
+    fun provideServiceDatabase(context: Context): ServiceDatabase { return ServiceDatabase.getInstance(context) }
 
     @Provides
     @Singleton
-    fun provideApplicationContext(): Context {
-        return context.applicationContext
-    }
+    fun provideApplicationContext(): Context { return context.applicationContext }
 
 }

@@ -1,6 +1,6 @@
 package com.bramdeconinck.technologysalesmantoolkit.interfaces
 
-interface IFirebaseSuggestionCallback {
-    fun showSuccesMessage()
+interface FirebaseSuggestionCallback {
+    fun showSuccessMessage()
     fun showFailureMessage()
 }

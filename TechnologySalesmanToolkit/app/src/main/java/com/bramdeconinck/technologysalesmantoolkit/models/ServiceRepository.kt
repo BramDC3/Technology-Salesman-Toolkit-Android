@@ -10,7 +10,5 @@ class ServiceRepository(private val serviceDao: ServiceDao) {
         services.forEach { serviceDao.insertService(it) }
     }
 
-    private fun clearServices() {
-        serviceDao.deleteAllServices()
-    }
+    private fun clearServices() { serviceDao.deleteAllServices() }
 }

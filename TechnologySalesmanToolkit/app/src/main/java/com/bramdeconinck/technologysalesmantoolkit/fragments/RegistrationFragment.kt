@@ -11,12 +11,12 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.bramdeconinck.technologysalesmantoolkit.R
 import com.bramdeconinck.technologysalesmantoolkit.databinding.FragmentRegistrationBinding
-import com.bramdeconinck.technologysalesmantoolkit.interfaces.IToastMaker
+import com.bramdeconinck.technologysalesmantoolkit.interfaces.ToastMaker
 import com.bramdeconinck.technologysalesmantoolkit.utils.MessageUtils.makeToast
 import com.bramdeconinck.technologysalesmantoolkit.utils.MessageUtils.showPrivacyPolicyDialog
 import com.bramdeconinck.technologysalesmantoolkit.viewmodels.RegistrationViewModel
 
-class RegistrationFragment : Fragment(), IToastMaker {
+class RegistrationFragment : Fragment(), ToastMaker {
 
     private lateinit var registrationViewModel: RegistrationViewModel
     private lateinit var binding: FragmentRegistrationBinding
@@ -30,19 +30,27 @@ class RegistrationFragment : Fragment(), IToastMaker {
         binding.registrationViewModel = registrationViewModel
         binding.setLifecycleOwner(activity)
 
-        registrationViewModel.goToLoginClicked.observe(this, Observer { findNavController().popBackStack() })
-
-        registrationViewModel.showPrivacyPolicyDialog.observe(this, Observer { showPrivacyPolicyDialog() })
-
-        registrationViewModel.registrationEvent.observe(this, Observer { showToast(it!!)  })
-
         return rootView
+    }
+
+    override fun onStart() {
+        super.onStart()
+
+        subscribeToObservables()
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
 
         registrationViewModel.clearRegistrationForm()
+    }
+
+    private fun subscribeToObservables() {
+        registrationViewModel.goToLoginClicked.observe(this, Observer { findNavController().popBackStack() })
+
+        registrationViewModel.showPrivacyPolicyDialog.observe(this, Observer { showPrivacyPolicyDialog() })
+
+        registrationViewModel.registrationEvent.observe(this, Observer { showToast(it!!)  })
     }
 
     private fun showPrivacyPolicyDialog() {

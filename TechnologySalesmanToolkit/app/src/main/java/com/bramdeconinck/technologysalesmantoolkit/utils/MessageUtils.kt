@@ -30,7 +30,7 @@ object MessageUtils {
     }
 
     @JvmStatic
-    fun showThreeButtonsPositiveFuncDialog(context: Context, title: String, message: String, func: () -> Unit) {
+    fun showThreeButtonsPositiveFunctionDialog(context: Context, title: String, message: String, func: () -> Unit) {
         AlertDialog.Builder(context)
                 .setTitle(title)
                 .setMessage(message)

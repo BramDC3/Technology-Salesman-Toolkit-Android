@@ -8,16 +8,18 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.bramdeconinck.technologysalesmantoolkit.R
-import com.bramdeconinck.technologysalesmantoolkit.interfaces.IToolbarTitleListener
+import com.bramdeconinck.technologysalesmantoolkit.interfaces.ToolbarTitleChanger
 import com.bramdeconinck.technologysalesmantoolkit.utils.FirebaseUtils.firebaseAuth
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity(), IToolbarTitleListener {
+class MainActivity : AppCompatActivity(), ToolbarTitleChanger {
 
     private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        // Changing the splash theme to the default app theme
         setTheme(R.style.AppTheme)
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
@@ -50,9 +52,7 @@ class MainActivity : AppCompatActivity(), IToolbarTitleListener {
                     if (firebaseAuth.currentUser == null) {
                         navController.navigate(R.id.notSignedIn)
                         hideToolbarAndBottomNavigation()
-                    } else {
-                        showToolbarAndBottomNavigation()
-                    }
+                    } else showToolbarAndBottomNavigation()
                 }
                 R.id.loginFragment -> hideToolbarAndBottomNavigation()
             }
@@ -65,13 +65,13 @@ class MainActivity : AppCompatActivity(), IToolbarTitleListener {
     // We don't want to show the toolbar and bottom navigation
     // on the login and registration screen, so we hide them
     private fun hideToolbarAndBottomNavigation() {
-        supportActionBar?.hide()
+        supportActionBar!!.hide()
         with(main_bottom_navigation_view) {
             if (visibility == View.VISIBLE && alpha == 1f) {
                 animate()
-                        .alpha(0f)
-                        .withEndAction { visibility = View.GONE }
-                        .duration = 0
+                    .alpha(0f)
+                    .withEndAction { visibility = View.GONE }
+                    .duration = 0
             }
         }
     }
@@ -79,12 +79,12 @@ class MainActivity : AppCompatActivity(), IToolbarTitleListener {
     // We do want to show the toolbar and bottom navigation
     // on the other screens, so we make them visible again
     private fun showToolbarAndBottomNavigation() {
-        supportActionBar?.show()
+        supportActionBar!!.show()
         with(main_bottom_navigation_view) {
             visibility = View.VISIBLE
             animate()
-                    .alpha(1f)
-                    .duration = 0
+                .alpha(1f)
+                .duration = 0
         }
     }
 
@@ -94,6 +94,6 @@ class MainActivity : AppCompatActivity(), IToolbarTitleListener {
     // need something different for the ServiceDetailFragment because
     // the title needs to be the name of the service. This function
     // changes the title of the toolbar.
-    override fun updateTitle(title: String?) { supportActionBar?.title = title }
+    override fun updateTitle(title: String?) { supportActionBar!!.title = title }
 
 }

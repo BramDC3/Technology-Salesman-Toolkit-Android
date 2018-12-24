@@ -1,8 +1,8 @@
 package com.bramdeconinck.technologysalesmantoolkit.network
 
-import com.bramdeconinck.technologysalesmantoolkit.interfaces.IFirebaseInstructionCallback
-import com.bramdeconinck.technologysalesmantoolkit.interfaces.IFirebaseServiceCallback
-import com.bramdeconinck.technologysalesmantoolkit.interfaces.IFirebaseSuggestionCallback
+import com.bramdeconinck.technologysalesmantoolkit.interfaces.FirebaseInstructionCallback
+import com.bramdeconinck.technologysalesmantoolkit.interfaces.FirebaseServiceCallback
+import com.bramdeconinck.technologysalesmantoolkit.interfaces.FirebaseSuggestionCallback
 import com.bramdeconinck.technologysalesmantoolkit.utils.FirebaseUtils.createSuggestionData
 import com.bramdeconinck.technologysalesmantoolkit.utils.FirebaseUtils.transformSnapshotToSInstruction
 import com.bramdeconinck.technologysalesmantoolkit.utils.FirebaseUtils.transformSnapshotToService
@@ -22,8 +22,8 @@ class FirestoreAPI {
                 .build()
     }
 
-    // Get all services from the Firestore
-    fun getAllServices(firebaseServiceCallback: IFirebaseServiceCallback) {
+    // Fetch all services from the Firestore
+    fun fetchAllServices(firebaseServiceCallback: FirebaseServiceCallback) {
         firebaseServiceCallback.showProgress()
         firestore.collection("Services").get(Source.SERVER)
                 .addOnCompleteListener { task ->
@@ -37,8 +37,8 @@ class FirestoreAPI {
                 }
     }
 
-    // Get all instructions of a service from the Firestore
-    fun getAllInstructionsFrom(serviceId: String, firebaseInstructionCallback: IFirebaseInstructionCallback) {
+    // Fetch all instructions of a service from the Firestore
+    fun fetchAllInstructionsFrom(serviceId: String, firebaseInstructionCallback: FirebaseInstructionCallback) {
         firestore.collection("Instructions").whereEqualTo("serviceId", serviceId).orderBy("index").get(Source.SERVER)
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
@@ -51,9 +51,9 @@ class FirestoreAPI {
     }
 
     // Post a suggestion to the Firestore
-    fun postSuggestion(callback: IFirebaseSuggestionCallback, suggestion: String) {
+    fun postSuggestion(callback: FirebaseSuggestionCallback, suggestion: String) {
         firestore.collection("Suggestions").add(createSuggestionData(suggestion))
-                .addOnSuccessListener { callback.showSuccesMessage() }
+                .addOnSuccessListener { callback.showSuccessMessage() }
                 .addOnFailureListener { callback.showFailureMessage() }
     }
 

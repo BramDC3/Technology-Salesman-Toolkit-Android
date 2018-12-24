@@ -9,12 +9,12 @@ import android.view.*
 import androidx.navigation.fragment.findNavController
 import com.bramdeconinck.technologysalesmantoolkit.R
 import com.bramdeconinck.technologysalesmantoolkit.databinding.FragmentProfileBinding
-import com.bramdeconinck.technologysalesmantoolkit.interfaces.IToastMaker
+import com.bramdeconinck.technologysalesmantoolkit.interfaces.ToastMaker
 import com.bramdeconinck.technologysalesmantoolkit.utils.BaseCommand
 import com.bramdeconinck.technologysalesmantoolkit.utils.FirebaseUtils.firebaseUser
 import com.bramdeconinck.technologysalesmantoolkit.utils.MessageUtils.makeToast
 import com.bramdeconinck.technologysalesmantoolkit.utils.MessageUtils.showBasicDialog
-import com.bramdeconinck.technologysalesmantoolkit.utils.MessageUtils.showThreeButtonsPositiveFuncDialog
+import com.bramdeconinck.technologysalesmantoolkit.utils.MessageUtils.showThreeButtonsPositiveFunctionDialog
 import com.bramdeconinck.technologysalesmantoolkit.utils.StringUtils.getFamilyName
 import com.bramdeconinck.technologysalesmantoolkit.utils.StringUtils.getFirstName
 import com.bramdeconinck.technologysalesmantoolkit.viewmodels.ProfileViewModel
@@ -22,7 +22,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import kotlinx.android.synthetic.main.fragment_profile.*
 
-class ProfileFragment : Fragment(), IToastMaker {
+class ProfileFragment : Fragment(), ToastMaker {
 
     private lateinit var profileViewModel: ProfileViewModel
     private lateinit var binding: FragmentProfileBinding
@@ -55,14 +55,17 @@ class ProfileFragment : Fragment(), IToastMaker {
     override fun onDestroyView() {
         super.onDestroyView()
 
-        if (profileViewModel.isEditable.value!!) profileViewModel.toggleEditMode()
         profileViewModel.clearProfileForm()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
         inflater?.inflate(R.menu.menu_edit_profile, menu)
         menuItem = menu!!.findItem(R.id.action_edit_profile)
-        initObservers()
+
+        // Normally this function would have been used in onStart,
+        // but we need the menuItem to be initialized first
+        subscribeToObservables()
+
         super.onCreateOptionsMenu(menu, inflater)
     }
 
@@ -89,7 +92,7 @@ class ProfileFragment : Fragment(), IToastMaker {
         et_profile_email.setText(firebaseUser!!.email)
     }
 
-    private fun initObservers() {
+    private fun subscribeToObservables() {
         profileViewModel.isEditable.observe(this, Observer { toggleEditMode(it!!) })
 
         profileViewModel.profileEditFormValidation.observe(this, Observer {
@@ -117,7 +120,7 @@ class ProfileFragment : Fragment(), IToastMaker {
 
         profileViewModel.profilePictureClicked.observe(this, Observer { showProfilePictureDialog() })
 
-        profileViewModel.profileEventOccured.observe(this, Observer { showToast(it!!) })
+        profileViewModel.profileEventOccurred.observe(this, Observer { showToast(it!!) })
     }
 
     private fun toggleEditMode(isEditable: Boolean) {
@@ -132,7 +135,7 @@ class ProfileFragment : Fragment(), IToastMaker {
     }
 
     private fun showChangeProfileDialog() {
-        showThreeButtonsPositiveFuncDialog(
+        showThreeButtonsPositiveFunctionDialog(
                 context!!,
                 getString(R.string.title_change_profile),
                 getString(R.string.message_change_profile),
@@ -151,7 +154,7 @@ class ProfileFragment : Fragment(), IToastMaker {
     }
 
     private fun showResetPasswordDialog() {
-        showThreeButtonsPositiveFuncDialog(
+        showThreeButtonsPositiveFunctionDialog(
                 context!!,
                 getString(R.string.title_change_password),
                 getString(R.string.message_change_password),

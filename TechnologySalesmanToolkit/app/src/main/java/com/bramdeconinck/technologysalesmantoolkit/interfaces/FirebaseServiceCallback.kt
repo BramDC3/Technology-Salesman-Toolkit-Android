@@ -1,6 +1,6 @@
 package com.bramdeconinck.technologysalesmantoolkit.interfaces
 
-interface IFirebaseServiceCallback {
+interface FirebaseServiceCallback {
     fun showProgress()
     fun hideProgress()
     fun showServicesMessage()

@@ -14,16 +14,16 @@ import com.bramdeconinck.technologysalesmantoolkit.R
 import androidx.navigation.fragment.findNavController
 import com.bramdeconinck.technologysalesmantoolkit.databinding.FragmentSettingsBinding
 import com.bramdeconinck.technologysalesmantoolkit.utils.BaseCommand
-import com.bramdeconinck.technologysalesmantoolkit.interfaces.IToastMaker
+import com.bramdeconinck.technologysalesmantoolkit.interfaces.ToastMaker
 import com.bramdeconinck.technologysalesmantoolkit.utils.privacyPolicy
 import com.bramdeconinck.technologysalesmantoolkit.utils.website
 import com.bramdeconinck.technologysalesmantoolkit.utils.MessageUtils.makeToast
 import com.bramdeconinck.technologysalesmantoolkit.utils.MessageUtils.showMakeSuggestionDialog
-import com.bramdeconinck.technologysalesmantoolkit.utils.MessageUtils.showThreeButtonsPositiveFuncDialog
+import com.bramdeconinck.technologysalesmantoolkit.utils.MessageUtils.showThreeButtonsPositiveFunctionDialog
 import com.bramdeconinck.technologysalesmantoolkit.utils.WebpageUtils.openWebPage
 import com.bramdeconinck.technologysalesmantoolkit.viewmodels.SettingsViewModel
 
-class SettingsFragment : Fragment(), IToastMaker {
+class SettingsFragment : Fragment(), ToastMaker {
 
     private lateinit var settingsViewModel: SettingsViewModel
     private lateinit var binding: FragmentSettingsBinding
@@ -37,6 +37,16 @@ class SettingsFragment : Fragment(), IToastMaker {
         binding.settingsViewModel = settingsViewModel
         binding.setLifecycleOwner(activity)
 
+        return rootView
+    }
+
+    override fun onStart() {
+        super.onStart()
+
+        subscribeToObservables()
+    }
+
+    private fun subscribeToObservables() {
         settingsViewModel.visitWebsiteClicked.observe(this, Observer { openWebPage(context!!, website) })
 
         settingsViewModel.visitPrivacyPolicyClicked.observe(this, Observer { openWebPage(context!!, privacyPolicy) })
@@ -56,7 +66,7 @@ class SettingsFragment : Fragment(), IToastMaker {
         })
 
         settingsViewModel.showSignOutDialogClicked.observe(this, Observer {
-            showThreeButtonsPositiveFuncDialog(
+            showThreeButtonsPositiveFunctionDialog(
                     context!!,
                     getString(R.string.title_sign_out),
                     getString(R.string.message_sign_out),
@@ -74,8 +84,6 @@ class SettingsFragment : Fragment(), IToastMaker {
         })
 
         settingsViewModel.signOutTriggered.observe(this, Observer { findNavController().navigate(R.id.signOutFromSettings) })
-
-        return rootView
     }
 
     override fun showToast(message: Int) { makeToast(context!!, message) }
