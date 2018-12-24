@@ -47,11 +47,11 @@ class ServiceListFragment : Fragment(), IToastMaker {
 
         // If the service detail container is not null,
         // then the app is running on a tablet
-        if (rootView.service_detail_container != null) twoPane = true
+        if (rootView.fl_service_list_detail_container != null) twoPane = true
 
         serviceAdapter = ServiceAdapter(this, services, twoPane)
 
-        rootView.service_list.adapter = serviceAdapter
+        rootView.rv_service_list_services.adapter = serviceAdapter
 
         services.observe(this, Observer { serviceAdapter.notifyDataSetChanged() })
 

@@ -30,14 +30,14 @@ class MainActivity : AppCompatActivity(), IToolbarTitleListener {
     private fun setupNavigation() {
 
         // The toolbar that is defined in the MainActivity layout is used as support action bar
-        setSupportActionBar(custom_toolbar)
+        setSupportActionBar(main_toolbar)
 
         // This navigation controller allows us to navigate between fragments
-        navController = findNavController(R.id.nav_host_fragment)
+        navController = findNavController(R.id.main_nav_host_fragment)
 
         // The setup of the action bar and bottom navigation bar with the navigation controller
         setupActionBarWithNavController(navController)
-        bottom_navigation_view.setupWithNavController(navController)
+        main_bottom_navigation_view.setupWithNavController(navController)
 
         // This listener helps us with fragment navigation
         // It prepares them so they're ready to be shown properly
@@ -66,7 +66,7 @@ class MainActivity : AppCompatActivity(), IToolbarTitleListener {
     // on the login and registration screen, so we hide them
     private fun hideToolbarAndBottomNavigation() {
         supportActionBar?.hide()
-        with(bottom_navigation_view) {
+        with(main_bottom_navigation_view) {
             if (visibility == View.VISIBLE && alpha == 1f) {
                 animate()
                         .alpha(0f)
@@ -80,7 +80,7 @@ class MainActivity : AppCompatActivity(), IToolbarTitleListener {
     // on the other screens, so we make them visible again
     private fun showToolbarAndBottomNavigation() {
         supportActionBar?.show()
-        with(bottom_navigation_view) {
+        with(main_bottom_navigation_view) {
             visibility = View.VISIBLE
             animate()
                     .alpha(1f)
