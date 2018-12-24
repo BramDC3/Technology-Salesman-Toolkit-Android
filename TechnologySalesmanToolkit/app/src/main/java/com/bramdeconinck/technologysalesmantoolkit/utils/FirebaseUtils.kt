@@ -25,8 +25,7 @@ object FirebaseUtils {
                 category = transformIntToCategory(snapshot.getDouble("category")!!.toInt()),
                 created = snapshot.getTimestamp("created")!!,
                 price = snapshot.getDouble("price")!!,
-                image = snapshot.getString("image")!!,
-                url = snapshot.getString("url")!!
+                image = snapshot.getString("image")!!
         )
     }
 
