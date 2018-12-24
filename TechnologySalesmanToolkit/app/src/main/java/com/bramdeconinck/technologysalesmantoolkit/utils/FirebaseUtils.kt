@@ -25,8 +25,7 @@ object FirebaseUtils {
                 category = transformIntToCategory(snapshot.getDouble("category")!!.toInt()),
                 created = snapshot.getTimestamp("created")!!,
                 price = snapshot.getDouble("price")!!,
-                image = snapshot.getString("image")!!,
-                url = snapshot.getString("url")!!
+                image = snapshot.getString("image")!!
         )
     }
 
@@ -49,12 +48,12 @@ object FirebaseUtils {
     fun createSuggestionData(suggestion: String): HashMap<String, Any> {
         val data = HashMap<String, Any>()
         data["message"] = suggestion
-        data["sender"] = firebaseUser?.uid ?: "Anonymous"
+        data["sender"] = firebaseUser!!.uid
         return data
     }
 
     // Retrieve the right category of a service based on an integer
-    private fun transformIntToCategory(i: Int): Category {
+    fun transformIntToCategory(i: Int): Category {
         return when (i) {
             0 -> Category.Windows
             1 -> Category.Android
@@ -63,9 +62,20 @@ object FirebaseUtils {
         }
     }
 
+    // Transforms a category enum to an integer for storing in the local database
+    fun transformCategoryToInt(c: Category): Int {
+        return when (c) {
+            Category.Windows -> 0
+            Category.Android -> 1
+            Category.Apple -> 2
+            Category.Andere -> 3
+        }
+    }
+
     @JvmStatic
     fun createProfileUpdates(firstname: String, familyname: String): UserProfileChangeRequest {
-        return UserProfileChangeRequest.Builder()
+        return UserProfileChangeRequest
+                .Builder()
                 .setDisplayName("$firstname $familyname")
                 .build()
     }

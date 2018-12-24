@@ -37,7 +37,7 @@ class ProfileViewModel : InjectedViewModel() {
 
     val appliedNameChanges = SingleLiveEvent<BaseCommand>()
 
-    val profileEventOccured = SingleLiveEvent<Int>()
+    val profileEventOccurred = SingleLiveEvent<Int>()
 
     init {
         firstname.value = ""
@@ -55,8 +55,8 @@ class ProfileViewModel : InjectedViewModel() {
     // Function to send an e-mail to the current FirebaseUser containing a link to change their password
     fun sendResetPasswordEmail(): () -> Unit = {
         firebaseAuth.sendPasswordResetEmail(firebaseUser!!.email!!)
-                .addOnSuccessListener { profileEventOccured.value = R.string.change_password_succes }
-                .addOnFailureListener { profileEventOccured.value = R.string.change_password_failure }
+                .addOnSuccessListener { profileEventOccurred.value = R.string.change_password_succes }
+                .addOnFailureListener { profileEventOccurred.value = R.string.change_password_failure }
     }
 
     fun validateProfileForm() {
@@ -115,6 +115,7 @@ class ProfileViewModel : InjectedViewModel() {
         firstname.value = ""
         familyname.value = ""
         email.value = ""
+        if (isEditable.value!!) toggleEditMode()
     }
 
 }

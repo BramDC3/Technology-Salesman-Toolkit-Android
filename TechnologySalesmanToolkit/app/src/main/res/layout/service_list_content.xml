@@ -1,74 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<android.support.v7.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/mainLayout"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:layout_margin="5dp">
 
-    <android.support.v7.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp">
-
-        <RelativeLayout
+        <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="8dp">
 
             <ImageView
-                android:id="@+id/iv_afbeelding"
+                android:id="@+id/iv_service_logo"
                 android:layout_width="120dp"
                 android:layout_height="120dp"
                 android:padding="4dp"
-                android:contentDescription="@string/description_service_image" />
+                android:contentDescription="@string/description_service_image"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
 
             <TextView
-                android:id="@+id/tv_naam"
+                android:id="@+id/tv_service_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
-                android:layout_toEndOf="@id/iv_afbeelding"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
-                android:textColor="#000000"
-                android:textStyle="bold"/>
+                android:textColor="@android:color/black"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/iv_service_logo"
+                app:layout_constraintTop_toTopOf="parent"/>
 
             <TextView
-                android:id="@+id/tv_beschrijving"
+                android:id="@+id/tv_service_description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/tv_naam"
                 android:layout_marginStart="5dp"
                 android:layout_marginTop="5dp"
-                android:layout_toEndOf="@id/iv_afbeelding"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small" />
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                app:layout_constraintStart_toEndOf="@+id/iv_service_logo"
+                app:layout_constraintTop_toBottomOf="@+id/tv_service_name"/>
 
             <TextView
-                android:id="@+id/tv_categorie"
+                android:id="@+id/tv_service_category"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/tv_beschrijving"
                 android:layout_marginStart="5dp"
                 android:layout_marginTop="5dp"
-                android:layout_toEndOf="@id/iv_afbeelding"
                 android:background="@color/colorPrimary"
                 android:paddingLeft="15dp"
                 android:paddingRight="15dp"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Small.Inverse"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/iv_service_logo"
+                app:layout_constraintTop_toBottomOf="@+id/tv_service_description"/>
 
             <TextView
-                android:id="@+id/tv_prijs"
+                android:id="@+id/tv_service_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/tv_categorie"
                 android:layout_marginStart="5dp"
                 android:layout_marginTop="5dp"
-                android:layout_toEndOf="@id/iv_afbeelding"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                app:layout_constraintStart_toEndOf="@+id/iv_service_logo"
+                app:layout_constraintTop_toBottomOf="@+id/tv_service_category"/>
 
-        </RelativeLayout>
+        </android.support.constraint.ConstraintLayout>
 
-    </android.support.v7.widget.CardView>
-
-</LinearLayout>
+</android.support.v7.widget.CardView>

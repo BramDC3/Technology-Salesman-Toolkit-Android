@@ -12,9 +12,7 @@ abstract class InjectedViewModel : ViewModel() {
     /**
      * Perform the injection when the ViewModel is created
      */
-    init {
-        inject()
-    }
+    init { inject() }
 
     /**
      * Injects the required dependencies.

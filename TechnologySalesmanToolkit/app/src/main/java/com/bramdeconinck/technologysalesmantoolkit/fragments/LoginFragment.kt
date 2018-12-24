@@ -12,7 +12,7 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.bramdeconinck.technologysalesmantoolkit.R
 import com.bramdeconinck.technologysalesmantoolkit.databinding.FragmentLoginBinding
-import com.bramdeconinck.technologysalesmantoolkit.interfaces.IToastMaker
+import com.bramdeconinck.technologysalesmantoolkit.interfaces.ToastMaker
 import com.bramdeconinck.technologysalesmantoolkit.utils.FirebaseUtils.firebaseUser
 import com.bramdeconinck.technologysalesmantoolkit.utils.GOOGLE_SIGN_IN_REQUEST_CODE
 import com.bramdeconinck.technologysalesmantoolkit.utils.MessageUtils.makeToast
@@ -24,12 +24,12 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
 
-class LoginFragment : Fragment(), IToastMaker {
+class LoginFragment : Fragment(), ToastMaker {
 
     private lateinit var loginViewModel: LoginViewModel
     private lateinit var binding: FragmentLoginBinding
     private lateinit var gso: GoogleSignInOptions
-    private lateinit var mGoogleSignInClient: GoogleSignInClient
+    private lateinit var googleSignInClient: GoogleSignInClient
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_login, container, false)
@@ -45,17 +45,15 @@ class LoginFragment : Fragment(), IToastMaker {
                 .requestEmail()
                 .build()
 
-        mGoogleSignInClient = GoogleSignIn.getClient(context!!, gso)
-
-        loginViewModel.navigateToServiceList.observe(this, Observer { goToServiceList()})
-
-        loginViewModel.signInWithGoogleClicked.observe(this, Observer { signInWithGoogle() })
-
-        loginViewModel.goToRegistrationClicked.observe(this, Observer { goToRegistration() })
-
-        loginViewModel.loginErrorOccurred.observe(this, Observer { showToast(it!!) })
+        googleSignInClient = GoogleSignIn.getClient(context!!, gso)
 
         return rootView
+    }
+
+    override fun onStart() {
+        super.onStart()
+
+        subscribeToObservables()
     }
 
     override fun onDestroyView() {
@@ -64,8 +62,18 @@ class LoginFragment : Fragment(), IToastMaker {
         loginViewModel.clearLoginForm()
     }
 
+    private fun subscribeToObservables() {
+        loginViewModel.navigateToServiceList.observe(this, Observer { goToServiceList()})
+
+        loginViewModel.signInWithGoogleClicked.observe(this, Observer { signInWithGoogle() })
+
+        loginViewModel.goToRegistrationClicked.observe(this, Observer { goToRegistration() })
+
+        loginViewModel.loginErrorOccurred.observe(this, Observer { showToast(it!!) })
+    }
+
     private fun signInWithGoogle() {
-        val signInIntent: Intent = mGoogleSignInClient.signInIntent
+        val signInIntent: Intent = googleSignInClient.signInIntent
         startActivityForResult(signInIntent, GOOGLE_SIGN_IN_REQUEST_CODE)
     }
 
@@ -77,9 +85,7 @@ class LoginFragment : Fragment(), IToastMaker {
             try {
                 val account: GoogleSignInAccount? = task.getResult(ApiException::class.java)
                 loginViewModel.firebaseAuthWithGoogle(account)
-            } catch (e: ApiException) {
-                print(e.message)
-            }
+            } catch (e: ApiException) { print(e.message) }
         }
     }
 

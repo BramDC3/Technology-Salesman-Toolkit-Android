@@ -36,7 +36,7 @@ class ServiceAdapter(
                 }
                 fragment.activity!!.supportFragmentManager
                         .beginTransaction()
-                        .replace(R.id.service_detail_container, detailFragment)
+                        .replace(R.id.fl_service_list_detail_container, detailFragment)
                         .commit()
             } else {
                 val arguments = Bundle().apply {
@@ -69,10 +69,10 @@ class ServiceAdapter(
     override fun getItemCount() = services.value!!.size
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val imageView: ImageView = view.iv_afbeelding
-        val nameView: TextView = view.tv_naam
-        val descriptionView: TextView = view.tv_beschrijving
-        val categoryView: TextView = view.tv_categorie
-        val priceView: TextView = view.tv_prijs
+        val imageView: ImageView = view.iv_service_logo
+        val nameView: TextView = view.tv_service_name
+        val descriptionView: TextView = view.tv_service_description
+        val categoryView: TextView = view.tv_service_category
+        val priceView: TextView = view.tv_service_price
     }
 }

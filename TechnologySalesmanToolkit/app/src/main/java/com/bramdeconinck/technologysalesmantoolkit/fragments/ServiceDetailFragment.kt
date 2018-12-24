@@ -1,27 +1,32 @@
 package com.bramdeconinck.technologysalesmantoolkit.fragments
 
+import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v4.app.FragmentStatePagerAdapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.bramdeconinck.technologysalesmantoolkit.models.Service
 import com.bramdeconinck.technologysalesmantoolkit.R
 import com.bramdeconinck.technologysalesmantoolkit.adapters.InstructionAdapter
-import com.bramdeconinck.technologysalesmantoolkit.interfaces.IToastMaker
-import com.bramdeconinck.technologysalesmantoolkit.interfaces.IToolbarTitleListener
+import com.bramdeconinck.technologysalesmantoolkit.interfaces.ToastMaker
+import com.bramdeconinck.technologysalesmantoolkit.interfaces.ToolbarTitleChanger
+import com.bramdeconinck.technologysalesmantoolkit.models.Instruction
 import com.bramdeconinck.technologysalesmantoolkit.utils.SERVICE_ITEM
 import com.bramdeconinck.technologysalesmantoolkit.utils.MessageUtils
 import com.bramdeconinck.technologysalesmantoolkit.viewmodels.ServiceViewModel
 import com.wajahatkarim3.easyflipviewpager.BookFlipPageTransformer
 import kotlinx.android.synthetic.main.fragment_service_detail.view.*
 
-class ServiceDetailFragment : Fragment(), IToastMaker {
+class ServiceDetailFragment : Fragment(), ToastMaker {
 
     private var service: Service? = null
     private lateinit var serviceViewModel: ServiceViewModel
+    private lateinit var instructions: MutableLiveData<List<Instruction>>
+    private lateinit var pagerAdapter: FragmentStatePagerAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,9 +41,9 @@ class ServiceDetailFragment : Fragment(), IToastMaker {
 
         serviceViewModel.fetchInstructions(service!!.id)
 
-        val instructions = serviceViewModel.instructions
+        instructions = serviceViewModel.instructions
 
-        val pagerAdapter = InstructionAdapter(instructions, childFragmentManager)
+        pagerAdapter = InstructionAdapter(instructions, childFragmentManager)
 
         rootView.vp_service_detail_instructions.adapter = pagerAdapter
 
@@ -48,20 +53,13 @@ class ServiceDetailFragment : Fragment(), IToastMaker {
         transformer.scaleAmountPercent = 10f
         rootView.vp_service_detail_instructions.setPageTransformer(true, transformer)
 
-        instructions.observe(this, Observer { pagerAdapter.notifyDataSetChanged() })
-
-        serviceViewModel.roomInstructions.observe(this, Observer { serviceViewModel.onDatabaseInstructionsReady(service!!.id) })
-
-        serviceViewModel.instructionsErrorOccurred.observe(this, Observer {
-            showToast(R.string.fetching_instructions_error)
-            serviceViewModel.onDatabaseInstructionsReady(service!!.id)
-        })
-
         return rootView
     }
 
     override fun onStart() {
         super.onStart()
+
+        subscribeToObservables()
 
         setSupportActionBarTitle(service?.name)
     }
@@ -72,7 +70,18 @@ class ServiceDetailFragment : Fragment(), IToastMaker {
         serviceViewModel.clearInstructions()
     }
 
-    private fun setSupportActionBarTitle(title: String?) { (activity as IToolbarTitleListener).updateTitle(title) }
+    private fun subscribeToObservables() {
+        instructions.observe(this, Observer { pagerAdapter.notifyDataSetChanged() })
+
+        serviceViewModel.roomInstructions.observe(this, Observer { serviceViewModel.onDatabaseInstructionsReady(service!!.id) })
+
+        serviceViewModel.instructionsErrorOccurred.observe(this, Observer {
+            showToast(R.string.fetching_instructions_error)
+            serviceViewModel.onDatabaseInstructionsReady(service!!.id)
+        })
+    }
+
+    private fun setSupportActionBarTitle(title: String?) { (activity as ToolbarTitleChanger).updateTitle(title) }
 
     override fun showToast(message: Int) { MessageUtils.makeToast(context!!, message)  }
 

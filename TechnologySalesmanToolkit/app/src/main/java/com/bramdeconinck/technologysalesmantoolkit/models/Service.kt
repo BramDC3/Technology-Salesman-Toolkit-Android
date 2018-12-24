@@ -20,6 +20,5 @@ data class Service(
         val category: Category,
         val created: Timestamp,
         val price: Double,
-        val image: String,
-        val url: String)
+        val image: String)
     : Parcelable

@@ -4,14 +4,14 @@ import android.arch.lifecycle.MutableLiveData
 import com.bramdeconinck.technologysalesmantoolkit.R
 import com.bramdeconinck.technologysalesmantoolkit.utils.BaseCommand
 import com.bramdeconinck.technologysalesmantoolkit.base.InjectedViewModel
-import com.bramdeconinck.technologysalesmantoolkit.interfaces.IFirebaseSuggestionCallback
+import com.bramdeconinck.technologysalesmantoolkit.interfaces.FirebaseSuggestionCallback
 import com.bramdeconinck.technologysalesmantoolkit.network.FirestoreAPI
 import com.bramdeconinck.technologysalesmantoolkit.utils.FirebaseUtils.firebaseAuth
 import com.bramdeconinck.technologysalesmantoolkit.utils.SingleLiveEvent
 import com.bramdeconinck.technologysalesmantoolkit.utils.ValidationUtils.everyFieldHasValue
 import javax.inject.Inject
 
-class SettingsViewModel : InjectedViewModel(), IFirebaseSuggestionCallback {
+class SettingsViewModel : InjectedViewModel(), FirebaseSuggestionCallback {
 
     @Inject
     lateinit var firestoreAPI: FirestoreAPI
@@ -32,9 +32,7 @@ class SettingsViewModel : InjectedViewModel(), IFirebaseSuggestionCallback {
 
     val signOutTriggered = SingleLiveEvent<Any>()
 
-    init {
-        isDarkModeEnabled.value = false
-    }
+    init { isDarkModeEnabled.value = false }
 
     fun visitWebsite() { visitWebsiteClicked.call() }
 
@@ -58,7 +56,7 @@ class SettingsViewModel : InjectedViewModel(), IFirebaseSuggestionCallback {
         signOutTriggered.call()
     }
 
-    override fun showSuccesMessage() { suggestionCallback.value = BaseCommand.Success(R.string.send_suggestion_succes) }
+    override fun showSuccessMessage() { suggestionCallback.value = BaseCommand.Success(R.string.send_suggestion_succes) }
 
     override fun showFailureMessage() { suggestionCallback.value = BaseCommand.Error(R.string.send_suggestion_error) }
 

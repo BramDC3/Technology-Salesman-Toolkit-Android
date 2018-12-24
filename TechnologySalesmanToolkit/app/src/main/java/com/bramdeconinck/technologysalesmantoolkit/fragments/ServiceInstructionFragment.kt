@@ -12,6 +12,7 @@ import com.bramdeconinck.technologysalesmantoolkit.models.Instruction
 import com.bramdeconinck.technologysalesmantoolkit.utils.INSTRUCTION_ITEM
 import com.bramdeconinck.technologysalesmantoolkit.utils.StringUtils.createFormattedInstructionsList
 import com.bumptech.glide.Glide
+import kotlinx.android.synthetic.main.fragment_service_instruction.*
 import kotlinx.android.synthetic.main.fragment_service_instruction.view.*
 
 class ServiceInstructionFragment : Fragment() {
@@ -24,17 +25,23 @@ class ServiceInstructionFragment : Fragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val rootView =  inflater.inflate(R.layout.fragment_service_instruction, container, false)
+        return inflater.inflate(R.layout.fragment_service_instruction, container, false)
+    }
 
-        Glide.with(rootView).load(instruction!!.image).into(rootView.iv_service_instruction_image)
+    override fun onStart() {
+        super.onStart()
 
-        rootView.tv_service_instruction_title.text = instruction!!.title
+        updateUI()
+    }
 
-        rootView.tv_service_instruction_description.text = instruction!!.description
+    private fun updateUI() {
+        Glide.with(this)
+                .load(instruction!!.image)
+                .into(iv_service_instruction_image)
 
-        rootView.tv_service_instruction_content.text = createFormattedInstructionsList(instruction!!.content)
-
-        return rootView
+        tv_service_instruction_title.text = instruction!!.title
+        tv_service_instruction_description.text = instruction!!.description
+        tv_service_instruction_content.text = createFormattedInstructionsList(instruction!!.content)
     }
 
 }

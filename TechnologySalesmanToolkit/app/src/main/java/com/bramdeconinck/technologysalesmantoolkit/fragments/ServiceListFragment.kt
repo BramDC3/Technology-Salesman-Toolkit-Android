@@ -1,5 +1,6 @@
 package com.bramdeconinck.technologysalesmantoolkit.fragments
 
+import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.databinding.DataBindingUtil
@@ -12,21 +13,20 @@ import android.widget.EditText
 import com.bramdeconinck.technologysalesmantoolkit.R
 import com.bramdeconinck.technologysalesmantoolkit.adapters.ServiceAdapter
 import com.bramdeconinck.technologysalesmantoolkit.databinding.FragmentServiceListBinding
-import com.bramdeconinck.technologysalesmantoolkit.interfaces.IToastMaker
+import com.bramdeconinck.technologysalesmantoolkit.interfaces.ToastMaker
 import com.bramdeconinck.technologysalesmantoolkit.models.Category
+import com.bramdeconinck.technologysalesmantoolkit.models.Service
 import com.bramdeconinck.technologysalesmantoolkit.utils.MessageUtils.makeToast
 import com.bramdeconinck.technologysalesmantoolkit.viewmodels.ServiceViewModel
 import kotlinx.android.synthetic.main.fragment_service_list.*
 import kotlinx.android.synthetic.main.fragment_service_list.view.*
 
-class ServiceListFragment : Fragment(), IToastMaker {
+class ServiceListFragment : Fragment(), ToastMaker {
 
     private lateinit var serviceViewModel: ServiceViewModel
     private lateinit var binding: FragmentServiceListBinding
+    private lateinit var services: MutableLiveData<List<Service>>
     private lateinit var serviceAdapter: ServiceAdapter
-
-    // Variable to check whether the app is running on a tablet or not
-    private var twoPane: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,21 +43,14 @@ class ServiceListFragment : Fragment(), IToastMaker {
         binding.serviceViewModel = serviceViewModel
         binding.setLifecycleOwner(activity)
 
-        val services = serviceViewModel.services
+        services = serviceViewModel.services
 
-        // If the service detail container is not null,
-        // then the app is running on a tablet
-        if (rootView.service_detail_container != null) twoPane = true
+        // Variable to check whether the app is running on a tablet or not
+        val twoPane = rootView.fl_service_list_detail_container != null
 
         serviceAdapter = ServiceAdapter(this, services, twoPane)
 
-        rootView.service_list.adapter = serviceAdapter
-
-        services.observe(this, Observer { serviceAdapter.notifyDataSetChanged() })
-
-        serviceViewModel.roomServices.observe(this, Observer { serviceViewModel.onDatabaseServicesReady() })
-
-        serviceViewModel.servicesErrorOccurred.observe(this, Observer { showToast(R.string.fetching_services_error) })
+        rootView.rv_service_list_services.adapter = serviceAdapter
 
         return rootView
     }
@@ -65,7 +58,9 @@ class ServiceListFragment : Fragment(), IToastMaker {
     override fun onStart() {
         super.onStart()
 
-        srl_service_list_swiper.setColorSchemeColors(Color.argb(1, 115, 161, 199))
+        subscribeToObservables()
+
+        srl_service_list_swiper.setColorSchemeResources(R.color.colorAccent)
 
         srl_service_list_swiper.setOnRefreshListener {
             srl_service_list_swiper.isRefreshing = false
@@ -125,6 +120,14 @@ class ServiceListFragment : Fragment(), IToastMaker {
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun subscribeToObservables() {
+        services.observe(this, Observer { serviceAdapter.notifyDataSetChanged() })
+
+        serviceViewModel.roomServices.observe(this, Observer { serviceViewModel.onDatabaseServicesReady() })
+
+        serviceViewModel.servicesErrorOccurred.observe(this, Observer { showToast(R.string.fetching_services_error) })
     }
 
     override fun showToast(message: Int) { makeToast(context!!, message) }
