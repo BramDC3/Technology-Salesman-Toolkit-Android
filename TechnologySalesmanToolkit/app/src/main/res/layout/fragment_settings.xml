@@ -29,18 +29,31 @@
                 android:focusableInTouchMode="true" >
 
                 <ImageView
-                    android:id="@+id/iv_login_logo"
+                    android:id="@+id/iv_settings_logo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="32dp"
+                    android:layout_marginTop="30dp"
                     android:contentDescription="@string/description_app_logo"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:srcCompat="@drawable/logo" />
 
+                <TextView
+                    android:id="@+id/tv_settings_appName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="@string/app_name"
+                    android:textColor="@android:color/white"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/iv_settings_logo" />
+
                 <android.support.constraint.ConstraintLayout
-                    android:id="@+id/settings_buttons"
+                    android:id="@+id/cl_settings_buttons"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="48dp"
@@ -52,7 +65,7 @@
                     android:background="@drawable/rounded_corners"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/iv_login_logo"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_settings_appName"
                     app:layout_constraintBottom_toTopOf="@+id/lbl_settings_copyright">
 
                     <Button
@@ -139,11 +152,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
-                    android:background="@drawable/copyright"
+                    android:text="@string/label_copyright"
+                    android:textColor="@color/colorClickableLabel"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/settings_buttons" />
+                    app:layout_constraintTop_toBottomOf="@+id/cl_settings_buttons" />
 
             </android.support.constraint.ConstraintLayout>
 

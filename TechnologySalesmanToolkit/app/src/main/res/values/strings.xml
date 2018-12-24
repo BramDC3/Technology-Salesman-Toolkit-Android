@@ -82,4 +82,10 @@
     <string name="message_privacy_policy_dialog">Door op \'Ja\' te drukken, gaat u akkoord met het privacybeleid en zal uw account aangemaakt worden. Er zal een bevestigingsmail naar uw e-mailadres verzonden worden.</string>
     <string name="description_service_instruction_image">Afbeelding van de huidige instructie</string>
 
+    <!-- Labels -->
+    <string name="label_change_password">Wachtwoord wijzigen? Klik hier!</string>
+    <string name="label_copyright">Copyright © 2018 | Bram De Coninck</string>
+    <string name="label_go_to_sign_in">Heb je al een account? Klik hier!</string>
+    <string name="label_go_to_registration">Heb je nog geen account? Klik hier!</string>
+
 </resources>
