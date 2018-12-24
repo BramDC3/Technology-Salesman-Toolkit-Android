@@ -11,4 +11,7 @@
     <!-- Form field text color -->
     <color name="colorFormFieldText">#655E5E</color>
 
+    <!-- Clickable label color -->
+    <color name="colorClickableLabel">#C4C4C4</color>
+
 </resources>

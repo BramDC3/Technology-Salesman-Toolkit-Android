@@ -33,17 +33,30 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="30dp"
+                    android:contentDescription="@string/description_app_logo"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/logo"
-                    android:contentDescription="@string/description_app_logo" />
+                    app:srcCompat="@drawable/logo" />
+
+                <TextView
+                    android:id="@+id/tv_registration_appName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="@string/app_name"
+                    android:textColor="@android:color/white"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/iv_registration_logo" />
 
                 <EditText
                     android:id="@+id/et_registration_firstname"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="56dp"
+                    android:layout_marginTop="52dp"
                     android:background="@drawable/reg_firstname"
                     android:ems="10"
                     android:hint="@string/placeholder_firstname"
@@ -55,7 +68,7 @@
                     android:text="@={registrationViewModel.firstname}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/iv_registration_logo"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_registration_appName"
                     tools:ignore="Autofill" />
 
                 <EditText
@@ -155,7 +168,8 @@
                     android:layout_marginTop="36dp"
                     android:layout_marginEnd="8dp"
                     android:layout_marginBottom="10dp"
-                    android:background="@drawable/reg_already_an_account"
+                    android:text="@string/label_go_to_sign_in"
+                    android:textColor="@color/colorClickableLabel"
                     android:textAlignment="center"
                     android:onClick="@{() -> registrationViewModel.goToLogin()}"
                     app:layout_constraintBottom_toBottomOf="parent"
