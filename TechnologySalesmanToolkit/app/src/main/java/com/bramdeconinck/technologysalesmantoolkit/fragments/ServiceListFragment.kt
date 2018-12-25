@@ -59,13 +59,6 @@ class ServiceListFragment : Fragment(), ToastMaker {
         super.onStart()
 
         subscribeToObservables()
-
-        srl_service_list_swiper.setColorSchemeResources(R.color.colorAccent)
-
-        srl_service_list_swiper.setOnRefreshListener {
-            srl_service_list_swiper.isRefreshing = false
-            serviceViewModel.fetchServices()
-        }
     }
 
     override fun onDestroyView() {
