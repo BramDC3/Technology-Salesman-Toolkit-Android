@@ -1,10 +1,10 @@
 package com.bramdeconinck.technologysalesmantoolkit.fragments
 
-import android.app.UiModeManager
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.databinding.DataBindingUtil
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.app.AppCompatDelegate
@@ -13,7 +13,6 @@ import android.view.View
 import android.view.ViewGroup
 import com.bramdeconinck.technologysalesmantoolkit.R
 import androidx.navigation.fragment.findNavController
-import com.bramdeconinck.technologysalesmantoolkit.activities.MainActivity
 import com.bramdeconinck.technologysalesmantoolkit.databinding.FragmentSettingsBinding
 import com.bramdeconinck.technologysalesmantoolkit.utils.BaseCommand
 import com.bramdeconinck.technologysalesmantoolkit.interfaces.ToastMaker
@@ -54,8 +53,14 @@ class SettingsFragment : Fragment(), ToastMaker {
         settingsViewModel.visitPrivacyPolicyClicked.observe(this, Observer { openWebPage(context!!, privacyPolicy) })
 
         settingsViewModel.isDarkModeEnabled.observe(this, Observer {
-            if (it!!) (activity as AppCompatActivity).delegate.setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-            else (activity as AppCompatActivity).delegate.setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            if (it!!) {
+                (activity as AppCompatActivity).delegate.setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                saveSelectedTheme(AppCompatDelegate.MODE_NIGHT_YES)
+            }
+            else {
+                (activity as AppCompatActivity).delegate.setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                saveSelectedTheme(AppCompatDelegate.MODE_NIGHT_NO)
+            }
         })
 
         settingsViewModel.makeSuggestionClicked.observe(this, Observer {
@@ -86,6 +91,11 @@ class SettingsFragment : Fragment(), ToastMaker {
         })
 
         settingsViewModel.signOutTriggered.observe(this, Observer { findNavController().navigate(R.id.signOutFromSettings) })
+    }
+
+    private fun saveSelectedTheme(theme: Int) {
+        val sharedPref = PreferenceManager.getDefaultSharedPreferences(context)
+        sharedPref.edit().putInt(getString(R.string.key_theme), theme).apply()
     }
 
     override fun showToast(message: Int) { makeToast(context!!, message) }
