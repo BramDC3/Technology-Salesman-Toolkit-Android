@@ -91,4 +91,12 @@
     <!-- Keys for shared preferences -->
     <string name="key_theme">Theme</string>
 
+    <!-- Dialogs -->
+    <string name="dialog_yes">Ja</string>
+    <string name="dialog_no">Nee</string>
+    <string name="dialog_cancel">Annuleren</string>
+    <string name="dialog_okay">Oké</string>
+    <string name="dialog_send">Verzend</string>
+    <string name="dialog_privacy_policy">Bekijk privacybeleid</string>
+
 </resources>

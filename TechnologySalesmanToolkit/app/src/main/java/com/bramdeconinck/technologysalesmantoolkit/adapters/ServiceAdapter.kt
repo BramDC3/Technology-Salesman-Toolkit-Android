@@ -14,6 +14,7 @@ import com.bramdeconinck.technologysalesmantoolkit.fragments.ServiceDetailFragme
 import com.bramdeconinck.technologysalesmantoolkit.fragments.ServiceListFragment
 import com.bramdeconinck.technologysalesmantoolkit.models.Service
 import com.bramdeconinck.technologysalesmantoolkit.utils.SERVICE_ITEM
+import com.bramdeconinck.technologysalesmantoolkit.utils.StringUtils.formatPrice
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.service_list_content.view.*
 
@@ -58,7 +59,7 @@ class ServiceAdapter(
         holder.nameView.text = item.name
         holder.descriptionView.text = item.description
         holder.categoryView.text = item.category.toString()
-        if (item.price != 0.0) holder.priceView.text = String.format("€ %.2f", item.price)
+        if (item.price != 0.0) holder.priceView.text = formatPrice(item.price)
 
         with(holder.itemView) {
             tag = item

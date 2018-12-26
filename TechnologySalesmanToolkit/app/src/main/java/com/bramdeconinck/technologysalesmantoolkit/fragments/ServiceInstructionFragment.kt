@@ -10,10 +10,9 @@ import android.view.ViewGroup
 import com.bramdeconinck.technologysalesmantoolkit.R
 import com.bramdeconinck.technologysalesmantoolkit.models.Instruction
 import com.bramdeconinck.technologysalesmantoolkit.utils.INSTRUCTION_ITEM
-import com.bramdeconinck.technologysalesmantoolkit.utils.StringUtils.createFormattedInstructionsList
+import com.bramdeconinck.technologysalesmantoolkit.utils.StringUtils.formatInstructionsList
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.fragment_service_instruction.*
-import kotlinx.android.synthetic.main.fragment_service_instruction.view.*
 
 class ServiceInstructionFragment : Fragment() {
     private var instruction: Instruction? = null
@@ -41,7 +40,7 @@ class ServiceInstructionFragment : Fragment() {
 
         tv_service_instruction_title.text = instruction!!.title
         tv_service_instruction_description.text = instruction!!.description
-        tv_service_instruction_content.text = createFormattedInstructionsList(instruction!!.content)
+        tv_service_instruction_content.text = formatInstructionsList(instruction!!.content)
     }
 
 }

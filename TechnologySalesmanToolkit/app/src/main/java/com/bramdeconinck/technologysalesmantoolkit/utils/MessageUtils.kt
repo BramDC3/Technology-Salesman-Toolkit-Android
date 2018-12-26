@@ -24,7 +24,7 @@ object MessageUtils {
         AlertDialog.Builder(context)
                 .setTitle(title)
                 .setMessage(message)
-                .setPositiveButton("Oké") { dialog, _ -> dialog.dismiss() }
+                .setPositiveButton(context.getString(R.string.dialog_okay)) { dialog, _ -> dialog.dismiss() }
                 .create()
                 .show()
     }
@@ -34,9 +34,9 @@ object MessageUtils {
         AlertDialog.Builder(context)
                 .setTitle(title)
                 .setMessage(message)
-                .setPositiveButton("Ja") { _, _ -> func() }
-                .setNegativeButton("Nee") { dialog, _ -> dialog.dismiss() }
-                .setNeutralButton("Annuleren") { dialog, _ -> dialog.dismiss() }
+                .setPositiveButton(context.getString(R.string.dialog_yes)) { _, _ -> func() }
+                .setNegativeButton(context.getString(R.string.dialog_no)) { dialog, _ -> dialog.dismiss() }
+                .setNeutralButton(context.getString(R.string.dialog_cancel)) { dialog, _ -> dialog.dismiss() }
                 .create()
                 .show()
     }
@@ -56,8 +56,8 @@ object MessageUtils {
                 .setTitle(title)
                 .setView(container)
                 .setMessage(message)
-                .setPositiveButton("Verzend") { _, _ -> func(editText.text.toString()) }
-                .setNeutralButton("Annuleren") { dialog, _ -> dialog.dismiss() }
+                .setPositiveButton(context.getString(R.string.dialog_send)) { _, _ -> func(editText.text.toString()) }
+                .setNeutralButton(context.getString(R.string.dialog_cancel)) { dialog, _ -> dialog.dismiss() }
                 .create()
                 .show()
     }
@@ -67,9 +67,9 @@ object MessageUtils {
         AlertDialog.Builder(context)
                 .setTitle(title)
                 .setMessage(message)
-                .setPositiveButton("Ja") { _, _ -> func() }
-                .setNegativeButton("Nee") { dialog, _ -> dialog.dismiss() }
-                .setNeutralButton("Bekijk privacybeleid") { _, _ -> openWebPage(context, privacyPolicy) }
+                .setPositiveButton(context.getString(R.string.dialog_yes)) { _, _ -> func() }
+                .setNegativeButton(context.getString(R.string.dialog_no)) { dialog, _ -> dialog.dismiss() }
+                .setNeutralButton(context.getString(R.string.dialog_privacy_policy)) { _, _ -> openWebPage(context, privacyPolicy) }
                 .create()
                 .show()
     }
