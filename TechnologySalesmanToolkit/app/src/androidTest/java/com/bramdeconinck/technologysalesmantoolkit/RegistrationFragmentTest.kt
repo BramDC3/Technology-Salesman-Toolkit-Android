@@ -1,10 +1,17 @@
 package com.bramdeconinck.technologysalesmantoolkit
 
+import android.app.Instrumentation
+import android.content.Intent
 import android.support.test.runner.AndroidJUnit4
 import android.support.test.espresso.Espresso.*
 import android.support.test.espresso.action.ViewActions
 import android.support.test.espresso.assertion.ViewAssertions
 import android.support.test.espresso.assertion.ViewAssertions.matches
+import android.support.test.espresso.intent.Intents
+import android.support.test.espresso.intent.Intents.intended
+import android.support.test.espresso.intent.Intents.intending
+import android.support.test.espresso.intent.matcher.IntentMatchers.hasAction
+import android.support.test.espresso.intent.matcher.IntentMatchers.hasData
 import android.support.test.espresso.matcher.RootMatchers
 import android.support.test.espresso.matcher.ViewMatchers
 import android.support.test.espresso.matcher.ViewMatchers.isDisplayed
@@ -12,7 +19,9 @@ import android.support.test.rule.ActivityTestRule
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import com.bramdeconinck.technologysalesmantoolkit.activities.MainActivity
+import com.bramdeconinck.technologysalesmantoolkit.utils.privacyPolicy
 import org.hamcrest.CoreMatchers
+import org.hamcrest.CoreMatchers.allOf
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -23,8 +32,7 @@ class RegistrationFragmentTest {
 
     private lateinit var navController: NavController
 
-    @Rule
-    @JvmField
+    @get:Rule
     var mActivityTestRule = ActivityTestRule(MainActivity::class.java)
 
     @Before
@@ -158,7 +166,7 @@ class RegistrationFragmentTest {
     }
 
     @Test
-    fun register_ValidRegistrationForm() {
+    fun register_ValidRegistrationForm_OpenPrivacyPolicy() {
         onView(ViewMatchers.withId(R.id.et_registration_firstname)).perform(ViewActions.typeText("Andy"))
         closeSoftKeyboard()
         onView(ViewMatchers.withId(R.id.et_registration_familyname)).perform(ViewActions.typeText("Droidon"))
@@ -171,6 +179,15 @@ class RegistrationFragmentTest {
         closeSoftKeyboard()
         onView(ViewMatchers.withId(R.id.btn_registration_register)).perform(ViewActions.click())
         onView(ViewMatchers.withText(R.string.title_privacy_policy_dialog)).check(matches(isDisplayed()))
+
+        Intents.init()
+        val expectedIntent = allOf(hasAction(Intent.ACTION_VIEW), hasData(privacyPolicy))
+        intending(expectedIntent).respondWith(Instrumentation.ActivityResult(0, null))
+
+        onView(ViewMatchers.withText(R.string.dialog_privacy_policy)).perform(ViewActions.click())
+
+        intended(expectedIntent)
+        Intents.release()
     }
 
     @Test

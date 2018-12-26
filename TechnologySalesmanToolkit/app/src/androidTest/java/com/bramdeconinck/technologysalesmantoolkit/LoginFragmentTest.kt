@@ -23,8 +23,7 @@ class LoginFragmentTest {
 
     private lateinit var navController: NavController
 
-    @Rule
-    @JvmField
+    @get:Rule
     var mActivityTestRule = ActivityTestRule(MainActivity::class.java)
 
     @Before
