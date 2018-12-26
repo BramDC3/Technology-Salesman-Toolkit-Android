@@ -1,6 +1,9 @@
 package com.bramdeconinck.technologysalesmantoolkit.viewmodels
 
+import android.annotation.SuppressLint
 import android.arch.lifecycle.MutableLiveData
+import android.content.Context
+import android.preference.PreferenceManager
 import com.bramdeconinck.technologysalesmantoolkit.R
 import com.bramdeconinck.technologysalesmantoolkit.utils.BaseCommand
 import com.bramdeconinck.technologysalesmantoolkit.base.InjectedViewModel
@@ -15,6 +18,10 @@ class SettingsViewModel : InjectedViewModel(), FirebaseSuggestionCallback {
 
     @Inject
     lateinit var firestoreAPI: FirestoreAPI
+
+    @SuppressLint("StaticFieldLeak")
+    @Inject
+    lateinit var context: Context
 
     val isDarkModeEnabled = MutableLiveData<Boolean>()
 
@@ -32,7 +39,11 @@ class SettingsViewModel : InjectedViewModel(), FirebaseSuggestionCallback {
 
     val signOutTriggered = SingleLiveEvent<Any>()
 
-    init { isDarkModeEnabled.value = false }
+    init {
+        val sharedPref = PreferenceManager.getDefaultSharedPreferences(context)
+        val theme = sharedPref.getInt(context.getString(R.string.key_theme), 1)
+        isDarkModeEnabled.value = theme == 2
+    }
 
     fun visitWebsite() { visitWebsiteClicked.call() }
 

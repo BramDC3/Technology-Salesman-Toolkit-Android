@@ -27,7 +27,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
-                android:textColor="@android:color/black"
+                android:textColor="@color/colorServiceTitle"
                 android:textStyle="bold"
                 app:layout_constraintStart_toEndOf="@+id/iv_service_logo"
                 app:layout_constraintTop_toTopOf="parent"/>
@@ -54,6 +54,7 @@
                 android:paddingRight="15dp"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Small.Inverse"
                 android:textStyle="bold"
+                android:textColor="@color/colorServiceCategory"
                 app:layout_constraintStart_toEndOf="@+id/iv_service_logo"
                 app:layout_constraintTop_toBottomOf="@+id/tv_service_description"/>
 

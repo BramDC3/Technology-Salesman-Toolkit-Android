@@ -88,4 +88,7 @@
     <string name="label_go_to_sign_in">Heb je al een account? Klik hier!</string>
     <string name="label_go_to_registration">Heb je nog geen account? Klik hier!</string>
 
+    <!-- Keys for shared preferences -->
+    <string name="key_theme">Theme</string>
+
 </resources>

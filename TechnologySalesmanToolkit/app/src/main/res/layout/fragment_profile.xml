@@ -20,6 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/login_background"
+            android:theme="@style/PrimaryBackground"
             tools:ignore="UselessParent">
 
             <android.support.constraint.ConstraintLayout
@@ -75,6 +76,7 @@
                         android:layout_marginTop="8dp"
                         android:inputType="textPersonName"
                         android:hint="@string/placeholder_firstname"
+                        android:textColorHint="@color/colorHintText"
                         android:textSize="16sp"
                         android:background="@drawable/reg_firstname"
                         android:paddingStart="40dp"
@@ -95,6 +97,7 @@
                         android:layout_marginTop="8dp"
                         android:inputType="textPersonName"
                         android:hint="@string/placeholder_lastname"
+                        android:textColorHint="@color/colorHintText"
                         android:background="@drawable/reg_familyname"
                         android:textSize="16sp"
                         android:paddingStart="40dp"
@@ -115,6 +118,7 @@
                         android:layout_marginTop="8dp"
                         android:inputType="textEmailAddress"
                         android:hint="@string/placeholder_email"
+                        android:textColorHint="@color/colorHintText"
                         android:background="@drawable/reg_email"
                         android:textSize="16sp"
                         android:paddingStart="40dp"

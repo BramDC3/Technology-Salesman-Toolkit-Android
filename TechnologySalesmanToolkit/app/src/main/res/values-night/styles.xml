@@ -34,6 +34,8 @@
     </style>
 
     <!-- Background for most views -->
-    <style name="PrimaryBackground" />
+    <style name="PrimaryBackground">
+        <item name="android:background">@color/colorGreyBackground</item>
+    </style>
 
 </resources>
