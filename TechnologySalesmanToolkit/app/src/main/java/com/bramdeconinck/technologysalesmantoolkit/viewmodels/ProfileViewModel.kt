@@ -83,7 +83,7 @@ class ProfileViewModel : InjectedViewModel() {
     }
 
     fun applyProfileChanges() =  {
-        if (firebaseUser!!.displayName != "$firstname $familyname") {
+        if (firebaseUser!!.displayName != "${firstname.value} ${familyname.value}") {
             firebaseUser!!.updateProfile(createProfileUpdates(firstname.value!!, familyname.value!!))
                     .addOnCompleteListener { task ->
                         if (task.isSuccessful) {
