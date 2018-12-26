@@ -1,6 +1,5 @@
 package com.bramdeconinck.technologysalesmantoolkit.activities
 
-import android.content.Context
 import android.os.Bundle
 import android.preference.PreferenceManager
 import android.support.v7.app.AppCompatActivity
@@ -11,7 +10,6 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.bramdeconinck.technologysalesmantoolkit.R
-import com.bramdeconinck.technologysalesmantoolkit.context.App
 import com.bramdeconinck.technologysalesmantoolkit.interfaces.ToolbarTitleChanger
 import com.bramdeconinck.technologysalesmantoolkit.utils.FirebaseUtils.firebaseAuth
 import kotlinx.android.synthetic.main.activity_main.*
@@ -101,6 +99,7 @@ class MainActivity : AppCompatActivity(), ToolbarTitleChanger {
         val sharedPref = PreferenceManager.getDefaultSharedPreferences(this)
         val theme = sharedPref.getInt(getString(R.string.key_theme), 1)
         if (theme == 2) delegate.setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        else delegate.setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO)
     }
 
     // Thanks to the navigation component, when you navigate to

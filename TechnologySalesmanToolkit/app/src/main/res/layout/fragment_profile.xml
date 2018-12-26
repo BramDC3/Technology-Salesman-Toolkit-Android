@@ -14,13 +14,13 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@drawable/login_background"
+        android:theme="@style/PrimaryBackground"
         tools:context=".fragments.ProfileFragment">
 
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/login_background"
-            android:theme="@style/PrimaryBackground"
             tools:ignore="UselessParent">
 
             <android.support.constraint.ConstraintLayout
