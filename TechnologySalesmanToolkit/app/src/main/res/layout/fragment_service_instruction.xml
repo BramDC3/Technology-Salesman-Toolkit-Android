@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white"
+    android:background="@color/colorInstructionBackground"
     tools:context=".fragments.ServiceInstructionFragment">
 
     <ScrollView
@@ -58,7 +58,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
-                android:textColor="@android:color/black"
+                android:textColor="@color/colorServiceTitle"
                 app:layout_constraintEnd_toEndOf="@+id/gl_service_instruction_95"
                 app:layout_constraintStart_toStartOf="@+id/gl_service_instruction_5"
                 app:layout_constraintTop_toBottomOf="@+id/tv_service_instruction_title" />

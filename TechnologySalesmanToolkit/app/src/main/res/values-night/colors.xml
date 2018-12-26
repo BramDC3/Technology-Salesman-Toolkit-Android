@@ -3,12 +3,33 @@
     <!-- The primary colors of the app theme -->
     <color name="colorPrimary">#212121</color>
     <color name="colorPrimaryDark">#000000</color>
-    <color name="colorAccent">#3E50B4</color>
+    <color name="colorAccent">#73A1C7</color>
 
     <!-- Background of certain groups of views -->
     <color name="colorLightBlueBackground">#45FFFFFF</color>
 
     <!-- Form field text color -->
     <color name="colorFormFieldText">#655E5E</color>
+
+    <!-- Clickable label color -->
+    <color name="colorClickableLabel">#C4C4C4</color>
+
+    <!-- Color used in dark mode for backgrounds -->
+    <color name="colorGreyBackground">#303030</color>
+
+    <!-- Color for titles of service list items -->
+    <color name="colorServiceTitle">@android:color/white</color>
+
+    <!-- Color for categories of service list items -->
+    <color name="colorServiceCategory">@color/colorClickableLabel</color>
+
+    <!-- Color for the background of instructions -->
+    <color name="colorInstructionBackground">@color/colorGreyBackground</color>
+
+    <!-- Color for the background of the bottom navigation view -->
+    <color name="colorBottomNavView">@color/colorPrimary</color>
+
+    <!-- Color for hint text -->
+    <color name="colorHintText">#808080</color>
 
 </resources>

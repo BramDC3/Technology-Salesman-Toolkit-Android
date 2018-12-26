@@ -14,10 +14,11 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@drawable/login_background"
+        android:theme="@style/PrimaryBackground"
         tools:context=".fragments.LoginFragment">
 
         <ScrollView
-            android:background="@drawable/login_background"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             tools:ignore="UselessParent">
@@ -62,6 +63,7 @@
                     android:background="@drawable/email"
                     android:ems="10"
                     android:hint="@string/placeholder_email"
+                    android:textColorHint="@color/colorHintText"
                     android:inputType="textEmailAddress"
                     android:paddingStart="40dp"
                     android:paddingEnd="20dp"
@@ -83,6 +85,7 @@
                     android:background="@drawable/password"
                     android:ems="10"
                     android:hint="@string/placeholder_password"
+                    android:textColorHint="@color/colorHintText"
                     android:inputType="textPassword"
                     android:paddingStart="40dp"
                     android:paddingEnd="20dp"

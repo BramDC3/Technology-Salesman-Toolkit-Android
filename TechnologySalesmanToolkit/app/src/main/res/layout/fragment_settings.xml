@@ -14,10 +14,11 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:theme="@style/PrimaryBackground"
+        android:background="@drawable/login_background"
         tools:context=".fragments.SettingsFragment">
 
         <ScrollView
-            android:background="@drawable/login_background"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             tools:ignore="UselessParent">

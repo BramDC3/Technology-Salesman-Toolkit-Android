@@ -1,5 +1,6 @@
 package com.bramdeconinck.technologysalesmantoolkit.fragments
 
+import android.app.UiModeManager
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.databinding.DataBindingUtil
@@ -12,6 +13,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.bramdeconinck.technologysalesmantoolkit.R
 import androidx.navigation.fragment.findNavController
+import com.bramdeconinck.technologysalesmantoolkit.activities.MainActivity
 import com.bramdeconinck.technologysalesmantoolkit.databinding.FragmentSettingsBinding
 import com.bramdeconinck.technologysalesmantoolkit.utils.BaseCommand
 import com.bramdeconinck.technologysalesmantoolkit.interfaces.ToastMaker
