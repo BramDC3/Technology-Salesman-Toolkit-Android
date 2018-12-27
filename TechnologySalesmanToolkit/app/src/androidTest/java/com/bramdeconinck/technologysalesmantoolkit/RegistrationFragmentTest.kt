@@ -19,6 +19,7 @@ import android.support.test.rule.ActivityTestRule
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import com.bramdeconinck.technologysalesmantoolkit.activities.MainActivity
+import com.bramdeconinck.technologysalesmantoolkit.utils.FirebaseUtils.firebaseAuth
 import com.bramdeconinck.technologysalesmantoolkit.utils.privacyPolicy
 import org.hamcrest.CoreMatchers
 import org.hamcrest.CoreMatchers.allOf
@@ -37,8 +38,13 @@ class RegistrationFragmentTest {
 
     @Before
     fun signOut() {
+        firebaseAuth.signOut()
+        Thread.sleep(5000)
+
         navController = mActivityTestRule.activity.findNavController(R.id.main_nav_host_fragment)
         mActivityTestRule.activity.runOnUiThread { navController.navigate(R.id.registrationFragment) }
+
+        Thread.sleep(500)
     }
 
     @Test
@@ -191,8 +197,14 @@ class RegistrationFragmentTest {
     }
 
     @Test
-    fun goToLogin() {
+    fun pressBackButton_GoToLogin() {
         pressBack()
+        onView(ViewMatchers.withId(R.id.btn_login_signIn)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+    }
+
+    @Test
+    fun clickLabel_GoToLogin() {
+        onView(ViewMatchers.withId(R.id.tv_registration_backToLogin)).perform(ViewActions.scrollTo(), ViewActions.click())
         onView(ViewMatchers.withId(R.id.btn_login_signIn)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
     }
 

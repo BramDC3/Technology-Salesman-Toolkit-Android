@@ -12,6 +12,7 @@ import android.support.test.runner.AndroidJUnit4
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import com.bramdeconinck.technologysalesmantoolkit.activities.MainActivity
+import com.bramdeconinck.technologysalesmantoolkit.utils.FirebaseUtils.firebaseAuth
 import org.hamcrest.CoreMatchers
 import org.junit.Before
 import org.junit.Rule
@@ -28,8 +29,13 @@ class LoginFragmentTest {
 
     @Before
     fun signOut() {
+        firebaseAuth.signOut()
+        Thread.sleep(5000)
+
         navController = mActivityTestRule.activity.findNavController(R.id.main_nav_host_fragment)
         mActivityTestRule.activity.runOnUiThread { navController.navigate(R.id.loginFragment) }
+
+        Thread.sleep(500)
     }
 
     @Test
