@@ -17,6 +17,7 @@ import com.bramdeconinck.technologysalesmantoolkit.interfaces.ToastMaker
 import com.bramdeconinck.technologysalesmantoolkit.models.Category
 import com.bramdeconinck.technologysalesmantoolkit.models.Service
 import com.bramdeconinck.technologysalesmantoolkit.utils.MessageUtils.makeToast
+import com.bramdeconinck.technologysalesmantoolkit.layoutmanagers.MyLineairLayoutManager
 import com.bramdeconinck.technologysalesmantoolkit.viewmodels.ServiceViewModel
 import kotlinx.android.synthetic.main.fragment_service_list.*
 import kotlinx.android.synthetic.main.fragment_service_list.view.*
@@ -49,7 +50,9 @@ class ServiceListFragment : Fragment(), ToastMaker {
         val twoPane = rootView.fl_service_list_detail_container != null
 
         serviceAdapter = ServiceAdapter(this, services, twoPane)
+        serviceAdapter.setHasStableIds(true)
 
+        rootView.rv_service_list_services.layoutManager = MyLineairLayoutManager(context)
         rootView.rv_service_list_services.adapter = serviceAdapter
 
         return rootView
@@ -64,6 +67,7 @@ class ServiceListFragment : Fragment(), ToastMaker {
     override fun onDestroyView() {
         super.onDestroyView()
 
+        rv_service_list_services.adapter = null
         serviceViewModel.clearFilters()
     }
 

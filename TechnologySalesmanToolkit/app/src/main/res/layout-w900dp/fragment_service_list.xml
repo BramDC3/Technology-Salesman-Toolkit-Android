@@ -38,7 +38,6 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layoutAnimation="@anim/layout_animation_from_bottom"
-                app:layoutManager="LinearLayoutManager"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"

@@ -67,6 +67,10 @@ class ServiceAdapter(
         }
     }
 
+    override fun getItemId(position: Int): Long {
+        return services.value!![position].hashCode().toLong()
+    }
+
     override fun getItemCount() = services.value!!.size
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
