@@ -25,6 +25,7 @@
     <!-- Splash Screen theme -->
     <style name="AppTheme.Launcher">
         <item name="android:windowBackground">@drawable/splash_screen</item>
+        <item name="android:windowAnimationStyle">@null</item>
     </style>
 
     <!-- Animation that takes place when changing from day to night theme and vice versa -->
