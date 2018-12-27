@@ -64,6 +64,8 @@ class MainActivity : AppCompatActivity(), ToolbarTitleChanger {
                     } else showToolbarAndBottomNavigation()
                 }
                 R.id.loginFragment -> hideToolbarAndBottomNavigation()
+                R.id.registrationFragment -> hideToolbarAndBottomNavigation()
+                else -> showToolbarAndBottomNavigation()
             }
         }
     }
@@ -72,6 +74,7 @@ class MainActivity : AppCompatActivity(), ToolbarTitleChanger {
     // on the login and registration screen, so we hide them
     private fun hideToolbarAndBottomNavigation() {
         supportActionBar!!.hide()
+
         with(main_bottom_navigation_view) {
             if (visibility == View.VISIBLE && alpha == 1f) {
                 animate()
@@ -86,11 +89,14 @@ class MainActivity : AppCompatActivity(), ToolbarTitleChanger {
     // on the other screens, so we make them visible again
     private fun showToolbarAndBottomNavigation() {
         supportActionBar!!.show()
+
         with(main_bottom_navigation_view) {
-            visibility = View.VISIBLE
-            animate()
-                .alpha(1f)
-                .duration = 0
+            if (visibility == View.GONE && alpha == 0f) {
+                animate()
+                    .alpha(1f)
+                    .withEndAction { visibility = View.VISIBLE }
+                    .duration = 0
+            }
         }
     }
 

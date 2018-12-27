@@ -19,7 +19,9 @@ import android.support.test.rule.ActivityTestRule
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import com.bramdeconinck.technologysalesmantoolkit.activities.MainActivity
+import com.bramdeconinck.technologysalesmantoolkit.utils.FirebaseUtils
 import com.bramdeconinck.technologysalesmantoolkit.utils.FirebaseUtils.firebaseAuth
+import com.bramdeconinck.technologysalesmantoolkit.utils.FirebaseUtils.firebaseUser
 import com.bramdeconinck.technologysalesmantoolkit.utils.privacyPolicy
 import org.hamcrest.CoreMatchers
 import org.hamcrest.CoreMatchers.allOf
@@ -37,14 +39,15 @@ class RegistrationFragmentTest {
     var mActivityTestRule = ActivityTestRule(MainActivity::class.java)
 
     @Before
-    fun signOut() {
-        firebaseAuth.signOut()
-        Thread.sleep(5000)
+    fun navigateToRegistration() {
+        if (firebaseAuth.currentUser != null) {
+            firebaseAuth.signOut()
+            Thread.sleep(5000)
+            firebaseUser = null
+        }
 
         navController = mActivityTestRule.activity.findNavController(R.id.main_nav_host_fragment)
         mActivityTestRule.activity.runOnUiThread { navController.navigate(R.id.registrationFragment) }
-
-        Thread.sleep(500)
     }
 
     @Test

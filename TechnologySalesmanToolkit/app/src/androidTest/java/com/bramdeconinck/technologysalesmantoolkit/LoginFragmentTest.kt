@@ -12,7 +12,9 @@ import android.support.test.runner.AndroidJUnit4
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import com.bramdeconinck.technologysalesmantoolkit.activities.MainActivity
+import com.bramdeconinck.technologysalesmantoolkit.utils.FirebaseUtils
 import com.bramdeconinck.technologysalesmantoolkit.utils.FirebaseUtils.firebaseAuth
+import com.bramdeconinck.technologysalesmantoolkit.utils.FirebaseUtils.firebaseUser
 import org.hamcrest.CoreMatchers
 import org.junit.Before
 import org.junit.Rule
@@ -28,14 +30,15 @@ class LoginFragmentTest {
     var mActivityTestRule = ActivityTestRule(MainActivity::class.java)
 
     @Before
-    fun signOut() {
-        firebaseAuth.signOut()
-        Thread.sleep(5000)
+    fun navigateToLogin() {
+        if (firebaseAuth.currentUser != null) {
+            firebaseAuth.signOut()
+            Thread.sleep(5000)
+            firebaseUser = null
+        }
 
         navController = mActivityTestRule.activity.findNavController(R.id.main_nav_host_fragment)
         mActivityTestRule.activity.runOnUiThread { navController.navigate(R.id.loginFragment) }
-
-        Thread.sleep(500)
     }
 
     @Test

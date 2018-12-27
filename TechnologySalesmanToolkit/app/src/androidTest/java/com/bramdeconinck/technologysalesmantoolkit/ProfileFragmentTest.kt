@@ -30,14 +30,14 @@ class ProfileFragmentTest {
 
     @Before
     fun navigateToProfile() {
-        firebaseAuth.signInWithEmailAndPassword(existantEmail, existantPassword)
-        Thread.sleep(7000)
-        firebaseUser = firebaseAuth.currentUser
+        if (firebaseAuth.currentUser == null) {
+            firebaseAuth.signInWithEmailAndPassword(existantEmail, existantPassword)
+            Thread.sleep(5000)
+            firebaseUser = firebaseAuth.currentUser
+        }
 
         navController = mActivityTestRule.activity.findNavController(R.id.main_nav_host_fragment)
         mActivityTestRule.activity.runOnUiThread { navController.navigate(R.id.profileFragment) }
-
-        Thread.sleep(500)
     }
 
     @Test
