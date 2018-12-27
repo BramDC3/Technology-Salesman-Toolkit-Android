@@ -34,8 +34,10 @@
             <ImageView
                 android:id="@+id/iv_service_instruction_image"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:contentDescription="@string/description_service_instruction_image"
+                android:scaleType="centerCrop"
+                app:layout_constraintDimensionRatio="WH,16:9"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"/>
@@ -48,6 +50,7 @@
                 android:layout_marginBottom="8dp"
                 android:gravity="center"
                 android:textSize="22sp"
+                android:textColor="@color/colorServiceTitle"
                 app:layout_constraintEnd_toEndOf="@+id/gl_service_instruction_95"
                 app:layout_constraintStart_toStartOf="@+id/gl_service_instruction_5"
                 app:layout_constraintTop_toBottomOf="@+id/iv_service_instruction_image" />
