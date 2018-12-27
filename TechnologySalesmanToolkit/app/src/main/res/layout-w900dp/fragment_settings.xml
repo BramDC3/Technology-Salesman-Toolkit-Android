@@ -108,7 +108,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="20dp"
                         android:elevation="10dp"
-                        android:checked="@={settingsViewModel.isDarkModeEnabled}"
+                        android:checked="@{safeUnbox(settingsViewModel.isDarkModeEnabled)}"
+                        android:onClick="@{() -> settingsViewModel.toggleDarkMode()}"
                         app:layout_constraintBottom_toBottomOf="@+id/btn_settings_darkmode"
                         app:layout_constraintEnd_toEndOf="@+id/btn_settings_darkmode"
                         app:layout_constraintTop_toTopOf="@+id/btn_settings_darkmode" />
