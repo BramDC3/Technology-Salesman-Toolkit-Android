@@ -1,4 +1,4 @@
 package com.bramdeconinck.technologysalesmantoolkit
 
-val existantEmail = "bramwarsx@gmail.com"
-val existantPassword = "osocosoc"
+const val existentEmail = "bramwarsx@gmail.com"
+const val existentPassword = "osocosoc"

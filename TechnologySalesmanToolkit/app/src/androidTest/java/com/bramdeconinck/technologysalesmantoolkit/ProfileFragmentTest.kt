@@ -13,6 +13,8 @@ import androidx.navigation.findNavController
 import com.bramdeconinck.technologysalesmantoolkit.activities.MainActivity
 import com.bramdeconinck.technologysalesmantoolkit.utils.FirebaseUtils.firebaseAuth
 import com.bramdeconinck.technologysalesmantoolkit.utils.FirebaseUtils.firebaseUser
+import com.bramdeconinck.technologysalesmantoolkit.utils.StringUtils.getFamilyname
+import com.bramdeconinck.technologysalesmantoolkit.utils.StringUtils.getFirstname
 import org.hamcrest.CoreMatchers
 import org.hamcrest.Matchers.not
 import org.junit.Before
@@ -31,13 +33,25 @@ class ProfileFragmentTest {
     @Before
     fun navigateToProfile() {
         if (firebaseAuth.currentUser == null) {
-            firebaseAuth.signInWithEmailAndPassword(existantEmail, existantPassword)
+            firebaseAuth.signInWithEmailAndPassword(existentEmail, existentPassword)
             Thread.sleep(5000)
             firebaseUser = firebaseAuth.currentUser
         }
 
         navController = mActivityTestRule.activity.findNavController(R.id.main_nav_host_fragment)
         mActivityTestRule.activity.runOnUiThread { navController.navigate(R.id.profileFragment) }
+    }
+
+    @Test
+    fun profileFragmentLoaded_FormIsFilledCorrectly() {
+        val firstname = getFirstname(firebaseUser!!.displayName!!)
+        val familyname = getFamilyname(firebaseUser!!.displayName!!)
+        val email = firebaseUser!!.email!!
+
+        onView(withId(R.id.tv_profile_fullname)).check(matches(withText("$firstname $familyname")))
+        onView(withId(R.id.et_profile_firstname)).check(matches(withText(firstname)))
+        onView(withId(R.id.et_profile_familyname)).check(matches(withText(familyname)))
+        onView(withId(R.id.et_profile_email)).check(matches(withText(email)))
     }
 
     @Test
