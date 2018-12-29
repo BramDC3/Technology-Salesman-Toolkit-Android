@@ -1,6 +1,8 @@
 package com.bramdeconinck.technologysalesmantoolkit.injection.module
 
 import android.content.Context
+import android.content.SharedPreferences
+import android.preference.PreferenceManager
 import com.bramdeconinck.technologysalesmantoolkit.database.ServiceDao
 import com.bramdeconinck.technologysalesmantoolkit.database.ServiceDatabase
 import com.bramdeconinck.technologysalesmantoolkit.models.InstructionRepository
@@ -46,6 +48,10 @@ class NetworkModule(private val context: Context) {
     @Provides
     @Singleton
     fun provideServiceDatabase(context: Context): ServiceDatabase { return ServiceDatabase.getInstance(context) }
+
+    @Provides
+    @Singleton
+    fun provideSharedPreferences(): SharedPreferences { return PreferenceManager.getDefaultSharedPreferences(context) }
 
     @Provides
     @Singleton

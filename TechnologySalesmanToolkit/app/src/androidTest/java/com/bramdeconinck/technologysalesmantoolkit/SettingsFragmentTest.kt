@@ -17,6 +17,7 @@ import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import com.bramdeconinck.technologysalesmantoolkit.activities.MainActivity
 import com.bramdeconinck.technologysalesmantoolkit.utils.privacyPolicy
+import com.bramdeconinck.technologysalesmantoolkit.utils.sharedPreferencesThemeKey
 import com.bramdeconinck.technologysalesmantoolkit.utils.website
 import org.hamcrest.CoreMatchers
 import org.junit.Assert
@@ -83,11 +84,11 @@ class SettingsFragmentTest {
     fun clickDarkModeButton_ChangeTheme() {
         val context = getInstrumentation().targetContext
         val sharedPref = PreferenceManager.getDefaultSharedPreferences(context)
-        val themeBefore = sharedPref.getInt(context.getString(R.string.key_theme), 0)
+        val themeBefore = sharedPref.getInt(sharedPreferencesThemeKey, 0)
 
         Espresso.onView(ViewMatchers.withId(R.id.btn_settings_darkmode)).perform(ViewActions.click())
 
-        val themeAfter = sharedPref.getInt(context.getString(R.string.key_theme), 0)
+        val themeAfter = sharedPref.getInt(sharedPreferencesThemeKey, 0)
 
         Assert.assertNotEquals(themeBefore, themeAfter)
 
@@ -100,11 +101,11 @@ class SettingsFragmentTest {
     fun toggleDarkModeSwitch_ChangeTheme() {
         val context = getInstrumentation().targetContext
         val sharedPref = PreferenceManager.getDefaultSharedPreferences(context)
-        val themeBefore = sharedPref.getInt(context.getString(R.string.key_theme), 0)
+        val themeBefore = sharedPref.getInt(sharedPreferencesThemeKey, 0)
 
         Espresso.onView(ViewMatchers.withId(R.id.switch_settings_darkmode)).perform(ViewActions.click())
 
-        val themeAfter = sharedPref.getInt(context.getString(R.string.key_theme), 0)
+        val themeAfter = sharedPref.getInt(sharedPreferencesThemeKey, 0)
 
         Assert.assertNotEquals(themeBefore, themeAfter)
 

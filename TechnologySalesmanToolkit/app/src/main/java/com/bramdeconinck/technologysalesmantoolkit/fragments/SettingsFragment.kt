@@ -22,6 +22,7 @@ import com.bramdeconinck.technologysalesmantoolkit.utils.MessageUtils.makeToast
 import com.bramdeconinck.technologysalesmantoolkit.utils.MessageUtils.showMakeSuggestionDialog
 import com.bramdeconinck.technologysalesmantoolkit.utils.MessageUtils.showThreeButtonsPositiveFunctionDialog
 import com.bramdeconinck.technologysalesmantoolkit.utils.WebpageUtils.openWebPage
+import com.bramdeconinck.technologysalesmantoolkit.utils.sharedPreferencesThemeKey
 import com.bramdeconinck.technologysalesmantoolkit.viewmodels.SettingsViewModel
 
 class SettingsFragment : Fragment(), ToastMaker {
@@ -95,7 +96,7 @@ class SettingsFragment : Fragment(), ToastMaker {
 
     private fun saveSelectedTheme(theme: Int) {
         val sharedPref = PreferenceManager.getDefaultSharedPreferences(context)
-        sharedPref.edit().putInt(getString(R.string.key_theme), theme).apply()
+        sharedPref.edit().putInt(sharedPreferencesThemeKey, theme).apply()
     }
 
     override fun showToast(message: Int) { makeToast(context!!, message) }

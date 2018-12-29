@@ -34,7 +34,7 @@ class ProfileFragmentTest {
     fun navigateToProfile() {
         if (firebaseAuth.currentUser == null) {
             firebaseAuth.signInWithEmailAndPassword(existentEmail, existentPassword)
-            Thread.sleep(5000)
+            Thread.sleep(10000)
             firebaseUser = firebaseAuth.currentUser
         }
 

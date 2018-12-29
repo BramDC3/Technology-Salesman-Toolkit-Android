@@ -42,7 +42,7 @@ class RegistrationFragmentTest {
     fun navigateToRegistration() {
         if (firebaseAuth.currentUser != null) {
             firebaseAuth.signOut()
-            Thread.sleep(5000)
+            Thread.sleep(10000)
             firebaseUser = null
         }
 

@@ -3,6 +3,7 @@ package com.bramdeconinck.technologysalesmantoolkit.viewmodels
 import android.annotation.SuppressLint
 import android.arch.lifecycle.MutableLiveData
 import android.content.Context
+import android.content.SharedPreferences
 import android.preference.PreferenceManager
 import com.bramdeconinck.technologysalesmantoolkit.R
 import com.bramdeconinck.technologysalesmantoolkit.utils.BaseCommand
@@ -12,6 +13,7 @@ import com.bramdeconinck.technologysalesmantoolkit.network.FirestoreAPI
 import com.bramdeconinck.technologysalesmantoolkit.utils.FirebaseUtils.firebaseAuth
 import com.bramdeconinck.technologysalesmantoolkit.utils.SingleLiveEvent
 import com.bramdeconinck.technologysalesmantoolkit.utils.ValidationUtils.everyFieldHasValue
+import com.bramdeconinck.technologysalesmantoolkit.utils.sharedPreferencesThemeKey
 import javax.inject.Inject
 
 class SettingsViewModel : InjectedViewModel(), FirebaseSuggestionCallback {
@@ -19,9 +21,8 @@ class SettingsViewModel : InjectedViewModel(), FirebaseSuggestionCallback {
     @Inject
     lateinit var firestoreAPI: FirestoreAPI
 
-    @SuppressLint("StaticFieldLeak")
     @Inject
-    lateinit var context: Context
+    lateinit var sharedPreferences: SharedPreferences
 
     val isDarkModeEnabled = MutableLiveData<Boolean>()
 
@@ -40,8 +41,7 @@ class SettingsViewModel : InjectedViewModel(), FirebaseSuggestionCallback {
     val signOutTriggered = SingleLiveEvent<Any>()
 
     init {
-        val sharedPref = PreferenceManager.getDefaultSharedPreferences(context)
-        val theme = sharedPref.getInt(context.getString(R.string.key_theme), 1)
+        val theme = sharedPreferences.getInt(sharedPreferencesThemeKey, 1)
         isDarkModeEnabled.value = theme == 2
     }
 
