@@ -1,10 +1,7 @@
 package com.bramdeconinck.technologysalesmantoolkit.viewmodels
 
-import android.annotation.SuppressLint
 import android.arch.lifecycle.MutableLiveData
-import android.content.Context
 import android.content.SharedPreferences
-import android.preference.PreferenceManager
 import com.bramdeconinck.technologysalesmantoolkit.R
 import com.bramdeconinck.technologysalesmantoolkit.utils.BaseCommand
 import com.bramdeconinck.technologysalesmantoolkit.base.InjectedViewModel
@@ -13,7 +10,7 @@ import com.bramdeconinck.technologysalesmantoolkit.network.FirestoreAPI
 import com.bramdeconinck.technologysalesmantoolkit.utils.FirebaseUtils.firebaseAuth
 import com.bramdeconinck.technologysalesmantoolkit.utils.SingleLiveEvent
 import com.bramdeconinck.technologysalesmantoolkit.utils.ValidationUtils.everyFieldHasValue
-import com.bramdeconinck.technologysalesmantoolkit.utils.sharedPreferencesThemeKey
+import com.bramdeconinck.technologysalesmantoolkit.utils.SHARED_PREFERENCES_KEY_THEME
 import javax.inject.Inject
 
 class SettingsViewModel : InjectedViewModel(), FirebaseSuggestionCallback {
@@ -41,7 +38,7 @@ class SettingsViewModel : InjectedViewModel(), FirebaseSuggestionCallback {
     val signOutTriggered = SingleLiveEvent<Any>()
 
     init {
-        val theme = sharedPreferences.getInt(sharedPreferencesThemeKey, 1)
+        val theme = sharedPreferences.getInt(SHARED_PREFERENCES_KEY_THEME, 1)
         isDarkModeEnabled.value = theme == 2
     }
 

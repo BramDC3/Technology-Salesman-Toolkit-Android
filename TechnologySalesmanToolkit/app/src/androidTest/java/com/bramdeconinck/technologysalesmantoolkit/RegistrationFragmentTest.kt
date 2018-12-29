@@ -19,10 +19,9 @@ import android.support.test.rule.ActivityTestRule
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import com.bramdeconinck.technologysalesmantoolkit.activities.MainActivity
-import com.bramdeconinck.technologysalesmantoolkit.utils.FirebaseUtils
 import com.bramdeconinck.technologysalesmantoolkit.utils.FirebaseUtils.firebaseAuth
 import com.bramdeconinck.technologysalesmantoolkit.utils.FirebaseUtils.firebaseUser
-import com.bramdeconinck.technologysalesmantoolkit.utils.privacyPolicy
+import com.bramdeconinck.technologysalesmantoolkit.utils.PRIVACY_POLICY
 import org.hamcrest.CoreMatchers
 import org.hamcrest.CoreMatchers.allOf
 import org.junit.Before
@@ -190,7 +189,7 @@ class RegistrationFragmentTest {
         onView(ViewMatchers.withText(R.string.title_privacy_policy_dialog)).check(matches(isDisplayed()))
 
         Intents.init()
-        val expectedIntent = allOf(hasAction(Intent.ACTION_VIEW), hasData(privacyPolicy))
+        val expectedIntent = allOf(hasAction(Intent.ACTION_VIEW), hasData(PRIVACY_POLICY))
         intending(expectedIntent).respondWith(Instrumentation.ActivityResult(0, null))
 
         onView(ViewMatchers.withText(R.string.dialog_privacy_policy)).perform(ViewActions.click())

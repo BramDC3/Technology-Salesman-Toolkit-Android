@@ -69,7 +69,7 @@ object MessageUtils {
                 .setMessage(message)
                 .setPositiveButton(context.getString(R.string.dialog_yes)) { _, _ -> func() }
                 .setNegativeButton(context.getString(R.string.dialog_no)) { dialog, _ -> dialog.dismiss() }
-                .setNeutralButton(context.getString(R.string.dialog_privacy_policy)) { _, _ -> openWebPage(context, privacyPolicy) }
+                .setNeutralButton(context.getString(R.string.dialog_privacy_policy)) { _, _ -> openWebPage(context, PRIVACY_POLICY) }
                 .create()
                 .show()
     }

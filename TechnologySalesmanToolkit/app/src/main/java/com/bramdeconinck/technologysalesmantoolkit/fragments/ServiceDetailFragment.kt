@@ -15,7 +15,6 @@ import com.bramdeconinck.technologysalesmantoolkit.adapters.InstructionAdapter
 import com.bramdeconinck.technologysalesmantoolkit.interfaces.ToastMaker
 import com.bramdeconinck.technologysalesmantoolkit.interfaces.ToolbarTitleChanger
 import com.bramdeconinck.technologysalesmantoolkit.models.Instruction
-import com.bramdeconinck.technologysalesmantoolkit.utils.SERVICE_ITEM
 import com.bramdeconinck.technologysalesmantoolkit.utils.MessageUtils
 import com.bramdeconinck.technologysalesmantoolkit.viewmodels.ServiceViewModel
 import com.wajahatkarim3.easyflipviewpager.BookFlipPageTransformer
@@ -78,7 +77,7 @@ class ServiceDetailFragment : Fragment(), ToastMaker {
 
         serviceViewModel.instructionsErrorOccurred.observe(this, Observer {
             showToast(R.string.fetching_instructions_error)
-            serviceViewModel.onDatabaseInstructionsReady(service!!.id)
+            serviceViewModel.onDatabaseInstructionsReady(service.id)
         })
     }
 

@@ -106,6 +106,8 @@ class ServiceViewModel : InjectedViewModel(), FirebaseServiceCallback, FirebaseI
 
     fun clearInstructions() { _instructions.value = mutableListOf() }
 
+    fun getInstructionById(instructionId: String) : Instruction { return instructions.value!!.first { it.id == instructionId } }
+
     fun onDatabaseServicesReady() {
         if (allServices.value!!.isEmpty() && roomServices.value!!.isNotEmpty()) {
             allServices.value = roomServices.value

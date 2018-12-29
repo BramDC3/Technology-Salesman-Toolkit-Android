@@ -16,9 +16,9 @@ import android.support.test.runner.AndroidJUnit4
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import com.bramdeconinck.technologysalesmantoolkit.activities.MainActivity
-import com.bramdeconinck.technologysalesmantoolkit.utils.privacyPolicy
-import com.bramdeconinck.technologysalesmantoolkit.utils.sharedPreferencesThemeKey
-import com.bramdeconinck.technologysalesmantoolkit.utils.website
+import com.bramdeconinck.technologysalesmantoolkit.utils.PRIVACY_POLICY
+import com.bramdeconinck.technologysalesmantoolkit.utils.SHARED_PREFERENCES_KEY_THEME
+import com.bramdeconinck.technologysalesmantoolkit.utils.TEST_WEBSITE
 import org.hamcrest.CoreMatchers
 import org.junit.Assert
 import org.junit.Before
@@ -43,7 +43,7 @@ class SettingsFragmentTest {
     @Test
     fun openWebsite() {
         Intents.init()
-        val expectedIntent = CoreMatchers.allOf(IntentMatchers.hasAction(Intent.ACTION_VIEW), IntentMatchers.hasData(website))
+        val expectedIntent = CoreMatchers.allOf(IntentMatchers.hasAction(Intent.ACTION_VIEW), IntentMatchers.hasData(TEST_WEBSITE))
         Intents.intending(expectedIntent).respondWith(Instrumentation.ActivityResult(0, null))
 
         Espresso.onView(ViewMatchers.withId(R.id.btn_settings_website)).perform(ViewActions.click())
@@ -55,7 +55,7 @@ class SettingsFragmentTest {
     @Test
     fun openPrivacyPolicy() {
         Intents.init()
-        val expectedIntent = CoreMatchers.allOf(IntentMatchers.hasAction(Intent.ACTION_VIEW), IntentMatchers.hasData(privacyPolicy))
+        val expectedIntent = CoreMatchers.allOf(IntentMatchers.hasAction(Intent.ACTION_VIEW), IntentMatchers.hasData(PRIVACY_POLICY))
         Intents.intending(expectedIntent).respondWith(Instrumentation.ActivityResult(0, null))
 
         Espresso.onView(ViewMatchers.withId(R.id.btn_settings_privacypolicy)).perform(ViewActions.click())
@@ -84,11 +84,11 @@ class SettingsFragmentTest {
     fun clickDarkModeButton_ChangeTheme() {
         val context = getInstrumentation().targetContext
         val sharedPref = PreferenceManager.getDefaultSharedPreferences(context)
-        val themeBefore = sharedPref.getInt(sharedPreferencesThemeKey, 0)
+        val themeBefore = sharedPref.getInt(SHARED_PREFERENCES_KEY_THEME, 0)
 
         Espresso.onView(ViewMatchers.withId(R.id.btn_settings_darkmode)).perform(ViewActions.click())
 
-        val themeAfter = sharedPref.getInt(sharedPreferencesThemeKey, 0)
+        val themeAfter = sharedPref.getInt(SHARED_PREFERENCES_KEY_THEME, 0)
 
         Assert.assertNotEquals(themeBefore, themeAfter)
 
@@ -101,11 +101,11 @@ class SettingsFragmentTest {
     fun toggleDarkModeSwitch_ChangeTheme() {
         val context = getInstrumentation().targetContext
         val sharedPref = PreferenceManager.getDefaultSharedPreferences(context)
-        val themeBefore = sharedPref.getInt(sharedPreferencesThemeKey, 0)
+        val themeBefore = sharedPref.getInt(SHARED_PREFERENCES_KEY_THEME, 0)
 
         Espresso.onView(ViewMatchers.withId(R.id.switch_settings_darkmode)).perform(ViewActions.click())
 
-        val themeAfter = sharedPref.getInt(sharedPreferencesThemeKey, 0)
+        val themeAfter = sharedPref.getInt(SHARED_PREFERENCES_KEY_THEME, 0)
 
         Assert.assertNotEquals(themeBefore, themeAfter)
 

@@ -12,7 +12,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.bramdeconinck.technologysalesmantoolkit.R
 import com.bramdeconinck.technologysalesmantoolkit.interfaces.ToolbarTitleChanger
 import com.bramdeconinck.technologysalesmantoolkit.utils.FirebaseUtils.firebaseAuth
-import com.bramdeconinck.technologysalesmantoolkit.utils.sharedPreferencesThemeKey
+import com.bramdeconinck.technologysalesmantoolkit.utils.SHARED_PREFERENCES_KEY_THEME
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), ToolbarTitleChanger {
@@ -104,7 +104,7 @@ class MainActivity : AppCompatActivity(), ToolbarTitleChanger {
     // Sets the current theme to the theme chosen by the user
     private fun enableDarkMode() {
         val sharedPref = PreferenceManager.getDefaultSharedPreferences(this)
-        val theme = sharedPref.getInt(sharedPreferencesThemeKey, 1)
+        val theme = sharedPref.getInt(SHARED_PREFERENCES_KEY_THEME, 1)
         if (theme == 2) delegate.setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES)
         else delegate.setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO)
     }

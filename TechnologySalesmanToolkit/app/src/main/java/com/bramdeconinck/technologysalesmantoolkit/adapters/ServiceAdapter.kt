@@ -2,7 +2,6 @@ package com.bramdeconinck.technologysalesmantoolkit.adapters
 
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModelProviders
-import android.os.Bundle
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -14,11 +13,9 @@ import com.bramdeconinck.technologysalesmantoolkit.R
 import com.bramdeconinck.technologysalesmantoolkit.fragments.ServiceDetailFragment
 import com.bramdeconinck.technologysalesmantoolkit.fragments.ServiceListFragment
 import com.bramdeconinck.technologysalesmantoolkit.models.Service
-import com.bramdeconinck.technologysalesmantoolkit.utils.SERVICE_ITEM
 import com.bramdeconinck.technologysalesmantoolkit.utils.StringUtils.formatPrice
 import com.bramdeconinck.technologysalesmantoolkit.viewmodels.ServiceViewModel
 import com.bumptech.glide.Glide
-import com.bumptech.glide.Glide.init
 import kotlinx.android.synthetic.main.service_list_content.view.*
 
 class ServiceAdapter(
