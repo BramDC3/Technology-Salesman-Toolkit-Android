@@ -24,23 +24,19 @@ import kotlinx.android.synthetic.main.fragment_service_detail.view.*
 
 class ServiceDetailFragment : Fragment(), ToastMaker {
 
-    private var service: Service? = null
+    private lateinit var service: Service
     private lateinit var serviceViewModel: ServiceViewModel
     private lateinit var instructions: MutableLiveData<List<Instruction>>
     private lateinit var pagerAdapter: FragmentStatePagerAdapter
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        service = arguments?.getParcelable(SERVICE_ITEM) as Service
-    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val rootView = inflater.inflate(R.layout.fragment_service_detail, container, false)
 
         serviceViewModel = ViewModelProviders.of(activity!!).get(ServiceViewModel::class.java)
 
-        serviceViewModel.fetchInstructions(service!!.id)
+        service = serviceViewModel.selectedService.value!!
+
+        serviceViewModel.fetchInstructions(service.id)
 
         instructions = serviceViewModel.instructions
 
@@ -62,7 +58,7 @@ class ServiceDetailFragment : Fragment(), ToastMaker {
 
         subscribeToObservables()
 
-        setSupportActionBarTitle(service?.name)
+        setSupportActionBarTitle(service.name)
     }
 
     override fun onDestroyView() {
@@ -71,12 +67,14 @@ class ServiceDetailFragment : Fragment(), ToastMaker {
         vp_service_detail_instructions.adapter = null
 
         serviceViewModel.clearInstructions()
+
+        serviceViewModel.selectedService.value = null
     }
 
     private fun subscribeToObservables() {
         instructions.observe(this, Observer { pagerAdapter.notifyDataSetChanged() })
 
-        serviceViewModel.roomInstructions.observe(this, Observer { serviceViewModel.onDatabaseInstructionsReady(service!!.id) })
+        serviceViewModel.roomInstructions.observe(this, Observer { serviceViewModel.onDatabaseInstructionsReady(service.id) })
 
         serviceViewModel.instructionsErrorOccurred.observe(this, Observer {
             showToast(R.string.fetching_instructions_error)

@@ -36,6 +36,8 @@ class ServiceViewModel : InjectedViewModel(), FirebaseServiceCallback, FirebaseI
     val instructions: MutableLiveData<List<Instruction>>
         get() = _instructions
 
+    val selectedService = MutableLiveData<Service>()
+
     private val _roomInstructions: LiveData<List<Instruction>>
     val roomInstructions: LiveData<List<Instruction>>
         get() = _roomInstructions
