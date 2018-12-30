@@ -74,6 +74,31 @@ class LoginFragmentTest {
     }
 
     @Test
+    fun signIn_EmailNotVerified() {
+        onView(ViewMatchers.withId(R.id.et_login_email)).perform(ViewActions.typeText("technologysalesmantoolkit@bramdeconinck.com"))
+        closeSoftKeyboard()
+        onView(ViewMatchers.withId(R.id.et_login_password)).perform(ViewActions.typeText(existentPassword))
+        closeSoftKeyboard()
+        onView(ViewMatchers.withId(R.id.btn_login_signIn)).perform(ViewActions.click())
+        onView(ViewMatchers.withText(R.string.error_email_is_not_verified)).inRoot(RootMatchers.withDecorView(CoreMatchers.not(CoreMatchers.`is`(mActivityTestRule.activity.window.decorView)))).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+    }
+
+    @Test
+    fun signIn_SuccessfulAuthentication_NavigateToServiceList() {
+        onView(ViewMatchers.withId(R.id.et_login_email)).perform(ViewActions.typeText(existentEmail))
+        closeSoftKeyboard()
+        onView(ViewMatchers.withId(R.id.et_login_password)).perform(ViewActions.typeText(existentPassword))
+        closeSoftKeyboard()
+        onView(ViewMatchers.withId(R.id.btn_login_signIn)).perform(ViewActions.click())
+        Thread.sleep(10000)
+        onView(ViewMatchers.withId(R.id.rv_service_list_services)).check(matches(isDisplayed()))
+
+        firebaseAuth.signOut()
+        Thread.sleep(10000)
+        firebaseUser = null
+    }
+
+    @Test
     fun goToRegistration() {
         onView(ViewMatchers.withId(R.id.tv_login_goToRegistration)).perform(ViewActions.click())
         onView(ViewMatchers.withId(R.id.btn_registration_register)).check(matches(isDisplayed()))

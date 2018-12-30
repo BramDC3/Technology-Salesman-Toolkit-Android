@@ -45,6 +45,7 @@ object MessageUtils {
     fun showMakeSuggestionDialog(context: Context, title: String, message: String, func: (String) -> Unit) {
         val editText = EditText(context)
         editText.setSingleLine(false)
+        editText.hint = context.getString(R.string.send_suggestion_hint)
         val container = FrameLayout(context)
         val params = FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
         params.marginStart = context.resources.getDimensionPixelSize(R.dimen.dialog_margin)

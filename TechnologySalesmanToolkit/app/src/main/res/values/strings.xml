@@ -55,6 +55,7 @@
     <string name="send_suggestion_succes">Bedankt voor het verzenden van uw suggestie!</string>
     <string name="send_suggestion_error">Er is iets fout gegaan tijdens het versturen van uw suggestie.</string>
     <string name="send_suggestion_empty_error">Een lege suggestie kan niet worden verstuurd.</string>
+    <string name="send_suggestion_hint">Typ hier uw suggestie…</string>
 
     <!-- ProfileFragment -->
     <string name="title_action_edit_profile">Wijzig profiel</string>

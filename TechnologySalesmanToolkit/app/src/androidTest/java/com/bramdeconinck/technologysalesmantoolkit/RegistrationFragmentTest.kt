@@ -28,6 +28,7 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import kotlin.random.Random
 
 @RunWith(AndroidJUnit4::class)
 class RegistrationFragmentTest {
@@ -197,6 +198,28 @@ class RegistrationFragmentTest {
         intended(expectedIntent)
         Intents.release()
     }
+
+    @Test
+    fun register_ValidRegistrationForm_CreateAccount() {
+        onView(ViewMatchers.withId(R.id.et_registration_firstname)).perform(ViewActions.typeText("Andy"))
+        closeSoftKeyboard()
+        onView(ViewMatchers.withId(R.id.et_registration_familyname)).perform(ViewActions.typeText("Droidon"))
+        closeSoftKeyboard()
+        onView(ViewMatchers.withId(R.id.et_registration_email)).perform(ViewActions.typeText("technologysalesmantoolkit${generateRandomNumber()}@bramdeconinck.com"))
+        closeSoftKeyboard()
+        onView(ViewMatchers.withId(R.id.et_registration_password)).perform(ViewActions.typeText("iphonessuck"))
+        closeSoftKeyboard()
+        onView(ViewMatchers.withId(R.id.et_registration_repeatPassword)).perform(ViewActions.typeText("iphonessuck"))
+        closeSoftKeyboard()
+        onView(ViewMatchers.withId(R.id.btn_registration_register)).perform(ViewActions.click())
+        onView(ViewMatchers.withText(R.string.title_privacy_policy_dialog)).check(matches(isDisplayed()))
+
+        onView(ViewMatchers.withText(R.string.dialog_yes)).perform(ViewActions.click())
+        onView(ViewMatchers.withText(R.string.message_account_created)).inRoot(RootMatchers.withDecorView(CoreMatchers.not(CoreMatchers.`is`(mActivityTestRule.activity.window.decorView)))).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+        onView(ViewMatchers.withId(R.id.btn_login_signIn)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+    }
+
+    private fun generateRandomNumber(): Int { return Random.nextInt(0, 2147483647)}
 
     @Test
     fun pressBackButton_GoToLogin() {
