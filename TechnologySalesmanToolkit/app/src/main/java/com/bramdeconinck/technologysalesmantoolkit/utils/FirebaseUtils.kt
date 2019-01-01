@@ -8,15 +8,23 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.UserProfileChangeRequest
 import com.google.firebase.firestore.QueryDocumentSnapshot
 
+/**
+ * [FirebaseUtils] contains all the Firebase utilities.
+ */
 object FirebaseUtils {
 
+    /**
+     * [FirebaseAuth] instance and the current [FirebaseUser].
+     */
     @JvmStatic
     val firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()
     @JvmStatic
     var firebaseUser: FirebaseUser? = firebaseAuth.currentUser
 
+    /**
+     * Converting the data of a snapshot to a [Service] object.
+     */
     @JvmStatic
-    // Converting the data of a snapshot to a Service object
     fun transformSnapshotToService(snapshot: QueryDocumentSnapshot): Service {
         return Service(
                 id = snapshot.id,
@@ -29,9 +37,11 @@ object FirebaseUtils {
         )
     }
 
+    /**
+     * Converting the data of a snapshot to an [Instruction] object.
+     */
     @Suppress("UNCHECKED_CAST")
     @JvmStatic
-    // Converting the data of a snapshot to an Instruction object
     fun transformSnapshotToSInstruction(snapshot: QueryDocumentSnapshot): Instruction {
         return Instruction(
                 id = snapshot.id,
@@ -44,6 +54,9 @@ object FirebaseUtils {
         )
     }
 
+    /**
+     * Creating suggestion data in a format that can be used to post a Suggestion object to the Firestore.
+     */
     @JvmStatic
     fun createSuggestionData(suggestion: String): HashMap<String, Any> {
         val data = HashMap<String, Any>()
@@ -52,7 +65,9 @@ object FirebaseUtils {
         return data
     }
 
-    // Retrieve the right category of a service based on an integer
+    /**
+     * Retrieves the right category of a service based on an integer.
+     */
     fun transformIntToCategory(i: Int): Category {
         return when (i) {
             0 -> Category.Windows
@@ -62,7 +77,9 @@ object FirebaseUtils {
         }
     }
 
-    // Transforms a category enum to an integer for storing in the local database
+    /**
+     * Transforms a category enum to an integer for storing in the local database.
+     */
     fun transformCategoryToInt(c: Category): Int {
         return when (c) {
             Category.Windows -> 0
@@ -72,6 +89,9 @@ object FirebaseUtils {
         }
     }
 
+    /**
+     * Create a [UserProfileChangeRequest] object to update the profile of the current [FirebaseUser].
+     */
     @JvmStatic
     fun createProfileUpdates(firstname: String, familyname: String): UserProfileChangeRequest {
         return UserProfileChangeRequest

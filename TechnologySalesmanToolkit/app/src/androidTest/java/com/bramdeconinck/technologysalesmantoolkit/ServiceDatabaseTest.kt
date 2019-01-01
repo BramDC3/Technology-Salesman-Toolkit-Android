@@ -4,7 +4,7 @@ import android.arch.persistence.room.Room
 import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4
 import com.bramdeconinck.technologysalesmantoolkit.TestUtils.getValue
-import com.bramdeconinck.technologysalesmantoolkit.database.ServiceDao
+import com.bramdeconinck.technologysalesmantoolkit.database.daos.ServiceDao
 import com.bramdeconinck.technologysalesmantoolkit.database.ServiceDatabase
 import com.bramdeconinck.technologysalesmantoolkit.models.Category
 import com.bramdeconinck.technologysalesmantoolkit.models.Instruction

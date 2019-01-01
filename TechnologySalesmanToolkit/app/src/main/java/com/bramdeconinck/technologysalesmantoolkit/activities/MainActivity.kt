@@ -15,65 +15,75 @@ import com.bramdeconinck.technologysalesmantoolkit.utils.FirebaseUtils.firebaseA
 import com.bramdeconinck.technologysalesmantoolkit.utils.SHARED_PREFERENCES_KEY_THEME
 import kotlinx.android.synthetic.main.activity_main.*
 
+/**
+ * The [MainActivity] is an entry point to the application.
+ * It's the only activity of this project.
+ */
 class MainActivity : AppCompatActivity(), ToolbarTitleChanger {
 
+    /**
+     * The [navController] is a part of the Navigation Component.
+     * It is used to navigate from and to destinations of the navigation graph.
+     */
     private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        // Changing the splash theme to the default app theme
+        /**
+         * Changing the splash theme of the app to the default app theme.
+         */
         setTheme(R.style.AppTheme)
 
-        // If the user has selected dark mode in the settings
-        // The night theme should be enabled by default
-        enableDarkMode()
+        setDayNightMode()
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // Navigation with a support action bar and a bottom navigation bar
-        // Thankfully, the new Navigation Component helps us with this
         setupNavigation()
     }
 
-    // The behavior for the navigation arrow in the toolbar
+    /**
+     * Setup for the behavior of the navigation arrow in the action bar.
+     */
     override fun onSupportNavigateUp() = navController.navigateUp()
 
-    // This function is all that is required to set up the navigation of the entire app
+    /**
+     * Setup for the navigation of the entire application.
+     * The Navigation Component simplifies navigation with the [navController].
+     * It also does the setup of the action bar and bottom navigation view in an easy manner.
+     */
     private fun setupNavigation() {
 
-        // The toolbar that is defined in the MainActivity layout is used as support action bar
-        setSupportActionBar(main_toolbar)
-
-        // This navigation controller allows us to navigate between fragments
         navController = findNavController(R.id.main_nav_host_fragment)
 
-        // The setup of the action bar and bottom navigation bar with the navigation controller
+        setSupportActionBar(main_toolbar)
         setupActionBarWithNavController(navController)
         main_bottom_navigation_view.setupWithNavController(navController)
 
-        // This listener helps us with fragment navigation
-        // It prepares them so they're ready to be shown properly
         navController.addOnNavigatedListener { _, destination ->
             when (destination.id) {
-                // The home of our nav graph is the LoginFragment, but
-                // if users are already logged in, they are supposed to be
-                // redirected to the ServiceListFragment
+                /**
+                 * Conditional navigation: if the user is logged in, he/she is allowed to navigate to the ServiceListFragment.
+                 * If the user isn't logged in, he/she gets redirected to the LoginFragment.
+                 */
                 R.id.serviceListFragment -> {
                     if (firebaseAuth.currentUser == null) {
                         navController.navigate(R.id.notSignedIn)
-                        hideToolbarAndBottomNavigation()
-                    } else showToolbarAndBottomNavigation()
+                        hideActionBarAndBottomNavigationView()
+                    } else showActionBarAndBottomNavigationView()
                 }
-                R.id.loginFragment -> hideToolbarAndBottomNavigation()
-                R.id.registrationFragment -> hideToolbarAndBottomNavigation()
-                else -> showToolbarAndBottomNavigation()
+
+                /**
+                 * When the user navigates to the LoginFragment or the RegistrationFragment, the action bar and bottom navigation view need to be hidden.
+                 * If the user navigates to any other fragment, the action bar and bottom navigation view need to be shown.
+                 */
+                R.id.loginFragment -> hideActionBarAndBottomNavigationView()
+                R.id.registrationFragment -> hideActionBarAndBottomNavigationView()
+                else -> showActionBarAndBottomNavigationView()
             }
         }
     }
 
-    // We don't want to show the toolbar and bottom navigation
-    // on the login and registration screen, so we hide them
-    private fun hideToolbarAndBottomNavigation() {
+    private fun hideActionBarAndBottomNavigationView() {
         supportActionBar!!.hide()
 
         with(main_bottom_navigation_view) {
@@ -86,9 +96,7 @@ class MainActivity : AppCompatActivity(), ToolbarTitleChanger {
         }
     }
 
-    // We do want to show the toolbar and bottom navigation
-    // on the other screens, so we make them visible again
-    private fun showToolbarAndBottomNavigation() {
+    private fun showActionBarAndBottomNavigationView() {
         supportActionBar!!.show()
 
         with(main_bottom_navigation_view) {
@@ -101,20 +109,22 @@ class MainActivity : AppCompatActivity(), ToolbarTitleChanger {
         }
     }
 
-    // Sets the current theme to the theme chosen by the user
-    private fun enableDarkMode() {
+    /**
+     * Changing the theme to day or night mode based on the preference of the user.
+     * The default theme is day mode.
+     */
+    private fun setDayNightMode() {
         val sharedPref = PreferenceManager.getDefaultSharedPreferences(this)
         val theme = sharedPref.getInt(SHARED_PREFERENCES_KEY_THEME, 1)
         if (theme == 2) delegate.setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES)
         else delegate.setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO)
     }
 
-    // Thanks to the navigation component, when you navigate to
-    // a fragment, the toolbar title is automatically changed
-    // based on the current label. This behaviour is great, but we
-    // need something different for the ServiceDetailFragment because
-    // the title needs to be the name of the service. This function
-    // changes the title of the toolbar.
+    /**
+     * The Navigation Component automatically changes the title in the action bar to the label of the current destination.
+     * When the current destination is the ServiceDetailFragment,
+     * this function changes the title to the name of the Service instead of the label of the destination.
+     */
     override fun updateTitle(title: String?) { supportActionBar!!.title = title }
 
 }

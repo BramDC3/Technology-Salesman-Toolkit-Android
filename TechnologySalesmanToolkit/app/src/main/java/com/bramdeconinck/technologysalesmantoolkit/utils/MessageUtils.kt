@@ -9,17 +9,24 @@ import android.widget.Toast
 import com.bramdeconinck.technologysalesmantoolkit.R
 import com.bramdeconinck.technologysalesmantoolkit.utils.WebpageUtils.openWebPage
 
+/**
+ * [MessageUtils] contains all the [Toast] and [AlertDialog] utilities.
+ */
 object MessageUtils {
 
+    /**
+     * Shows a toast on the screen for a chosen amount of time with a given stringResourceId.
+     */
     @JvmStatic
-    // Shows a toast on the screen for a chosen amount of time with a given stringResourceId
     fun makeToast(context: Context, stringResourceId: Int, message: String? = null, duration: Int = Toast.LENGTH_LONG) {
         if (message == null) Toast.makeText(context, stringResourceId, duration).show()
         else Toast.makeText(context, context.getString(stringResourceId, message), duration).show()
     }
 
+    /**
+     * Show a dialog on the screen with a given title and message.
+     */
     @JvmStatic
-    // Show a dialog on the screen with a given title and message
     fun showBasicDialog(context: Context, title: String, message: String) {
         AlertDialog.Builder(context)
                 .setTitle(title)
@@ -29,6 +36,10 @@ object MessageUtils {
                 .show()
     }
 
+    /**
+     * Show a dialog on the screen with a given title and message.
+     * The positive button has a given function.
+     */
     @JvmStatic
     fun showThreeButtonsPositiveFunctionDialog(context: Context, title: String, message: String, func: () -> Unit) {
         AlertDialog.Builder(context)
@@ -41,6 +52,10 @@ object MessageUtils {
                 .show()
     }
 
+    /**
+     * Show a dialog on the screen with a given title and message.
+     * The dialog contains an [EditText] used to enter a suggestion.
+     */
     @JvmStatic
     fun showMakeSuggestionDialog(context: Context, title: String, message: String, func: (String) -> Unit) {
         val editText = EditText(context)
@@ -63,6 +78,11 @@ object MessageUtils {
                 .show()
     }
 
+    /**
+     * Show a dialog on the screen with a given title and message.
+     * The positive button has a given function.
+     * The neutral button opens the privacy policy via an intent.
+     */
     @JvmStatic
     fun showPrivacyPolicyDialog(context: Context, title: String, message: String, func: () -> Unit) {
         AlertDialog.Builder(context)

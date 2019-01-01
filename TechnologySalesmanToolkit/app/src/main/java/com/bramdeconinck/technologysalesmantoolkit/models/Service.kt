@@ -12,7 +12,9 @@ import kotlinx.android.parcel.Parcelize
  */
 @Entity(tableName = "service_table")
 data class Service(
-        //Each Entity requires a primary key
+        /**
+         * Each Entity needs a Primary Key
+         */
         @PrimaryKey val id: String,
         val name: String,
         val description: String,
