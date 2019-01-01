@@ -20,6 +20,7 @@ import com.bramdeconinck.technologysalesmantoolkit.utils.MessageUtils.makeToast
 import com.bramdeconinck.technologysalesmantoolkit.viewmodels.ServiceViewModel
 import kotlinx.android.synthetic.main.fragment_service_list.*
 import kotlinx.android.synthetic.main.fragment_service_list.view.*
+import android.support.v7.widget.LinearLayoutManager
 
 class ServiceListFragment : Fragment(), ToastMaker {
 
@@ -49,7 +50,11 @@ class ServiceListFragment : Fragment(), ToastMaker {
         val twoPane = rootView.fl_service_list_detail_container != null
 
         serviceAdapter = ServiceAdapter(this, services, twoPane)
+        serviceAdapter.setHasStableIds(true)
 
+        val layoutManager = object : LinearLayoutManager(context) { override fun supportsPredictiveItemAnimations(): Boolean { return true } }
+
+        rootView.rv_service_list_services.layoutManager = layoutManager
         rootView.rv_service_list_services.adapter = serviceAdapter
 
         return rootView
@@ -64,6 +69,7 @@ class ServiceListFragment : Fragment(), ToastMaker {
     override fun onDestroyView() {
         super.onDestroyView()
 
+        rv_service_list_services.adapter = null
         serviceViewModel.clearFilters()
     }
 

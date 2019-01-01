@@ -1,7 +1,7 @@
 package com.bramdeconinck.technologysalesmantoolkit.adapters
 
 import android.arch.lifecycle.MutableLiveData
-import android.os.Bundle
+import android.arch.lifecycle.ViewModelProviders
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -13,7 +13,8 @@ import com.bramdeconinck.technologysalesmantoolkit.R
 import com.bramdeconinck.technologysalesmantoolkit.fragments.ServiceDetailFragment
 import com.bramdeconinck.technologysalesmantoolkit.fragments.ServiceListFragment
 import com.bramdeconinck.technologysalesmantoolkit.models.Service
-import com.bramdeconinck.technologysalesmantoolkit.utils.SERVICE_ITEM
+import com.bramdeconinck.technologysalesmantoolkit.utils.StringUtils.formatPrice
+import com.bramdeconinck.technologysalesmantoolkit.viewmodels.ServiceViewModel
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.service_list_content.view.*
 
@@ -24,26 +25,17 @@ class ServiceAdapter(
         RecyclerView.Adapter<ServiceAdapter.ViewHolder>() {
 
     private val onClickListener: View.OnClickListener
+    private val serviceViewModel = ViewModelProviders.of(fragment.activity!!).get(ServiceViewModel::class.java)
 
     init {
         onClickListener = View.OnClickListener { v ->
-            val item = v.tag as Service
+            serviceViewModel.selectedService.value = v.tag as Service
             if (twoPane) {
-                val detailFragment = ServiceDetailFragment().apply {
-                    arguments = Bundle().apply {
-                        putParcelable(SERVICE_ITEM, item)
-                    }
-                }
                 fragment.activity!!.supportFragmentManager
                         .beginTransaction()
-                        .replace(R.id.fl_service_list_detail_container, detailFragment)
+                        .replace(R.id.fl_service_list_detail_container, ServiceDetailFragment())
                         .commit()
-            } else {
-                val arguments = Bundle().apply {
-                    putParcelable(SERVICE_ITEM, item)
-                }
-                fragment.findNavController().navigate(R.id.toServiceDetail, arguments)
-            }
+            } else { fragment.findNavController().navigate(R.id.toServiceDetail) }
         }
     }
 
@@ -58,12 +50,16 @@ class ServiceAdapter(
         holder.nameView.text = item.name
         holder.descriptionView.text = item.description
         holder.categoryView.text = item.category.toString()
-        if (item.price != 0.0) holder.priceView.text = String.format("€ %.2f", item.price)
+        if (item.price != 0.0) holder.priceView.text = formatPrice(item.price)
 
         with(holder.itemView) {
             tag = item
             setOnClickListener(onClickListener)
         }
+    }
+
+    override fun getItemId(position: Int): Long {
+        return services.value!![position].hashCode().toLong()
     }
 
     override fun getItemCount() = services.value!!.size

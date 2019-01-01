@@ -13,8 +13,7 @@ object RoomConvertersUtils {
 
     @TypeConverter
     @JvmStatic
-    fun fromTimestamp(value: Long): Timestamp { return Timestamp(Date(value))
-    }
+    fun fromTimestamp(value: Long): Timestamp { return Timestamp(Date(value)) }
 
     @TypeConverter
     @JvmStatic

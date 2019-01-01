@@ -1,10 +1,12 @@
 package com.bramdeconinck.technologysalesmantoolkit.injection.module
 
 import android.content.Context
+import android.content.SharedPreferences
+import android.preference.PreferenceManager
 import com.bramdeconinck.technologysalesmantoolkit.database.ServiceDao
 import com.bramdeconinck.technologysalesmantoolkit.database.ServiceDatabase
-import com.bramdeconinck.technologysalesmantoolkit.models.InstructionRepository
-import com.bramdeconinck.technologysalesmantoolkit.models.ServiceRepository
+import com.bramdeconinck.technologysalesmantoolkit.repositories.InstructionRepository
+import com.bramdeconinck.technologysalesmantoolkit.repositories.ServiceRepository
 import com.bramdeconinck.technologysalesmantoolkit.network.FirestoreAPI
 import dagger.Module
 import dagger.Provides
@@ -33,11 +35,13 @@ class NetworkModule(private val context: Context) {
 
     @Provides
     @Singleton
-    fun provideInstructionRepository(serviceDao: ServiceDao): InstructionRepository { return InstructionRepository(serviceDao) }
+    fun provideInstructionRepository(serviceDao: ServiceDao): InstructionRepository { return InstructionRepository(serviceDao)
+    }
 
     @Provides
     @Singleton
-    fun provideServiceRepository(serviceDao: ServiceDao): ServiceRepository { return ServiceRepository(serviceDao) }
+    fun provideServiceRepository(serviceDao: ServiceDao): ServiceRepository { return ServiceRepository(serviceDao)
+    }
 
     @Provides
     @Singleton
@@ -46,6 +50,10 @@ class NetworkModule(private val context: Context) {
     @Provides
     @Singleton
     fun provideServiceDatabase(context: Context): ServiceDatabase { return ServiceDatabase.getInstance(context) }
+
+    @Provides
+    @Singleton
+    fun provideSharedPreferences(): SharedPreferences { return PreferenceManager.getDefaultSharedPreferences(context) }
 
     @Provides
     @Singleton

@@ -17,11 +17,7 @@ class InstructionAdapter(
     override fun getItem(p0: Int): Fragment {
         val item = instructions.value!![p0]
 
-        return ServiceInstructionFragment().apply {
-            arguments = Bundle().apply {
-                putParcelable(INSTRUCTION_ITEM, item)
-            }
-        }
+        return ServiceInstructionFragment().apply { arguments = Bundle().apply { putString(INSTRUCTION_ITEM, item.id) } }
     }
 
     override fun getCount() = instructions.value!!.size

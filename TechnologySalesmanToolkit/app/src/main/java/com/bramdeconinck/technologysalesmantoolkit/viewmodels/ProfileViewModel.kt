@@ -9,8 +9,8 @@ import com.bramdeconinck.technologysalesmantoolkit.utils.FirebaseUtils.createPro
 import com.bramdeconinck.technologysalesmantoolkit.utils.FirebaseUtils.firebaseAuth
 import com.bramdeconinck.technologysalesmantoolkit.utils.FirebaseUtils.firebaseUser
 import com.bramdeconinck.technologysalesmantoolkit.utils.SingleLiveEvent
-import com.bramdeconinck.technologysalesmantoolkit.utils.StringUtils.getFamilyName
-import com.bramdeconinck.technologysalesmantoolkit.utils.StringUtils.getFirstName
+import com.bramdeconinck.technologysalesmantoolkit.utils.StringUtils.getFamilyname
+import com.bramdeconinck.technologysalesmantoolkit.utils.StringUtils.getFirstname
 import com.bramdeconinck.technologysalesmantoolkit.utils.ValidationUtils.atLeastOneFieldChanged
 import com.bramdeconinck.technologysalesmantoolkit.utils.ValidationUtils.everyFieldHasValue
 import com.bramdeconinck.technologysalesmantoolkit.utils.ValidationUtils.isEmailValid
@@ -61,8 +61,8 @@ class ProfileViewModel : InjectedViewModel() {
 
     fun validateProfileForm() {
         val profileFormMap = mapOf(email.value!! to firebaseUser!!.email!!,
-                firstname.value!! to getFirstName(firebaseUser!!.displayName!!),
-                familyname.value!! to getFamilyName(firebaseUser!!.displayName!!))
+                firstname.value!! to getFirstname(firebaseUser!!.displayName!!),
+                familyname.value!! to getFamilyname(firebaseUser!!.displayName!!))
 
         if (!atLeastOneFieldChanged(profileFormMap)) {
             toggleEditMode()

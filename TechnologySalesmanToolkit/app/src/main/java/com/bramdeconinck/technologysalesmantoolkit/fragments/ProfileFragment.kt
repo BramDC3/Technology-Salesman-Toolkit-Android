@@ -15,8 +15,8 @@ import com.bramdeconinck.technologysalesmantoolkit.utils.FirebaseUtils.firebaseU
 import com.bramdeconinck.technologysalesmantoolkit.utils.MessageUtils.makeToast
 import com.bramdeconinck.technologysalesmantoolkit.utils.MessageUtils.showBasicDialog
 import com.bramdeconinck.technologysalesmantoolkit.utils.MessageUtils.showThreeButtonsPositiveFunctionDialog
-import com.bramdeconinck.technologysalesmantoolkit.utils.StringUtils.getFamilyName
-import com.bramdeconinck.technologysalesmantoolkit.utils.StringUtils.getFirstName
+import com.bramdeconinck.technologysalesmantoolkit.utils.StringUtils.getFamilyname
+import com.bramdeconinck.technologysalesmantoolkit.utils.StringUtils.getFirstname
 import com.bramdeconinck.technologysalesmantoolkit.viewmodels.ProfileViewModel
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
@@ -87,8 +87,8 @@ class ProfileFragment : Fragment(), ToastMaker {
                 .into(iv_profile_profile_picture)
 
         tv_profile_fullname.text = firebaseUser!!.displayName
-        et_profile_firstname.setText(getFirstName(firebaseUser!!.displayName!!))
-        et_profile_familyname.setText(getFamilyName(firebaseUser!!.displayName!!))
+        et_profile_firstname.setText(getFirstname(firebaseUser!!.displayName!!))
+        et_profile_familyname.setText(getFamilyname(firebaseUser!!.displayName!!))
         et_profile_email.setText(firebaseUser!!.email)
     }
 

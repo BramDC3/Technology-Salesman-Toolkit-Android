@@ -7,6 +7,8 @@ import com.bramdeconinck.technologysalesmantoolkit.interfaces.FirebaseInstructio
 import com.bramdeconinck.technologysalesmantoolkit.interfaces.FirebaseServiceCallback
 import com.bramdeconinck.technologysalesmantoolkit.models.*
 import com.bramdeconinck.technologysalesmantoolkit.network.FirestoreAPI
+import com.bramdeconinck.technologysalesmantoolkit.repositories.InstructionRepository
+import com.bramdeconinck.technologysalesmantoolkit.repositories.ServiceRepository
 import com.bramdeconinck.technologysalesmantoolkit.utils.SingleLiveEvent
 import org.jetbrains.anko.doAsync
 import javax.inject.Inject
@@ -35,6 +37,8 @@ class ServiceViewModel : InjectedViewModel(), FirebaseServiceCallback, FirebaseI
     private val _instructions = MutableLiveData<List<Instruction>>()
     val instructions: MutableLiveData<List<Instruction>>
         get() = _instructions
+
+    val selectedService = MutableLiveData<Service>()
 
     private val _roomInstructions: LiveData<List<Instruction>>
     val roomInstructions: LiveData<List<Instruction>>
@@ -103,6 +107,8 @@ class ServiceViewModel : InjectedViewModel(), FirebaseServiceCallback, FirebaseI
     }
 
     fun clearInstructions() { _instructions.value = mutableListOf() }
+
+    fun getInstructionById(instructionId: String) : Instruction { return instructions.value!!.first { it.id == instructionId } }
 
     fun onDatabaseServicesReady() {
         if (allServices.value!!.isEmpty() && roomServices.value!!.isNotEmpty()) {

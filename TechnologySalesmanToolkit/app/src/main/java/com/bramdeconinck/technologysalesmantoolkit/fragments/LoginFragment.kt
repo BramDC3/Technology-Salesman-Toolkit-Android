@@ -96,6 +96,6 @@ class LoginFragment : Fragment(), ToastMaker {
 
     private fun goToRegistration() { findNavController().navigate(R.id.toRegistration) }
 
-    override fun showToast(message: Int) {makeToast(context!!, message)}
+    override fun showToast(message: Int) { makeToast(context!!, message) }
 
 }

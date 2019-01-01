@@ -9,7 +9,6 @@ import kotlinx.android.parcel.Parcelize
  * The @Entity annotation is used to indicate that this domain object can be used by Room.
  * The tableName parameter signifies the name of the table in which objects of this type will be saved.
  */
-@Parcelize
 @Entity(tableName = "instruction_table")
 data class Instruction(
         //Each Entity requires a primary key
@@ -20,4 +19,3 @@ data class Instruction(
         val image: String,
         val serviceId: String,
         val index: Int)
-    : Parcelable

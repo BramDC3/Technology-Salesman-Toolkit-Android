@@ -24,7 +24,7 @@ object MessageUtils {
         AlertDialog.Builder(context)
                 .setTitle(title)
                 .setMessage(message)
-                .setPositiveButton("Oké") { dialog, _ -> dialog.dismiss() }
+                .setPositiveButton(context.getString(R.string.dialog_okay)) { dialog, _ -> dialog.dismiss() }
                 .create()
                 .show()
     }
@@ -34,9 +34,9 @@ object MessageUtils {
         AlertDialog.Builder(context)
                 .setTitle(title)
                 .setMessage(message)
-                .setPositiveButton("Ja") { _, _ -> func() }
-                .setNegativeButton("Nee") { dialog, _ -> dialog.dismiss() }
-                .setNeutralButton("Annuleren") { dialog, _ -> dialog.dismiss() }
+                .setPositiveButton(context.getString(R.string.dialog_yes)) { _, _ -> func() }
+                .setNegativeButton(context.getString(R.string.dialog_no)) { dialog, _ -> dialog.dismiss() }
+                .setNeutralButton(context.getString(R.string.dialog_cancel)) { dialog, _ -> dialog.dismiss() }
                 .create()
                 .show()
     }
@@ -45,6 +45,7 @@ object MessageUtils {
     fun showMakeSuggestionDialog(context: Context, title: String, message: String, func: (String) -> Unit) {
         val editText = EditText(context)
         editText.setSingleLine(false)
+        editText.hint = context.getString(R.string.send_suggestion_hint)
         val container = FrameLayout(context)
         val params = FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
         params.marginStart = context.resources.getDimensionPixelSize(R.dimen.dialog_margin)
@@ -56,8 +57,8 @@ object MessageUtils {
                 .setTitle(title)
                 .setView(container)
                 .setMessage(message)
-                .setPositiveButton("Verzend") { _, _ -> func(editText.text.toString()) }
-                .setNeutralButton("Annuleren") { dialog, _ -> dialog.dismiss() }
+                .setPositiveButton(context.getString(R.string.dialog_send)) { _, _ -> func(editText.text.toString()) }
+                .setNeutralButton(context.getString(R.string.dialog_cancel)) { dialog, _ -> dialog.dismiss() }
                 .create()
                 .show()
     }
@@ -67,9 +68,9 @@ object MessageUtils {
         AlertDialog.Builder(context)
                 .setTitle(title)
                 .setMessage(message)
-                .setPositiveButton("Ja") { _, _ -> func() }
-                .setNegativeButton("Nee") { dialog, _ -> dialog.dismiss() }
-                .setNeutralButton("Bekijk privacybeleid") { _, _ -> openWebPage(context, privacyPolicy) }
+                .setPositiveButton(context.getString(R.string.dialog_yes)) { _, _ -> func() }
+                .setNegativeButton(context.getString(R.string.dialog_no)) { dialog, _ -> dialog.dismiss() }
+                .setNeutralButton(context.getString(R.string.dialog_privacy_policy)) { _, _ -> openWebPage(context, PRIVACY_POLICY) }
                 .create()
                 .show()
     }

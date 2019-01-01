@@ -9,7 +9,7 @@ import com.bramdeconinck.technologysalesmantoolkit.models.Instruction
 import com.bramdeconinck.technologysalesmantoolkit.models.Service
 import com.bramdeconinck.technologysalesmantoolkit.utils.RoomConvertersUtils
 
-@Database(entities = [Service::class, Instruction::class], version = 1)
+@Database(entities = [Service::class, Instruction::class], version = 1, exportSchema = false)
 @TypeConverters(RoomConvertersUtils::class)
 abstract class ServiceDatabase : RoomDatabase() {
 

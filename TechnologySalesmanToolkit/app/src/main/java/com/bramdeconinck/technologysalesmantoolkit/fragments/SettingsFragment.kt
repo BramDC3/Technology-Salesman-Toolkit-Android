@@ -16,12 +16,13 @@ import androidx.navigation.fragment.findNavController
 import com.bramdeconinck.technologysalesmantoolkit.databinding.FragmentSettingsBinding
 import com.bramdeconinck.technologysalesmantoolkit.utils.BaseCommand
 import com.bramdeconinck.technologysalesmantoolkit.interfaces.ToastMaker
-import com.bramdeconinck.technologysalesmantoolkit.utils.privacyPolicy
-import com.bramdeconinck.technologysalesmantoolkit.utils.website
+import com.bramdeconinck.technologysalesmantoolkit.utils.PRIVACY_POLICY
+import com.bramdeconinck.technologysalesmantoolkit.utils.TEST_WEBSITE
 import com.bramdeconinck.technologysalesmantoolkit.utils.MessageUtils.makeToast
 import com.bramdeconinck.technologysalesmantoolkit.utils.MessageUtils.showMakeSuggestionDialog
 import com.bramdeconinck.technologysalesmantoolkit.utils.MessageUtils.showThreeButtonsPositiveFunctionDialog
 import com.bramdeconinck.technologysalesmantoolkit.utils.WebpageUtils.openWebPage
+import com.bramdeconinck.technologysalesmantoolkit.utils.SHARED_PREFERENCES_KEY_THEME
 import com.bramdeconinck.technologysalesmantoolkit.viewmodels.SettingsViewModel
 
 class SettingsFragment : Fragment(), ToastMaker {
@@ -48,9 +49,9 @@ class SettingsFragment : Fragment(), ToastMaker {
     }
 
     private fun subscribeToObservables() {
-        settingsViewModel.visitWebsiteClicked.observe(this, Observer { openWebPage(context!!, website) })
+        settingsViewModel.visitWebsiteClicked.observe(this, Observer { openWebPage(context!!, TEST_WEBSITE) })
 
-        settingsViewModel.visitPrivacyPolicyClicked.observe(this, Observer { openWebPage(context!!, privacyPolicy) })
+        settingsViewModel.visitPrivacyPolicyClicked.observe(this, Observer { openWebPage(context!!, PRIVACY_POLICY) })
 
         settingsViewModel.isDarkModeEnabled.observe(this, Observer {
             if (it!!) {
@@ -95,7 +96,7 @@ class SettingsFragment : Fragment(), ToastMaker {
 
     private fun saveSelectedTheme(theme: Int) {
         val sharedPref = PreferenceManager.getDefaultSharedPreferences(context)
-        sharedPref.edit().putInt(getString(R.string.key_theme), theme).apply()
+        sharedPref.edit().putInt(SHARED_PREFERENCES_KEY_THEME, theme).apply()
     }
 
     override fun showToast(message: Int) { makeToast(context!!, message) }
