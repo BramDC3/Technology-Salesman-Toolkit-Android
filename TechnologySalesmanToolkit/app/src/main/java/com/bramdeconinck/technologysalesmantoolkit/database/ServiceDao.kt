@@ -27,4 +27,5 @@ interface ServiceDao {
 
     @Query("DELETE FROM instruction_table WHERE serviceId = :id")
     fun deleteInstructionsByServiceId(id: String)
+
 }

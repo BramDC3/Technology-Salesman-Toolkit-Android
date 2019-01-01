@@ -7,6 +7,8 @@ import com.bramdeconinck.technologysalesmantoolkit.interfaces.FirebaseInstructio
 import com.bramdeconinck.technologysalesmantoolkit.interfaces.FirebaseServiceCallback
 import com.bramdeconinck.technologysalesmantoolkit.models.*
 import com.bramdeconinck.technologysalesmantoolkit.network.FirestoreAPI
+import com.bramdeconinck.technologysalesmantoolkit.repositories.InstructionRepository
+import com.bramdeconinck.technologysalesmantoolkit.repositories.ServiceRepository
 import com.bramdeconinck.technologysalesmantoolkit.utils.SingleLiveEvent
 import org.jetbrains.anko.doAsync
 import javax.inject.Inject

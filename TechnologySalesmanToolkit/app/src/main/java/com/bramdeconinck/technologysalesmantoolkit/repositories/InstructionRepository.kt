@@ -1,6 +1,7 @@
-package com.bramdeconinck.technologysalesmantoolkit.models
+package com.bramdeconinck.technologysalesmantoolkit.repositories
 
 import com.bramdeconinck.technologysalesmantoolkit.database.ServiceDao
+import com.bramdeconinck.technologysalesmantoolkit.models.Instruction
 
 class InstructionRepository(private val serviceDao: ServiceDao) {
     val instructions = serviceDao.getAllInstructions()
