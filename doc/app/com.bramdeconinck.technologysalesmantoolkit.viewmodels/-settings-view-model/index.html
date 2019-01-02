@@ -1,0 +1,177 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>SettingsViewModel - app</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">app</a>&nbsp;/&nbsp;<a href="../index.html">com.bramdeconinck.technologysalesmantoolkit.viewmodels</a>&nbsp;/&nbsp;<a href="./index.html">SettingsViewModel</a><br/>
+<br/>
+<h1>SettingsViewModel</h1>
+<code><span class="keyword">class </span><span class="identifier">SettingsViewModel</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="../../com.bramdeconinck.technologysalesmantoolkit.base/-injected-view-model/index.html"><span class="identifier">InjectedViewModel</span></a><span class="symbol">, </span><a href="../../com.bramdeconinck.technologysalesmantoolkit.interfaces/-firebase-suggestion-callback/index.html"><span class="identifier">FirebaseSuggestionCallback</span></a></code>
+<p>Instance of <a href="../../com.bramdeconinck.technologysalesmantoolkit.base/-injected-view-model/index.html">InjectedViewModel</a> that contains data and functions used in the SettingsFragment.</p>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-init-.html">&lt;init&gt;</a></p>
+</td>
+<td>
+<code><span class="identifier">SettingsViewModel</span><span class="symbol">(</span><span class="symbol">)</span></code>
+<p>Instance of <a href="../../com.bramdeconinck.technologysalesmantoolkit.base/-injected-view-model/index.html">InjectedViewModel</a> that contains data and functions used in the SettingsFragment.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="empty-suggestion.html">emptySuggestion</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">emptySuggestion</span><span class="symbol">: </span><a href="../../com.bramdeconinck.technologysalesmantoolkit.utils/-single-live-event/index.html"><span class="identifier">SingleLiveEvent</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="firestore-a-p-i.html">firestoreAPI</a></p>
+</td>
+<td>
+<code><span class="keyword">lateinit</span> <span class="keyword">var </span><span class="identifier">firestoreAPI</span><span class="symbol">: </span><a href="../../com.bramdeconinck.technologysalesmantoolkit.network/-firestore-a-p-i/index.html"><span class="identifier">FirestoreAPI</span></a></code>
+<p>Injection of the <a href="firestore-a-p-i.html">firestoreAPI</a> and <a href="shared-preferences.html">sharedPreferences</a>.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="is-dark-mode-enabled.html">isDarkModeEnabled</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">isDarkModeEnabled</span><span class="symbol">: </span><span class="identifier">LiveData</span><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="make-suggestion-clicked.html">makeSuggestionClicked</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">makeSuggestionClicked</span><span class="symbol">: </span><a href="../../com.bramdeconinck.technologysalesmantoolkit.utils/-single-live-event/index.html"><span class="identifier">SingleLiveEvent</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="shared-preferences.html">sharedPreferences</a></p>
+</td>
+<td>
+<code><span class="keyword">lateinit</span> <span class="keyword">var </span><span class="identifier">sharedPreferences</span><span class="symbol">: </span><a href="https://developer.android.com/reference/android/content/SharedPreferences.html"><span class="identifier">SharedPreferences</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="show-sign-out-dialog-clicked.html">showSignOutDialogClicked</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">showSignOutDialogClicked</span><span class="symbol">: </span><a href="../../com.bramdeconinck.technologysalesmantoolkit.utils/-single-live-event/index.html"><span class="identifier">SingleLiveEvent</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="sign-out-triggered.html">signOutTriggered</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">signOutTriggered</span><span class="symbol">: </span><a href="../../com.bramdeconinck.technologysalesmantoolkit.utils/-single-live-event/index.html"><span class="identifier">SingleLiveEvent</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="suggestion-callback.html">suggestionCallback</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">suggestionCallback</span><span class="symbol">: </span><a href="../../com.bramdeconinck.technologysalesmantoolkit.utils/-single-live-event/index.html"><span class="identifier">SingleLiveEvent</span></a><span class="symbol">&lt;</span><a href="../../com.bramdeconinck.technologysalesmantoolkit.utils/-base-command/index.html"><span class="identifier">BaseCommand</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="visit-privacy-policy-clicked.html">visitPrivacyPolicyClicked</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">visitPrivacyPolicyClicked</span><span class="symbol">: </span><a href="../../com.bramdeconinck.technologysalesmantoolkit.utils/-single-live-event/index.html"><span class="identifier">SingleLiveEvent</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="visit-website-clicked.html">visitWebsiteClicked</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">visitWebsiteClicked</span><span class="symbol">: </span><a href="../../com.bramdeconinck.technologysalesmantoolkit.utils/-single-live-event/index.html"><span class="identifier">SingleLiveEvent</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span></code>
+<p><a href="../../com.bramdeconinck.technologysalesmantoolkit.utils/-single-live-event/index.html">SingleLiveEvent</a> objects used to emit events.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="get-suggestion.html">getSuggestion</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">getSuggestion</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="symbol">(</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Function that is gives as a parameter in a dialog that retrieves a String.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="make-suggestion.html">makeSuggestion</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">makeSuggestion</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="show-failure-message.html">showFailureMessage</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">showFailureMessage</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="show-sign-out-dialog.html">showSignOutDialog</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">showSignOutDialog</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="show-success-message.html">showSuccessMessage</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">showSuccessMessage</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="sign-out.html">signOut</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">signOut</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="toggle-dark-mode.html">toggleDarkMode</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">toggleDarkMode</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="visit-privacy-policy.html">visitPrivacyPolicy</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">visitPrivacyPolicy</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="visit-website.html">visitWebsite</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">visitWebsite</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

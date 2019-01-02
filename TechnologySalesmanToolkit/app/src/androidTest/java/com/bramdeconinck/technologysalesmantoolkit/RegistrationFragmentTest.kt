@@ -30,6 +30,9 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import kotlin.random.Random
 
+/**
+ * To run the tests of the [RegistrationFragmentTest], an emulator with an active internet connection is required.
+ */
 @RunWith(AndroidJUnit4::class)
 class RegistrationFragmentTest {
 

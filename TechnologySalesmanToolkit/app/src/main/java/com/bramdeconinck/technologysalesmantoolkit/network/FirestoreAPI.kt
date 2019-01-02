@@ -10,19 +10,30 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.FirebaseFirestoreSettings
 import com.google.firebase.firestore.Source
 
+/**
+ * The [FirestoreAPI] class is used for all network requests.
+ */
 class FirestoreAPI {
 
-    // Access a Firebase Firestore instance
+    /**
+     * The [firestore] is an instance of the Firebase Firestore
+     */
     private val firestore = FirebaseFirestore.getInstance()
 
+    /**
+     * These firestore settings are used to use Timestamp objects instead of Date objects.
+     * Date objects are soon going to be deprecated in Firestore.
+     */
     init {
-        // These settings are used to hide a warning about dates and timestamps
         firestore.firestoreSettings = FirebaseFirestoreSettings.Builder()
                 .setTimestampsInSnapshotsEnabled(true)
                 .build()
     }
 
-    // Fetch all services from the Firestore
+    /**
+     * Function to fetch all services of the Firestore.
+     * [Source.SERVER] is used to disable Firestore caching because a Room database is used for caching.
+     */
     fun fetchAllServices(firebaseServiceCallback: FirebaseServiceCallback) {
         firebaseServiceCallback.showProgress()
         firestore.collection("Services").get(Source.SERVER)
@@ -37,7 +48,10 @@ class FirestoreAPI {
                 }
     }
 
-    // Fetch all instructions of a service from the Firestore
+    /**
+     * Function to fetch all instructions of a gives service of the Firestore.
+     * [Source.SERVER] is used to disable Firestore caching because a Room database is used for caching.
+     */
     fun fetchAllInstructionsFrom(serviceId: String, firebaseInstructionCallback: FirebaseInstructionCallback) {
         firestore.collection("Instructions").whereEqualTo("serviceId", serviceId).orderBy("index").get(Source.SERVER)
                 .addOnCompleteListener { task ->
@@ -50,7 +64,9 @@ class FirestoreAPI {
                 }
     }
 
-    // Post a suggestion to the Firestore
+    /**
+     * Function to post a suggestion to the Firestore.
+     */
     fun postSuggestion(callback: FirebaseSuggestionCallback, suggestion: String) {
         firestore.collection("Suggestions").add(createSuggestionData(suggestion))
                 .addOnSuccessListener { callback.showSuccessMessage() }

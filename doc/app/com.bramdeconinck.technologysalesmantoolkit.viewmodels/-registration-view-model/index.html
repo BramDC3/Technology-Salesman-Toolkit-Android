@@ -1,0 +1,130 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>RegistrationViewModel - app</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">app</a>&nbsp;/&nbsp;<a href="../index.html">com.bramdeconinck.technologysalesmantoolkit.viewmodels</a>&nbsp;/&nbsp;<a href="./index.html">RegistrationViewModel</a><br/>
+<br/>
+<h1>RegistrationViewModel</h1>
+<code><span class="keyword">class </span><span class="identifier">RegistrationViewModel</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="../../com.bramdeconinck.technologysalesmantoolkit.base/-injected-view-model/index.html"><span class="identifier">InjectedViewModel</span></a></code>
+<p>Instance of <a href="../../com.bramdeconinck.technologysalesmantoolkit.base/-injected-view-model/index.html">InjectedViewModel</a> that contains data and functions used in the ProfileFragment.</p>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-init-.html">&lt;init&gt;</a></p>
+</td>
+<td>
+<code><span class="identifier">RegistrationViewModel</span><span class="symbol">(</span><span class="symbol">)</span></code>
+<p>Instance of <a href="../../com.bramdeconinck.technologysalesmantoolkit.base/-injected-view-model/index.html">InjectedViewModel</a> that contains data and functions used in the ProfileFragment.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="email.html">email</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">email</span><span class="symbol">: </span><span class="identifier">MutableLiveData</span><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="familyname.html">familyname</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">familyname</span><span class="symbol">: </span><span class="identifier">MutableLiveData</span><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="firstname.html">firstname</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">firstname</span><span class="symbol">: </span><span class="identifier">MutableLiveData</span><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">&gt;</span></code>
+<p>Values for fields of the registration form.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="go-to-login-clicked.html">goToLoginClicked</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">goToLoginClicked</span><span class="symbol">: </span><a href="../../com.bramdeconinck.technologysalesmantoolkit.utils/-single-live-event/index.html"><span class="identifier">SingleLiveEvent</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span></code>
+<p><a href="../../com.bramdeconinck.technologysalesmantoolkit.utils/-single-live-event/index.html">SingleLiveEvent</a> objects used to emit events.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="password.html">password</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">password</span><span class="symbol">: </span><span class="identifier">MutableLiveData</span><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="registration-event.html">registrationEvent</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">registrationEvent</span><span class="symbol">: </span><a href="../../com.bramdeconinck.technologysalesmantoolkit.utils/-single-live-event/index.html"><span class="identifier">SingleLiveEvent</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="repeat-password.html">repeatPassword</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">repeatPassword</span><span class="symbol">: </span><span class="identifier">MutableLiveData</span><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="show-privacy-policy-dialog.html">showPrivacyPolicyDialog</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">showPrivacyPolicyDialog</span><span class="symbol">: </span><a href="../../com.bramdeconinck.technologysalesmantoolkit.utils/-single-live-event/index.html"><span class="identifier">SingleLiveEvent</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="clear-registration-form.html">clearRegistrationForm</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">clearRegistrationForm</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="create-firebase-account.html">createFirebaseAccount</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">createFirebaseAccount</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Function to create a Firebase account with an email address and password combination.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="go-to-login.html">goToLogin</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">goToLogin</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="is-registration-form-valid.html">isRegistrationFormValid</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">isRegistrationFormValid</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Function to validate the registration form.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

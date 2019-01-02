@@ -1,0 +1,76 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>ServiceAdapter - app</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">app</a>&nbsp;/&nbsp;<a href="../index.html">com.bramdeconinck.technologysalesmantoolkit.adapters</a>&nbsp;/&nbsp;<a href="./index.html">ServiceAdapter</a><br/>
+<br/>
+<h1>ServiceAdapter</h1>
+<code><span class="keyword">class </span><span class="identifier">ServiceAdapter</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">Adapter</span><span class="symbol">&lt;</span><a href="-view-holder/index.html"><span class="identifier">ViewHolder</span></a><span class="symbol">&gt;</span></code>
+<p><a href="./index.html">ServiceAdapter</a> is a <a href="#">RecyclerView</a> Adapter used for the RecyclerView of the ServiceListFragment.</p>
+<h3>Types</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-view-holder/index.html">ViewHolder</a></p>
+</td>
+<td>
+<code><span class="keyword">inner</span> <span class="keyword">class </span><span class="identifier">ViewHolder</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">ViewHolder</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-init-.html">&lt;init&gt;</a></p>
+</td>
+<td>
+<code><span class="identifier">ServiceAdapter</span><span class="symbol">(</span><span class="identifier" id="com.bramdeconinck.technologysalesmantoolkit.adapters.ServiceAdapter$<init>(com.bramdeconinck.technologysalesmantoolkit.fragments.ServiceListFragment, android.arch.lifecycle.LiveData((kotlin.collections.List((com.bramdeconinck.technologysalesmantoolkit.models.Service)))), kotlin.Boolean)/fragment">fragment</span><span class="symbol">:</span>&nbsp;<a href="../../com.bramdeconinck.technologysalesmantoolkit.fragments/-service-list-fragment/index.html"><span class="identifier">ServiceListFragment</span></a><span class="symbol">, </span><span class="identifier" id="com.bramdeconinck.technologysalesmantoolkit.adapters.ServiceAdapter$<init>(com.bramdeconinck.technologysalesmantoolkit.fragments.ServiceListFragment, android.arch.lifecycle.LiveData((kotlin.collections.List((com.bramdeconinck.technologysalesmantoolkit.models.Service)))), kotlin.Boolean)/services">services</span><span class="symbol">:</span>&nbsp;<span class="identifier">LiveData</span><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><a href="../../com.bramdeconinck.technologysalesmantoolkit.models/-service/index.html"><span class="identifier">Service</span></a><span class="symbol">&gt;</span><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier" id="com.bramdeconinck.technologysalesmantoolkit.adapters.ServiceAdapter$<init>(com.bramdeconinck.technologysalesmantoolkit.fragments.ServiceListFragment, android.arch.lifecycle.LiveData((kotlin.collections.List((com.bramdeconinck.technologysalesmantoolkit.models.Service)))), kotlin.Boolean)/twoPane">twoPane</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a><span class="symbol">)</span></code>
+<p><a href="./index.html">ServiceAdapter</a> is a <a href="#">RecyclerView</a> Adapter used for the RecyclerView of the ServiceListFragment.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="get-item-count.html">getItemCount</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">getItemCount</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="get-item-id.html">getItemId</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">getItemId</span><span class="symbol">(</span><span class="identifier" id="com.bramdeconinck.technologysalesmantoolkit.adapters.ServiceAdapter$getItemId(kotlin.Int)/position">position</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html"><span class="identifier">Long</span></a></code>
+<p>To preserve the animation of the <a href="#">RecyclerView</a> of the <a href="../../com.bramdeconinck.technologysalesmantoolkit.fragments/-service-list-fragment/index.html">ServiceListFragment</a>,
+the id of a <a href="../../com.bramdeconinck.technologysalesmantoolkit.models/-service/index.html">Service</a> item should be truly unique and not the <a href="get-item-id.html#com.bramdeconinck.technologysalesmantoolkit.adapters.ServiceAdapter$getItemId(kotlin.Int)/position">position</a> itself.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="on-bind-view-holder.html">onBindViewHolder</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">onBindViewHolder</span><span class="symbol">(</span><span class="identifier" id="com.bramdeconinck.technologysalesmantoolkit.adapters.ServiceAdapter$onBindViewHolder(com.bramdeconinck.technologysalesmantoolkit.adapters.ServiceAdapter.ViewHolder, kotlin.Int)/holder">holder</span><span class="symbol">:</span>&nbsp;<a href="-view-holder/index.html"><span class="identifier">ViewHolder</span></a><span class="symbol">, </span><span class="identifier" id="com.bramdeconinck.technologysalesmantoolkit.adapters.ServiceAdapter$onBindViewHolder(com.bramdeconinck.technologysalesmantoolkit.adapters.ServiceAdapter.ViewHolder, kotlin.Int)/position">position</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="on-create-view-holder.html">onCreateViewHolder</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">onCreateViewHolder</span><span class="symbol">(</span><span class="identifier" id="com.bramdeconinck.technologysalesmantoolkit.adapters.ServiceAdapter$onCreateViewHolder(android.view.ViewGroup, kotlin.Int)/parent">parent</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/view/ViewGroup.html"><span class="identifier">ViewGroup</span></a><span class="symbol">, </span><span class="identifier" id="com.bramdeconinck.technologysalesmantoolkit.adapters.ServiceAdapter$onCreateViewHolder(android.view.ViewGroup, kotlin.Int)/viewType">viewType</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="-view-holder/index.html"><span class="identifier">ViewHolder</span></a></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

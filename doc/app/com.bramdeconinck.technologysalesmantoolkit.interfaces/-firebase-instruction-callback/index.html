@@ -1,0 +1,48 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>FirebaseInstructionCallback - app</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">app</a>&nbsp;/&nbsp;<a href="../index.html">com.bramdeconinck.technologysalesmantoolkit.interfaces</a>&nbsp;/&nbsp;<a href="./index.html">FirebaseInstructionCallback</a><br/>
+<br/>
+<h1>FirebaseInstructionCallback</h1>
+<code><span class="keyword">interface </span><span class="identifier">FirebaseInstructionCallback</span></code>
+<p>Interface used for handling callbacks when fetching Instruction objects.</p>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="on-instructions-call-back.html">onInstructionsCallBack</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">onInstructionsCallBack</span><span class="symbol">(</span><span class="identifier" id="com.bramdeconinck.technologysalesmantoolkit.interfaces.FirebaseInstructionCallback$onInstructionsCallBack(kotlin.collections.List((kotlin.Any)))/list">list</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="show-instructions-message.html">showInstructionsMessage</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">showInstructionsMessage</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Inheritors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="../../com.bramdeconinck.technologysalesmantoolkit.viewmodels/-service-view-model/index.html">ServiceViewModel</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">ServiceViewModel</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="../../com.bramdeconinck.technologysalesmantoolkit.base/-injected-view-model/index.html"><span class="identifier">InjectedViewModel</span></a><span class="symbol">, </span><a href="../-firebase-service-callback/index.html"><span class="identifier">FirebaseServiceCallback</span></a><span class="symbol">, </span><a href="./index.html"><span class="identifier">FirebaseInstructionCallback</span></a></code>
+<p>Instance of <a href="../../com.bramdeconinck.technologysalesmantoolkit.base/-injected-view-model/index.html">InjectedViewModel</a> that contains data and functions used in the
+ServiceListFragment, ServiceDetailFragment and ServiceInstructionFragment.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

@@ -1,15 +1,25 @@
 package com.bramdeconinck.technologysalesmantoolkit.utils
 
+/**
+ * [StringUtils] contains all the utilities to manipulate [String].
+ */
 object StringUtils {
 
+    /**
+     * Retrieves the first name of a full name of a Firebase user.
+     */
     @JvmStatic
-    // Retrieves the first name of a full name of a firebase user
     fun getFirstname(name: String): String { return name.substring(0, name.indexOf(' ')) }
 
+    /**
+     * Retrieves the family name of a full name of a Firebase user.
+     */
     @JvmStatic
-    // Retrieves the family name of a full name of a firebase user
     fun getFamilyname(name: String): String { return name.substring(name.indexOf(' ') + 1) }
 
+    /**
+     * Format a list of instructions to be able to be shown in a single TextView.
+     */
     @JvmStatic
     fun formatInstructionsList(content: List<String>): String {
         var string = ""
@@ -17,6 +27,9 @@ object StringUtils {
         return string
     }
 
+    /**
+     * Format a price to have a € sign and round it to two decimals.
+     */
     @JvmStatic
     fun formatPrice(price: Double): String { return String.format("€ %.2f", price) }
 

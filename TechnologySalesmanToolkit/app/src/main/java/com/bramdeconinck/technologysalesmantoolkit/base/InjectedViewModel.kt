@@ -10,14 +10,14 @@ import com.bramdeconinck.technologysalesmantoolkit.viewmodels.*
 abstract class InjectedViewModel : ViewModel() {
 
     /**
-     * Perform the injection when the ViewModel is created
+     * Performing the injection when the ViewModel is created.
      */
     init { inject() }
 
     /**
-     * Injects the required dependencies.
-     * We need the 'when(this)' construct for each new ViewModel as the 'this' reference should
-     * refer to an instance of that specific ViewModel.
+     * Injects the required dependencies using the [injector].
+     * The 'when(this)' construct is required for each new ViewModel,
+     * as the 'this' reference should refer to an instance of that specific ViewModel.
      * Just injecting into a generic InjectedViewModel is not specific enough for Dagger.
      */
     private fun inject() {

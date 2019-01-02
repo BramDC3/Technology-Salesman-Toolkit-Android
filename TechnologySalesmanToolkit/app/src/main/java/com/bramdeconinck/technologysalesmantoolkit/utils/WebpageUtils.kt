@@ -7,8 +7,14 @@ import android.net.Uri
 import com.bramdeconinck.technologysalesmantoolkit.R
 import com.bramdeconinck.technologysalesmantoolkit.utils.MessageUtils.makeToast
 
+/**
+ * [WebpageUtils] contains all the utilities for opening webpages.
+ */
 object WebpageUtils {
 
+    /**
+     * Open a webpage with a given url.
+     */
     @JvmStatic
     fun openWebPage(context: Context, url: String) {
         try {

@@ -1,0 +1,68 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>MessageUtils - app</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">app</a>&nbsp;/&nbsp;<a href="../index.html">com.bramdeconinck.technologysalesmantoolkit.utils</a>&nbsp;/&nbsp;<a href="./index.html">MessageUtils</a><br/>
+<br/>
+<h1>MessageUtils</h1>
+<code><span class="keyword">object </span><span class="identifier">MessageUtils</span></code>
+<p><a href="./index.html">MessageUtils</a> contains all the <a href="https://developer.android.com/reference/android/widget/Toast.html">Toast</a> and <a href="https://developer.android.com/reference/android/app/AlertDialog.html">AlertDialog</a> utilities.</p>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="make-toast.html">makeToast</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">makeToast</span><span class="symbol">(</span><span class="identifier" id="com.bramdeconinck.technologysalesmantoolkit.utils.MessageUtils$makeToast(android.content.Context, kotlin.Int, kotlin.String, kotlin.Int)/context">context</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/content/Context.html"><span class="identifier">Context</span></a><span class="symbol">, </span><span class="identifier" id="com.bramdeconinck.technologysalesmantoolkit.utils.MessageUtils$makeToast(android.content.Context, kotlin.Int, kotlin.String, kotlin.Int)/stringResourceId">stringResourceId</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">, </span><span class="identifier" id="com.bramdeconinck.technologysalesmantoolkit.utils.MessageUtils$makeToast(android.content.Context, kotlin.Int, kotlin.String, kotlin.Int)/message">message</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">?</span>&nbsp;<span class="symbol">=</span>&nbsp;null<span class="symbol">, </span><span class="identifier" id="com.bramdeconinck.technologysalesmantoolkit.utils.MessageUtils$makeToast(android.content.Context, kotlin.Int, kotlin.String, kotlin.Int)/duration">duration</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a>&nbsp;<span class="symbol">=</span>&nbsp;Toast.LENGTH_LONG<span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Shows a toast on the screen for a chosen amount of time with a given stringResourceId.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="show-basic-dialog.html">showBasicDialog</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">showBasicDialog</span><span class="symbol">(</span><span class="identifier" id="com.bramdeconinck.technologysalesmantoolkit.utils.MessageUtils$showBasicDialog(android.content.Context, kotlin.String, kotlin.String)/context">context</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/content/Context.html"><span class="identifier">Context</span></a><span class="symbol">, </span><span class="identifier" id="com.bramdeconinck.technologysalesmantoolkit.utils.MessageUtils$showBasicDialog(android.content.Context, kotlin.String, kotlin.String)/title">title</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="com.bramdeconinck.technologysalesmantoolkit.utils.MessageUtils$showBasicDialog(android.content.Context, kotlin.String, kotlin.String)/message">message</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Show a dialog on the screen with a given title and message.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="show-make-suggestion-dialog.html">showMakeSuggestionDialog</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">showMakeSuggestionDialog</span><span class="symbol">(</span><span class="identifier" id="com.bramdeconinck.technologysalesmantoolkit.utils.MessageUtils$showMakeSuggestionDialog(android.content.Context, kotlin.String, kotlin.String, kotlin.Function1((kotlin.String, kotlin.Unit)))/context">context</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/content/Context.html"><span class="identifier">Context</span></a><span class="symbol">, </span><span class="identifier" id="com.bramdeconinck.technologysalesmantoolkit.utils.MessageUtils$showMakeSuggestionDialog(android.content.Context, kotlin.String, kotlin.String, kotlin.Function1((kotlin.String, kotlin.Unit)))/title">title</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="com.bramdeconinck.technologysalesmantoolkit.utils.MessageUtils$showMakeSuggestionDialog(android.content.Context, kotlin.String, kotlin.String, kotlin.Function1((kotlin.String, kotlin.Unit)))/message">message</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="com.bramdeconinck.technologysalesmantoolkit.utils.MessageUtils$showMakeSuggestionDialog(android.content.Context, kotlin.String, kotlin.String, kotlin.Function1((kotlin.String, kotlin.Unit)))/func">func</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Show a dialog on the screen with a given title and message.
+The dialog contains an <a href="https://developer.android.com/reference/android/widget/EditText.html">EditText</a> used to enter a suggestion.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="show-privacy-policy-dialog.html">showPrivacyPolicyDialog</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">showPrivacyPolicyDialog</span><span class="symbol">(</span><span class="identifier" id="com.bramdeconinck.technologysalesmantoolkit.utils.MessageUtils$showPrivacyPolicyDialog(android.content.Context, kotlin.String, kotlin.String, kotlin.Function0((kotlin.Unit)))/context">context</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/content/Context.html"><span class="identifier">Context</span></a><span class="symbol">, </span><span class="identifier" id="com.bramdeconinck.technologysalesmantoolkit.utils.MessageUtils$showPrivacyPolicyDialog(android.content.Context, kotlin.String, kotlin.String, kotlin.Function0((kotlin.Unit)))/title">title</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="com.bramdeconinck.technologysalesmantoolkit.utils.MessageUtils$showPrivacyPolicyDialog(android.content.Context, kotlin.String, kotlin.String, kotlin.Function0((kotlin.Unit)))/message">message</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="com.bramdeconinck.technologysalesmantoolkit.utils.MessageUtils$showPrivacyPolicyDialog(android.content.Context, kotlin.String, kotlin.String, kotlin.Function0((kotlin.Unit)))/func">func</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Show a dialog on the screen with a given title and message.
+The positive button has a given function.
+The neutral button opens the privacy policy via an intent.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="show-three-buttons-positive-function-dialog.html">showThreeButtonsPositiveFunctionDialog</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">showThreeButtonsPositiveFunctionDialog</span><span class="symbol">(</span><span class="identifier" id="com.bramdeconinck.technologysalesmantoolkit.utils.MessageUtils$showThreeButtonsPositiveFunctionDialog(android.content.Context, kotlin.String, kotlin.String, kotlin.Function0((kotlin.Unit)))/context">context</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/content/Context.html"><span class="identifier">Context</span></a><span class="symbol">, </span><span class="identifier" id="com.bramdeconinck.technologysalesmantoolkit.utils.MessageUtils$showThreeButtonsPositiveFunctionDialog(android.content.Context, kotlin.String, kotlin.String, kotlin.Function0((kotlin.Unit)))/title">title</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="com.bramdeconinck.technologysalesmantoolkit.utils.MessageUtils$showThreeButtonsPositiveFunctionDialog(android.content.Context, kotlin.String, kotlin.String, kotlin.Function0((kotlin.Unit)))/message">message</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="com.bramdeconinck.technologysalesmantoolkit.utils.MessageUtils$showThreeButtonsPositiveFunctionDialog(android.content.Context, kotlin.String, kotlin.String, kotlin.Function0((kotlin.Unit)))/func">func</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Show a dialog on the screen with a given title and message.
+The positive button has a given function.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

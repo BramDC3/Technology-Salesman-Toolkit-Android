@@ -2,9 +2,13 @@ package com.bramdeconinck.technologysalesmantoolkit
 
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.Observer
+import com.bramdeconinck.technologysalesmantoolkit.utils.FirebaseUtils
 import java.util.concurrent.CountDownLatch
 import java.util.concurrent.TimeUnit
 
+/**
+ * [TestUtils] contains all the utilities needed for testing.
+ */
 object TestUtils {
 
     /**

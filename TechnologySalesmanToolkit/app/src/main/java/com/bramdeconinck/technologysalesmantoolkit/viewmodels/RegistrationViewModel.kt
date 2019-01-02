@@ -13,22 +13,25 @@ import com.bramdeconinck.technologysalesmantoolkit.utils.ValidationUtils.isEmail
 import com.bramdeconinck.technologysalesmantoolkit.utils.ValidationUtils.isPasswordValid
 import com.bramdeconinck.technologysalesmantoolkit.utils.ValidationUtils.passwordsMatch
 
+/**
+ * Instance of [InjectedViewModel] that contains data and functions used in the ProfileFragment.
+ */
 class RegistrationViewModel : InjectedViewModel() {
 
+    /**
+     * Values for fields of the registration form.
+     */
     val firstname = MutableLiveData<String>()
-
     val familyname = MutableLiveData<String>()
-
     val email = MutableLiveData<String>()
-
     val password = MutableLiveData<String>()
-
     val repeatPassword = MutableLiveData<String>()
 
+    /**
+     * [SingleLiveEvent] objects used to emit events.
+     */
     val goToLoginClicked = SingleLiveEvent<Any>()
-
     val showPrivacyPolicyDialog = SingleLiveEvent<Any>()
-
     val registrationEvent = SingleLiveEvent<Int>()
 
     init {
@@ -39,6 +42,11 @@ class RegistrationViewModel : InjectedViewModel() {
         repeatPassword.value = ""
     }
 
+    fun goToLogin() { goToLoginClicked.call() }
+
+    /**
+     * Function to validate the registration form.
+     */
     fun isRegistrationFormValid() {
         if (!everyFieldHasValue(listOf(firstname.value!!, familyname.value!!, email.value!!, password.value!!, repeatPassword.value!!))) {
             registrationEvent.value = R.string.error_empty_fields
@@ -63,6 +71,9 @@ class RegistrationViewModel : InjectedViewModel() {
         showPrivacyPolicyDialog.call()
     }
 
+    /**
+     * Function to create a Firebase account with an email address and password combination.
+     */
     fun createFirebaseAccount(): () -> Unit = {
         firebaseAuth.createUserWithEmailAndPassword(email.value!!, password.value!!)
                 .addOnCompleteListener { task1 ->
@@ -80,8 +91,6 @@ class RegistrationViewModel : InjectedViewModel() {
                     } else { registrationEvent.value = R.string.error_account_not_created }
                 }
     }
-
-    fun goToLogin() { goToLoginClicked.call() }
 
     fun clearRegistrationForm() {
         firstname.value = ""

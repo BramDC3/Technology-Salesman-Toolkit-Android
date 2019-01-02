@@ -1,0 +1,62 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>FirestoreAPI - app</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">app</a>&nbsp;/&nbsp;<a href="../index.html">com.bramdeconinck.technologysalesmantoolkit.network</a>&nbsp;/&nbsp;<a href="./index.html">FirestoreAPI</a><br/>
+<br/>
+<h1>FirestoreAPI</h1>
+<code><span class="keyword">class </span><span class="identifier">FirestoreAPI</span></code>
+<p>The <a href="./index.html">FirestoreAPI</a> class is used for all network requests.</p>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-init-.html">&lt;init&gt;</a></p>
+</td>
+<td>
+<code><span class="identifier">FirestoreAPI</span><span class="symbol">(</span><span class="symbol">)</span></code>
+<p>The <a href="./index.html">FirestoreAPI</a> class is used for all network requests.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="fetch-all-instructions-from.html">fetchAllInstructionsFrom</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">fetchAllInstructionsFrom</span><span class="symbol">(</span><span class="identifier" id="com.bramdeconinck.technologysalesmantoolkit.network.FirestoreAPI$fetchAllInstructionsFrom(kotlin.String, com.bramdeconinck.technologysalesmantoolkit.interfaces.FirebaseInstructionCallback)/serviceId">serviceId</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="com.bramdeconinck.technologysalesmantoolkit.network.FirestoreAPI$fetchAllInstructionsFrom(kotlin.String, com.bramdeconinck.technologysalesmantoolkit.interfaces.FirebaseInstructionCallback)/firebaseInstructionCallback">firebaseInstructionCallback</span><span class="symbol">:</span>&nbsp;<a href="../../com.bramdeconinck.technologysalesmantoolkit.interfaces/-firebase-instruction-callback/index.html"><span class="identifier">FirebaseInstructionCallback</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Function to fetch all instructions of a gives service of the Firestore.
+<a href="#">Source.SERVER</a> is used to disable Firestore caching because a Room database is used for caching.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="fetch-all-services.html">fetchAllServices</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">fetchAllServices</span><span class="symbol">(</span><span class="identifier" id="com.bramdeconinck.technologysalesmantoolkit.network.FirestoreAPI$fetchAllServices(com.bramdeconinck.technologysalesmantoolkit.interfaces.FirebaseServiceCallback)/firebaseServiceCallback">firebaseServiceCallback</span><span class="symbol">:</span>&nbsp;<a href="../../com.bramdeconinck.technologysalesmantoolkit.interfaces/-firebase-service-callback/index.html"><span class="identifier">FirebaseServiceCallback</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Function to fetch all services of the Firestore.
+<a href="#">Source.SERVER</a> is used to disable Firestore caching because a Room database is used for caching.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="post-suggestion.html">postSuggestion</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">postSuggestion</span><span class="symbol">(</span><span class="identifier" id="com.bramdeconinck.technologysalesmantoolkit.network.FirestoreAPI$postSuggestion(com.bramdeconinck.technologysalesmantoolkit.interfaces.FirebaseSuggestionCallback, kotlin.String)/callback">callback</span><span class="symbol">:</span>&nbsp;<a href="../../com.bramdeconinck.technologysalesmantoolkit.interfaces/-firebase-suggestion-callback/index.html"><span class="identifier">FirebaseSuggestionCallback</span></a><span class="symbol">, </span><span class="identifier" id="com.bramdeconinck.technologysalesmantoolkit.network.FirestoreAPI$postSuggestion(com.bramdeconinck.technologysalesmantoolkit.interfaces.FirebaseSuggestionCallback, kotlin.String)/suggestion">suggestion</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Function to post a suggestion to the Firestore.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

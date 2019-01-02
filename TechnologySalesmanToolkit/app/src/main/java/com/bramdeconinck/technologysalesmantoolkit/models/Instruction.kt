@@ -11,7 +11,9 @@ import kotlinx.android.parcel.Parcelize
  */
 @Entity(tableName = "instruction_table")
 data class Instruction(
-        //Each Entity requires a primary key
+        /**
+         * Each Entity needs a Primary Key
+         */
         @PrimaryKey val id: String,
         val title: String,
         val description: String,

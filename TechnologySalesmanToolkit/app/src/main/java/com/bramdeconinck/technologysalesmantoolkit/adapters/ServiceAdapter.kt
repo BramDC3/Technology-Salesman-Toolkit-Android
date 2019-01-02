@@ -1,7 +1,9 @@
 package com.bramdeconinck.technologysalesmantoolkit.adapters
 
+import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModelProviders
+import android.support.v4.app.FragmentStatePagerAdapter
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -18,9 +20,12 @@ import com.bramdeconinck.technologysalesmantoolkit.viewmodels.ServiceViewModel
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.service_list_content.view.*
 
+/**
+ * [ServiceAdapter] is a [RecyclerView] Adapter used for the RecyclerView of the ServiceListFragment.
+ */
 class ServiceAdapter(
         private val fragment: ServiceListFragment,
-        private val services: MutableLiveData<List<Service>>,
+        private val services: LiveData<List<Service>>,
         private val twoPane: Boolean) :
         RecyclerView.Adapter<ServiceAdapter.ViewHolder>() {
 
@@ -29,7 +34,17 @@ class ServiceAdapter(
 
     init {
         onClickListener = View.OnClickListener { v ->
+            /**
+             * Instead of sending the selected [Service] as a parcel,
+             * the selected [Service] is stored in the [ServiceViewModel].
+             */
             serviceViewModel.selectedService.value = v.tag as Service
+
+            /**
+             * When [twoPane] is true, the user is using a tablet.
+             * If the user is using a tablet, the [ServiceDetailFragment] should open in a container of the tablet layout of the [ServiceListFragment].
+             * If the user is using a phone, the Navigation Controller should navigate to the [ServiceDetailFragment].
+             */
             if (twoPane) {
                 fragment.activity!!.supportFragmentManager
                         .beginTransaction()
@@ -58,6 +73,10 @@ class ServiceAdapter(
         }
     }
 
+    /**
+     * To preserve the animation of the [RecyclerView] of the [ServiceListFragment],
+     * the id of a [Service] item should be truly unique and not the [position] itself.
+     */
     override fun getItemId(position: Int): Long {
         return services.value!![position].hashCode().toLong()
     }

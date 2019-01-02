@@ -21,6 +21,9 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
+/**
+ * To run the tests of the [LoginFragmentTest], an emulator with an active internet connection is required.
+ */
 @RunWith(AndroidJUnit4::class)
 class LoginFragmentTest {
 

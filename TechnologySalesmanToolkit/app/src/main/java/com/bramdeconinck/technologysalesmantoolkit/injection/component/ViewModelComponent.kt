@@ -10,19 +10,17 @@ import javax.inject.Singleton
  * Components act as the bridge between the Modules that know how to provide dependencies
  * and the actual objects that require something to be injected.
  *
- * More info can be found in [the documentation](https://google.github.io/dagger/api/2.14/dagger/Component.html)
+ * More info can be found in [the documentation](https://google.github.io/dagger/api/2.14/dagger/Component.html).
  */
 @Singleton
 /**
- * All modules that are required to perform the injections into the listed objects should be listed
- * in this annotation
+ * All modules that are required to perform the injections into the listed objects should be listed in this annotation.
  */
 @Component(modules = [NetworkModule::class])
 interface ViewModelComponent {
 
     /**
-     * Injects the dependencies into the specified MetarViewModel.
-     * @param serviceViewModel the [ServiceViewModel] in which to inject the dependencies.
+     * Injects the dependencies into the specified ViewModel.
      */
     fun inject(serviceViewModel: ServiceViewModel)
     fun inject(loginViewModel: LoginViewModel)
