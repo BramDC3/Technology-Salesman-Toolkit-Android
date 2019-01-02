@@ -67,7 +67,6 @@ class ServiceListFragment : Fragment(), ToastMaker {
     override fun onDestroyView() {
         super.onDestroyView()
 
-        rv_service_list_services.adapter = null
         serviceViewModel.clearFilters()
     }
 

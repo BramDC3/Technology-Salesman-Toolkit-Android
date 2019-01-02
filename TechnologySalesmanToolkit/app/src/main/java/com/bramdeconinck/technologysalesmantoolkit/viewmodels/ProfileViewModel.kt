@@ -125,11 +125,6 @@ class ProfileViewModel : InjectedViewModel() {
         }
     }
 
-    fun clearProfileForm() {
-        firstname.value = ""
-        familyname.value = ""
-        email.value = ""
-        if (isEditable.value!!) toggleEditMode()
-    }
+    fun clearProfileForm() { if (isEditable.value!!) toggleEditMode() }
 
 }

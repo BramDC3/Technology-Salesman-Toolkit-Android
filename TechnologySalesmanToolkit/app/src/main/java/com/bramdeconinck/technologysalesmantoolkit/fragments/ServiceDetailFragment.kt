@@ -54,16 +54,6 @@ class ServiceDetailFragment : Fragment(), ToastMaker {
         setSupportActionBarTitle(service.name)
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-
-        vp_service_detail_instructions.adapter = null
-
-        serviceViewModel.clearInstructions()
-
-        serviceViewModel.selectedService.value = null
-    }
-
     /**
      * Function to get all the necessary data from the [ServiceViewModel],
      * and creates the [InstructionAdapter] used by the ViewPager.
