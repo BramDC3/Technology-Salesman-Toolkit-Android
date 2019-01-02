@@ -1,0 +1,140 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>com.bramdeconinck.technologysalesmantoolkit.utils - app</title>
+<link rel="stylesheet" href="../../style.css">
+</HEAD>
+<BODY>
+<a href="../index.html">app</a>&nbsp;/&nbsp;<a href="./index.html">com.bramdeconinck.technologysalesmantoolkit.utils</a><br/>
+<br/>
+<h2>Package com.bramdeconinck.technologysalesmantoolkit.utils</h2>
+<h3>Types</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-base-command/index.html">BaseCommand</a></p>
+</td>
+<td>
+<code><span class="keyword">sealed</span> <span class="keyword">class </span><span class="identifier">BaseCommand</span></code>
+<p><a href="-base-command/index.html">BaseCommand</a> is a sealed class used as an inferred type for SingleLiveEvent.
+This is to ensure that a single SingleLiveEvent can emit multiple events happening in one ViewModel.
+More info about sealed classes can be found here: https://kotlinlang.org/docs/reference/sealed-classes.html,
+but in layman's terms, sealed classes are similar to enums and we use it to emit different events happening in one ViewModel.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-firebase-utils/index.html">FirebaseUtils</a></p>
+</td>
+<td>
+<code><span class="keyword">object </span><span class="identifier">FirebaseUtils</span></code>
+<p><a href="-firebase-utils/index.html">FirebaseUtils</a> contains all the Firebase utilities.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-message-utils/index.html">MessageUtils</a></p>
+</td>
+<td>
+<code><span class="keyword">object </span><span class="identifier">MessageUtils</span></code>
+<p><a href="-message-utils/index.html">MessageUtils</a> contains all the <a href="https://developer.android.com/reference/android/widget/Toast.html">Toast</a> and <a href="https://developer.android.com/reference/android/app/AlertDialog.html">AlertDialog</a> utilities.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-room-converters-utils/index.html">RoomConvertersUtils</a></p>
+</td>
+<td>
+<code><span class="keyword">object </span><span class="identifier">RoomConvertersUtils</span></code>
+<p><a href="-room-converters-utils/index.html">RoomConvertersUtils</a> contains all the utilities used to transform object to be able to be stored in a Room database.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-single-live-event/index.html">SingleLiveEvent</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">SingleLiveEvent</span><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">MutableLiveData</span><span class="symbol">&lt;</span><a href="-single-live-event/index.html#T"><span class="identifier">T</span></a><span class="symbol">&gt;</span></code>
+<p>A lifecycle-aware observable that sends only new updates after subscription, used for events like
+navigation and Snackbar messages.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-string-utils/index.html">StringUtils</a></p>
+</td>
+<td>
+<code><span class="keyword">object </span><span class="identifier">StringUtils</span></code>
+<p><a href="-string-utils/index.html">StringUtils</a> contains all the utilities to manipulate <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-validation-utils/index.html">ValidationUtils</a></p>
+</td>
+<td>
+<code><span class="keyword">object </span><span class="identifier">ValidationUtils</span></code>
+<p><a href="-validation-utils/index.html">ValidationUtils</a> contains all the utilities for form validation.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-webpage-utils/index.html">WebpageUtils</a></p>
+</td>
+<td>
+<code><span class="keyword">object </span><span class="identifier">WebpageUtils</span></code>
+<p><a href="-webpage-utils/index.html">WebpageUtils</a> contains all the utilities for opening webpages.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-g-o-o-g-l-e_-s-i-g-n_-i-n_-r-e-q-u-e-s-t_-c-o-d-e.html">GOOGLE_SIGN_IN_REQUEST_CODE</a></p>
+</td>
+<td>
+<code><span class="keyword">const</span> <span class="keyword">val </span><span class="identifier">GOOGLE_SIGN_IN_REQUEST_CODE</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="-i-n-s-t-r-u-c-t-i-o-n_-i-t-e-m.html">INSTRUCTION_ITEM</a></p>
+</td>
+<td>
+<code><span class="keyword">const</span> <span class="keyword">val </span><span class="identifier">INSTRUCTION_ITEM</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="-p-r-i-v-a-c-y_-p-o-l-i-c-y.html">PRIVACY_POLICY</a></p>
+</td>
+<td>
+<code><span class="keyword">const</span> <span class="keyword">val </span><span class="identifier">PRIVACY_POLICY</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="-s-h-a-r-e-d_-p-r-e-f-e-r-e-n-c-e-s_-k-e-y_-t-h-e-m-e.html">SHARED_PREFERENCES_KEY_THEME</a></p>
+</td>
+<td>
+<code><span class="keyword">const</span> <span class="keyword">val </span><span class="identifier">SHARED_PREFERENCES_KEY_THEME</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="-t-e-s-t_-w-e-b-s-i-t-e.html">TEST_WEBSITE</a></p>
+</td>
+<td>
+<code><span class="keyword">const</span> <span class="keyword">val </span><span class="identifier">TEST_WEBSITE</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="valid-email-address-regex.html">validEmailAddressRegex</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">validEmailAddressRegex</span><span class="symbol">: </span><a href="https://developer.android.com/reference/java/util/regex/Pattern.html"><span class="identifier">Pattern</span></a></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

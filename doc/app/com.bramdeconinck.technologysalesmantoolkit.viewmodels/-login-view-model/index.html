@@ -1,0 +1,123 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>LoginViewModel - app</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">app</a>&nbsp;/&nbsp;<a href="../index.html">com.bramdeconinck.technologysalesmantoolkit.viewmodels</a>&nbsp;/&nbsp;<a href="./index.html">LoginViewModel</a><br/>
+<br/>
+<h1>LoginViewModel</h1>
+<code><span class="keyword">class </span><span class="identifier">LoginViewModel</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="../../com.bramdeconinck.technologysalesmantoolkit.base/-injected-view-model/index.html"><span class="identifier">InjectedViewModel</span></a></code>
+<p>Instance of <a href="../../com.bramdeconinck.technologysalesmantoolkit.base/-injected-view-model/index.html">InjectedViewModel</a> that contains data and functions used in the LoginFragment.</p>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-init-.html">&lt;init&gt;</a></p>
+</td>
+<td>
+<code><span class="identifier">LoginViewModel</span><span class="symbol">(</span><span class="symbol">)</span></code>
+<p>Instance of <a href="../../com.bramdeconinck.technologysalesmantoolkit.base/-injected-view-model/index.html">InjectedViewModel</a> that contains data and functions used in the LoginFragment.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="email.html">email</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">email</span><span class="symbol">: </span><span class="identifier">MutableLiveData</span><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">&gt;</span></code>
+<p>Values for fields of the login form.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="go-to-registration-clicked.html">goToRegistrationClicked</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">goToRegistrationClicked</span><span class="symbol">: </span><a href="../../com.bramdeconinck.technologysalesmantoolkit.utils/-single-live-event/index.html"><span class="identifier">SingleLiveEvent</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="login-error-occurred.html">loginErrorOccurred</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">loginErrorOccurred</span><span class="symbol">: </span><a href="../../com.bramdeconinck.technologysalesmantoolkit.utils/-single-live-event/index.html"><span class="identifier">SingleLiveEvent</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="navigate-to-service-list.html">navigateToServiceList</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">navigateToServiceList</span><span class="symbol">: </span><a href="../../com.bramdeconinck.technologysalesmantoolkit.utils/-single-live-event/index.html"><span class="identifier">SingleLiveEvent</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span></code>
+<p><a href="../../com.bramdeconinck.technologysalesmantoolkit.utils/-single-live-event/index.html">SingleLiveEvent</a> objects used to emit events.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="password.html">password</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">password</span><span class="symbol">: </span><span class="identifier">MutableLiveData</span><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="sign-in-with-google-clicked.html">signInWithGoogleClicked</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">signInWithGoogleClicked</span><span class="symbol">: </span><a href="../../com.bramdeconinck.technologysalesmantoolkit.utils/-single-live-event/index.html"><span class="identifier">SingleLiveEvent</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="clear-login-form.html">clearLoginForm</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">clearLoginForm</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="firebase-auth-with-google.html">firebaseAuthWithGoogle</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">firebaseAuthWithGoogle</span><span class="symbol">(</span><span class="identifier" id="com.bramdeconinck.technologysalesmantoolkit.viewmodels.LoginViewModel$firebaseAuthWithGoogle(com.google.android.gms.auth.api.signin.GoogleSignInAccount)/acct">acct</span><span class="symbol">:</span>&nbsp;<span class="identifier">GoogleSignInAccount</span><span class="symbol">?</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Function to sign in with a Google account.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="go-to-registration.html">goToRegistration</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">goToRegistration</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="log-in-with-firebase-account.html">logInWithFirebaseAccount</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">logInWithFirebaseAccount</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Function to sign in with a email address and password combination.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="sign-in-with-google.html">signInWithGoogle</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">signInWithGoogle</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

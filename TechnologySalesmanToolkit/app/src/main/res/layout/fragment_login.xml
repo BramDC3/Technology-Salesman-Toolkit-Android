@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <import type="android.view.View"/>
+
+        <variable
+            name="loginViewModel"
+            type="com.bramdeconinck.technologysalesmantoolkit.viewmodels.LoginViewModel"/>
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/login_background"
+        android:theme="@style/PrimaryBackground"
+        tools:context=".fragments.LoginFragment">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:ignore="UselessParent">
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:focusable="true"
+                android:focusableInTouchMode="true">
+
+                <ImageView
+                    android:id="@+id/iv_login_logo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:contentDescription="@string/description_app_logo"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/logo" />
+
+                <TextView
+                    android:id="@+id/tv_login_appName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="@string/app_name"
+                    android:textColor="@android:color/white"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/iv_login_logo" />
+
+                <EditText
+                    android:id="@+id/et_login_email"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="52dp"
+                    android:background="@drawable/email"
+                    android:ems="10"
+                    android:hint="@string/placeholder_email"
+                    android:textColorHint="@color/colorHintText"
+                    android:inputType="textEmailAddress"
+                    android:paddingStart="40dp"
+                    android:paddingEnd="20dp"
+                    android:text="@={loginViewModel.email}"
+                    android:textColor="@color/colorFormFieldText"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_login_appName"
+                    tools:ignore="Autofill" />
+
+                <EditText
+                    android:id="@+id/et_login_password"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/password"
+                    android:ems="10"
+                    android:hint="@string/placeholder_password"
+                    android:textColorHint="@color/colorHintText"
+                    android:inputType="textPassword"
+                    android:paddingStart="40dp"
+                    android:paddingEnd="20dp"
+                    android:textSize="16sp"
+                    android:textColor="@color/colorFormFieldText"
+                    android:text="@={loginViewModel.password}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/et_login_email"
+                    tools:ignore="Autofill" />
+
+                <Button
+                    android:id="@+id/btn_login_signIn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/login"
+                    android:onClick="@{() -> loginViewModel.logInWithFirebaseAccount()}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/et_login_password" />
+
+                <Button
+                    android:id="@+id/btn_login_signInWithGoogle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="32dp"
+                    android:layout_marginBottom="32dp"
+                    android:background="@drawable/login_google"
+                    android:onClick="@{() -> loginViewModel.signInWithGoogle()}"
+                    app:layout_constraintBottom_toTopOf="@+id/tv_login_goToRegistration"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/btn_login_signIn" />
+
+                <TextView
+                    android:id="@+id/tv_login_goToRegistration"
+                    android:layout_width="wrap_content"
+                    android:layout_height="19dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginBottom="10dp"
+                    android:text="@string/label_go_to_registration"
+                    android:textColor="@color/colorClickableLabel"
+                    android:onClick="@{() -> loginViewModel.goToRegistration()}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+            </android.support.constraint.ConstraintLayout>
+
+        </ScrollView>
+
+    </FrameLayout>
+
+</layout>

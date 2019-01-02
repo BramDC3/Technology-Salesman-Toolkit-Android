@@ -1,0 +1,73 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>RoomConvertersUtils - app</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">app</a>&nbsp;/&nbsp;<a href="../index.html">com.bramdeconinck.technologysalesmantoolkit.utils</a>&nbsp;/&nbsp;<a href="./index.html">RoomConvertersUtils</a><br/>
+<br/>
+<h1>RoomConvertersUtils</h1>
+<code><span class="keyword">object </span><span class="identifier">RoomConvertersUtils</span></code>
+<p><a href="./index.html">RoomConvertersUtils</a> contains all the utilities used to transform object to be able to be stored in a Room database.</p>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="from-category.html">fromCategory</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">fromCategory</span><span class="symbol">(</span><span class="identifier" id="com.bramdeconinck.technologysalesmantoolkit.utils.RoomConvertersUtils$fromCategory(com.bramdeconinck.technologysalesmantoolkit.models.Category)/category">category</span><span class="symbol">:</span>&nbsp;<a href="../../com.bramdeconinck.technologysalesmantoolkit.models/-category/index.html"><span class="identifier">Category</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code>
+<p>Converting a <a href="../../com.bramdeconinck.technologysalesmantoolkit.models/-category/index.html">Category</a> to an <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="from-list-of-strings-json.html">fromListOfStringsJson</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">fromListOfStringsJson</span><span class="symbol">(</span><span class="identifier" id="com.bramdeconinck.technologysalesmantoolkit.utils.RoomConvertersUtils$fromListOfStringsJson(kotlin.collections.List((kotlin.String)))/list">list</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code>
+<p>Converting a list of <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a> to JSON.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="from-timestamp.html">fromTimestamp</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">fromTimestamp</span><span class="symbol">(</span><span class="identifier" id="com.bramdeconinck.technologysalesmantoolkit.utils.RoomConvertersUtils$fromTimestamp(com.google.firebase.Timestamp)/timestamp">timestamp</span><span class="symbol">:</span>&nbsp;<span class="identifier">Timestamp</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html"><span class="identifier">Long</span></a></code>
+<p>Converting a <a href="#">Timestamp</a> to a <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a>.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="json-to-list-of-strings.html">jsonToListOfStrings</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">jsonToListOfStrings</span><span class="symbol">(</span><span class="identifier" id="com.bramdeconinck.technologysalesmantoolkit.utils.RoomConvertersUtils$jsonToListOfStrings(kotlin.String)/json">json</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">&gt;</span></code>
+<p>Converting JSON to a list of <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="to-category.html">toCategory</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">toCategory</span><span class="symbol">(</span><span class="identifier" id="com.bramdeconinck.technologysalesmantoolkit.utils.RoomConvertersUtils$toCategory(kotlin.Int)/value">value</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="../../com.bramdeconinck.technologysalesmantoolkit.models/-category/index.html"><span class="identifier">Category</span></a></code>
+<p>Converting an <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a> to a <a href="../../com.bramdeconinck.technologysalesmantoolkit.models/-category/index.html">Category</a>.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="to-timestamp.html">toTimestamp</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">toTimestamp</span><span class="symbol">(</span><span class="identifier" id="com.bramdeconinck.technologysalesmantoolkit.utils.RoomConvertersUtils$toTimestamp(kotlin.Long)/value">value</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html"><span class="identifier">Long</span></a><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Timestamp</span></code>
+<p>Converting a <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a> to a <a href="#">Timestamp</a>.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

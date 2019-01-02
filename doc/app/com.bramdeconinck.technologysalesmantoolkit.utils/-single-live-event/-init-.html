@@ -1,0 +1,20 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>SingleLiveEvent.<init> - app</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">app</a>&nbsp;/&nbsp;<a href="../index.html">com.bramdeconinck.technologysalesmantoolkit.utils</a>&nbsp;/&nbsp;<a href="index.html">SingleLiveEvent</a>&nbsp;/&nbsp;<a href="./-init-.html">&lt;init&gt;</a><br/>
+<br/>
+<h1>&lt;init&gt;</h1>
+<a name="com.bramdeconinck.technologysalesmantoolkit.utils.SingleLiveEvent$&lt;init&gt;()"></a>
+<code><span class="identifier">SingleLiveEvent</span><span class="symbol">(</span><span class="symbol">)</span></code>
+<p>A lifecycle-aware observable that sends only new updates after subscription, used for events like
+navigation and Snackbar messages.</p>
+<p>This avoids a common problem with events: on configuration change (like rotation) an update
+can be emitted if the observer is active. This LiveData only calls the observable if there's an
+explicit call to setValue() or call().</p>
+<p>Note that only one observer is going to be notified of changes.</p>
+</BODY>
+</HTML>

@@ -1,3 +1,100 @@
 <resources>
+    <!-- App name -->
     <string name="app_name">Technology Salesman Toolkit</string>
+
+    <!-- LoginFragment-->
+    <string name="message_welcome">Welkom, %1$s!</string>
+    <string name="placeholder_email">E-mailadres</string>
+    <string name="placeholder_password">Wachtwoord</string>
+    <string name="description_app_logo">Logo of Technology Salesmen Toolkit</string>
+    <string name="error_email_is_not_verified">Gelieve uw e-mailadres te bevestigen aan de hand van de verzonden e-mail.</string>
+    <string name="error_empty_fields">"Gelieve alle velden in te vullen."</string>
+
+    <!-- RegistrationFragment -->
+    <string name="placeholder_firstname">Voornaam</string>
+    <string name="placeholder_lastname">Familienaam</string>
+    <string name="placeholder_repeatpassword">Herhaal wachtwoord</string>
+    <string name="message_account_created">Uw account werd succesvol aangemaakt!</string>
+    <string name="error_account_not_created">Er is iets fout gelopen tijdens het aanmaken van uw account. Gelieve het opnieuw te proberen.</string>
+    <string name="error_invalid_email">Gelieve een geldig e-mailadres in te voeren.</string>
+    <string name="error_invalid_password">Gelieve een wachtwoord van meer dan 6 karakters in te voeren.</string>
+    <string name="error_passwords_dont_match">De twee ingevoerde wachtwoorden komen niet overeen.</string>
+
+    <!-- ServiceListFragment -->
+    <string name="search_hint">Zoek hier…</string>
+    <string name="title_action_filter_everything">Toon alles</string>
+    <string name="title_action_filter_windows">Filter op Windows</string>
+    <string name="title_action_filter_android">Filter op Android</string>
+    <string name="title_action_filter_apple">Filter op Apple</string>
+    <string name="title_action_filter_other">Toon alle andere</string>
+
+    <!-- ServiceListItem -->
+    <string name="description_service_image">Afbeelding van een dienst</string>
+
+    <!-- Firebase errors  -->
+    <string name="sign_in_error">Er is een fout opgetreden tijdens het aanmelden. Gelieve het opnieuw te proberen.</string>
+    <string name="fetching_data_error">Er is een fout opgetreden tijdens het ophalen van de gegevens.</string>
+    <string name="fetching_services_error">Er is een fout opgetreden tijdens het ophalen van de diensten.</string>
+    <string name="fetching_instructions_error">Er is een fout opgetreden tijdens het ophalen van de instructies.</string>
+
+    <!-- Titles of certain fragments for the action bar and bottom navigation bar -->
+    <string name="title_service_list_fragment">Diensten</string>
+    <string name="title_profile_fragment">Profiel</string>
+    <string name="title_settings_fragment">Instellingen</string>
+
+    <!-- SettingsFragment -->
+    <string name="settings_website">Bezoek de website</string>
+    <string name="settings_darkmode">Donkere modus</string>
+    <string name="settings_privacypolicy">Bekijk het privacybeleid</string>
+    <string name="settings_suggestion">Verstuur een suggestie</string>
+    <string name="settings_signout">Meld af</string>
+    <string name="title_send_suggestion">Verstuur een suggestie</string>
+    <string name="title_sign_out">Afmelden</string>
+    <string name="message_send_suggestion">Vul hieronder uw suggestie in en druk op de knop \'Verzend\'.</string>
+    <string name="message_sign_out">Bent u zeker dat u zich wilt afmelden?</string>
+    <string name="send_suggestion_succes">Bedankt voor het verzenden van uw suggestie!</string>
+    <string name="send_suggestion_error">Er is iets fout gegaan tijdens het versturen van uw suggestie.</string>
+    <string name="send_suggestion_empty_error">Een lege suggestie kan niet worden verstuurd.</string>
+    <string name="send_suggestion_hint">Typ hier uw suggestie…</string>
+
+    <!-- ProfileFragment -->
+    <string name="title_action_edit_profile">Wijzig profiel</string>
+    <string name="title_action_stop_editing_profile">Stop met wijzigen profiel</string>
+    <string name="placeholder_profile_fullname">Andy Droidon</string>
+    <string name="description_profile_picture">Profielfoto van de gebruiker</string>
+    <string name="title_change_password">Wachtwoord wijzigen</string>
+    <string name="message_change_password">Bent u zeker dat u uw wachtwoord wilt wijzigen? Als u op \'Ja\' drukt, zal er een e-mail verzonden worden waarmee uw wachtwoord opnieuw ingesteld kan worden.</string>
+    <string name="title_change_profile_picture">Profielfoto wijzigen</string>
+    <string name="message_change_profile_picture">Momenteel kan u enkel uw profielfoto wijzigen door aan te melden met uw Google account.</string>
+    <string name="change_password_succes">Er werd een e-mail naar u verzonden waarmee u uw wachtwoord kunt wijzigen.</string>
+    <string name="change_password_failure">Er is een fout opgetreden tijdens het proberen versturen van de e-mail.</string>
+    <string name="title_change_profile">Profiel wijzigen</string>
+    <string name="message_change_profile">Bent u zeker dat u uw profiel wilt wijzigen?</string>
+    <string name="title_change_name">"Naam wijzigen"</string>
+    <string name="message_change_name">Uw naam werd succesvol gewijzigd.</string>
+    <string name="error_change_name">Er is een fout opgetreden tijdens het wijzigen van uw naam.</string>
+    <string name="title_change_email">"E-mailadres wijzigen"</string>
+    <string name="message_change_email">Uw e-mailadres werd succesvol gewijzigd.</string>
+    <string name="error_change_email">Er is een fout opgetreden tijdens het wijzigen van uw e-mailadres.</string>
+
+    <!-- Utils -->
+    <string name="error_no_browser_detected">Er werd geen webbrowser gedetecteerd op uw toestel.</string>
+    <string name="title_privacy_policy_dialog">Privacybeleid</string>
+    <string name="message_privacy_policy_dialog">Door op \'Ja\' te drukken, gaat u akkoord met het privacybeleid en zal uw account aangemaakt worden. Er zal een bevestigingsmail naar uw e-mailadres verzonden worden.</string>
+    <string name="description_service_instruction_image">Afbeelding van de huidige instructie</string>
+
+    <!-- Labels -->
+    <string name="label_change_password">Wachtwoord wijzigen? Klik hier!</string>
+    <string name="label_copyright">Copyright © 2018 | Bram De Coninck</string>
+    <string name="label_go_to_sign_in">Heb je al een account? Klik hier!</string>
+    <string name="label_go_to_registration">Heb je nog geen account? Klik hier!</string>
+
+    <!-- Dialogs -->
+    <string name="dialog_yes">Ja</string>
+    <string name="dialog_no">Nee</string>
+    <string name="dialog_cancel">Annuleren</string>
+    <string name="dialog_okay">Oké</string>
+    <string name="dialog_send">Verzend</string>
+    <string name="dialog_privacy_policy">Bekijk privacybeleid</string>
+
 </resources>

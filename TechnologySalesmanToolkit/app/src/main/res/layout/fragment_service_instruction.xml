@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorInstructionBackground"
+    tools:context=".fragments.ServiceInstructionFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:ignore="UselessParent">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.support.constraint.Guideline
+                android:id="@+id/gl_service_instruction_5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.05"/>
+
+            <android.support.constraint.Guideline
+                android:id="@+id/gl_service_instruction_95"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.95"/>
+
+            <ImageView
+                android:id="@+id/iv_service_instruction_image"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:contentDescription="@string/description_service_instruction_image"
+                android:scaleType="centerCrop"
+                app:layout_constraintDimensionRatio="WH,16:9"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <TextView
+                android:id="@+id/tv_service_instruction_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:gravity="center"
+                android:textSize="22sp"
+                android:textColor="@color/colorServiceTitle"
+                app:layout_constraintEnd_toEndOf="@+id/gl_service_instruction_95"
+                app:layout_constraintStart_toStartOf="@+id/gl_service_instruction_5"
+                app:layout_constraintTop_toBottomOf="@+id/iv_service_instruction_image" />
+
+            <TextView
+                android:id="@+id/tv_service_instruction_description"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="8dp"
+                android:textColor="@color/colorServiceTitle"
+                app:layout_constraintEnd_toEndOf="@+id/gl_service_instruction_95"
+                app:layout_constraintStart_toStartOf="@+id/gl_service_instruction_5"
+                app:layout_constraintTop_toBottomOf="@+id/tv_service_instruction_title" />
+
+            <TextView
+                android:id="@+id/tv_service_instruction_content"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="8dp"
+                app:layout_constraintEnd_toEndOf="@+id/gl_service_instruction_95"
+                app:layout_constraintStart_toStartOf="@+id/gl_service_instruction_5"
+                app:layout_constraintTop_toBottomOf="@+id/tv_service_instruction_description" />
+
+        </android.support.constraint.ConstraintLayout>
+
+    </ScrollView>
+
+</FrameLayout>

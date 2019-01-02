@@ -1,0 +1,94 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>FirebaseUtils - app</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">app</a>&nbsp;/&nbsp;<a href="../index.html">com.bramdeconinck.technologysalesmantoolkit.utils</a>&nbsp;/&nbsp;<a href="./index.html">FirebaseUtils</a><br/>
+<br/>
+<h1>FirebaseUtils</h1>
+<code><span class="keyword">object </span><span class="identifier">FirebaseUtils</span></code>
+<p><a href="./index.html">FirebaseUtils</a> contains all the Firebase utilities.</p>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="firebase-auth.html">firebaseAuth</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">firebaseAuth</span><span class="symbol">: </span><span class="identifier">FirebaseAuth</span></code>
+<p><a href="#">FirebaseAuth</a> instance and the current <a href="#">FirebaseUser</a>.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="firebase-user.html">firebaseUser</a></p>
+</td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">firebaseUser</span><span class="symbol">: </span><span class="identifier">FirebaseUser</span><span class="symbol">?</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="create-profile-updates.html">createProfileUpdates</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">createProfileUpdates</span><span class="symbol">(</span><span class="identifier" id="com.bramdeconinck.technologysalesmantoolkit.utils.FirebaseUtils$createProfileUpdates(kotlin.String, kotlin.String)/firstname">firstname</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="com.bramdeconinck.technologysalesmantoolkit.utils.FirebaseUtils$createProfileUpdates(kotlin.String, kotlin.String)/familyname">familyname</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">UserProfileChangeRequest</span></code>
+<p>Create a <a href="#">UserProfileChangeRequest</a> object to update the profile of the current <a href="#">FirebaseUser</a>.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="create-suggestion-data.html">createSuggestionData</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">createSuggestionData</span><span class="symbol">(</span><span class="identifier" id="com.bramdeconinck.technologysalesmantoolkit.utils.FirebaseUtils$createSuggestionData(kotlin.String)/suggestion">suggestion</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-hash-map/index.html"><span class="identifier">HashMap</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">,</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span></code>
+<p>Creating suggestion data in a format that can be used to post a Suggestion object to the Firestore.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="transform-category-to-int.html">transformCategoryToInt</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">transformCategoryToInt</span><span class="symbol">(</span><span class="identifier" id="com.bramdeconinck.technologysalesmantoolkit.utils.FirebaseUtils$transformCategoryToInt(com.bramdeconinck.technologysalesmantoolkit.models.Category)/c">c</span><span class="symbol">:</span>&nbsp;<a href="../../com.bramdeconinck.technologysalesmantoolkit.models/-category/index.html"><span class="identifier">Category</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code>
+<p>Transforms a category enum to an integer for storing in the local database.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="transform-int-to-category.html">transformIntToCategory</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">transformIntToCategory</span><span class="symbol">(</span><span class="identifier" id="com.bramdeconinck.technologysalesmantoolkit.utils.FirebaseUtils$transformIntToCategory(kotlin.Int)/i">i</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="../../com.bramdeconinck.technologysalesmantoolkit.models/-category/index.html"><span class="identifier">Category</span></a></code>
+<p>Retrieves the right category of a service based on an integer.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="transform-snapshot-to-s-instruction.html">transformSnapshotToSInstruction</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">transformSnapshotToSInstruction</span><span class="symbol">(</span><span class="identifier" id="com.bramdeconinck.technologysalesmantoolkit.utils.FirebaseUtils$transformSnapshotToSInstruction(com.google.firebase.firestore.QueryDocumentSnapshot)/snapshot">snapshot</span><span class="symbol">:</span>&nbsp;<span class="identifier">QueryDocumentSnapshot</span><span class="symbol">)</span><span class="symbol">: </span><a href="../../com.bramdeconinck.technologysalesmantoolkit.models/-instruction/index.html"><span class="identifier">Instruction</span></a></code>
+<p>Converting the data of a snapshot to an <a href="../../com.bramdeconinck.technologysalesmantoolkit.models/-instruction/index.html">Instruction</a> object.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="transform-snapshot-to-service.html">transformSnapshotToService</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">transformSnapshotToService</span><span class="symbol">(</span><span class="identifier" id="com.bramdeconinck.technologysalesmantoolkit.utils.FirebaseUtils$transformSnapshotToService(com.google.firebase.firestore.QueryDocumentSnapshot)/snapshot">snapshot</span><span class="symbol">:</span>&nbsp;<span class="identifier">QueryDocumentSnapshot</span><span class="symbol">)</span><span class="symbol">: </span><a href="../../com.bramdeconinck.technologysalesmantoolkit.models/-service/index.html"><span class="identifier">Service</span></a></code>
+<p>Converting the data of a snapshot to a <a href="../../com.bramdeconinck.technologysalesmantoolkit.models/-service/index.html">Service</a> object.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>
