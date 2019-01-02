@@ -141,8 +141,6 @@ class ServiceViewModel : InjectedViewModel(), FirebaseServiceCallback, FirebaseI
         firestoreAPI.fetchAllInstructionsFrom(serviceId, this)
     }
 
-    fun clearInstructions() { _instructions.value = mutableListOf() }
-
     fun getInstructionById(instructionId: String) : Instruction { return instructions.value!!.first { it.id == instructionId } }
 
     /**
