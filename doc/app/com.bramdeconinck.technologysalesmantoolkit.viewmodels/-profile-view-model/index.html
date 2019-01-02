@@ -1,0 +1,168 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>ProfileViewModel - app</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">app</a>&nbsp;/&nbsp;<a href="../index.html">com.bramdeconinck.technologysalesmantoolkit.viewmodels</a>&nbsp;/&nbsp;<a href="./index.html">ProfileViewModel</a><br/>
+<br/>
+<h1>ProfileViewModel</h1>
+<code><span class="keyword">class </span><span class="identifier">ProfileViewModel</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="../../com.bramdeconinck.technologysalesmantoolkit.base/-injected-view-model/index.html"><span class="identifier">InjectedViewModel</span></a></code>
+<p>Instance of <a href="../../com.bramdeconinck.technologysalesmantoolkit.base/-injected-view-model/index.html">InjectedViewModel</a> that contains data and functions used in the ProfileFragment.</p>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-init-.html">&lt;init&gt;</a></p>
+</td>
+<td>
+<code><span class="identifier">ProfileViewModel</span><span class="symbol">(</span><span class="symbol">)</span></code>
+<p>Instance of <a href="../../com.bramdeconinck.technologysalesmantoolkit.base/-injected-view-model/index.html">InjectedViewModel</a> that contains data and functions used in the ProfileFragment.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="applied-email-changes.html">appliedEmailChanges</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">appliedEmailChanges</span><span class="symbol">: </span><a href="../../com.bramdeconinck.technologysalesmantoolkit.utils/-single-live-event/index.html"><span class="identifier">SingleLiveEvent</span></a><span class="symbol">&lt;</span><a href="../../com.bramdeconinck.technologysalesmantoolkit.utils/-base-command/index.html"><span class="identifier">BaseCommand</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="applied-name-changes.html">appliedNameChanges</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">appliedNameChanges</span><span class="symbol">: </span><a href="../../com.bramdeconinck.technologysalesmantoolkit.utils/-single-live-event/index.html"><span class="identifier">SingleLiveEvent</span></a><span class="symbol">&lt;</span><a href="../../com.bramdeconinck.technologysalesmantoolkit.utils/-base-command/index.html"><span class="identifier">BaseCommand</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="email.html">email</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">email</span><span class="symbol">: </span><span class="identifier">MutableLiveData</span><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="familyname.html">familyname</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">familyname</span><span class="symbol">: </span><span class="identifier">MutableLiveData</span><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="firstname.html">firstname</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">firstname</span><span class="symbol">: </span><span class="identifier">MutableLiveData</span><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">&gt;</span></code>
+<p>Values for fields of the profile form.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="is-editable.html">isEditable</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">isEditable</span><span class="symbol">: </span><span class="identifier">LiveData</span><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="profile-edit-form-validation.html">profileEditFormValidation</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">profileEditFormValidation</span><span class="symbol">: </span><a href="../../com.bramdeconinck.technologysalesmantoolkit.utils/-single-live-event/index.html"><span class="identifier">SingleLiveEvent</span></a><span class="symbol">&lt;</span><a href="../../com.bramdeconinck.technologysalesmantoolkit.utils/-base-command/index.html"><span class="identifier">BaseCommand</span></a><span class="symbol">&gt;</span></code>
+<p><a href="../../com.bramdeconinck.technologysalesmantoolkit.utils/-single-live-event/index.html">SingleLiveEvent</a> objects used to emit events.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="profile-event-occurred.html">profileEventOccurred</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">profileEventOccurred</span><span class="symbol">: </span><a href="../../com.bramdeconinck.technologysalesmantoolkit.utils/-single-live-event/index.html"><span class="identifier">SingleLiveEvent</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="profile-picture-clicked.html">profilePictureClicked</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">profilePictureClicked</span><span class="symbol">: </span><a href="../../com.bramdeconinck.technologysalesmantoolkit.utils/-single-live-event/index.html"><span class="identifier">SingleLiveEvent</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="reset-password-button-clicked.html">resetPasswordButtonClicked</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">resetPasswordButtonClicked</span><span class="symbol">: </span><a href="../../com.bramdeconinck.technologysalesmantoolkit.utils/-single-live-event/index.html"><span class="identifier">SingleLiveEvent</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="apply-profile-changes.html">applyProfileChanges</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">applyProfileChanges</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Function that applies the profile changes.
+It handles both changes to the name and the email address of the <a href="../../com.bramdeconinck.technologysalesmantoolkit.utils/-firebase-utils/firebase-user.html">firebaseUser</a>.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="change-profile-picture.html">changeProfilePicture</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">changeProfilePicture</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="clear-profile-form.html">clearProfileForm</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">clearProfileForm</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="reset-password.html">resetPassword</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">resetPassword</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="send-reset-password-email.html">sendResetPasswordEmail</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">sendResetPasswordEmail</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Function that sends an e-mail to the <a href="../../com.bramdeconinck.technologysalesmantoolkit.utils/-firebase-utils/firebase-user.html">firebaseUser</a> containing a link to change their password.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="toggle-edit-mode.html">toggleEditMode</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">toggleEditMode</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="validate-profile-form.html">validateProfileForm</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">validateProfileForm</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Function to validate the profile form.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

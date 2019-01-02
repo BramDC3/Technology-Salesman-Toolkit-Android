@@ -1,0 +1,55 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>BaseCommand - app</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">app</a>&nbsp;/&nbsp;<a href="../index.html">com.bramdeconinck.technologysalesmantoolkit.utils</a>&nbsp;/&nbsp;<a href="./index.html">BaseCommand</a><br/>
+<br/>
+<h1>BaseCommand</h1>
+<code><span class="keyword">sealed</span> <span class="keyword">class </span><span class="identifier">BaseCommand</span></code>
+<p><a href="./index.html">BaseCommand</a> is a sealed class used as an inferred type for SingleLiveEvent.
+This is to ensure that a single SingleLiveEvent can emit multiple events happening in one ViewModel.
+More info about sealed classes can be found here: https://kotlinlang.org/docs/reference/sealed-classes.html,
+but in layman's terms, sealed classes are similar to enums and we use it to emit different events happening in one ViewModel.</p>
+<h3>Types</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-error/index.html">Error</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">Error</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">BaseCommand</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="-success/index.html">Success</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">Success</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">BaseCommand</span></a></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Inheritors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-error/index.html">Error</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">Error</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">BaseCommand</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="-success/index.html">Success</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">Success</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">BaseCommand</span></a></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

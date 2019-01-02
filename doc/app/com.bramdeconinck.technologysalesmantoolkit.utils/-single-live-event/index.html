@@ -1,0 +1,62 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>SingleLiveEvent - app</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">app</a>&nbsp;/&nbsp;<a href="../index.html">com.bramdeconinck.technologysalesmantoolkit.utils</a>&nbsp;/&nbsp;<a href="./index.html">SingleLiveEvent</a><br/>
+<br/>
+<h1>SingleLiveEvent</h1>
+<code><span class="keyword">class </span><span class="identifier">SingleLiveEvent</span><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">MutableLiveData</span><span class="symbol">&lt;</span><a href="index.html#T"><span class="identifier">T</span></a><span class="symbol">&gt;</span></code>
+<p>A lifecycle-aware observable that sends only new updates after subscription, used for events like
+navigation and Snackbar messages.</p>
+<p>This avoids a common problem with events: on configuration change (like rotation) an update
+can be emitted if the observer is active. This LiveData only calls the observable if there's an
+explicit call to setValue() or call().</p>
+<p>Note that only one observer is going to be notified of changes.</p>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-init-.html">&lt;init&gt;</a></p>
+</td>
+<td>
+<code><span class="identifier">SingleLiveEvent</span><span class="symbol">(</span><span class="symbol">)</span></code>
+<p>A lifecycle-aware observable that sends only new updates after subscription, used for events like
+navigation and Snackbar messages.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="call.html">call</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">call</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Used for cases where T is Void, to make calls cleaner.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="observe.html">observe</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">observe</span><span class="symbol">(</span><span class="identifier" id="com.bramdeconinck.technologysalesmantoolkit.utils.SingleLiveEvent$observe(android.arch.lifecycle.LifecycleOwner, android.arch.lifecycle.Observer((com.bramdeconinck.technologysalesmantoolkit.utils.SingleLiveEvent.T)))/owner">owner</span><span class="symbol">:</span>&nbsp;<span class="identifier">LifecycleOwner</span><span class="symbol">, </span><span class="identifier" id="com.bramdeconinck.technologysalesmantoolkit.utils.SingleLiveEvent$observe(android.arch.lifecycle.LifecycleOwner, android.arch.lifecycle.Observer((com.bramdeconinck.technologysalesmantoolkit.utils.SingleLiveEvent.T)))/observer">observer</span><span class="symbol">:</span>&nbsp;<span class="identifier">Observer</span><span class="symbol">&lt;</span><a href="index.html#T"><span class="identifier">T</span></a><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="set-value.html">setValue</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">setValue</span><span class="symbol">(</span><span class="identifier" id="com.bramdeconinck.technologysalesmantoolkit.utils.SingleLiveEvent$setValue(com.bramdeconinck.technologysalesmantoolkit.utils.SingleLiveEvent.T)/t">t</span><span class="symbol">:</span>&nbsp;<a href="index.html#T"><span class="identifier">T</span></a><span class="symbol">?</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

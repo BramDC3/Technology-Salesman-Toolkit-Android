@@ -1,0 +1,236 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>ServiceViewModel - app</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">app</a>&nbsp;/&nbsp;<a href="../index.html">com.bramdeconinck.technologysalesmantoolkit.viewmodels</a>&nbsp;/&nbsp;<a href="./index.html">ServiceViewModel</a><br/>
+<br/>
+<h1>ServiceViewModel</h1>
+<code><span class="keyword">class </span><span class="identifier">ServiceViewModel</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="../../com.bramdeconinck.technologysalesmantoolkit.base/-injected-view-model/index.html"><span class="identifier">InjectedViewModel</span></a><span class="symbol">, </span><a href="../../com.bramdeconinck.technologysalesmantoolkit.interfaces/-firebase-service-callback/index.html"><span class="identifier">FirebaseServiceCallback</span></a><span class="symbol">, </span><a href="../../com.bramdeconinck.technologysalesmantoolkit.interfaces/-firebase-instruction-callback/index.html"><span class="identifier">FirebaseInstructionCallback</span></a></code>
+<p>Instance of <a href="../../com.bramdeconinck.technologysalesmantoolkit.base/-injected-view-model/index.html">InjectedViewModel</a> that contains data and functions used in the
+ServiceListFragment, ServiceDetailFragment and ServiceInstructionFragment.</p>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-init-.html">&lt;init&gt;</a></p>
+</td>
+<td>
+<code><span class="identifier">ServiceViewModel</span><span class="symbol">(</span><span class="symbol">)</span></code>
+<p>Instance of <a href="../../com.bramdeconinck.technologysalesmantoolkit.base/-injected-view-model/index.html">InjectedViewModel</a> that contains data and functions used in the
+ServiceListFragment, ServiceDetailFragment and ServiceInstructionFragment.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="firestore-a-p-i.html">firestoreAPI</a></p>
+</td>
+<td>
+<code><span class="keyword">lateinit</span> <span class="keyword">var </span><span class="identifier">firestoreAPI</span><span class="symbol">: </span><a href="../../com.bramdeconinck.technologysalesmantoolkit.network/-firestore-a-p-i/index.html"><span class="identifier">FirestoreAPI</span></a></code>
+<p>Injection of the <a href="firestore-a-p-i.html">firestoreAPI</a>, <a href="service-repository.html">serviceRepository</a> and <a href="instruction-repository.html">instructionRepository</a>.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="instruction-repository.html">instructionRepository</a></p>
+</td>
+<td>
+<code><span class="keyword">lateinit</span> <span class="keyword">var </span><span class="identifier">instructionRepository</span><span class="symbol">: </span><a href="../../com.bramdeconinck.technologysalesmantoolkit.repositories/-instruction-repository/index.html"><span class="identifier">InstructionRepository</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="instructions.html">instructions</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">instructions</span><span class="symbol">: </span><span class="identifier">LiveData</span><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><a href="../../com.bramdeconinck.technologysalesmantoolkit.models/-instruction/index.html"><span class="identifier">Instruction</span></a><span class="symbol">&gt;</span><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="instructions-error-occurred.html">instructionsErrorOccurred</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">instructionsErrorOccurred</span><span class="symbol">: </span><a href="../../com.bramdeconinck.technologysalesmantoolkit.utils/-single-live-event/index.html"><span class="identifier">SingleLiveEvent</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="is-loading.html">isLoading</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">isLoading</span><span class="symbol">: </span><span class="identifier">LiveData</span><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="room-instructions.html">roomInstructions</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">roomInstructions</span><span class="symbol">: </span><span class="identifier">LiveData</span><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><a href="../../com.bramdeconinck.technologysalesmantoolkit.models/-instruction/index.html"><span class="identifier">Instruction</span></a><span class="symbol">&gt;</span><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="room-services.html">roomServices</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">roomServices</span><span class="symbol">: </span><span class="identifier">LiveData</span><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><a href="../../com.bramdeconinck.technologysalesmantoolkit.models/-service/index.html"><span class="identifier">Service</span></a><span class="symbol">&gt;</span><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="selected-service.html">selectedService</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">selectedService</span><span class="symbol">: </span><span class="identifier">MutableLiveData</span><span class="symbol">&lt;</span><a href="../../com.bramdeconinck.technologysalesmantoolkit.models/-service/index.html"><span class="identifier">Service</span></a><span class="symbol">&gt;</span></code>
+<p>The selected service for the current ServiceDetailFragment.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="service-repository.html">serviceRepository</a></p>
+</td>
+<td>
+<code><span class="keyword">lateinit</span> <span class="keyword">var </span><span class="identifier">serviceRepository</span><span class="symbol">: </span><a href="../../com.bramdeconinck.technologysalesmantoolkit.repositories/-service-repository/index.html"><span class="identifier">ServiceRepository</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="services.html">services</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">services</span><span class="symbol">: </span><span class="identifier">LiveData</span><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><a href="../../com.bramdeconinck.technologysalesmantoolkit.models/-service/index.html"><span class="identifier">Service</span></a><span class="symbol">&gt;</span><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="services-error-occurred.html">servicesErrorOccurred</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">servicesErrorOccurred</span><span class="symbol">: </span><a href="../../com.bramdeconinck.technologysalesmantoolkit.utils/-single-live-event/index.html"><span class="identifier">SingleLiveEvent</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span></code>
+<p><a href="../../com.bramdeconinck.technologysalesmantoolkit.utils/-single-live-event/index.html">SingleLiveEvent</a> objects used to emit events.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="apply-category-query.html">applyCategoryQuery</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">applyCategoryQuery</span><span class="symbol">(</span><span class="identifier" id="com.bramdeconinck.technologysalesmantoolkit.viewmodels.ServiceViewModel$applyCategoryQuery(com.bramdeconinck.technologysalesmantoolkit.models.Category)/category">category</span><span class="symbol">:</span>&nbsp;<a href="../../com.bramdeconinck.technologysalesmantoolkit.models/-category/index.html"><span class="identifier">Category</span></a><span class="symbol">?</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="apply-search-query.html">applySearchQuery</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">applySearchQuery</span><span class="symbol">(</span><span class="identifier" id="com.bramdeconinck.technologysalesmantoolkit.viewmodels.ServiceViewModel$applySearchQuery(kotlin.String)/query">query</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="clear-filters.html">clearFilters</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">clearFilters</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="clear-instructions.html">clearInstructions</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">clearInstructions</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="fetch-instructions.html">fetchInstructions</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">fetchInstructions</span><span class="symbol">(</span><span class="identifier" id="com.bramdeconinck.technologysalesmantoolkit.viewmodels.ServiceViewModel$fetchInstructions(kotlin.String)/serviceId">serviceId</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="fetch-services.html">fetchServices</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">fetchServices</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="get-instruction-by-id.html">getInstructionById</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">getInstructionById</span><span class="symbol">(</span><span class="identifier" id="com.bramdeconinck.technologysalesmantoolkit.viewmodels.ServiceViewModel$getInstructionById(kotlin.String)/instructionId">instructionId</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="../../com.bramdeconinck.technologysalesmantoolkit.models/-instruction/index.html"><span class="identifier">Instruction</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="hide-progress.html">hideProgress</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">hideProgress</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="on-database-instructions-ready.html">onDatabaseInstructionsReady</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">onDatabaseInstructionsReady</span><span class="symbol">(</span><span class="identifier" id="com.bramdeconinck.technologysalesmantoolkit.viewmodels.ServiceViewModel$onDatabaseInstructionsReady(kotlin.String)/id">id</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Function that gets called after the instructions from the database are loaded.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="on-database-services-ready.html">onDatabaseServicesReady</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">onDatabaseServicesReady</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Function that gets called after the services from the database are loaded.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="on-instructions-call-back.html">onInstructionsCallBack</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">onInstructionsCallBack</span><span class="symbol">(</span><span class="identifier" id="com.bramdeconinck.technologysalesmantoolkit.viewmodels.ServiceViewModel$onInstructionsCallBack(kotlin.collections.List((kotlin.Any)))/list">list</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Function that updates the list of instructions after fetching them and also inserts them into the local database.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="on-services-call-back.html">onServicesCallBack</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">onServicesCallBack</span><span class="symbol">(</span><span class="identifier" id="com.bramdeconinck.technologysalesmantoolkit.viewmodels.ServiceViewModel$onServicesCallBack(kotlin.collections.List((kotlin.Any)))/list">list</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Function that updates the list of services after fetching them and also inserts them into the local database.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="show-instructions-message.html">showInstructionsMessage</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">showInstructionsMessage</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="show-progress.html">showProgress</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">showProgress</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="show-services-message.html">showServicesMessage</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">showServicesMessage</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>
