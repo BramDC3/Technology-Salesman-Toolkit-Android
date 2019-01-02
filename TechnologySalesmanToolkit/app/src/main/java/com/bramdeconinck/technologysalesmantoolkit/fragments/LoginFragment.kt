@@ -24,14 +24,23 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
 
+/**
+ * [LoginFragment] is a [Fragment] where users can sign in.
+ */
 class LoginFragment : Fragment(), ToastMaker {
 
+    /**
+     * [loginViewModel] contains all data and functions that have to do with logging in.
+     * [binding] is used for data binding.
+     * [gso] and [googleSignInClient] are used for Google authentication.
+     */
     private lateinit var loginViewModel: LoginViewModel
     private lateinit var binding: FragmentLoginBinding
     private lateinit var gso: GoogleSignInOptions
     private lateinit var googleSignInClient: GoogleSignInClient
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_login, container, false)
 
         loginViewModel =  ViewModelProviders.of(activity!!).get(LoginViewModel::class.java)
@@ -62,6 +71,9 @@ class LoginFragment : Fragment(), ToastMaker {
         loginViewModel.clearLoginForm()
     }
 
+    /**
+     * Function to subscribe to the observables of the [LoginViewModel].
+     */
     private fun subscribeToObservables() {
         loginViewModel.navigateToServiceList.observe(this, Observer { goToServiceList()})
 
@@ -72,11 +84,17 @@ class LoginFragment : Fragment(), ToastMaker {
         loginViewModel.loginErrorOccurred.observe(this, Observer { showToast(it!!) })
     }
 
+    /**
+     * Function to open an intent for authenticating with a Google account.
+     */
     private fun signInWithGoogle() {
         val signInIntent: Intent = googleSignInClient.signInIntent
         startActivityForResult(signInIntent, GOOGLE_SIGN_IN_REQUEST_CODE)
     }
 
+    /**
+     * Function that handles the result of the intent of the function above.
+     */
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == GOOGLE_SIGN_IN_REQUEST_CODE) {

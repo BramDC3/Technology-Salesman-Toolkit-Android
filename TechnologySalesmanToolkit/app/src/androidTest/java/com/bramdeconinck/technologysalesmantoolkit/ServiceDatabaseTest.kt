@@ -6,6 +6,7 @@ import android.support.test.runner.AndroidJUnit4
 import com.bramdeconinck.technologysalesmantoolkit.TestUtils.getValue
 import com.bramdeconinck.technologysalesmantoolkit.database.daos.ServiceDao
 import com.bramdeconinck.technologysalesmantoolkit.database.ServiceDatabase
+import com.bramdeconinck.technologysalesmantoolkit.database.daos.InstructionDao
 import com.bramdeconinck.technologysalesmantoolkit.models.Category
 import com.bramdeconinck.technologysalesmantoolkit.models.Instruction
 import com.bramdeconinck.technologysalesmantoolkit.models.Service
@@ -21,6 +22,7 @@ class ServiceDatabaseTest {
 
     private lateinit var serviceDatabase: ServiceDatabase
     private lateinit var serviceDao: ServiceDao
+    private lateinit var instructionDao: InstructionDao
 
     @Before
     fun clearDatabase() {
@@ -29,6 +31,7 @@ class ServiceDatabaseTest {
                 ServiceDatabase::class.java).build()
 
         serviceDao = serviceDatabase.serviceDao()
+        instructionDao = serviceDatabase.instructionDao()
     }
 
     @Test
@@ -53,25 +56,25 @@ class ServiceDatabaseTest {
 
     @Test
     fun insertInstructions_allInserted() {
-        serviceDao.insertInstruction(Instruction(id = "ONE", index = 0, title = "Eerste instructie", serviceId = "UNO", image = "url1", description = "Beschrijving van eerste instructie", content = listOf("step1", "step2", "step3")))
-        serviceDao.insertInstruction(Instruction(id = "TWO", index = 0, title = "Tweede instructie", serviceId = "DOS", image = "url2", description = "Beschrijving van tweede instructie", content = listOf("step1", "step2", "step3")))
-        serviceDao.insertInstruction(Instruction(id = "THREE", index = 0, title = "Derde instructie", serviceId = "TRES", image = "url3", description = "Beschrijving van derde instructie", content = listOf("step1", "step2", "step3")))
+        instructionDao.insertInstruction(Instruction(id = "ONE", index = 0, title = "Eerste instructie", serviceId = "UNO", image = "url1", description = "Beschrijving van eerste instructie", content = listOf("step1", "step2", "step3")))
+        instructionDao.insertInstruction(Instruction(id = "TWO", index = 0, title = "Tweede instructie", serviceId = "DOS", image = "url2", description = "Beschrijving van tweede instructie", content = listOf("step1", "step2", "step3")))
+        instructionDao.insertInstruction(Instruction(id = "THREE", index = 0, title = "Derde instructie", serviceId = "TRES", image = "url3", description = "Beschrijving van derde instructie", content = listOf("step1", "step2", "step3")))
 
-        assertEquals(3, getValue(serviceDao.getAllInstructions()).size)
+        assertEquals(3, getValue(instructionDao.getAllInstructions()).size)
     }
 
     @Test
     fun deleteInstructionsByServiceId_InstructionsWithOtherServiceIdsRemain() {
         val serviceId = "UNO"
 
-        serviceDao.insertInstruction(Instruction(id = "ONE", index = 0, title = "Eerste instructie", serviceId = "UNO", image = "url1", description = "Beschrijving van eerste instructie", content = listOf("step1", "step2", "step3")))
-        serviceDao.insertInstruction(Instruction(id = "TWO", index = 0, title = "Tweede instructie", serviceId = "DOS", image = "url2", description = "Beschrijving van tweede instructie", content = listOf("step1", "step2", "step3")))
-        serviceDao.insertInstruction(Instruction(id = "THREE", index = 0, title = "Derde instructie", serviceId = "TRES", image = "url3", description = "Beschrijving van derde instructie", content = listOf("step1", "step2", "step3")))
+        instructionDao.insertInstruction(Instruction(id = "ONE", index = 0, title = "Eerste instructie", serviceId = "UNO", image = "url1", description = "Beschrijving van eerste instructie", content = listOf("step1", "step2", "step3")))
+        instructionDao.insertInstruction(Instruction(id = "TWO", index = 0, title = "Tweede instructie", serviceId = "DOS", image = "url2", description = "Beschrijving van tweede instructie", content = listOf("step1", "step2", "step3")))
+        instructionDao.insertInstruction(Instruction(id = "THREE", index = 0, title = "Derde instructie", serviceId = "TRES", image = "url3", description = "Beschrijving van derde instructie", content = listOf("step1", "step2", "step3")))
 
-        serviceDao.deleteInstructionsByServiceId(serviceId)
+        instructionDao.deleteInstructionsByServiceId(serviceId)
 
-        assertEquals(2, getValue(serviceDao.getAllInstructions()).size)
+        assertEquals(2, getValue(instructionDao.getAllInstructions()).size)
 
-        assertFalse(getValue(serviceDao.getAllInstructions()).any { it.serviceId == serviceId })
+        assertFalse(getValue(instructionDao.getAllInstructions()).any { it.serviceId == serviceId })
     }
 }

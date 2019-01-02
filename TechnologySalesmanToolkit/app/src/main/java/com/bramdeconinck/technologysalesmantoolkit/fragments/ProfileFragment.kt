@@ -17,13 +17,22 @@ import com.bramdeconinck.technologysalesmantoolkit.utils.MessageUtils.showBasicD
 import com.bramdeconinck.technologysalesmantoolkit.utils.MessageUtils.showThreeButtonsPositiveFunctionDialog
 import com.bramdeconinck.technologysalesmantoolkit.utils.StringUtils.getFamilyname
 import com.bramdeconinck.technologysalesmantoolkit.utils.StringUtils.getFirstname
+import com.bramdeconinck.technologysalesmantoolkit.viewmodels.LoginViewModel
 import com.bramdeconinck.technologysalesmantoolkit.viewmodels.ProfileViewModel
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import kotlinx.android.synthetic.main.fragment_profile.*
 
+/**
+ * [ProfileFragment] is a [Fragment] where users view their user details and change them.
+ */
 class ProfileFragment : Fragment(), ToastMaker {
 
+    /**
+     * [profileViewModel] contains all data and functions that have to do with the profile of the [firebaseUser].
+     * [binding] is used for data binding.
+     * [menuItem] is used to change the icon and and tooltip of the action bar icon.
+     */
     private lateinit var profileViewModel: ProfileViewModel
     private lateinit var binding: FragmentProfileBinding
     private lateinit var menuItem: MenuItem
@@ -62,8 +71,10 @@ class ProfileFragment : Fragment(), ToastMaker {
         inflater?.inflate(R.menu.menu_edit_profile, menu)
         menuItem = menu!!.findItem(R.id.action_edit_profile)
 
-        // Normally this function would have been used in onStart,
-        // but we need the menuItem to be initialized first
+        /**
+         * Normally this function would have been used in onStart,
+         * but we need the menuItem to be initialized first.
+         */
         subscribeToObservables()
 
         super.onCreateOptionsMenu(menu, inflater)
@@ -79,7 +90,9 @@ class ProfileFragment : Fragment(), ToastMaker {
         })
     }
 
-    // Function to update the UI with data of the current FirebaseUser
+    /**
+     * Function to update the UI with data of the current [firebaseUser].
+     */
     private fun updateUI() {
         Glide.with(this)
                 .load(firebaseUser!!.photoUrl ?: R.drawable.default_profile_image)
@@ -92,6 +105,9 @@ class ProfileFragment : Fragment(), ToastMaker {
         et_profile_email.setText(firebaseUser!!.email)
     }
 
+    /**
+     * Function to subscribe to the observables of the [ProfileViewModel].
+     */
     private fun subscribeToObservables() {
         profileViewModel.isEditable.observe(this, Observer { toggleEditMode(it!!) })
 
@@ -123,6 +139,10 @@ class ProfileFragment : Fragment(), ToastMaker {
         profileViewModel.profileEventOccurred.observe(this, Observer { showToast(it!!) })
     }
 
+    /**
+     * Function to change the icon and tooltip of the [menuItem],
+     * based on whether the [ProfileFragment] is in editing mode or not.
+     */
     private fun toggleEditMode(isEditable: Boolean) {
         if (isEditable) {
             menuItem.icon = context!!.getDrawable(R.drawable.ic_close_black_24dp)

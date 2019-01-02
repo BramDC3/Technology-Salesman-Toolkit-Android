@@ -1,5 +1,6 @@
 package com.bramdeconinck.technologysalesmantoolkit.adapters
 
+import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModelProviders
 import android.support.v4.app.FragmentStatePagerAdapter
@@ -24,7 +25,7 @@ import kotlinx.android.synthetic.main.service_list_content.view.*
  */
 class ServiceAdapter(
         private val fragment: ServiceListFragment,
-        private val services: MutableLiveData<List<Service>>,
+        private val services: LiveData<List<Service>>,
         private val twoPane: Boolean) :
         RecyclerView.Adapter<ServiceAdapter.ViewHolder>() {
 

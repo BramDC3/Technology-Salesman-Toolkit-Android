@@ -14,10 +14,18 @@ import com.bramdeconinck.technologysalesmantoolkit.databinding.FragmentRegistrat
 import com.bramdeconinck.technologysalesmantoolkit.interfaces.ToastMaker
 import com.bramdeconinck.technologysalesmantoolkit.utils.MessageUtils.makeToast
 import com.bramdeconinck.technologysalesmantoolkit.utils.MessageUtils.showPrivacyPolicyDialog
+import com.bramdeconinck.technologysalesmantoolkit.viewmodels.LoginViewModel
 import com.bramdeconinck.technologysalesmantoolkit.viewmodels.RegistrationViewModel
 
+/**
+ * [RegistrationFragment] is a [Fragment] where users can create an account.
+ */
 class RegistrationFragment : Fragment(), ToastMaker {
 
+    /**
+     * [registrationViewModel] contains all data and functions that have to do with creating an account.
+     * [binding] is used for data binding.
+     */
     private lateinit var registrationViewModel: RegistrationViewModel
     private lateinit var binding: FragmentRegistrationBinding
 
@@ -45,6 +53,9 @@ class RegistrationFragment : Fragment(), ToastMaker {
         registrationViewModel.clearRegistrationForm()
     }
 
+    /**
+     * Function to subscribe to the observables of the [RegistrationViewModel].
+     */
     private fun subscribeToObservables() {
         registrationViewModel.goToLoginClicked.observe(this, Observer { findNavController().popBackStack() })
 

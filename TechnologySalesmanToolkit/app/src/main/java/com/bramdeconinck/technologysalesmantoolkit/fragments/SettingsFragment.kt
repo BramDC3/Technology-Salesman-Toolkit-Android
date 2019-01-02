@@ -16,6 +16,8 @@ import androidx.navigation.fragment.findNavController
 import com.bramdeconinck.technologysalesmantoolkit.databinding.FragmentSettingsBinding
 import com.bramdeconinck.technologysalesmantoolkit.utils.BaseCommand
 import com.bramdeconinck.technologysalesmantoolkit.interfaces.ToastMaker
+import com.bramdeconinck.technologysalesmantoolkit.models.Instruction
+import com.bramdeconinck.technologysalesmantoolkit.models.Service
 import com.bramdeconinck.technologysalesmantoolkit.utils.PRIVACY_POLICY
 import com.bramdeconinck.technologysalesmantoolkit.utils.TEST_WEBSITE
 import com.bramdeconinck.technologysalesmantoolkit.utils.MessageUtils.makeToast
@@ -23,10 +25,18 @@ import com.bramdeconinck.technologysalesmantoolkit.utils.MessageUtils.showMakeSu
 import com.bramdeconinck.technologysalesmantoolkit.utils.MessageUtils.showThreeButtonsPositiveFunctionDialog
 import com.bramdeconinck.technologysalesmantoolkit.utils.WebpageUtils.openWebPage
 import com.bramdeconinck.technologysalesmantoolkit.utils.SHARED_PREFERENCES_KEY_THEME
+import com.bramdeconinck.technologysalesmantoolkit.viewmodels.ServiceViewModel
 import com.bramdeconinck.technologysalesmantoolkit.viewmodels.SettingsViewModel
 
+/**
+ * [SettingsFragment] is a [Fragment] where users can find information about the app, sign out and change the theme of the app.
+ */
 class SettingsFragment : Fragment(), ToastMaker {
 
+    /**
+     * [settingsViewModel] contains all data and functions that have to do with the settings.
+     * [binding] is used for data binding.
+     */
     private lateinit var settingsViewModel: SettingsViewModel
     private lateinit var binding: FragmentSettingsBinding
 
@@ -48,6 +58,9 @@ class SettingsFragment : Fragment(), ToastMaker {
         subscribeToObservables()
     }
 
+    /**
+     * Function to subscribe to the observables of the [SettingsViewModel].
+     */
     private fun subscribeToObservables() {
         settingsViewModel.visitWebsiteClicked.observe(this, Observer { openWebPage(context!!, TEST_WEBSITE) })
 
@@ -94,6 +107,9 @@ class SettingsFragment : Fragment(), ToastMaker {
         settingsViewModel.signOutTriggered.observe(this, Observer { findNavController().navigate(R.id.signOutFromSettings) })
     }
 
+    /**
+     * Function to store the selected theme in the Shared Preferences.
+     */
     private fun saveSelectedTheme(theme: Int) {
         val sharedPref = PreferenceManager.getDefaultSharedPreferences(context)
         sharedPref.edit().putInt(SHARED_PREFERENCES_KEY_THEME, theme).apply()

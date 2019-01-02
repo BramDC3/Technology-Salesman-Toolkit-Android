@@ -1,5 +1,6 @@
 package com.bramdeconinck.technologysalesmantoolkit.adapters
 
+import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -13,7 +14,7 @@ import com.bramdeconinck.technologysalesmantoolkit.utils.INSTRUCTION_ITEM
  * [InstructionAdapter] is a [FragmentStatePagerAdapter] used for the ViewPager of the ServiceDetailFragment.
  */
 class InstructionAdapter(
-        private val instructions: MutableLiveData<List<Instruction>>,
+        private val instructions: LiveData<List<Instruction>>,
         fragmentManager: FragmentManager) :
         FragmentStatePagerAdapter(fragmentManager) {
 

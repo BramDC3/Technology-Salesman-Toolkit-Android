@@ -1,5 +1,6 @@
 package com.bramdeconinck.technologysalesmantoolkit.viewmodels
 
+import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.content.SharedPreferences
 import com.bramdeconinck.technologysalesmantoolkit.R
@@ -13,38 +14,46 @@ import com.bramdeconinck.technologysalesmantoolkit.utils.ValidationUtils.everyFi
 import com.bramdeconinck.technologysalesmantoolkit.utils.SHARED_PREFERENCES_KEY_THEME
 import javax.inject.Inject
 
+/**
+ * Instance of [InjectedViewModel] that contains data and functions used in the SettingsFragment.
+ */
 class SettingsViewModel : InjectedViewModel(), FirebaseSuggestionCallback {
 
+    /**
+     * Injection of the [firestoreAPI] and [sharedPreferences].
+     */
     @Inject
     lateinit var firestoreAPI: FirestoreAPI
 
     @Inject
     lateinit var sharedPreferences: SharedPreferences
 
-    val isDarkModeEnabled = MutableLiveData<Boolean>()
+    /**
+     * Value that indicates whether dark mode is enabled or not.
+     */
+    private val _isDarkModeEnabled = MutableLiveData<Boolean>()
+    val isDarkModeEnabled: LiveData<Boolean>
+        get() = _isDarkModeEnabled
 
+    /**
+     * [SingleLiveEvent] objects used to emit events.
+     */
     val visitWebsiteClicked = SingleLiveEvent<Any>()
-
     val visitPrivacyPolicyClicked = SingleLiveEvent<Any>()
-
     val makeSuggestionClicked = SingleLiveEvent<Any>()
-
     val showSignOutDialogClicked = SingleLiveEvent<Any>()
-
     val emptySuggestion = SingleLiveEvent<Any>()
-
     val suggestionCallback = SingleLiveEvent<BaseCommand>()
-
     val signOutTriggered = SingleLiveEvent<Any>()
 
     init {
         val theme = sharedPreferences.getInt(SHARED_PREFERENCES_KEY_THEME, 1)
-        isDarkModeEnabled.value = theme == 2
+        _isDarkModeEnabled.value = theme == 2
     }
 
     fun visitWebsite() { visitWebsiteClicked.call() }
 
-    fun toggleDarkMode() { isDarkModeEnabled.value = !isDarkModeEnabled.value!! }
+    fun toggleDarkMode() { _isDarkModeEnabled.value = !_isDarkModeEnabled.value!! }
 
     fun visitPrivacyPolicy() { visitPrivacyPolicyClicked.call() }
 
@@ -52,8 +61,14 @@ class SettingsViewModel : InjectedViewModel(), FirebaseSuggestionCallback {
 
     fun showSignOutDialog() { showSignOutDialogClicked.call() }
 
+    /**
+     * Function that is gives as a parameter in a dialog that retrieves a String.
+     */
     fun getSuggestion() = { suggestion: String -> validateSuggestion(suggestion)}
 
+    /**
+     * Function to validate a suggestion.
+     */
     private fun validateSuggestion(suggestion: String) {
         if (everyFieldHasValue(listOf(suggestion))) firestoreAPI.postSuggestion(this, suggestion)
         else emptySuggestion.call()
