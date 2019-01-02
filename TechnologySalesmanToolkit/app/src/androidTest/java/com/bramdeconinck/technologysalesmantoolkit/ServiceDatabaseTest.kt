@@ -17,6 +17,9 @@ import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 
+/**
+ * [ServiceDatabaseTest] contains the tests for the local Room database.
+ */
 @RunWith(AndroidJUnit4::class)
 class ServiceDatabaseTest {
 
