@@ -59,6 +59,8 @@ class ServiceListFragment : Fragment(), ToastMaker {
     override fun onStart() {
         super.onStart()
 
+        serviceViewModel.clearInstructions()
+
         prepareRecyclerView()
 
         subscribeToObservables()
