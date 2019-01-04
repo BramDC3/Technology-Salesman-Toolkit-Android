@@ -39,7 +39,6 @@ class ProfileViewModel : InjectedViewModel() {
      */
     val profileEditFormValidation = SingleLiveEvent<BaseCommand>()
     val resetPasswordButtonClicked = SingleLiveEvent<Any>()
-    val profilePictureClicked = SingleLiveEvent<Any>()
     val appliedEmailChanges = SingleLiveEvent<BaseCommand>()
     val appliedNameChanges = SingleLiveEvent<BaseCommand>()
     val profileEventOccurred = SingleLiveEvent<Int>()
@@ -50,8 +49,6 @@ class ProfileViewModel : InjectedViewModel() {
         email.value = ""
         _isEditable.value = false
     }
-
-    fun changeProfilePicture() { profilePictureClicked.call() }
 
     fun resetPassword() { resetPasswordButtonClicked.call() }
 

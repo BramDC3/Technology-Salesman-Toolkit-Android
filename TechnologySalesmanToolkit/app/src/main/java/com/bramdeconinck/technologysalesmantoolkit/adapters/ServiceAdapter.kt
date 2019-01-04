@@ -41,6 +41,11 @@ class ServiceAdapter(
             serviceViewModel.selectedService.value = v.tag as Service
 
             /**
+             * Clear the instructions of the previously clicked [Service], if there are any
+             */
+            serviceViewModel.clearInstructions()
+
+            /**
              * When [twoPane] is true, the user is using a tablet.
              * If the user is using a tablet, the [ServiceDetailFragment] should open in a container of the tablet layout of the [ServiceListFragment].
              * If the user is using a phone, the Navigation Controller should navigate to the [ServiceDetailFragment].

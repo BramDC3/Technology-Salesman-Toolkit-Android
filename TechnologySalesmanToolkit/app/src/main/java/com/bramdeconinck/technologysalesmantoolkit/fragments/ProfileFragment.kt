@@ -134,8 +134,6 @@ class ProfileFragment : Fragment(), ToastMaker {
 
         profileViewModel.resetPasswordButtonClicked.observe(this, Observer { showResetPasswordDialog() })
 
-        profileViewModel.profilePictureClicked.observe(this, Observer { showProfilePictureDialog() })
-
         profileViewModel.profileEventOccurred.observe(this, Observer { showToast(it!!) })
     }
 
@@ -179,13 +177,6 @@ class ProfileFragment : Fragment(), ToastMaker {
                 getString(R.string.title_change_password),
                 getString(R.string.message_change_password),
                 profileViewModel.sendResetPasswordEmail()
-        )
-    }
-
-    private fun showProfilePictureDialog() {
-        showDialog(
-            R.string.title_change_profile_picture,
-            R.string.message_change_profile_picture
         )
     }
 

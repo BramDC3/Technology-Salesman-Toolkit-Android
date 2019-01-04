@@ -60,7 +60,6 @@
                         android:layout_marginEnd="16dp"
                         android:background="@android:color/transparent"
                         android:contentDescription="@string/description_profile_picture"
-                        android:onClick="@{() -> profileViewModel.changeProfilePicture()}"
                         app:layout_constraintEnd_toEndOf="@+id/gl_profile_buttons_40v"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
