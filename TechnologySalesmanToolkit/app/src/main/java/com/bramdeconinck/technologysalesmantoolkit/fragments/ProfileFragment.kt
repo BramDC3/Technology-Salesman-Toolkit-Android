@@ -5,6 +5,7 @@ import android.arch.lifecycle.ViewModelProviders
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v4.content.ContextCompat.getDrawable
 import android.view.*
 import androidx.navigation.fragment.findNavController
 import com.bramdeconinck.technologysalesmantoolkit.R
@@ -17,7 +18,6 @@ import com.bramdeconinck.technologysalesmantoolkit.utils.MessageUtils.showBasicD
 import com.bramdeconinck.technologysalesmantoolkit.utils.MessageUtils.showThreeButtonsPositiveFunctionDialog
 import com.bramdeconinck.technologysalesmantoolkit.utils.StringUtils.getFamilyname
 import com.bramdeconinck.technologysalesmantoolkit.utils.StringUtils.getFirstname
-import com.bramdeconinck.technologysalesmantoolkit.viewmodels.LoginViewModel
 import com.bramdeconinck.technologysalesmantoolkit.viewmodels.ProfileViewModel
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
@@ -143,10 +143,10 @@ class ProfileFragment : Fragment(), ToastMaker {
      */
     private fun toggleEditMode(isEditable: Boolean) {
         if (isEditable) {
-            menuItem.icon = context!!.getDrawable(R.drawable.ic_close_black_24dp)
+            menuItem.icon = getDrawable(activity!!, R.drawable.ic_close_black_24dp)
             menuItem.title = getString(R.string.title_action_stop_editing_profile)
         } else {
-            menuItem.icon = context!!.getDrawable(R.drawable.ic_edit_black_24dp)
+            menuItem.icon = getDrawable(activity!!, R.drawable.ic_edit_black_24dp)
             menuItem.title = getString(R.string.title_action_edit_profile)
             updateUI()
         }

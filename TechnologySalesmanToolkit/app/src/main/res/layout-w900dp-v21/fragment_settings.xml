@@ -14,8 +14,8 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:theme="@style/PrimaryBackground"
         android:background="@drawable/login_background"
+        android:theme="@style/PrimaryBackground"
         tools:context=".fragments.SettingsFragment">
 
         <ScrollView
@@ -69,6 +69,13 @@
                     app:layout_constraintTop_toBottomOf="@+id/tv_settings_appName"
                     app:layout_constraintBottom_toTopOf="@+id/lbl_settings_copyright">
 
+                    <android.support.constraint.Guideline
+                        android:id="@+id/gl_settings_buttons_50"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintGuide_percent="0.5"/>
+
                     <Button
                         android:id="@+id/btn_settings_website"
                         android:layout_width="wrap_content"
@@ -78,7 +85,7 @@
                         android:layout_marginEnd="8dp"
                         android:background="@drawable/visit_website"
                         android:onClick="@{() -> settingsViewModel.visitWebsite()}"
-                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/gl_settings_buttons_50"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
@@ -92,14 +99,15 @@
                         android:background="@drawable/dark_mode"
                         android:onClick="@{() -> settingsViewModel.toggleDarkMode()}"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/btn_settings_website" />
+                        app:layout_constraintStart_toEndOf="@+id/gl_settings_buttons_50"
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <Switch
                         android:id="@+id/switch_settings_darkmode"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="20dp"
+                        android:elevation="10dp"
                         android:checked="@{safeUnbox(settingsViewModel.isDarkModeEnabled)}"
                         android:onClick="@{() -> settingsViewModel.toggleDarkMode()}"
                         app:layout_constraintBottom_toBottomOf="@+id/btn_settings_darkmode"
@@ -115,9 +123,9 @@
                         android:layout_marginEnd="8dp"
                         android:background="@drawable/privacy_policy"
                         android:onClick="@{() -> settingsViewModel.visitPrivacyPolicy()}"
-                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/gl_settings_buttons_50"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/btn_settings_darkmode" />
+                        app:layout_constraintTop_toBottomOf="@+id/btn_settings_website" />
 
                     <Button
                         android:id="@+id/btn_settings_suggestion"
@@ -129,8 +137,8 @@
                         android:background="@drawable/send_suggestion"
                         android:onClick="@{() -> settingsViewModel.makeSuggestion()}"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/btn_settings_privacypolicy" />
+                        app:layout_constraintStart_toEndOf="@+id/gl_settings_buttons_50"
+                        app:layout_constraintTop_toBottomOf="@+id/btn_settings_darkmode" />
 
                     <Button
                         android:id="@+id/btn_settings_signout"
