@@ -18,9 +18,14 @@
         android:theme="@style/PrimaryBackground"
         tools:context=".fragments.ProfileFragment">
 
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:ignore="UselessParent">
+
             <android.support.constraint.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:animateLayoutChanges="true">
 
                 <android.support.constraint.Guideline
@@ -41,9 +46,10 @@
                     android:paddingTop="8dp"
                     android:paddingEnd="14dp"
                     android:paddingBottom="18dp"
+                    app:layout_constraintBottom_toTopOf="@+id/gl_profile_buttons_60h"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintBottom_toTopOf="@+id/gl_profile_buttons_60h">
+                    app:layout_constraintTop_toTopOf="parent">
 
                     <android.support.constraint.Guideline
                         android:id="@+id/gl_profile_buttons_40v"
@@ -70,10 +76,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
+                        android:background="@android:color/transparent"
                         android:text="@string/placeholder_profile_fullname"
                         android:textColor="@android:color/white"
                         android:textSize="26sp"
-                        android:background="@android:color/transparent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/iv_profile_profile_picture" />
@@ -172,6 +178,8 @@
                     app:layout_constraintTop_toBottomOf="@+id/gl_profile_buttons_60h" />
 
             </android.support.constraint.ConstraintLayout>
+
+        </ScrollView>
 
     </FrameLayout>
 
