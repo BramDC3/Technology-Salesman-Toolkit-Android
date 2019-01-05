@@ -110,7 +110,7 @@ class ProfileFragment : Fragment(), ToastMaker {
          * [Glide] is used to load the image of the [firebaseUser] into the ImageView.
          */
         Glide.with(this)
-                .load(firebaseUser!!.photoUrl ?: R.drawable.default_profile_image)
+                .load(firebaseUser!!.photoUrl ?: R.drawable.default_profile_picture)
                 .apply(RequestOptions.circleCropTransform())
                 .into(iv_profile_profile_picture)
 

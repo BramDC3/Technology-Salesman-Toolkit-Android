@@ -29,33 +29,48 @@
                 android:focusable="true"
                 android:focusableInTouchMode="true" >
 
+                <android.support.constraint.Guideline
+                    android:id="@+id/gl_settings_10"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.10"/>
+
+                <android.support.constraint.Guideline
+                    android:id="@+id/gl_settings_90"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.90"/>
+
                 <ImageView
                     android:id="@+id/iv_settings_logo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="30dp"
                     android:contentDescription="@string/description_app_logo"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/gl_settings_90"
+                    app:layout_constraintStart_toStartOf="@+id/gl_settings_10"
                     app:layout_constraintTop_toTopOf="parent"
                     app:srcCompat="@drawable/logo" />
 
                 <TextView
                     android:id="@+id/tv_settings_appName"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
                     android:text="@string/app_name"
                     android:textColor="@android:color/white"
                     android:textSize="20sp"
                     android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
+                    android:gravity="center"
+                    app:layout_constraintEnd_toEndOf="@+id/gl_settings_90"
+                    app:layout_constraintStart_toStartOf="@+id/gl_settings_10"
                     app:layout_constraintTop_toBottomOf="@+id/iv_settings_logo" />
 
                 <android.support.constraint.ConstraintLayout
                     android:id="@+id/cl_settings_buttons"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="48dp"
                     android:layout_marginBottom="32dp"
@@ -63,11 +78,18 @@
                     android:paddingBottom="18dp"
                     android:paddingStart="4dp"
                     android:paddingEnd="4dp"
-                    android:background="@drawable/rounded_corners"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
+                    android:background="@drawable/form_blue_background"
+                    app:layout_constraintEnd_toEndOf="@+id/gl_settings_90"
+                    app:layout_constraintStart_toStartOf="@+id/gl_settings_10"
                     app:layout_constraintTop_toBottomOf="@+id/tv_settings_appName"
                     app:layout_constraintBottom_toTopOf="@+id/lbl_settings_copyright">
+
+                    <android.support.constraint.Guideline
+                        android:id="@+id/gl_settings_buttons_15"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintGuide_percent="0.15"/>
 
                     <android.support.constraint.Guideline
                         android:id="@+id/gl_settings_buttons_50"
@@ -76,27 +98,65 @@
                         android:orientation="vertical"
                         app:layout_constraintGuide_percent="0.5"/>
 
+                    <android.support.constraint.Guideline
+                        android:id="@+id/gl_settings_buttons_85"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintGuide_percent="0.85"/>
+
                     <Button
                         android:id="@+id/btn_settings_website"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:layout_marginTop="8dp"
                         android:layout_marginEnd="8dp"
-                        android:background="@drawable/visit_website"
+                        android:background="@drawable/form_field_rounded_background"
+                        android:text="@string/button_settings_website"
+                        android:textAppearance="@style/TextAppearance.AppCompat"
+                        android:textSize="16sp"
+                        android:textColor="@color/colorFormFieldText"
+                        android:paddingStart="12dp"
+                        android:paddingEnd="12dp"
+                        android:drawableStart="@drawable/ic_internet_gray_24dp"
+                        android:drawablePadding="24dp"
+                        android:textAlignment="textStart"
                         android:onClick="@{() -> settingsViewModel.visitWebsite()}"
                         app:layout_constraintEnd_toStartOf="@+id/gl_settings_buttons_50"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="28dp"
+                        android:elevation="10dp"
+                        android:src="@drawable/ic_arrow_right_gray_24dp"
+                        android:background="@android:color/transparent"
+                        android:contentDescription="@string/button_settings_website"
+                        app:layout_constraintBottom_toBottomOf="@+id/btn_settings_website"
+                        app:layout_constraintEnd_toEndOf="@+id/btn_settings_website"
+                        app:layout_constraintTop_toTopOf="@+id/btn_settings_website"
+                        tools:ignore="UnusedAttribute" />
+
                     <Button
                         android:id="@+id/btn_settings_darkmode"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:layout_marginTop="8dp"
                         android:layout_marginEnd="8dp"
-                        android:background="@drawable/dark_mode"
+                        android:background="@drawable/form_field_rounded_background"
+                        android:text="@string/button_settings_darkmode"
+                        android:textAppearance="@style/TextAppearance.AppCompat"
+                        android:textSize="16sp"
+                        android:textColor="@color/colorFormFieldText"
+                        android:paddingStart="12dp"
+                        android:paddingEnd="12dp"
+                        android:drawableStart="@drawable/ic_dark_mode_gray_24dp"
+                        android:drawablePadding="24dp"
+                        android:textAlignment="textStart"
                         android:onClick="@{() -> settingsViewModel.toggleDarkMode()}"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/gl_settings_buttons_50"
@@ -109,49 +169,117 @@
                         android:layout_marginEnd="20dp"
                         android:checked="@{safeUnbox(settingsViewModel.isDarkModeEnabled)}"
                         android:onClick="@{() -> settingsViewModel.toggleDarkMode()}"
+                        android:elevation="10dp"
                         app:layout_constraintBottom_toBottomOf="@+id/btn_settings_darkmode"
                         app:layout_constraintEnd_toEndOf="@+id/btn_settings_darkmode"
-                        app:layout_constraintTop_toTopOf="@+id/btn_settings_darkmode" />
+                        app:layout_constraintTop_toTopOf="@+id/btn_settings_darkmode"
+                        tools:ignore="UnusedAttribute" />
 
                     <Button
                         android:id="@+id/btn_settings_privacypolicy"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:layout_marginTop="8dp"
                         android:layout_marginEnd="8dp"
-                        android:background="@drawable/privacy_policy"
+                        android:background="@drawable/form_field_rounded_background"
+                        android:text="@string/button_settings_privacypolicy"
+                        android:textAppearance="@style/TextAppearance.AppCompat"
+                        android:textSize="16sp"
+                        android:textColor="@color/colorFormFieldText"
+                        android:paddingStart="12dp"
+                        android:paddingEnd="12dp"
+                        android:drawableStart="@drawable/ic_security_gray_24dp"
+                        android:drawablePadding="24dp"
+                        android:textAlignment="textStart"
                         android:onClick="@{() -> settingsViewModel.visitPrivacyPolicy()}"
                         app:layout_constraintEnd_toStartOf="@+id/gl_settings_buttons_50"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/btn_settings_website" />
 
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="28dp"
+                        android:elevation="10dp"
+                        android:background="@android:color/transparent"
+                        android:src="@drawable/ic_arrow_right_gray_24dp"
+                        android:contentDescription="@string/button_settings_website"
+                        app:layout_constraintBottom_toBottomOf="@+id/btn_settings_privacypolicy"
+                        app:layout_constraintEnd_toEndOf="@+id/btn_settings_privacypolicy"
+                        app:layout_constraintTop_toTopOf="@+id/btn_settings_privacypolicy"
+                        tools:ignore="UnusedAttribute" />
+
                     <Button
                         android:id="@+id/btn_settings_suggestion"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:layout_marginTop="8dp"
                         android:layout_marginEnd="8dp"
-                        android:background="@drawable/send_suggestion"
+                        android:background="@drawable/form_field_rounded_background"
+                        android:text="@string/button_settings_suggestion"
+                        android:textAppearance="@style/TextAppearance.AppCompat"
+                        android:textSize="16sp"
+                        android:textColor="@color/colorFormFieldText"
+                        android:paddingStart="12dp"
+                        android:paddingEnd="12dp"
+                        android:drawableStart="@drawable/ic_message_gray_24dp"
+                        android:drawablePadding="24dp"
+                        android:textAlignment="textStart"
                         android:onClick="@{() -> settingsViewModel.makeSuggestion()}"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/gl_settings_buttons_50"
                         app:layout_constraintTop_toBottomOf="@+id/btn_settings_darkmode" />
 
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="28dp"
+                        android:elevation="10dp"
+                        android:background="@android:color/transparent"
+                        android:src="@drawable/ic_arrow_right_gray_24dp"
+                        android:contentDescription="@string/button_settings_website"
+                        app:layout_constraintBottom_toBottomOf="@+id/btn_settings_suggestion"
+                        app:layout_constraintEnd_toEndOf="@+id/btn_settings_suggestion"
+                        app:layout_constraintTop_toTopOf="@+id/btn_settings_suggestion"
+                        tools:ignore="UnusedAttribute" />
+
                     <Button
                         android:id="@+id/btn_settings_signout"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:layout_marginTop="8dp"
                         android:layout_marginEnd="8dp"
                         android:layout_marginBottom="8dp"
-                        android:background="@drawable/sign_out"
+                        android:background="@drawable/form_field_rounded_background"
+                        android:text="@string/button_settings_signout"
+                        android:textAppearance="@style/TextAppearance.AppCompat"
+                        android:textSize="16sp"
+                        android:textColor="@color/colorFormFieldText"
+                        android:paddingStart="12dp"
+                        android:paddingEnd="12dp"
+                        android:drawableStart="@drawable/ic_sign_out_gray_24dp"
+                        android:drawablePadding="24dp"
+                        android:textAlignment="textStart"
                         android:onClick="@{() -> settingsViewModel.showSignOutDialog()}"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="@id/gl_settings_buttons_85"
+                        app:layout_constraintStart_toStartOf="@id/gl_settings_buttons_15"
                         app:layout_constraintTop_toBottomOf="@+id/btn_settings_suggestion" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="28dp"
+                        android:elevation="10dp"
+                        android:src="@drawable/ic_arrow_right_gray_24dp"
+                        android:background="@android:color/transparent"
+                        android:contentDescription="@string/button_settings_website"
+                        app:layout_constraintBottom_toBottomOf="@+id/btn_settings_signout"
+                        app:layout_constraintEnd_toEndOf="@+id/btn_settings_signout"
+                        app:layout_constraintTop_toTopOf="@+id/btn_settings_signout"
+                        tools:ignore="UnusedAttribute" />
 
                 </android.support.constraint.ConstraintLayout>
 
@@ -163,8 +291,8 @@
                     android:text="@string/label_copyright"
                     android:textColor="@color/colorClickableLabel"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/gl_settings_90"
+                    app:layout_constraintStart_toStartOf="@+id/gl_settings_10"
                     app:layout_constraintTop_toBottomOf="@+id/cl_settings_buttons" />
 
             </android.support.constraint.ConstraintLayout>

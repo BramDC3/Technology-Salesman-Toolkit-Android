@@ -3,6 +3,8 @@
     <string name="app_name">Technology Salesman Toolkit</string>
 
     <!-- LoginFragment-->
+    <string name="button_login_sign_in">Meld aan</string>
+    <string name="button_login_sign_in_with_google">Meld aan met Google</string>
     <string name="message_welcome">Welkom, %1$s!</string>
     <string name="placeholder_email">E-mailadres</string>
     <string name="placeholder_password">Wachtwoord</string>
@@ -11,6 +13,7 @@
     <string name="error_empty_fields">"Gelieve alle velden in te vullen."</string>
 
     <!-- RegistrationFragment -->
+    <string name="button_registration_create_account">Maak account aan</string>
     <string name="placeholder_firstname">Voornaam</string>
     <string name="placeholder_lastname">Familienaam</string>
     <string name="placeholder_repeatpassword">Herhaal wachtwoord</string>
@@ -43,11 +46,11 @@
     <string name="title_settings_fragment">Instellingen</string>
 
     <!-- SettingsFragment -->
-    <string name="settings_website">Bezoek de website</string>
-    <string name="settings_darkmode">Donkere modus</string>
-    <string name="settings_privacypolicy">Bekijk het privacybeleid</string>
-    <string name="settings_suggestion">Verstuur een suggestie</string>
-    <string name="settings_signout">Meld af</string>
+    <string name="button_settings_website">Bezoek de website</string>
+    <string name="button_settings_darkmode">Donkere modus</string>
+    <string name="button_settings_privacypolicy">Bekijk het privacybeleid</string>
+    <string name="button_settings_suggestion">Verstuur een suggestie</string>
+    <string name="button_settings_signout">Meld af</string>
     <string name="title_send_suggestion">Verstuur een suggestie</string>
     <string name="title_sign_out">Afmelden</string>
     <string name="message_send_suggestion">Vul hieronder uw suggestie in en druk op de knop \'Verzend\'.</string>

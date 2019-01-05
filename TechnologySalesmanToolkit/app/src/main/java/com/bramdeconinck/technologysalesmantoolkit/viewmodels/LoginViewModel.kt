@@ -73,6 +73,8 @@ class LoginViewModel : InjectedViewModel() {
                         firebaseUser = firebaseAuth.currentUser
                         if (firebaseUser!!.isEmailVerified) {
                             navigateToServiceList.call()
+                            email.value = ""
+                            password.value = ""
                         } else {
                             firebaseAuth.signOut()
                             loginErrorOccurred.value = R.string.error_email_is_not_verified
