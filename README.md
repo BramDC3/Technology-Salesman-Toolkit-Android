@@ -38,7 +38,6 @@ I've provided an account people can use for testing purposes, but don't hesitate
 ## Documentation
 
 The entire application has been provided with kDoc documentation. I've added documentation for almost every function and property used. Dokka has been used to create a handy "manual" of the application. The Dokka files can be found [here](../doc).
-> - [Coming soon](#)
 
 ## Download
 
