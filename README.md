@@ -1,17 +1,20 @@
-# Welkom bij Technology Salesman Toolkit!
+# Welcome to Technology Salesman Toolkit!
 
-Dit is de GitHub repository voor de Technology Salesman Toolkit (TEST) app, een Android applicatie voor Technology Salesmen om hen te helpen bij het uitvoeren van bepaalde diensten en om de communicatie op de werkvloer te verbeteren.
+This is the GitHub repository for the Technology Salesman Toolkit (TEST) app, an Android application for the technology salesmen of Fnac. This application helps them execute certain multimedia related services like:
+> - How to delete virusses from a computer.
+> - How to recover corrupted data from a drive/SD card.
+> - How to perform a clean installation of Windows 10.
 
 ## Inhoudsopgave
 
-> - [Groepsleden](#groepsleden)
+> - [Groepsleden](#creator)
 > - [Releases](#releases)
 > - [Handleidingen](#handleidingen)
 
 
-## Groepsleden
+## Creator
 
-| Naam     | GitHub                        | E-mail                               |
+| Name     | GitHub                        | E-mail                               |
 | :---     | :---                          | :---                                |
 | De Coninck Bram | <https://github.com/BramDC3> | [bram.deconinck.y7538@student.hogent.be](mailto:bram.deconinck.y7538@student.hogent.be) |
 
