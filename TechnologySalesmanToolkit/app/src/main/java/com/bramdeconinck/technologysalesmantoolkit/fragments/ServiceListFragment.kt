@@ -29,13 +29,22 @@ class ServiceListFragment : Fragment(), ToastMaker {
 
     /**
      * [serviceViewModel] contains all data and functions that have to do with [Service] and [Instruction] objects.
-     * [binding] is used for data binding.
-     * [services] are all the services, either fetched from the network API or the local database.
-     * [serviceAdapter] is used to prepare service items to display in the RecyclerView.
      */
     private lateinit var serviceViewModel: ServiceViewModel
+
+    /**
+     * [binding] is used for data binding.
+     */
     private lateinit var binding: FragmentServiceListBinding
+
+    /**
+     * [services] are all the services, either fetched from the Firestore or the local Room database.
+     */
     private lateinit var services: LiveData<List<Service>>
+
+    /**
+     * [serviceAdapter] is used to prepare service items to display in the RecyclerView.
+     */
     private lateinit var serviceAdapter: ServiceAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -59,8 +68,6 @@ class ServiceListFragment : Fragment(), ToastMaker {
     override fun onStart() {
         super.onStart()
 
-        serviceViewModel.clearInstructions()
-
         prepareRecyclerView()
 
         subscribeToObservables()
@@ -73,8 +80,7 @@ class ServiceListFragment : Fragment(), ToastMaker {
     }
 
     /**
-     * Inflate a menu for searching with text and a menu
-     * to use predefined filters of categories.
+     * Inflating a menu for searching with text and a menu to use predefined filters of categories.
      */
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater?) {
         inflater?.inflate(R.menu.menu_search_bar, menu)
@@ -98,6 +104,9 @@ class ServiceListFragment : Fragment(), ToastMaker {
         super.onCreateOptionsMenu(menu, inflater)
     }
 
+    /**
+     * Function for applying the selected filter to [services].
+     */
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.action_filter_everything -> {
@@ -144,7 +153,7 @@ class ServiceListFragment : Fragment(), ToastMaker {
         serviceAdapter.setHasStableIds(true)
 
         /**
-         * Special [LinearLayoutManager] used to preserve animations.
+         * Custom [LinearLayoutManager] used to preserve animations.
          */
         val layoutManager = object : LinearLayoutManager(context) { override fun supportsPredictiveItemAnimations(): Boolean { return true } }
 
@@ -163,6 +172,11 @@ class ServiceListFragment : Fragment(), ToastMaker {
         serviceViewModel.servicesErrorOccurred.observe(this, Observer { showToast(R.string.fetching_services_error) })
     }
 
+    /**
+     * Function for showing a toast message.
+     *
+     * @param [message]: String resource Id.
+     */
     override fun showToast(message: Int) { makeToast(context!!, message) }
 
 }

@@ -14,6 +14,9 @@ object WebpageUtils {
 
     /**
      * Open a webpage with a given url.
+     *
+     * @param context: [Context] of the fragment that used this function.
+     * @param url: Link to the website that should be opened.
      */
     @JvmStatic
     fun openWebPage(context: Context, url: String) {

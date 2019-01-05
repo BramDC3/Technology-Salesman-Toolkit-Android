@@ -16,6 +16,9 @@ object RoomConvertersUtils {
 
     /**
      * Converting a [Long] to a [Timestamp].
+     *
+     * @param value: [Long] that needs to be converted to a [Timestamp].
+     * @return: [Timestamp] with the value of [value].
      */
     @TypeConverter
     @JvmStatic
@@ -23,6 +26,9 @@ object RoomConvertersUtils {
 
     /**
      * Converting a [Timestamp] to a [Long].
+     *
+     * @param timestamp: [Timestamp] that needs to be converted to a [Long].
+     * @return: [Long] with the value of [timestamp].
      */
     @TypeConverter
     @JvmStatic
@@ -30,6 +36,9 @@ object RoomConvertersUtils {
 
     /**
      * Converting an [Int] to a [Category].
+     *
+     * @param value: [Int] that needs to be converted to a [Category].
+     * @return: [Category] with the value of [value].
      */
     @TypeConverter
     @JvmStatic
@@ -37,6 +46,9 @@ object RoomConvertersUtils {
 
     /**
      * Converting a [Category] to an [Int].
+     *
+     * @param category: [Category] that needs to be converted to an Integer.
+     * @return: Integer with the value of [category].
      */
     @TypeConverter
     @JvmStatic
@@ -44,6 +56,9 @@ object RoomConvertersUtils {
 
     /**
      * Converting a list of [String] to JSON.
+     *
+     * @param list: List of [String] that needs to be converted to json.
+     * @return: [list] as json.
      */
     @TypeConverter
     @JvmStatic
@@ -51,6 +66,9 @@ object RoomConvertersUtils {
 
     /**
      * Converting JSON to a list of [String].
+     *
+     * @param json: Json that needs to be converted to a list of [String].
+     * @return: List of [String] from the json.
      */
     @TypeConverter
     @JvmStatic

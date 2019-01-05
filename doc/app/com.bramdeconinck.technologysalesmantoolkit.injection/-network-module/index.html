@@ -1,0 +1,107 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>NetworkModule - app</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">app</a>&nbsp;/&nbsp;<a href="../index.html">com.bramdeconinck.technologysalesmantoolkit.injection</a>&nbsp;/&nbsp;<a href="./index.html">NetworkModule</a><br/>
+<br/>
+<h1>NetworkModule</h1>
+<code><span class="keyword">class </span><span class="identifier">NetworkModule</span></code>
+<p>Module which provides all required dependencies for the network, database and shared preferences.
+Methods annotated with @Provides informs Dagger that this method can provide a certain dependency.
+Methods annotated with @Singleton indicate that Dagger should only instantiate the dependency once and provide that some object on further requests.</p>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-init-.html">&lt;init&gt;</a></p>
+</td>
+<td>
+<code><span class="identifier">NetworkModule</span><span class="symbol">(</span><span class="identifier" id="com.bramdeconinck.technologysalesmantoolkit.injection.NetworkModule$<init>(android.content.Context)/context">context</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/content/Context.html"><span class="identifier">Context</span></a><span class="symbol">)</span></code>
+<p>Module which provides all required dependencies for the network, database and shared preferences.
+Methods annotated with @Provides informs Dagger that this method can provide a certain dependency.
+Methods annotated with @Singleton indicate that Dagger should only instantiate the dependency once and provide that some object on further requests.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="provide-application-context.html">provideApplicationContext</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">provideApplicationContext</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://developer.android.com/reference/android/content/Context.html"><span class="identifier">Context</span></a></code>
+<p>Provides the Application Context implementation.
+The <a href="https://developer.android.com/reference/android/content/Context.html">Context</a> is used to create the <a href="../../com.bramdeconinck.technologysalesmantoolkit.database/-service-database/index.html">ServiceDatabase</a> and provide the <a href="https://developer.android.com/reference/android/content/SharedPreferences.html">SharedPreferences</a>.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="provide-instruction-dao.html">provideInstructionDao</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">provideInstructionDao</span><span class="symbol">(</span><span class="identifier" id="com.bramdeconinck.technologysalesmantoolkit.injection.NetworkModule$provideInstructionDao(com.bramdeconinck.technologysalesmantoolkit.database.ServiceDatabase)/serviceDatabase">serviceDatabase</span><span class="symbol">:</span>&nbsp;<a href="../../com.bramdeconinck.technologysalesmantoolkit.database/-service-database/index.html"><span class="identifier">ServiceDatabase</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="../../com.bramdeconinck.technologysalesmantoolkit.database.daos/-instruction-dao/index.html"><span class="identifier">InstructionDao</span></a></code>
+<p>Provides the Instruction Dao implementation.
+The <a href="../../com.bramdeconinck.technologysalesmantoolkit.database.daos/-instruction-dao/index.html">InstructionDao</a> is used to interact with the Instruction objects in the <a href="../../com.bramdeconinck.technologysalesmantoolkit.database/-service-database/index.html">ServiceDatabase</a>.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="provide-instruction-repository.html">provideInstructionRepository</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">provideInstructionRepository</span><span class="symbol">(</span><span class="identifier" id="com.bramdeconinck.technologysalesmantoolkit.injection.NetworkModule$provideInstructionRepository(com.bramdeconinck.technologysalesmantoolkit.database.daos.InstructionDao)/instructionDao">instructionDao</span><span class="symbol">:</span>&nbsp;<a href="../../com.bramdeconinck.technologysalesmantoolkit.database.daos/-instruction-dao/index.html"><span class="identifier">InstructionDao</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="../../com.bramdeconinck.technologysalesmantoolkit.repositories/-instruction-repository/index.html"><span class="identifier">InstructionRepository</span></a></code>
+<p>Provides the Instruction Repository implementation.
+The <a href="../../com.bramdeconinck.technologysalesmantoolkit.repositories/-instruction-repository/index.html">InstructionRepository</a> is used to interact with the <a href="../../com.bramdeconinck.technologysalesmantoolkit.database.daos/-instruction-dao/index.html">InstructionDao</a>.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="provide-service-dao.html">provideServiceDao</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">provideServiceDao</span><span class="symbol">(</span><span class="identifier" id="com.bramdeconinck.technologysalesmantoolkit.injection.NetworkModule$provideServiceDao(com.bramdeconinck.technologysalesmantoolkit.database.ServiceDatabase)/serviceDatabase">serviceDatabase</span><span class="symbol">:</span>&nbsp;<a href="../../com.bramdeconinck.technologysalesmantoolkit.database/-service-database/index.html"><span class="identifier">ServiceDatabase</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="../../com.bramdeconinck.technologysalesmantoolkit.database.daos/-service-dao/index.html"><span class="identifier">ServiceDao</span></a></code>
+<p>Provides the Service Dao implementation.
+The <a href="../../com.bramdeconinck.technologysalesmantoolkit.database.daos/-service-dao/index.html">ServiceDao</a> is used to interact with the Service objects in the <a href="../../com.bramdeconinck.technologysalesmantoolkit.database/-service-database/index.html">ServiceDatabase</a>.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="provide-service-database.html">provideServiceDatabase</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">provideServiceDatabase</span><span class="symbol">(</span><span class="identifier" id="com.bramdeconinck.technologysalesmantoolkit.injection.NetworkModule$provideServiceDatabase(android.content.Context)/context">context</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/content/Context.html"><span class="identifier">Context</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="../../com.bramdeconinck.technologysalesmantoolkit.database/-service-database/index.html"><span class="identifier">ServiceDatabase</span></a></code>
+<p>Provides the Service Database implementation.
+The <a href="../../com.bramdeconinck.technologysalesmantoolkit.database/-service-database/index.html">ServiceDatabase</a> is used to cache Service and Instruction objects.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="provide-service-repository.html">provideServiceRepository</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">provideServiceRepository</span><span class="symbol">(</span><span class="identifier" id="com.bramdeconinck.technologysalesmantoolkit.injection.NetworkModule$provideServiceRepository(com.bramdeconinck.technologysalesmantoolkit.database.daos.ServiceDao)/serviceDao">serviceDao</span><span class="symbol">:</span>&nbsp;<a href="../../com.bramdeconinck.technologysalesmantoolkit.database.daos/-service-dao/index.html"><span class="identifier">ServiceDao</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="../../com.bramdeconinck.technologysalesmantoolkit.repositories/-service-repository/index.html"><span class="identifier">ServiceRepository</span></a></code>
+<p>Provides the Service Repository implementation.
+The <a href="../../com.bramdeconinck.technologysalesmantoolkit.repositories/-service-repository/index.html">ServiceRepository</a> is used to interact with the <a href="../../com.bramdeconinck.technologysalesmantoolkit.database.daos/-service-dao/index.html">ServiceDao</a>.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="provide-shared-preferences.html">provideSharedPreferences</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">provideSharedPreferences</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://developer.android.com/reference/android/content/SharedPreferences.html"><span class="identifier">SharedPreferences</span></a></code>
+<p>Provides the Shared Preferences implementation.
+The <a href="https://developer.android.com/reference/android/content/SharedPreferences.html">SharedPreferences</a> are used to store the preferred app theme of the user.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

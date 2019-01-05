@@ -33,6 +33,8 @@ class FirestoreAPI {
     /**
      * Function to fetch all services of the Firestore.
      * [Source.SERVER] is used to disable Firestore caching because a Room database is used for caching.
+     *
+     * @param firebaseServiceCallback: Interface containing methods that are used as callbacks.
      */
     fun fetchAllServices(firebaseServiceCallback: FirebaseServiceCallback) {
         firebaseServiceCallback.showProgress()
@@ -51,6 +53,9 @@ class FirestoreAPI {
     /**
      * Function to fetch all instructions of a gives service of the Firestore.
      * [Source.SERVER] is used to disable Firestore caching because a Room database is used for caching.
+     *
+     * @param serviceId: Id of the Service for which the instructions need to be fetched.
+     * @param firebaseInstructionCallback: Interface containing methods that are used as callbacks.
      */
     fun fetchAllInstructionsFrom(serviceId: String, firebaseInstructionCallback: FirebaseInstructionCallback) {
         firestore.collection("Instructions").whereEqualTo("serviceId", serviceId).orderBy("index").get(Source.SERVER)
@@ -66,6 +71,9 @@ class FirestoreAPI {
 
     /**
      * Function to post a suggestion to the Firestore.
+     *
+     * @param callback: Interface containing methods that are used as callbacks.
+     * @param suggestion: String with the suggestion of the user.
      */
     fun postSuggestion(callback: FirebaseSuggestionCallback, suggestion: String) {
         firestore.collection("Suggestions").add(createSuggestionData(suggestion))

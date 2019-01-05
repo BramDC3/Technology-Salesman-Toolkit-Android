@@ -1,15 +1,15 @@
 package com.bramdeconinck.technologysalesmantoolkit.context
 
-import android.app.Application
-import com.bramdeconinck.technologysalesmantoolkit.injection.component.DaggerViewModelComponent
-import com.bramdeconinck.technologysalesmantoolkit.injection.component.ViewModelComponent
-import com.bramdeconinck.technologysalesmantoolkit.injection.module.NetworkModule
+import android.support.multidex.MultiDexApplication
+import com.bramdeconinck.technologysalesmantoolkit.injection.DaggerViewModelComponent
+import com.bramdeconinck.technologysalesmantoolkit.injection.ViewModelComponent
+import com.bramdeconinck.technologysalesmantoolkit.injection.NetworkModule
 
 /**
  * The [App] class is used to construct a [NetworkModule] with the application context,
  * which is used to create a local database with Room.
  */
-class App: Application() {
+class App: MultiDexApplication() {
 
     /**
      * A ViewModelComponent is required to do the actual injecting.
@@ -24,5 +24,9 @@ class App: Application() {
             .build()
     }
 
+    /**
+     * The [injector] is placed in a companion object because ViewModels will
+     * need it to inject themselves.
+     */
     companion object { lateinit var injector: ViewModelComponent }
 }

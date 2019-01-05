@@ -1,0 +1,39 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>com.bramdeconinck.technologysalesmantoolkit.injection - app</title>
+<link rel="stylesheet" href="../../style.css">
+</HEAD>
+<BODY>
+<a href="../index.html">app</a>&nbsp;/&nbsp;<a href="./index.html">com.bramdeconinck.technologysalesmantoolkit.injection</a><br/>
+<br/>
+<h2>Package com.bramdeconinck.technologysalesmantoolkit.injection</h2>
+<h3>Types</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-network-module/index.html">NetworkModule</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">NetworkModule</span></code>
+<p>Module which provides all required dependencies for the network, database and shared preferences.
+Methods annotated with @Provides informs Dagger that this method can provide a certain dependency.
+Methods annotated with @Singleton indicate that Dagger should only instantiate the dependency once and provide that some object on further requests.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-view-model-component/index.html">ViewModelComponent</a></p>
+</td>
+<td>
+<code><span class="keyword">interface </span><span class="identifier">ViewModelComponent</span></code>
+<p>Component providing the inject functions for presenters.
+Components act as the bridge between the Modules that know how to provide dependencies
+and the actual objects that require something to be injected.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

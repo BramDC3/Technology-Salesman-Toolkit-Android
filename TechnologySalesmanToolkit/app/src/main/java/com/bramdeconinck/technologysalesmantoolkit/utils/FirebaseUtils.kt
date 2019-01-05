@@ -14,15 +14,21 @@ import com.google.firebase.firestore.QueryDocumentSnapshot
 object FirebaseUtils {
 
     /**
-     * [FirebaseAuth] instance and the current [FirebaseUser].
+     * [FirebaseAuth] used across the entire application.
      */
     @JvmStatic
     val firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()
+
+    /**
+     * [FirebaseUser] of [firebaseAuth].
+     */
     @JvmStatic
     var firebaseUser: FirebaseUser? = firebaseAuth.currentUser
 
     /**
      * Converting the data of a snapshot to a [Service] object.
+     *
+     * @param snapshot: [QueryDocumentSnapshot] fetched from the Network Api)
      */
     @JvmStatic
     fun transformSnapshotToService(snapshot: QueryDocumentSnapshot): Service {
@@ -39,6 +45,8 @@ object FirebaseUtils {
 
     /**
      * Converting the data of a snapshot to an [Instruction] object.
+     *
+     * @param snapshot: [QueryDocumentSnapshot] fetched from the Network Api)
      */
     @Suppress("UNCHECKED_CAST")
     @JvmStatic
@@ -56,6 +64,9 @@ object FirebaseUtils {
 
     /**
      * Creating suggestion data in a format that can be used to post a Suggestion object to the Firestore.
+     *
+     * @param suggestion: String containing the suggestion of the user.
+     * @return: Data used to post the suggestion to the Firestore.
      */
     @JvmStatic
     fun createSuggestionData(suggestion: String): HashMap<String, Any> {
@@ -67,6 +78,9 @@ object FirebaseUtils {
 
     /**
      * Retrieves the right category of a service based on an integer.
+     *
+     * @param i: Integer value of a [Category].
+     * @return: Corresponding [Category].
      */
     fun transformIntToCategory(i: Int): Category {
         return when (i) {
@@ -79,6 +93,9 @@ object FirebaseUtils {
 
     /**
      * Transforms a category enum to an integer for storing in the local database.
+     *
+     * @param c: [Category] that needs to be stored as an Integer.
+     * @return: Integer value of the [Category].
      */
     fun transformCategoryToInt(c: Category): Int {
         return when (c) {
@@ -91,6 +108,10 @@ object FirebaseUtils {
 
     /**
      * Create a [UserProfileChangeRequest] object to update the profile of the current [FirebaseUser].
+     *
+     * @param firstname: First name of the user.
+     * @param familyname: Family name of the user.
+     * @return: [UserProfileChangeRequest] object that Firebase can use.
      */
     @JvmStatic
     fun createProfileUpdates(firstname: String, familyname: String): UserProfileChangeRequest {

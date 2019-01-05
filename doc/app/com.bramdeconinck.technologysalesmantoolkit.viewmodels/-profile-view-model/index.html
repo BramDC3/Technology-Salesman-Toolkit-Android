@@ -32,28 +32,38 @@
 <p><a href="applied-email-changes.html">appliedEmailChanges</a></p>
 </td>
 <td>
-<code><span class="keyword">val </span><span class="identifier">appliedEmailChanges</span><span class="symbol">: </span><a href="../../com.bramdeconinck.technologysalesmantoolkit.utils/-single-live-event/index.html"><span class="identifier">SingleLiveEvent</span></a><span class="symbol">&lt;</span><a href="../../com.bramdeconinck.technologysalesmantoolkit.utils/-base-command/index.html"><span class="identifier">BaseCommand</span></a><span class="symbol">&gt;</span></code></td>
+<code><span class="keyword">val </span><span class="identifier">appliedEmailChanges</span><span class="symbol">: </span><a href="../../com.bramdeconinck.technologysalesmantoolkit.utils/-single-live-event/index.html"><span class="identifier">SingleLiveEvent</span></a><span class="symbol">&lt;</span><a href="../../com.bramdeconinck.technologysalesmantoolkit.utils/-base-command/index.html"><span class="identifier">BaseCommand</span></a><span class="symbol">&gt;</span></code>
+<p><a href="../../com.bramdeconinck.technologysalesmantoolkit.utils/-single-live-event/index.html">SingleLiveEvent</a> that indicates an event occurred when changing the email address of the user.
+It has the value of a <a href="../../com.bramdeconinck.technologysalesmantoolkit.utils/-base-command/index.html">BaseCommand</a>.</p>
+</td>
 </tr>
 <tr>
 <td>
 <p><a href="applied-name-changes.html">appliedNameChanges</a></p>
 </td>
 <td>
-<code><span class="keyword">val </span><span class="identifier">appliedNameChanges</span><span class="symbol">: </span><a href="../../com.bramdeconinck.technologysalesmantoolkit.utils/-single-live-event/index.html"><span class="identifier">SingleLiveEvent</span></a><span class="symbol">&lt;</span><a href="../../com.bramdeconinck.technologysalesmantoolkit.utils/-base-command/index.html"><span class="identifier">BaseCommand</span></a><span class="symbol">&gt;</span></code></td>
+<code><span class="keyword">val </span><span class="identifier">appliedNameChanges</span><span class="symbol">: </span><a href="../../com.bramdeconinck.technologysalesmantoolkit.utils/-single-live-event/index.html"><span class="identifier">SingleLiveEvent</span></a><span class="symbol">&lt;</span><a href="../../com.bramdeconinck.technologysalesmantoolkit.utils/-base-command/index.html"><span class="identifier">BaseCommand</span></a><span class="symbol">&gt;</span></code>
+<p><a href="../../com.bramdeconinck.technologysalesmantoolkit.utils/-single-live-event/index.html">SingleLiveEvent</a> that indicates an event occurred when changing the name of the user.
+It has the value of a <a href="../../com.bramdeconinck.technologysalesmantoolkit.utils/-base-command/index.html">BaseCommand</a>.</p>
+</td>
 </tr>
 <tr>
 <td>
 <p><a href="email.html">email</a></p>
 </td>
 <td>
-<code><span class="keyword">val </span><span class="identifier">email</span><span class="symbol">: </span><span class="identifier">MutableLiveData</span><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">&gt;</span></code></td>
+<code><span class="keyword">val </span><span class="identifier">email</span><span class="symbol">: </span><span class="identifier">MutableLiveData</span><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">&gt;</span></code>
+<p><a href="email.html">email</a> is the email address of the FirebaseUser that is currently signed in.</p>
+</td>
 </tr>
 <tr>
 <td>
 <p><a href="familyname.html">familyname</a></p>
 </td>
 <td>
-<code><span class="keyword">val </span><span class="identifier">familyname</span><span class="symbol">: </span><span class="identifier">MutableLiveData</span><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">&gt;</span></code></td>
+<code><span class="keyword">val </span><span class="identifier">familyname</span><span class="symbol">: </span><span class="identifier">MutableLiveData</span><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">&gt;</span></code>
+<p><a href="familyname.html">familyname</a> is the family name of the FirebaseUser that is currently signed in.</p>
+</td>
 </tr>
 <tr>
 <td>
@@ -61,7 +71,7 @@
 </td>
 <td>
 <code><span class="keyword">val </span><span class="identifier">firstname</span><span class="symbol">: </span><span class="identifier">MutableLiveData</span><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">&gt;</span></code>
-<p>Values for fields of the profile form.</p>
+<p><a href="firstname.html">firstname</a> is the first name of the FirebaseUser that is currently signed in.</p>
 </td>
 </tr>
 <tr>
@@ -77,7 +87,8 @@
 </td>
 <td>
 <code><span class="keyword">val </span><span class="identifier">profileEditFormValidation</span><span class="symbol">: </span><a href="../../com.bramdeconinck.technologysalesmantoolkit.utils/-single-live-event/index.html"><span class="identifier">SingleLiveEvent</span></a><span class="symbol">&lt;</span><a href="../../com.bramdeconinck.technologysalesmantoolkit.utils/-base-command/index.html"><span class="identifier">BaseCommand</span></a><span class="symbol">&gt;</span></code>
-<p><a href="../../com.bramdeconinck.technologysalesmantoolkit.utils/-single-live-event/index.html">SingleLiveEvent</a> objects used to emit events.</p>
+<p><a href="../../com.bramdeconinck.technologysalesmantoolkit.utils/-single-live-event/index.html">SingleLiveEvent</a> that indicates an event occurred when validating the profile form.
+It has the value of a <a href="../../com.bramdeconinck.technologysalesmantoolkit.utils/-base-command/index.html">BaseCommand</a>.</p>
 </td>
 </tr>
 <tr>
@@ -85,21 +96,19 @@
 <p><a href="profile-event-occurred.html">profileEventOccurred</a></p>
 </td>
 <td>
-<code><span class="keyword">val </span><span class="identifier">profileEventOccurred</span><span class="symbol">: </span><a href="../../com.bramdeconinck.technologysalesmantoolkit.utils/-single-live-event/index.html"><span class="identifier">SingleLiveEvent</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">&gt;</span></code></td>
-</tr>
-<tr>
-<td>
-<p><a href="profile-picture-clicked.html">profilePictureClicked</a></p>
+<code><span class="keyword">val </span><span class="identifier">profileEventOccurred</span><span class="symbol">: </span><a href="../../com.bramdeconinck.technologysalesmantoolkit.utils/-single-live-event/index.html"><span class="identifier">SingleLiveEvent</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">&gt;</span></code>
+<p><a href="../../com.bramdeconinck.technologysalesmantoolkit.utils/-single-live-event/index.html">SingleLiveEvent</a> that indicates an event for which a message should be displayed has occurred.
+It has the value of a String resource Id.</p>
 </td>
-<td>
-<code><span class="keyword">val </span><span class="identifier">profilePictureClicked</span><span class="symbol">: </span><a href="../../com.bramdeconinck.technologysalesmantoolkit.utils/-single-live-event/index.html"><span class="identifier">SingleLiveEvent</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span></code></td>
 </tr>
 <tr>
 <td>
 <p><a href="reset-password-button-clicked.html">resetPasswordButtonClicked</a></p>
 </td>
 <td>
-<code><span class="keyword">val </span><span class="identifier">resetPasswordButtonClicked</span><span class="symbol">: </span><a href="../../com.bramdeconinck.technologysalesmantoolkit.utils/-single-live-event/index.html"><span class="identifier">SingleLiveEvent</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span></code></td>
+<code><span class="keyword">val </span><span class="identifier">resetPasswordButtonClicked</span><span class="symbol">: </span><a href="../../com.bramdeconinck.technologysalesmantoolkit.utils/-single-live-event/index.html"><span class="identifier">SingleLiveEvent</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span></code>
+<p><a href="../../com.bramdeconinck.technologysalesmantoolkit.utils/-single-live-event/index.html">SingleLiveEvent</a> that indicates the user wants to change his/her password.</p>
+</td>
 </tr>
 </tbody>
 </table>
@@ -112,30 +121,27 @@
 </td>
 <td>
 <code><span class="keyword">fun </span><span class="identifier">applyProfileChanges</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
-<p>Function that applies the profile changes.
-It handles both changes to the name and the email address of the <a href="../../com.bramdeconinck.technologysalesmantoolkit.utils/-firebase-utils/firebase-user.html">firebaseUser</a>.</p>
+<p>Function that gets called when the user changed their profile and wants to save the changes.
+It checks if the name, the email address or both have to be changed.</p>
 </td>
 </tr>
 <tr>
 <td>
-<p><a href="change-profile-picture.html">changeProfilePicture</a></p>
+<p><a href="exit-editing-mode.html">exitEditingMode</a></p>
 </td>
 <td>
-<code><span class="keyword">fun </span><span class="identifier">changeProfilePicture</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
-</tr>
-<tr>
-<td>
-<p><a href="clear-profile-form.html">clearProfileForm</a></p>
+<code><span class="keyword">fun </span><span class="identifier">exitEditingMode</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Function to exit the editing mode if it was entered.</p>
 </td>
-<td>
-<code><span class="keyword">fun </span><span class="identifier">clearProfileForm</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
 </tr>
 <tr>
 <td>
 <p><a href="reset-password.html">resetPassword</a></p>
 </td>
 <td>
-<code><span class="keyword">fun </span><span class="identifier">resetPassword</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+<code><span class="keyword">fun </span><span class="identifier">resetPassword</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Function that gets called when the Change Password TextView is clicked.</p>
+</td>
 </tr>
 <tr>
 <td>
@@ -151,7 +157,9 @@ It handles both changes to the name and the email address of the <a href="../../
 <p><a href="toggle-edit-mode.html">toggleEditMode</a></p>
 </td>
 <td>
-<code><span class="keyword">fun </span><span class="identifier">toggleEditMode</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+<code><span class="keyword">fun </span><span class="identifier">toggleEditMode</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Function that enters or exits editing mode.</p>
+</td>
 </tr>
 <tr>
 <td>

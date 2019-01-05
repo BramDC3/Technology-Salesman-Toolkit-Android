@@ -19,19 +19,45 @@ import com.bramdeconinck.technologysalesmantoolkit.utils.ValidationUtils.passwor
 class RegistrationViewModel : InjectedViewModel() {
 
     /**
-     * Values for fields of the registration form.
+     * [firstname] is the first name of the user.
      */
     val firstname = MutableLiveData<String>()
+
+    /**
+     * [familyname] is the family name of the user.
+     */
     val familyname = MutableLiveData<String>()
+
+    /**
+     * [email] is the email address of the user.
+     */
     val email = MutableLiveData<String>()
+
+    /**
+     * [password] is the password the user wants.
+     */
     val password = MutableLiveData<String>()
+
+    /**
+     * [repeatPassword] is the password the user wants, repeated.
+     */
     val repeatPassword = MutableLiveData<String>()
 
     /**
-     * [SingleLiveEvent] objects used to emit events.
+     * [SingleLiveEvent] that indicates the user wants to go to the Login Fragment.
      */
     val goToLoginClicked = SingleLiveEvent<Any>()
+
+    /**
+     * [SingleLiveEvent] that indicates the user has correctly filled out the registration form
+     * and needs to be shown the privacy policy dialog.
+     */
     val showPrivacyPolicyDialog = SingleLiveEvent<Any>()
+
+    /**
+     * [SingleLiveEvent] that indicates an error occurred when validating the registration form.
+     * It has the value of a String resource Id.
+     */
     val registrationEvent = SingleLiveEvent<Int>()
 
     init {
@@ -42,6 +68,9 @@ class RegistrationViewModel : InjectedViewModel() {
         repeatPassword.value = ""
     }
 
+    /**
+     * Function that gets called when the Login TextView is clicked.
+     */
     fun goToLogin() { goToLoginClicked.call() }
 
     /**
@@ -90,14 +119,6 @@ class RegistrationViewModel : InjectedViewModel() {
                                 }
                     } else { registrationEvent.value = R.string.error_account_not_created }
                 }
-    }
-
-    fun clearRegistrationForm() {
-        firstname.value = ""
-        familyname.value = ""
-        email.value = ""
-        password.value = ""
-        repeatPassword.value = ""
     }
 
 }

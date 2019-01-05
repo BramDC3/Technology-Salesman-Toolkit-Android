@@ -16,7 +16,7 @@ abstract class InjectedViewModel : ViewModel() {
 
     /**
      * Injects the required dependencies using the [injector].
-     * The 'when(this)' construct is required for each new ViewModel,
+     * The 'when(this)' construct is required for each ViewModel,
      * as the 'this' reference should refer to an instance of that specific ViewModel.
      * Just injecting into a generic InjectedViewModel is not specific enough for Dagger.
      */

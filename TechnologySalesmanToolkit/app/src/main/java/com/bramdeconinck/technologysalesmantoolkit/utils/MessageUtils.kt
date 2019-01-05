@@ -16,6 +16,11 @@ object MessageUtils {
 
     /**
      * Shows a toast on the screen for a chosen amount of time with a given stringResourceId.
+     *
+     * @param context: [Context] of the fragment that used this function.
+     * @param stringResourceId: String resource Id.
+     * @param message: Optional parameter that is needed for the string resource.
+     * @param duration: How long the toast should be shown.
      */
     @JvmStatic
     fun makeToast(context: Context, stringResourceId: Int, message: String? = null, duration: Int = Toast.LENGTH_LONG) {
@@ -25,6 +30,10 @@ object MessageUtils {
 
     /**
      * Show a dialog on the screen with a given title and message.
+     *
+     * @param context: [Context] of the fragment that used this function.
+     * @param title: Title of the dialog.
+     * @param message: Message of the dialog.
      */
     @JvmStatic
     fun showBasicDialog(context: Context, title: String, message: String) {
@@ -39,6 +48,11 @@ object MessageUtils {
     /**
      * Show a dialog on the screen with a given title and message.
      * The positive button has a given function.
+     *
+     * @param context: [Context] of the fragment that used this function.
+     * @param title: Title of the dialog.
+     * @param message: Message of the dialog.
+     * @param func: Function that is called when the positive button is clicked.
      */
     @JvmStatic
     fun showThreeButtonsPositiveFunctionDialog(context: Context, title: String, message: String, func: () -> Unit) {
@@ -55,9 +69,19 @@ object MessageUtils {
     /**
      * Show a dialog on the screen with a given title and message.
      * The dialog contains an [EditText] used to enter a suggestion.
+     *
+     * @param context: [Context] of the fragment that used this function.
+     * @param title: Title of the dialog.
+     * @param message: Message of the dialog.
+     * @param func: Function that is called when the positive button is clicked.
      */
     @JvmStatic
     fun showMakeSuggestionDialog(context: Context, title: String, message: String, func: (String) -> Unit) {
+
+        /**
+         * Programmatically created [EditText] that is used as the body of the dialog.
+         * The user can type their suggestion here and the function of the positive button uses the entered text.
+         */
         val editText = EditText(context)
         editText.setSingleLine(false)
         editText.hint = context.getString(R.string.send_suggestion_hint)
@@ -82,6 +106,11 @@ object MessageUtils {
      * Show a dialog on the screen with a given title and message.
      * The positive button has a given function.
      * The neutral button opens the privacy policy via an intent.
+     *
+     * @param context: [Context] of the fragment that used this function.
+     * @param title: Title of the dialog.
+     * @param message: Message of the dialog.
+     * @param func: Function that is called when the positive button is clicked.
      */
     @JvmStatic
     fun showPrivacyPolicyDialog(context: Context, title: String, message: String, func: () -> Unit) {

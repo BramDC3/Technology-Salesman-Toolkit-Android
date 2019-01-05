@@ -19,18 +19,18 @@ import com.bramdeconinck.technologysalesmantoolkit.utils.RoomConvertersUtils
 abstract class ServiceDatabase : RoomDatabase() {
 
     /**
-     * The [ServiceDao] used to interact with the [Service] objects of the [RoomDatabase]
+     * The [ServiceDao] used to interact with the [Service] objects of the [RoomDatabase].
      */
     abstract fun serviceDao() : ServiceDao
 
     /**
-     * The [InstructionDao] used to interact with the [Instruction] objects of the [RoomDatabase]
+     * The [InstructionDao] used to interact with the [Instruction] objects of the [RoomDatabase].
      */
     abstract fun instructionDao() : InstructionDao
 
     /**
      * The instance of the [ServiceDatabase].
-     * If doesn't exist yet, it is created before it is returned.
+     * If doesn't exist yet, it is initialized before it is returned.
      */
     companion object {
         private var instance : ServiceDatabase? = null

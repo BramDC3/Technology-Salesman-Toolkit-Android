@@ -31,12 +31,22 @@ class LoginFragment : Fragment(), ToastMaker {
 
     /**
      * [loginViewModel] contains all data and functions that have to do with logging in.
-     * [binding] is used for data binding.
-     * [gso] and [googleSignInClient] are used for Google authentication.
      */
     private lateinit var loginViewModel: LoginViewModel
+
+    /**
+     * [binding] is used for data binding.
+     */
     private lateinit var binding: FragmentLoginBinding
+
+    /**
+     * [gso] are the [GoogleSignInOptions] used to sign in with a Google account.
+     */
     private lateinit var gso: GoogleSignInOptions
+
+    /**
+     * [googleSignInClient] is the screen users can see to sign in with their Google account.
+     */
     private lateinit var googleSignInClient: GoogleSignInClient
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -65,12 +75,6 @@ class LoginFragment : Fragment(), ToastMaker {
         subscribeToObservables()
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-
-        loginViewModel.clearLoginForm()
-    }
-
     /**
      * Function to subscribe to the observables of the [LoginViewModel].
      */
@@ -85,7 +89,7 @@ class LoginFragment : Fragment(), ToastMaker {
     }
 
     /**
-     * Function to open an intent for authenticating with a Google account.
+     * Function to open a screen for signing in with a Google account.
      */
     private fun signInWithGoogle() {
         val signInIntent: Intent = googleSignInClient.signInIntent
@@ -107,13 +111,24 @@ class LoginFragment : Fragment(), ToastMaker {
         }
     }
 
+    /**
+     * Function for navigating to the [ServiceListFragment] and welcoming the user.
+     */
     private fun goToServiceList() {
         makeToast(context!!, R.string.message_welcome, firebaseUser!!.displayName)
         findNavController().navigate(R.id.toServiceList)
     }
 
+    /**
+     * Function for navigating to the [RegistrationFragment].
+     */
     private fun goToRegistration() { findNavController().navigate(R.id.toRegistration) }
 
+    /**
+     * Function for showing a toast message.
+     *
+     * @param [message]: String resource Id.
+     */
     override fun showToast(message: Int) { makeToast(context!!, message) }
 
 }

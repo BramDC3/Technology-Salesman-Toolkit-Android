@@ -26,14 +26,23 @@ import kotlinx.android.synthetic.main.fragment_service_detail.*
 class ServiceDetailFragment : Fragment(), ToastMaker {
 
     /**
-     * [service] is the selected [Service].
-     * [serviceViewModel] contains all data and functions that have to do with [Service] and [Instruction] objects.
-     * [instructions] are the instructions of [service].
-     * [pagerAdapter] is used to prepare [ServiceInstructionFragment] to be shown in a ViewPager.
+     * [service] is the currently selected [Service].
      */
     private lateinit var service: Service
+
+    /**
+     * [serviceViewModel] contains all data and functions that have to do with [Service] and [Instruction] objects.
+     */
     private lateinit var serviceViewModel: ServiceViewModel
+
+    /**
+     * [instructions] are the instructions of [service].
+     */
     private lateinit var instructions: LiveData<List<Instruction>>
+
+    /**
+     * [pagerAdapter] is used to prepare all [ServiceInstructionFragment] fragments for the ViewPager.
+     */
     private lateinit var pagerAdapter: FragmentStatePagerAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -51,7 +60,7 @@ class ServiceDetailFragment : Fragment(), ToastMaker {
 
         subscribeToObservables()
 
-        setSupportActionBarTitle(service.name)
+        setSupportActionBarTitle()
     }
 
     /**
@@ -99,8 +108,13 @@ class ServiceDetailFragment : Fragment(), ToastMaker {
     /**
      * Function to change the title of the action bar to the name of [service].
      */
-    private fun setSupportActionBarTitle(title: String?) { (activity as ToolbarTitleChanger).updateTitle(title) }
+    private fun setSupportActionBarTitle() { (activity as ToolbarTitleChanger).updateTitle(service.name) }
 
+    /**
+     * Function for showing a toast message.
+     *
+     * @param [message]: String resource Id.
+     */
     override fun showToast(message: Int) { MessageUtils.makeToast(context!!, message)  }
 
 }

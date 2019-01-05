@@ -16,8 +16,6 @@ import androidx.navigation.fragment.findNavController
 import com.bramdeconinck.technologysalesmantoolkit.databinding.FragmentSettingsBinding
 import com.bramdeconinck.technologysalesmantoolkit.utils.BaseCommand
 import com.bramdeconinck.technologysalesmantoolkit.interfaces.ToastMaker
-import com.bramdeconinck.technologysalesmantoolkit.models.Instruction
-import com.bramdeconinck.technologysalesmantoolkit.models.Service
 import com.bramdeconinck.technologysalesmantoolkit.utils.PRIVACY_POLICY
 import com.bramdeconinck.technologysalesmantoolkit.utils.TEST_WEBSITE
 import com.bramdeconinck.technologysalesmantoolkit.utils.MessageUtils.makeToast
@@ -25,7 +23,6 @@ import com.bramdeconinck.technologysalesmantoolkit.utils.MessageUtils.showMakeSu
 import com.bramdeconinck.technologysalesmantoolkit.utils.MessageUtils.showThreeButtonsPositiveFunctionDialog
 import com.bramdeconinck.technologysalesmantoolkit.utils.WebpageUtils.openWebPage
 import com.bramdeconinck.technologysalesmantoolkit.utils.SHARED_PREFERENCES_KEY_THEME
-import com.bramdeconinck.technologysalesmantoolkit.viewmodels.ServiceViewModel
 import com.bramdeconinck.technologysalesmantoolkit.viewmodels.SettingsViewModel
 
 /**
@@ -35,9 +32,12 @@ class SettingsFragment : Fragment(), ToastMaker {
 
     /**
      * [settingsViewModel] contains all data and functions that have to do with the settings.
-     * [binding] is used for data binding.
      */
     private lateinit var settingsViewModel: SettingsViewModel
+
+    /**
+     * [binding] is used for data binding.
+     */
     private lateinit var binding: FragmentSettingsBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -66,34 +66,11 @@ class SettingsFragment : Fragment(), ToastMaker {
 
         settingsViewModel.visitPrivacyPolicyClicked.observe(this, Observer { openWebPage(context!!, PRIVACY_POLICY) })
 
-        settingsViewModel.isDarkModeEnabled.observe(this, Observer {
-            if (it!!) {
-                (activity as AppCompatActivity).delegate.setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-                saveSelectedTheme(AppCompatDelegate.MODE_NIGHT_YES)
-            }
-            else {
-                (activity as AppCompatActivity).delegate.setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-                saveSelectedTheme(AppCompatDelegate.MODE_NIGHT_NO)
-            }
-        })
+        settingsViewModel.isDarkModeEnabled.observe(this, Observer { changeSelectedTheme(it!!) })
 
-        settingsViewModel.makeSuggestionClicked.observe(this, Observer {
-            showMakeSuggestionDialog(
-                    context!!,
-                    getString(R.string.title_send_suggestion),
-                    getString(R.string.message_send_suggestion),
-                    settingsViewModel.getSuggestion()
-            )
-        })
+        settingsViewModel.makeSuggestionClicked.observe(this, Observer { makeSuggestion() })
 
-        settingsViewModel.showSignOutDialogClicked.observe(this, Observer {
-            showThreeButtonsPositiveFunctionDialog(
-                    context!!,
-                    getString(R.string.title_sign_out),
-                    getString(R.string.message_sign_out),
-                    settingsViewModel.signOut()
-            )
-        })
+        settingsViewModel.showSignOutDialogClicked.observe(this, Observer { signOutRequested() })
 
         settingsViewModel.emptySuggestion.observe(this, Observer { showToast(R.string.send_suggestion_empty_error) })
 
@@ -104,17 +81,62 @@ class SettingsFragment : Fragment(), ToastMaker {
             }
         })
 
-        settingsViewModel.signOutTriggered.observe(this, Observer { findNavController().navigate(R.id.signOutFromSettings) })
+        settingsViewModel.signOutTriggered.observe(this, Observer { signOutTriggered() })
     }
 
     /**
-     * Function to store the selected theme in the Shared Preferences.
+     * Function for displaying a dialog where users can make a suggestion.
      */
-    private fun saveSelectedTheme(theme: Int) {
+    private fun makeSuggestion() {
+        showMakeSuggestionDialog(
+                context!!,
+                getString(R.string.title_send_suggestion),
+                getString(R.string.message_send_suggestion),
+                settingsViewModel.getSuggestion()
+        )
+    }
+
+    /**
+     * Function for displaying a dialog where users can choose whether they want to sign out or not.
+     */
+    private fun signOutRequested() {
+        showThreeButtonsPositiveFunctionDialog(
+                context!!,
+                getString(R.string.title_sign_out),
+                getString(R.string.message_sign_out),
+                settingsViewModel.signOut()
+        )
+    }
+
+    /**
+     * Function called when the user signed out to redirect them to the [LoginFragment].
+     */
+    private fun signOutTriggered() { findNavController().navigate(R.id.signOutFromSettings) }
+
+    /**
+     * Function to change the theme of the app to day or night mode and save this preference.
+     *
+     * @param [night]: Indicates whether the selected theme should be night theme or day theme.
+     */
+    private fun changeSelectedTheme(night: Boolean) {
+         val theme = if (night) {
+            (activity as AppCompatActivity).delegate.setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            AppCompatDelegate.MODE_NIGHT_YES
+        }
+        else {
+            (activity as AppCompatActivity).delegate.setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            AppCompatDelegate.MODE_NIGHT_NO
+        }
+
         val sharedPref = PreferenceManager.getDefaultSharedPreferences(context)
         sharedPref.edit().putInt(SHARED_PREFERENCES_KEY_THEME, theme).apply()
     }
 
+    /**
+     * Function for showing a toast message.
+     *
+     * @param [message]: String resource Id.
+     */
     override fun showToast(message: Int) { makeToast(context!!, message) }
 
 }

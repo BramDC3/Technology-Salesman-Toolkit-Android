@@ -35,4 +35,10 @@
     <!-- Color for hint text -->
     <color name="colorHintText">#808080</color>
 
+    <!-- Color for the stroke of the background of an edit text -->
+    <color name="colorGreyStrokeAndIcon">#453F3F</color>
+
+    <!-- Color for the background of the buttons of the forms -->
+    <color name="colorBlueButtonFormField">#D173A1C7</color>
+
 </resources>

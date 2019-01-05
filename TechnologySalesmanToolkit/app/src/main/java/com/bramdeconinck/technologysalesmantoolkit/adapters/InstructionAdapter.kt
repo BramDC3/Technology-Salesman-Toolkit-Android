@@ -21,13 +21,17 @@ class InstructionAdapter(
     /**
      * Function that fetches an Instruction.
      *
-     * @return [ServiceInstructionFragment]: Returns a [ServiceInstructionFragment] for the ViewPager with the id of the [Instruction] as a parameter.
+     * @param [index]: Index of the [Instruction] that is requested.
+     * @return [Fragment]: Returns a [ServiceInstructionFragment] for the ViewPager with the id of the [Instruction] as a parameter.
      */
-    override fun getItem(p0: Int): Fragment {
-        val item = instructions.value!![p0]
+    override fun getItem(index: Int): Fragment {
+        val item = instructions.value!![index]
 
         return ServiceInstructionFragment().apply { arguments = Bundle().apply { putString(INSTRUCTION_ITEM, item.id) } }
     }
 
+    /**
+     * Function that returns the amount of [Instruction] objects.
+     */
     override fun getCount() = instructions.value!!.size
 }
