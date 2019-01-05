@@ -111,7 +111,10 @@ class ProfileFragment : Fragment(), ToastMaker {
          */
         Glide.with(this)
                 .load(firebaseUser!!.photoUrl ?: R.drawable.default_profile_picture)
-                .apply(RequestOptions.circleCropTransform())
+                .apply(RequestOptions
+                    .circleCropTransform()
+                    .error(R.drawable.default_profile_picture)
+                    .placeholder(R.drawable.default_profile_picture))
                 .into(iv_profile_profile_picture)
 
         tv_profile_fullname.text = firebaseUser!!.displayName

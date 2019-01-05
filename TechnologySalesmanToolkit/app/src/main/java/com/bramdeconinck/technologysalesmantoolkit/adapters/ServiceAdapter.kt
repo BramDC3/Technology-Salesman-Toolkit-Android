@@ -19,6 +19,7 @@ import com.bramdeconinck.technologysalesmantoolkit.models.Service
 import com.bramdeconinck.technologysalesmantoolkit.utils.StringUtils.formatPrice
 import com.bramdeconinck.technologysalesmantoolkit.viewmodels.ServiceViewModel
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import kotlinx.android.synthetic.main.service_list_content.view.*
 
 /**
@@ -78,7 +79,12 @@ class ServiceAdapter(
         /**
          * [Glide] is used to load the image of the [Service] into the ImageView.
          */
-        Glide.with(fragment).load(item.image).into(holder.imageView)
+        Glide.with(fragment)
+            .load(item.image)
+            .apply(RequestOptions()
+                .error(R.drawable.logo)
+                .placeholder(R.drawable.logo))
+            .into(holder.imageView)
 
         holder.nameView.text = item.name
         holder.descriptionView.text = item.description
