@@ -9,7 +9,7 @@
 <br/>
 <h1>ServiceDao</h1>
 <code><span class="keyword">interface </span><span class="identifier">ServiceDao</span></code>
-<p>The <a href="./index.html">ServiceDao</a> is a Data Access Object where the database interactions are defined.
+<p>The <a href="./index.html">ServiceDao</a> is a Data Access Object where database interactions are defined.
 They can include a variety of query methods for <a href="../../com.bramdeconinck.technologysalesmantoolkit.models/-service/index.html">Service</a> objects.</p>
 <h3>Functions</h3>
 <table>
@@ -19,21 +19,27 @@ They can include a variety of query methods for <a href="../../com.bramdeconinck
 <p><a href="delete-all-services.html">deleteAllServices</a></p>
 </td>
 <td>
-<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">deleteAllServices</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">deleteAllServices</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Function to delete all <a href="../../com.bramdeconinck.technologysalesmantoolkit.models/-service/index.html">Service</a> objects stored in the Room database.</p>
+</td>
 </tr>
 <tr>
 <td>
 <p><a href="get-all-services.html">getAllServices</a></p>
 </td>
 <td>
-<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">getAllServices</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">LiveData</span><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><a href="../../com.bramdeconinck.technologysalesmantoolkit.models/-service/index.html"><span class="identifier">Service</span></a><span class="symbol">&gt;</span><span class="symbol">&gt;</span></code></td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">getAllServices</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">LiveData</span><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><a href="../../com.bramdeconinck.technologysalesmantoolkit.models/-service/index.html"><span class="identifier">Service</span></a><span class="symbol">&gt;</span><span class="symbol">&gt;</span></code>
+<p>Function to fetch all <a href="../../com.bramdeconinck.technologysalesmantoolkit.models/-service/index.html">Service</a> objects stored in the Room database.</p>
+</td>
 </tr>
 <tr>
 <td>
 <p><a href="insert-service.html">insertService</a></p>
 </td>
 <td>
-<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">insertService</span><span class="symbol">(</span><span class="identifier" id="com.bramdeconinck.technologysalesmantoolkit.database.daos.ServiceDao$insertService(com.bramdeconinck.technologysalesmantoolkit.models.Service)/service">service</span><span class="symbol">:</span>&nbsp;<a href="../../com.bramdeconinck.technologysalesmantoolkit.models/-service/index.html"><span class="identifier">Service</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">insertService</span><span class="symbol">(</span><span class="identifier" id="com.bramdeconinck.technologysalesmantoolkit.database.daos.ServiceDao$insertService(com.bramdeconinck.technologysalesmantoolkit.models.Service)/service">service</span><span class="symbol">:</span>&nbsp;<a href="../../com.bramdeconinck.technologysalesmantoolkit.models/-service/index.html"><span class="identifier">Service</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Function to insert a <a href="../../com.bramdeconinck.technologysalesmantoolkit.models/-service/index.html">Service</a> into the Room database.</p>
+</td>
 </tr>
 </tbody>
 </table>

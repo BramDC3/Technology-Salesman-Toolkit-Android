@@ -8,8 +8,7 @@ com.bramdeconinck.technologysalesmantoolkit.context
 com.bramdeconinck.technologysalesmantoolkit.database
 com.bramdeconinck.technologysalesmantoolkit.database.daos
 com.bramdeconinck.technologysalesmantoolkit.fragments
-com.bramdeconinck.technologysalesmantoolkit.injection.component
-com.bramdeconinck.technologysalesmantoolkit.injection.module
+com.bramdeconinck.technologysalesmantoolkit.injection
 com.bramdeconinck.technologysalesmantoolkit.interfaces
 com.bramdeconinck.technologysalesmantoolkit.models
 com.bramdeconinck.technologysalesmantoolkit.network

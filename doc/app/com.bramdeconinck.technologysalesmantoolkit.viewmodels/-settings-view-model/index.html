@@ -32,7 +32,9 @@
 <p><a href="empty-suggestion.html">emptySuggestion</a></p>
 </td>
 <td>
-<code><span class="keyword">val </span><span class="identifier">emptySuggestion</span><span class="symbol">: </span><a href="../../com.bramdeconinck.technologysalesmantoolkit.utils/-single-live-event/index.html"><span class="identifier">SingleLiveEvent</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span></code></td>
+<code><span class="keyword">val </span><span class="identifier">emptySuggestion</span><span class="symbol">: </span><a href="../../com.bramdeconinck.technologysalesmantoolkit.utils/-single-live-event/index.html"><span class="identifier">SingleLiveEvent</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span></code>
+<p><a href="../../com.bramdeconinck.technologysalesmantoolkit.utils/-single-live-event/index.html">SingleLiveEvent</a> indicating that the user didn't enter a suggestion but wanted to send it anyway.</p>
+</td>
 </tr>
 <tr>
 <td>
@@ -40,7 +42,7 @@
 </td>
 <td>
 <code><span class="keyword">lateinit</span> <span class="keyword">var </span><span class="identifier">firestoreAPI</span><span class="symbol">: </span><a href="../../com.bramdeconinck.technologysalesmantoolkit.network/-firestore-a-p-i/index.html"><span class="identifier">FirestoreAPI</span></a></code>
-<p>Injection of the <a href="firestore-a-p-i.html">firestoreAPI</a> and <a href="shared-preferences.html">sharedPreferences</a>.</p>
+<p>Injection of the <a href="../../com.bramdeconinck.technologysalesmantoolkit.network/-firestore-a-p-i/index.html">FirestoreAPI</a> using Dagger.</p>
 </td>
 </tr>
 <tr>
@@ -55,42 +57,55 @@
 <p><a href="make-suggestion-clicked.html">makeSuggestionClicked</a></p>
 </td>
 <td>
-<code><span class="keyword">val </span><span class="identifier">makeSuggestionClicked</span><span class="symbol">: </span><a href="../../com.bramdeconinck.technologysalesmantoolkit.utils/-single-live-event/index.html"><span class="identifier">SingleLiveEvent</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span></code></td>
+<code><span class="keyword">val </span><span class="identifier">makeSuggestionClicked</span><span class="symbol">: </span><a href="../../com.bramdeconinck.technologysalesmantoolkit.utils/-single-live-event/index.html"><span class="identifier">SingleLiveEvent</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span></code>
+<p><a href="../../com.bramdeconinck.technologysalesmantoolkit.utils/-single-live-event/index.html">SingleLiveEvent</a> indicating that the user wants to make a suggestion.</p>
+</td>
 </tr>
 <tr>
 <td>
 <p><a href="shared-preferences.html">sharedPreferences</a></p>
 </td>
 <td>
-<code><span class="keyword">lateinit</span> <span class="keyword">var </span><span class="identifier">sharedPreferences</span><span class="symbol">: </span><a href="https://developer.android.com/reference/android/content/SharedPreferences.html"><span class="identifier">SharedPreferences</span></a></code></td>
+<code><span class="keyword">lateinit</span> <span class="keyword">var </span><span class="identifier">sharedPreferences</span><span class="symbol">: </span><a href="https://developer.android.com/reference/android/content/SharedPreferences.html"><span class="identifier">SharedPreferences</span></a></code>
+<p>Injection of the <a href="shared-preferences.html">sharedPreferences</a> using Dagger.</p>
+</td>
 </tr>
 <tr>
 <td>
 <p><a href="show-sign-out-dialog-clicked.html">showSignOutDialogClicked</a></p>
 </td>
 <td>
-<code><span class="keyword">val </span><span class="identifier">showSignOutDialogClicked</span><span class="symbol">: </span><a href="../../com.bramdeconinck.technologysalesmantoolkit.utils/-single-live-event/index.html"><span class="identifier">SingleLiveEvent</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span></code></td>
+<code><span class="keyword">val </span><span class="identifier">showSignOutDialogClicked</span><span class="symbol">: </span><a href="../../com.bramdeconinck.technologysalesmantoolkit.utils/-single-live-event/index.html"><span class="identifier">SingleLiveEvent</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span></code>
+<p><a href="../../com.bramdeconinck.technologysalesmantoolkit.utils/-single-live-event/index.html">SingleLiveEvent</a> indicating that the user wants to sign out.</p>
+</td>
 </tr>
 <tr>
 <td>
 <p><a href="sign-out-triggered.html">signOutTriggered</a></p>
 </td>
 <td>
-<code><span class="keyword">val </span><span class="identifier">signOutTriggered</span><span class="symbol">: </span><a href="../../com.bramdeconinck.technologysalesmantoolkit.utils/-single-live-event/index.html"><span class="identifier">SingleLiveEvent</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span></code></td>
+<code><span class="keyword">val </span><span class="identifier">signOutTriggered</span><span class="symbol">: </span><a href="../../com.bramdeconinck.technologysalesmantoolkit.utils/-single-live-event/index.html"><span class="identifier">SingleLiveEvent</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span></code>
+<p><a href="../../com.bramdeconinck.technologysalesmantoolkit.utils/-single-live-event/index.html">SingleLiveEvent</a> indicating that the user wants to sign out.</p>
+</td>
 </tr>
 <tr>
 <td>
 <p><a href="suggestion-callback.html">suggestionCallback</a></p>
 </td>
 <td>
-<code><span class="keyword">val </span><span class="identifier">suggestionCallback</span><span class="symbol">: </span><a href="../../com.bramdeconinck.technologysalesmantoolkit.utils/-single-live-event/index.html"><span class="identifier">SingleLiveEvent</span></a><span class="symbol">&lt;</span><a href="../../com.bramdeconinck.technologysalesmantoolkit.utils/-base-command/index.html"><span class="identifier">BaseCommand</span></a><span class="symbol">&gt;</span></code></td>
+<code><span class="keyword">val </span><span class="identifier">suggestionCallback</span><span class="symbol">: </span><a href="../../com.bramdeconinck.technologysalesmantoolkit.utils/-single-live-event/index.html"><span class="identifier">SingleLiveEvent</span></a><span class="symbol">&lt;</span><a href="../../com.bramdeconinck.technologysalesmantoolkit.utils/-base-command/index.html"><span class="identifier">BaseCommand</span></a><span class="symbol">&gt;</span></code>
+<p><a href="../../com.bramdeconinck.technologysalesmantoolkit.utils/-single-live-event/index.html">SingleLiveEvent</a> indicating that an event occurred when sending a suggestion.
+It's value is a <a href="../../com.bramdeconinck.technologysalesmantoolkit.utils/-base-command/index.html">BaseCommand</a>.</p>
+</td>
 </tr>
 <tr>
 <td>
 <p><a href="visit-privacy-policy-clicked.html">visitPrivacyPolicyClicked</a></p>
 </td>
 <td>
-<code><span class="keyword">val </span><span class="identifier">visitPrivacyPolicyClicked</span><span class="symbol">: </span><a href="../../com.bramdeconinck.technologysalesmantoolkit.utils/-single-live-event/index.html"><span class="identifier">SingleLiveEvent</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span></code></td>
+<code><span class="keyword">val </span><span class="identifier">visitPrivacyPolicyClicked</span><span class="symbol">: </span><a href="../../com.bramdeconinck.technologysalesmantoolkit.utils/-single-live-event/index.html"><span class="identifier">SingleLiveEvent</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span></code>
+<p><a href="../../com.bramdeconinck.technologysalesmantoolkit.utils/-single-live-event/index.html">SingleLiveEvent</a> indicating that the user wants to see the privacy policy.</p>
+</td>
 </tr>
 <tr>
 <td>
@@ -98,7 +113,7 @@
 </td>
 <td>
 <code><span class="keyword">val </span><span class="identifier">visitWebsiteClicked</span><span class="symbol">: </span><a href="../../com.bramdeconinck.technologysalesmantoolkit.utils/-single-live-event/index.html"><span class="identifier">SingleLiveEvent</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span></code>
-<p><a href="../../com.bramdeconinck.technologysalesmantoolkit.utils/-single-live-event/index.html">SingleLiveEvent</a> objects used to emit events.</p>
+<p><a href="../../com.bramdeconinck.technologysalesmantoolkit.utils/-single-live-event/index.html">SingleLiveEvent</a> indicating that the user wants to visit the website.</p>
 </td>
 </tr>
 </tbody>
@@ -112,7 +127,7 @@
 </td>
 <td>
 <code><span class="keyword">fun </span><span class="identifier">getSuggestion</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="symbol">(</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
-<p>Function that is gives as a parameter in a dialog that retrieves a String.</p>
+<p>Function that is given as a parameter in a dialog that retrieves the suggestion as a <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>.</p>
 </td>
 </tr>
 <tr>
@@ -120,56 +135,72 @@
 <p><a href="make-suggestion.html">makeSuggestion</a></p>
 </td>
 <td>
-<code><span class="keyword">fun </span><span class="identifier">makeSuggestion</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+<code><span class="keyword">fun </span><span class="identifier">makeSuggestion</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Function that gets called when the Make A Suggestion button is clicked.</p>
+</td>
 </tr>
 <tr>
 <td>
 <p><a href="show-failure-message.html">showFailureMessage</a></p>
 </td>
 <td>
-<code><span class="keyword">fun </span><span class="identifier">showFailureMessage</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+<code><span class="keyword">fun </span><span class="identifier">showFailureMessage</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Function that gets triggered when an error occurred while posting the suggestion.</p>
+</td>
 </tr>
 <tr>
 <td>
 <p><a href="show-sign-out-dialog.html">showSignOutDialog</a></p>
 </td>
 <td>
-<code><span class="keyword">fun </span><span class="identifier">showSignOutDialog</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+<code><span class="keyword">fun </span><span class="identifier">showSignOutDialog</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Function that gets triggered when the Sign Out button is clicked.</p>
+</td>
 </tr>
 <tr>
 <td>
 <p><a href="show-success-message.html">showSuccessMessage</a></p>
 </td>
 <td>
-<code><span class="keyword">fun </span><span class="identifier">showSuccessMessage</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+<code><span class="keyword">fun </span><span class="identifier">showSuccessMessage</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Function that gets triggered when the suggestion is successfully posted.</p>
+</td>
 </tr>
 <tr>
 <td>
 <p><a href="sign-out.html">signOut</a></p>
 </td>
 <td>
-<code><span class="keyword">fun </span><span class="identifier">signOut</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+<code><span class="keyword">fun </span><span class="identifier">signOut</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Function that signs the user out.</p>
+</td>
 </tr>
 <tr>
 <td>
 <p><a href="toggle-dark-mode.html">toggleDarkMode</a></p>
 </td>
 <td>
-<code><span class="keyword">fun </span><span class="identifier">toggleDarkMode</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+<code><span class="keyword">fun </span><span class="identifier">toggleDarkMode</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Function that gets called when the Dark Mode button is clicked.</p>
+</td>
 </tr>
 <tr>
 <td>
 <p><a href="visit-privacy-policy.html">visitPrivacyPolicy</a></p>
 </td>
 <td>
-<code><span class="keyword">fun </span><span class="identifier">visitPrivacyPolicy</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+<code><span class="keyword">fun </span><span class="identifier">visitPrivacyPolicy</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Function that gets called when the Show Privacy Policy button is clicked.</p>
+</td>
 </tr>
 <tr>
 <td>
 <p><a href="visit-website.html">visitWebsite</a></p>
 </td>
 <td>
-<code><span class="keyword">fun </span><span class="identifier">visitWebsite</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+<code><span class="keyword">fun </span><span class="identifier">visitWebsite</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Function that gets called when the Visit Website button is clicked.</p>
+</td>
 </tr>
 </tbody>
 </table>

@@ -12,7 +12,7 @@
 <td>
 <a href="../com.bramdeconinck.technologysalesmantoolkit.context/-app/index.html">com.bramdeconinck.technologysalesmantoolkit.context.App</a></td>
 <td>
-<p>The <a href="../com.bramdeconinck.technologysalesmantoolkit.context/-app/index.html">App</a> class is used to construct a <a href="../com.bramdeconinck.technologysalesmantoolkit.injection.module/-network-module/index.html">NetworkModule</a> with the application context,
+<p>The <a href="../com.bramdeconinck.technologysalesmantoolkit.context/-app/index.html">App</a> class is used to construct a <a href="../com.bramdeconinck.technologysalesmantoolkit.injection/-network-module/index.html">NetworkModule</a> with the application context,
 which is used to create a local database with Room.</p>
 </td>
 </tr>
@@ -79,8 +79,7 @@ but in layman's terms, sealed classes are similar to enums and we use it to emit
 <td>
 <a href="../com.bramdeconinck.technologysalesmantoolkit.models/-instruction/index.html">com.bramdeconinck.technologysalesmantoolkit.models.Instruction</a></td>
 <td>
-<p>The @Entity annotation is used to indicate that this domain object can be used by Room.
-The tableName parameter signifies the name of the table in which objects of this type will be saved.</p>
+<p>The <a href="#">Entity</a> annotation is used to indicate that this domain object can be used by Room.</p>
 </td>
 </tr>
 <tr>
@@ -94,7 +93,7 @@ The tableName parameter signifies the name of the table in which objects of this
 <td>
 <a href="../com.bramdeconinck.technologysalesmantoolkit.database.daos/-instruction-dao/index.html">com.bramdeconinck.technologysalesmantoolkit.database.daos.InstructionDao</a></td>
 <td>
-<p>The <a href="../com.bramdeconinck.technologysalesmantoolkit.database.daos/-instruction-dao/index.html">InstructionDao</a> is a Data Access Object where the database interactions are defined.
+<p>The <a href="../com.bramdeconinck.technologysalesmantoolkit.database.daos/-instruction-dao/index.html">InstructionDao</a> is a Data Access Object where database instructions are defined.
 They can include a variety of query methods for <a href="../com.bramdeconinck.technologysalesmantoolkit.models/-instruction/index.html">Instruction</a> objects.</p>
 </td>
 </tr>
@@ -136,9 +135,11 @@ It's the only activity of this project.</p>
 </tr>
 <tr>
 <td>
-<a href="../com.bramdeconinck.technologysalesmantoolkit.injection.module/-network-module/index.html">com.bramdeconinck.technologysalesmantoolkit.injection.module.NetworkModule</a></td>
+<a href="../com.bramdeconinck.technologysalesmantoolkit.injection/-network-module/index.html">com.bramdeconinck.technologysalesmantoolkit.injection.NetworkModule</a></td>
 <td>
-<p>Module which provides all required dependencies for the network, database and shared preferences.</p>
+<p>Module which provides all required dependencies for the network, database and shared preferences.
+Methods annotated with @Provides informs Dagger that this method can provide a certain dependency.
+Methods annotated with @Singleton indicate that Dagger should only instantiate the dependency once and provide that some object on further requests.</p>
 </td>
 </tr>
 <tr>
@@ -180,8 +181,7 @@ It's the only activity of this project.</p>
 <td>
 <a href="../com.bramdeconinck.technologysalesmantoolkit.models/-service/index.html">com.bramdeconinck.technologysalesmantoolkit.models.Service</a></td>
 <td>
-<p>The @Entity annotation is used to indicate that this domain object can be used by Room.
-The tableName parameter signifies the name of the table in which objects of this type will be saved.</p>
+<p>The <a href="#">Entity</a> annotation is used to indicate that this domain object can be used by Room.</p>
 </td>
 </tr>
 <tr>
@@ -195,7 +195,7 @@ The tableName parameter signifies the name of the table in which objects of this
 <td>
 <a href="../com.bramdeconinck.technologysalesmantoolkit.database.daos/-service-dao/index.html">com.bramdeconinck.technologysalesmantoolkit.database.daos.ServiceDao</a></td>
 <td>
-<p>The <a href="../com.bramdeconinck.technologysalesmantoolkit.database.daos/-service-dao/index.html">ServiceDao</a> is a Data Access Object where the database interactions are defined.
+<p>The <a href="../com.bramdeconinck.technologysalesmantoolkit.database.daos/-service-dao/index.html">ServiceDao</a> is a Data Access Object where database interactions are defined.
 They can include a variety of query methods for <a href="../com.bramdeconinck.technologysalesmantoolkit.models/-service/index.html">Service</a> objects.</p>
 </td>
 </tr>
@@ -294,7 +294,7 @@ navigation and Snackbar messages.</p>
 </tr>
 <tr>
 <td>
-<a href="../com.bramdeconinck.technologysalesmantoolkit.injection.component/-view-model-component/index.html">com.bramdeconinck.technologysalesmantoolkit.injection.component.ViewModelComponent</a></td>
+<a href="../com.bramdeconinck.technologysalesmantoolkit.injection/-view-model-component/index.html">com.bramdeconinck.technologysalesmantoolkit.injection.ViewModelComponent</a></td>
 <td>
 <p>Component providing the inject functions for presenters.
 Components act as the bridge between the Modules that know how to provide dependencies
