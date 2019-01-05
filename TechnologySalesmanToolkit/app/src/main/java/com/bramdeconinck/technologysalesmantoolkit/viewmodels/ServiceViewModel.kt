@@ -20,14 +20,20 @@ import javax.inject.Inject
 class ServiceViewModel : InjectedViewModel(), FirebaseServiceCallback, FirebaseInstructionCallback {
 
     /**
-     * Injection of the [firestoreAPI], [serviceRepository] and [instructionRepository].
+     * Injection of the [FirestoreAPI] using Dagger.
      */
     @Inject
     lateinit var firestoreAPI: FirestoreAPI
 
+    /**
+     * Injection of the [ServiceRepository] using Dagger.
+     */
     @Inject
     lateinit var serviceRepository: ServiceRepository
 
+    /**
+     * Injection of the [InstructionRepository] using Dagger.
+     */
     @Inject
     lateinit var instructionRepository: InstructionRepository
 
@@ -77,15 +83,23 @@ class ServiceViewModel : InjectedViewModel(), FirebaseServiceCallback, FirebaseI
     val selectedService = MutableLiveData<Service>()
 
     /**
-     * Filters for services.
+     * [selectedCategory] filter [_services] on [Category].
      */
     private var selectedCategory: Category?
+
+    /**
+     * [searchQuery] filter [_services] on the name of the [Service] objects..
+     */
     private var searchQuery: String
 
     /**
-     * [SingleLiveEvent] objects used to emit events.
+     * [SingleLiveEvent] indicating an error occurred while fetching services from the Network Api.
      */
     val servicesErrorOccurred = SingleLiveEvent<Any>()
+
+    /**
+     * [SingleLiveEvent] indicating an error occurred while fetching instructions from the Network Api.
+     */
     val instructionsErrorOccurred = SingleLiveEvent<Any>()
 
     init {
@@ -109,40 +123,64 @@ class ServiceViewModel : InjectedViewModel(), FirebaseServiceCallback, FirebaseI
     }
 
     /**
-     * Function to modify the list of [Service] that should be displayed.
+     * Function to filter the list of [Service] that should be displayed.
      */
     private fun refreshServiceList() {
         if (selectedCategory != null) _services.value = allServices.value!!.filter { it.name.toLowerCase().contains(searchQuery) && it.category == selectedCategory }
         else _services.value = allServices.value!!.filter { it.name.toLowerCase().contains(searchQuery) }
     }
 
+    /**
+     * Function that applies a query to the names of [Service] objects in [_services].
+     *
+     * @param query: Value for the search filter.
+     */
     fun applySearchQuery(query: String) {
         searchQuery = query.toLowerCase()
         refreshServiceList()
     }
 
+    /**
+     * Function that applies a [Category] query to [_services].
+     *
+     * @param category: Value for the category filter.
+     */
     fun applyCategoryQuery(category: Category?) {
         selectedCategory = category
         refreshServiceList()
     }
 
+    /**
+     * Function that clears the filters on [_services] to have the full list again.
+     */
     fun clearFilters() {
         selectedCategory = null
         searchQuery = ""
         _services.value = allServices.value
     }
 
+    /**
+     * Function that fetches services from the Network Api.
+     */
     fun fetchServices() {
         clearFilters()
         firestoreAPI.fetchAllServices(this)
     }
 
-    fun fetchInstructions(serviceId: String) {
-        firestoreAPI.fetchAllInstructionsFrom(serviceId, this)
-    }
+    /**
+     * Function that fetches instructions from the Network Api.
+     *
+     * @param serviceId: Id of the [Service] the instructions belong to.
+     */
+    fun fetchInstructions(serviceId: String) { firestoreAPI.fetchAllInstructionsFrom(serviceId, this) }
 
     fun clearInstructions() { _instructions.value = mutableListOf() }
 
+    /**
+     * Function to get an [Instruction] based on it's id.
+     *
+     * @param instructionId: Id of the [Instruction].
+     */
     fun getInstructionById(instructionId: String) : Instruction { return instructions.value!!.first { it.id == instructionId } }
 
     /**
@@ -158,6 +196,8 @@ class ServiceViewModel : InjectedViewModel(), FirebaseServiceCallback, FirebaseI
 
     /**
      * Function that gets called after the instructions from the database are loaded.
+     *
+     * @param id: Id of the [Service] to which the instructions belong to.
      */
     fun onDatabaseInstructionsReady(id: String) {
         if (_instructions.value!!.isEmpty() && !roomInstructions.value.isNullOrEmpty()) {
@@ -167,30 +207,46 @@ class ServiceViewModel : InjectedViewModel(), FirebaseServiceCallback, FirebaseI
 
     /**
      * Function that updates the list of services after fetching them and also inserts them into the local database.
+     *
+     * @param services: List of [Service] retrieved from the Network Api.
      */
-    override fun onServicesCallBack(list: List<Any>) {
-        allServices.value = list.map { it as Service }
+    override fun onServicesCallBack(services: List<Any>) {
+        allServices.value = services.map { it as Service }
         doAsync { serviceRepository.insert(allServices.value!!) }
         refreshServiceList()
     }
 
+    /**
+     * Function that gets triggered when the fetching of services has begun.
+     */
     override fun showProgress() { _isLoading.value = true }
 
+    /**
+     * Function that gets triggered when the fetching of services has stopped.
+     */
     override fun hideProgress() { _isLoading.value = false }
 
+    /**
+     * Function that gets triggered when an error occurred while fetching services.
+     */
     override fun showServicesMessage() { servicesErrorOccurred.call() }
 
     /**
      * Function that updates the list of instructions after fetching them and also inserts them into the local database.
+     *
+     * @param instructions: List of [Instruction] retrieved from the Network Api.
      */
-    override fun onInstructionsCallBack(list: List<Any>) {
-        _instructions.value = list.map { it as Instruction }
+    override fun onInstructionsCallBack(instructions: List<Any>) {
+        _instructions.value = instructions.map { it as Instruction }
         doAsync {
             instructionRepository.deleteInstructionsByServiceId(_instructions.value!![0].serviceId)
             instructionRepository.insert(_instructions.value!!)
         }
     }
 
+    /**
+     * Function that gets triggered when an error occurred while fetching instructions.
+     */
     override fun showInstructionsMessage() { instructionsErrorOccurred.call() }
 
 }

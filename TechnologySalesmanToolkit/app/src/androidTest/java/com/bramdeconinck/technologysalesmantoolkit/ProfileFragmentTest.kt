@@ -58,12 +58,6 @@ class ProfileFragmentTest {
     }
 
     @Test
-    fun profilePictureClicked_OpenChangeProfilePictureDialog() {
-        onView(withId(R.id.iv_profile_profile_picture)).perform(click())
-        onView(withText(R.string.title_change_profile_picture)).check(matches(isDisplayed()))
-    }
-
-    @Test
     fun changePasswordClicked_OpenChangePasswordDialog() {
         onView(withId(R.id.tv_profile_change_password)).perform(ViewActions.scrollTo(), click())
         onView(withText(R.string.title_change_password)).check(matches(isDisplayed()))

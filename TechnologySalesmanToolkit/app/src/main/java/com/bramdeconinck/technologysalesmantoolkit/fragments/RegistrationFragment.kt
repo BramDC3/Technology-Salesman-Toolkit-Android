@@ -24,9 +24,12 @@ class RegistrationFragment : Fragment(), ToastMaker {
 
     /**
      * [registrationViewModel] contains all data and functions that have to do with creating an account.
-     * [binding] is used for data binding.
      */
     private lateinit var registrationViewModel: RegistrationViewModel
+
+    /**
+     * [binding] is used for data binding.
+     */
     private lateinit var binding: FragmentRegistrationBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -47,12 +50,6 @@ class RegistrationFragment : Fragment(), ToastMaker {
         subscribeToObservables()
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-
-        registrationViewModel.clearRegistrationForm()
-    }
-
     /**
      * Function to subscribe to the observables of the [RegistrationViewModel].
      */
@@ -64,6 +61,9 @@ class RegistrationFragment : Fragment(), ToastMaker {
         registrationViewModel.registrationEvent.observe(this, Observer { showToast(it!!)  })
     }
 
+    /**
+     * Function for displaying a dialog where users can read the privacy policy and create their account.
+     */
     private fun showPrivacyPolicyDialog() {
         showPrivacyPolicyDialog(
                 context!!,
@@ -73,6 +73,11 @@ class RegistrationFragment : Fragment(), ToastMaker {
         )
     }
 
+    /**
+     * Function for showing a toast message.
+     *
+     * @param [message]: String resource Id.
+     */
     override fun showToast(message: Int) { makeToast(context!!, message) }
 
 }

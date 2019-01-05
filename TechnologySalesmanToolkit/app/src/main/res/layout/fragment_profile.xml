@@ -26,6 +26,7 @@
             <android.support.constraint.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingBottom="16dp"
                 android:animateLayoutChanges="true">
 
                 <ImageView
@@ -57,7 +58,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="48dp"
-                    android:layout_marginBottom="32dp"
                     android:paddingTop="8dp"
                     android:paddingBottom="18dp"
                     android:paddingStart="14dp"
@@ -150,12 +150,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="32dp"
-                    android:layout_marginBottom="10dp"
                     android:onClick="@{() -> profileViewModel.resetPassword()}"
                     android:text="@string/label_change_password"
                     android:textColor="@color/colorClickableLabel"
                     android:visibility="@{safeUnbox(profileViewModel.isEditable) ? View.GONE : View.VISIBLE}"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/cl_profile_form" />

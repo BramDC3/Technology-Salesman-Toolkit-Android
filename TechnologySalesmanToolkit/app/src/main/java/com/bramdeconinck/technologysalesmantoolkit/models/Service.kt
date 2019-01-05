@@ -2,18 +2,17 @@ package com.bramdeconinck.technologysalesmantoolkit.models
 
 import android.arch.persistence.room.Entity
 import android.arch.persistence.room.PrimaryKey
-import android.os.Parcelable
 import com.google.firebase.Timestamp
-import kotlinx.android.parcel.Parcelize
 
 /**
- * The @Entity annotation is used to indicate that this domain object can be used by Room.
- * The tableName parameter signifies the name of the table in which objects of this type will be saved.
+ * The [Entity] annotation is used to indicate that this domain object can be used by Room.
+ *
+ * @param: tableName signifies the name of the table in which objects of this type will be saved.
  */
 @Entity(tableName = "service_table")
 data class Service(
         /**
-         * Each Entity needs a Primary Key
+         * Each Entity needs a [PrimaryKey]
          */
         @PrimaryKey val id: String,
         val name: String,

@@ -23,10 +23,13 @@ import kotlinx.android.synthetic.main.fragment_service_instruction.*
 class ServiceInstructionFragment : Fragment() {
 
     /**
-     * [instruction] is the selected [Instruction].
-     * [serviceViewModel] contains all data and functions that have to do with [Service] and [Instruction] objects.
+     * [instruction] is the currently selected [Instruction].
      */
     private lateinit var instruction: Instruction
+
+    /**
+     * [serviceViewModel] contains all data and functions that have to do with [Service] and [Instruction] objects.
+     */
     private lateinit var serviceViewModel: ServiceViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -36,6 +39,7 @@ class ServiceInstructionFragment : Fragment() {
          * Getting the selected instruction out of the navigation arguments.
          */
         val instructionId = arguments!!.getString(INSTRUCTION_ITEM)!!
+
 
         instruction = serviceViewModel.getInstructionById(instructionId)
 
@@ -52,6 +56,9 @@ class ServiceInstructionFragment : Fragment() {
      * Function to update the UI with data of [instruction].
      */
     private fun updateUI() {
+        /**
+         * [Glide] is used to load the image of the [instruction] into the ImageView.
+         */
         Glide.with(this)
                 .load(instruction.image)
                 .into(iv_service_instruction_image)

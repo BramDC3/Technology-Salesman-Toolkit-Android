@@ -30,11 +30,18 @@ class ProfileFragment : Fragment(), ToastMaker {
 
     /**
      * [profileViewModel] contains all data and functions that have to do with the profile of the [firebaseUser].
-     * [binding] is used for data binding.
-     * [menuItem] is used to change the icon and and tooltip of the action bar icon.
      */
     private lateinit var profileViewModel: ProfileViewModel
+
+    /**
+     * [binding] is used for data binding.
+     */
     private lateinit var binding: FragmentProfileBinding
+
+    /**
+     * [menuItem] is the menu item used for entering and exiting editing mode.
+     * It is used to change the icon and and tooltip of the action bar icon
+     */
     private lateinit var menuItem: MenuItem
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -58,13 +65,15 @@ class ProfileFragment : Fragment(), ToastMaker {
     override fun onStart() {
         super.onStart()
 
+        subscribeToObservables()
+
         updateUI()
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
 
-        profileViewModel.clearProfileForm()
+        profileViewModel.exitEditingMode()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
@@ -72,14 +81,17 @@ class ProfileFragment : Fragment(), ToastMaker {
         menuItem = menu!!.findItem(R.id.action_edit_profile)
 
         /**
-         * Normally this function would have been used in onStart,
-         * but we need the menuItem to be initialized first.
+         * Normally this function would have been in [subscribeToObservables],
+         * but we need the menuItem to be initialized first, which happens later in the lifecycle.
          */
-        subscribeToObservables()
+        profileViewModel.isEditable.observe(this, Observer { toggleEditMode(it!!) })
 
         super.onCreateOptionsMenu(menu, inflater)
     }
 
+    /**
+     * Inflating a menu with the menu item used to enter and exit editing mode.
+     */
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         return (when(item?.itemId) {
             R.id.action_edit_profile -> {
@@ -94,6 +106,9 @@ class ProfileFragment : Fragment(), ToastMaker {
      * Function to update the UI with data of the current [firebaseUser].
      */
     private fun updateUI() {
+        /**
+         * [Glide] is used to load the image of the [firebaseUser] into the ImageView.
+         */
         Glide.with(this)
                 .load(firebaseUser!!.photoUrl ?: R.drawable.default_profile_image)
                 .apply(RequestOptions.circleCropTransform())
@@ -109,8 +124,6 @@ class ProfileFragment : Fragment(), ToastMaker {
      * Function to subscribe to the observables of the [ProfileViewModel].
      */
     private fun subscribeToObservables() {
-        profileViewModel.isEditable.observe(this, Observer { toggleEditMode(it!!) })
-
         profileViewModel.profileEditFormValidation.observe(this, Observer {
             when (it) {
                 is BaseCommand.Success -> showChangeProfileDialog()
@@ -140,6 +153,8 @@ class ProfileFragment : Fragment(), ToastMaker {
     /**
      * Function to change the icon and tooltip of the [menuItem],
      * based on whether the [ProfileFragment] is in editing mode or not.
+     *
+     * @param [isEditable]: Indicates whether the user is entering or exiting editing mode.
      */
     private fun toggleEditMode(isEditable: Boolean) {
         if (isEditable) {
@@ -152,6 +167,9 @@ class ProfileFragment : Fragment(), ToastMaker {
         }
     }
 
+    /**
+     * Function for displaying a dialog where users can choose whether to apply their profile changes or not.
+     */
     private fun showChangeProfileDialog() {
         showThreeButtonsPositiveFunctionDialog(
                 context!!,
@@ -161,16 +179,30 @@ class ProfileFragment : Fragment(), ToastMaker {
         )
     }
 
+    /**
+     * Function for displaying a dialog mentioning that the name of the user has been changed.
+     *
+     * @param [message]: String resource Id
+     */
     private fun applyNameChanges(message: Int) {
         showDialog(R.string.title_change_name, message)
         updateUI()
     }
 
+    /**
+     * Function for displaying a dialog mentioning that the email address of the user has been changed
+     * and redirecting the user back to the [LoginFragment].
+     *
+     * @param [message]: String resource Id
+     */
     private fun applyEmailChanges(message: Int) {
         showDialog(R.string.title_change_email, message)
         findNavController().navigate(R.id.signOutFromProfile)
     }
 
+    /**
+     * Function for displaying a dialog where users can choose whether they want to change their password or not.
+     */
     private fun showResetPasswordDialog() {
         showThreeButtonsPositiveFunctionDialog(
                 context!!,
@@ -180,8 +212,19 @@ class ProfileFragment : Fragment(), ToastMaker {
         )
     }
 
+    /**
+     * Function for showing a basic dialog.
+     *
+     * @param [title]: String resource Id for the title of the dialog.
+     * @param [message]: String resource Id for the message of the dialog.
+     */
     private fun showDialog(title: Int, message: Int) { showBasicDialog(context!!, getString(title), getString(message)) }
 
+    /**
+     * Function for showing a toast message.
+     *
+     * @param [message]: String resource Id.
+     */
     override fun showToast(message: Int) { makeToast(context!!, message) }
 
 }

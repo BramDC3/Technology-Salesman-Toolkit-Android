@@ -1,4 +1,4 @@
-package com.bramdeconinck.technologysalesmantoolkit.injection.module
+package com.bramdeconinck.technologysalesmantoolkit.injection
 
 import android.content.Context
 import android.content.SharedPreferences
@@ -15,7 +15,6 @@ import javax.inject.Singleton
 
 /**
  * Module which provides all required dependencies for the network, database and shared preferences.
- *
  * Methods annotated with @Provides informs Dagger that this method can provide a certain dependency.
  * Methods annotated with @Singleton indicate that Dagger should only instantiate the dependency once and provide that some object on further requests.
  */
@@ -80,7 +79,7 @@ class NetworkModule(private val context: Context) {
 
     /**
      * Provides the Application Context implementation.
-     * The [Context] is used to create the [ServiceDatabase].
+     * The [Context] is used to create the [ServiceDatabase] and provide the [SharedPreferences].
      */
     @Provides
     @Singleton

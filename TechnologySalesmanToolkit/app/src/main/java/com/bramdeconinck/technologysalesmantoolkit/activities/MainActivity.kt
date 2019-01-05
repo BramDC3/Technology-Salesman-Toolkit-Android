@@ -83,6 +83,9 @@ class MainActivity : AppCompatActivity(), ToolbarTitleChanger {
         }
     }
 
+    /**
+     * Function to hide the action bar and bottom navigation view.
+     */
     private fun hideActionBarAndBottomNavigationView() {
         supportActionBar!!.hide()
 
@@ -96,6 +99,9 @@ class MainActivity : AppCompatActivity(), ToolbarTitleChanger {
         }
     }
 
+    /**
+     * Function to show the action bar and bottom navigation view.
+     */
     private fun showActionBarAndBottomNavigationView() {
         supportActionBar!!.show()
 
@@ -121,9 +127,11 @@ class MainActivity : AppCompatActivity(), ToolbarTitleChanger {
     }
 
     /**
-     * The Navigation Component automatically changes the title in the action bar to the label of the current destination.
+     * The Navigation Component automatically changes the title of the action bar to the label of the current destination.
      * When the current destination is the ServiceDetailFragment,
      * this function changes the title to the name of the Service instead of the label of the destination.
+     *
+     * @param title: String used as title of the action bar.
      */
     override fun updateTitle(title: String?) { supportActionBar!!.title = title }
 

@@ -21,10 +21,18 @@ import com.bramdeconinck.technologysalesmantoolkit.utils.ValidationUtils.isEmail
 class ProfileViewModel : InjectedViewModel() {
 
     /**
-     * Values for fields of the profile form.
+     * [firstname] is the first name of the FirebaseUser that is currently signed in.
      */
     val firstname = MutableLiveData<String>()
+
+    /**
+     * [familyname] is the family name of the FirebaseUser that is currently signed in.
+     */
     val familyname = MutableLiveData<String>()
+
+    /**
+     * [email] is the email address of the FirebaseUser that is currently signed in.
+     */
     val email = MutableLiveData<String>()
 
     /**
@@ -35,12 +43,32 @@ class ProfileViewModel : InjectedViewModel() {
         get() = _isEditable
 
     /**
-     * [SingleLiveEvent] objects used to emit events.
+     * [SingleLiveEvent] that indicates an event occurred when validating the profile form.
+     * It has the value of a [BaseCommand].
      */
     val profileEditFormValidation = SingleLiveEvent<BaseCommand>()
+
+    /**
+     * [SingleLiveEvent] that indicates the user wants to change his/her password.
+     */
     val resetPasswordButtonClicked = SingleLiveEvent<Any>()
+
+    /**
+     * [SingleLiveEvent] that indicates an event occurred when changing the email address of the user.
+     * It has the value of a [BaseCommand].
+     */
     val appliedEmailChanges = SingleLiveEvent<BaseCommand>()
+
+    /**
+     * [SingleLiveEvent] that indicates an event occurred when changing the name of the user.
+     * It has the value of a [BaseCommand].
+     */
     val appliedNameChanges = SingleLiveEvent<BaseCommand>()
+
+    /**
+     * [SingleLiveEvent] that indicates an event for which a message should be displayed has occurred.
+     * It has the value of a String resource Id.
+     */
     val profileEventOccurred = SingleLiveEvent<Int>()
 
     init {
@@ -50,8 +78,14 @@ class ProfileViewModel : InjectedViewModel() {
         _isEditable.value = false
     }
 
+    /**
+     * Function that gets called when the Change Password TextView is clicked.
+     */
     fun resetPassword() { resetPasswordButtonClicked.call() }
 
+    /**
+     * Function that enters or exits editing mode.
+     */
     fun toggleEditMode() { _isEditable.value = !_isEditable.value!! }
 
     /**
@@ -90,38 +124,51 @@ class ProfileViewModel : InjectedViewModel() {
     }
 
     /**
-     * Function that applies the profile changes.
-     * It handles both changes to the name and the email address of the [firebaseUser].
+     * Function that gets called when the user changed their profile and wants to save the changes.
+     * It checks if the name, the email address or both have to be changed.
      */
     fun applyProfileChanges() =  {
-        if (firebaseUser!!.displayName != "${firstname.value} ${familyname.value}") {
-            firebaseUser!!.updateProfile(createProfileUpdates(firstname.value!!, familyname.value!!))
-                    .addOnCompleteListener { task ->
-                        if (task.isSuccessful) {
-                            appliedNameChanges.value = BaseCommand.Success(R.string.message_change_name)
-                            if (_isEditable.value!!) toggleEditMode()
-                        }
-                    }
-                    .addOnFailureListener { appliedNameChanges.value = BaseCommand.Error(R.string.error_change_name) }
-        }
+        if (firebaseUser!!.displayName != "${firstname.value} ${familyname.value}") applyNameChanges()
 
-        if (firebaseUser!!.email != email.value!!) {
-            firebaseUser!!.updateEmail(email.value!!)
-                    .addOnCompleteListener { task1 ->
-                        if (task1.isSuccessful) {
-                            firebaseUser!!.sendEmailVerification()
-                                    .addOnCompleteListener { task2 ->
-                                        if (task2.isSuccessful) {
-                                            firebaseAuth.signOut()
-                                            appliedEmailChanges.value = BaseCommand.Success(R.string.message_change_email)
-                                        }
-                                    }
-                        }
-                    }
-                    .addOnFailureListener { appliedEmailChanges.value = BaseCommand.Error(R.string.error_change_email) }
-        }
+        if (firebaseUser!!.email != email.value!!) applyEmailChanges()
     }
 
-    fun clearProfileForm() { if (isEditable.value!!) toggleEditMode() }
+    /**
+     * Function to apply the changes to the name the user has made.
+     */
+    private fun applyNameChanges() {
+        firebaseUser!!.updateProfile(createProfileUpdates(firstname.value!!, familyname.value!!))
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        appliedNameChanges.value = BaseCommand.Success(R.string.message_change_name)
+                        if (_isEditable.value!!) toggleEditMode()
+                    }
+                }
+                .addOnFailureListener { appliedNameChanges.value = BaseCommand.Error(R.string.error_change_name) }
+    }
+
+    /**
+     * Function to apply the changes to the email address the user has made.
+     */
+    private fun applyEmailChanges() {
+        firebaseUser!!.updateEmail(email.value!!)
+                .addOnCompleteListener { task1 ->
+                    if (task1.isSuccessful) {
+                        firebaseUser!!.sendEmailVerification()
+                                .addOnCompleteListener { task2 ->
+                                    if (task2.isSuccessful) {
+                                        firebaseAuth.signOut()
+                                        appliedEmailChanges.value = BaseCommand.Success(R.string.message_change_email)
+                                    }
+                                }
+                    }
+                }
+                .addOnFailureListener { appliedEmailChanges.value = BaseCommand.Error(R.string.error_change_email) }
+    }
+
+    /**
+     * Function to exit the editing mode if it was entered.
+     */
+    fun exitEditingMode() { if (isEditable.value!!) toggleEditMode() }
 
 }
