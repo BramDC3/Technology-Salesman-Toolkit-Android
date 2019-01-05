@@ -55,7 +55,7 @@ class RegistrationFragmentTest {
 
     @Test
     fun register_EmptyFields() {
-        onView(ViewMatchers.withId(R.id.btn_registration_register)).perform(ViewActions.click())
+        onView(ViewMatchers.withId(R.id.btn_registration_register)).perform(ViewActions.scrollTo(), ViewActions.click())
         onView(ViewMatchers.withText(R.string.error_empty_fields)).inRoot(RootMatchers.withDecorView(CoreMatchers.not(CoreMatchers.`is`(mActivityTestRule.activity.window.decorView)))).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
     }
 
@@ -69,7 +69,7 @@ class RegistrationFragmentTest {
         closeSoftKeyboard()
         onView(ViewMatchers.withId(R.id.et_registration_repeatPassword)).perform(ViewActions.typeText("iphonessuck"))
         closeSoftKeyboard()
-        onView(ViewMatchers.withId(R.id.btn_registration_register)).perform(ViewActions.click())
+        onView(ViewMatchers.withId(R.id.btn_registration_register)).perform(ViewActions.scrollTo(), ViewActions.click())
         onView(ViewMatchers.withText(R.string.error_empty_fields)).inRoot(RootMatchers.withDecorView(CoreMatchers.not(CoreMatchers.`is`(mActivityTestRule.activity.window.decorView)))).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
     }
 
@@ -83,7 +83,7 @@ class RegistrationFragmentTest {
         closeSoftKeyboard()
         onView(ViewMatchers.withId(R.id.et_registration_repeatPassword)).perform(ViewActions.typeText("iphonessuck"))
         closeSoftKeyboard()
-        onView(ViewMatchers.withId(R.id.btn_registration_register)).perform(ViewActions.click())
+        onView(ViewMatchers.withId(R.id.btn_registration_register)).perform(ViewActions.scrollTo(), ViewActions.click())
         onView(ViewMatchers.withText(R.string.error_empty_fields)).inRoot(RootMatchers.withDecorView(CoreMatchers.not(CoreMatchers.`is`(mActivityTestRule.activity.window.decorView)))).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
     }
 
@@ -97,7 +97,7 @@ class RegistrationFragmentTest {
         closeSoftKeyboard()
         onView(ViewMatchers.withId(R.id.et_registration_repeatPassword)).perform(ViewActions.typeText("iphonessuck"))
         closeSoftKeyboard()
-        onView(ViewMatchers.withId(R.id.btn_registration_register)).perform(ViewActions.click())
+        onView(ViewMatchers.withId(R.id.btn_registration_register)).perform(ViewActions.scrollTo(), ViewActions.click())
         onView(ViewMatchers.withText(R.string.error_empty_fields)).inRoot(RootMatchers.withDecorView(CoreMatchers.not(CoreMatchers.`is`(mActivityTestRule.activity.window.decorView)))).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
     }
 
@@ -111,7 +111,7 @@ class RegistrationFragmentTest {
         closeSoftKeyboard()
         onView(ViewMatchers.withId(R.id.et_registration_repeatPassword)).perform(ViewActions.typeText("iphonessuck"))
         closeSoftKeyboard()
-        onView(ViewMatchers.withId(R.id.btn_registration_register)).perform(ViewActions.click())
+        onView(ViewMatchers.withId(R.id.btn_registration_register)).perform(ViewActions.scrollTo(),ViewActions.click())
         onView(ViewMatchers.withText(R.string.error_empty_fields)).inRoot(RootMatchers.withDecorView(CoreMatchers.not(CoreMatchers.`is`(mActivityTestRule.activity.window.decorView)))).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
     }
 
@@ -125,7 +125,7 @@ class RegistrationFragmentTest {
         closeSoftKeyboard()
         onView(ViewMatchers.withId(R.id.et_registration_password)).perform(ViewActions.typeText("iphonessuck"))
         closeSoftKeyboard()
-        onView(ViewMatchers.withId(R.id.btn_registration_register)).perform(ViewActions.click())
+        onView(ViewMatchers.withId(R.id.btn_registration_register)).perform(ViewActions.scrollTo(), ViewActions.click())
         onView(ViewMatchers.withText(R.string.error_empty_fields)).inRoot(RootMatchers.withDecorView(CoreMatchers.not(CoreMatchers.`is`(mActivityTestRule.activity.window.decorView)))).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
     }
 
@@ -141,7 +141,7 @@ class RegistrationFragmentTest {
         closeSoftKeyboard()
         onView(ViewMatchers.withId(R.id.et_registration_repeatPassword)).perform(ViewActions.typeText("iphonessuck"))
         closeSoftKeyboard()
-        onView(ViewMatchers.withId(R.id.btn_registration_register)).perform(ViewActions.click())
+        onView(ViewMatchers.withId(R.id.btn_registration_register)).perform(ViewActions.scrollTo(), ViewActions.click())
         onView(ViewMatchers.withText(R.string.error_invalid_email)).inRoot(RootMatchers.withDecorView(CoreMatchers.not(CoreMatchers.`is`(mActivityTestRule.activity.window.decorView)))).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
     }
 
@@ -157,7 +157,7 @@ class RegistrationFragmentTest {
         closeSoftKeyboard()
         onView(ViewMatchers.withId(R.id.et_registration_repeatPassword)).perform(ViewActions.typeText("andy"))
         closeSoftKeyboard()
-        onView(ViewMatchers.withId(R.id.btn_registration_register)).perform(ViewActions.click())
+        onView(ViewMatchers.withId(R.id.btn_registration_register)).perform(ViewActions.scrollTo(), ViewActions.click())
         onView(ViewMatchers.withText(R.string.error_invalid_password)).inRoot(RootMatchers.withDecorView(CoreMatchers.not(CoreMatchers.`is`(mActivityTestRule.activity.window.decorView)))).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
     }
 
@@ -173,7 +173,7 @@ class RegistrationFragmentTest {
         closeSoftKeyboard()
         onView(ViewMatchers.withId(R.id.et_registration_repeatPassword)).perform(ViewActions.typeText("applesucks"))
         closeSoftKeyboard()
-        onView(ViewMatchers.withId(R.id.btn_registration_register)).perform(ViewActions.click())
+        onView(ViewMatchers.withId(R.id.btn_registration_register)).perform(ViewActions.scrollTo(), ViewActions.click())
         onView(ViewMatchers.withText(R.string.error_passwords_dont_match)).inRoot(RootMatchers.withDecorView(CoreMatchers.not(CoreMatchers.`is`(mActivityTestRule.activity.window.decorView)))).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
     }
 
@@ -189,7 +189,7 @@ class RegistrationFragmentTest {
         closeSoftKeyboard()
         onView(ViewMatchers.withId(R.id.et_registration_repeatPassword)).perform(ViewActions.typeText("iphonessuck"))
         closeSoftKeyboard()
-        onView(ViewMatchers.withId(R.id.btn_registration_register)).perform(ViewActions.click())
+        onView(ViewMatchers.withId(R.id.btn_registration_register)).perform(ViewActions.scrollTo(), ViewActions.click())
         onView(ViewMatchers.withText(R.string.title_privacy_policy_dialog)).check(matches(isDisplayed()))
 
         Intents.init()
@@ -214,7 +214,7 @@ class RegistrationFragmentTest {
         closeSoftKeyboard()
         onView(ViewMatchers.withId(R.id.et_registration_repeatPassword)).perform(ViewActions.typeText("iphonessuck"))
         closeSoftKeyboard()
-        onView(ViewMatchers.withId(R.id.btn_registration_register)).perform(ViewActions.click())
+        onView(ViewMatchers.withId(R.id.btn_registration_register)).perform(ViewActions.scrollTo(), ViewActions.click())
         onView(ViewMatchers.withText(R.string.title_privacy_policy_dialog)).check(matches(isDisplayed()))
 
         onView(ViewMatchers.withText(R.string.dialog_yes)).perform(ViewActions.click())
