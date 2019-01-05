@@ -68,7 +68,7 @@
             android:id="@+id/signOutFromProfile"
             app:destination="@id/loginFragment"
             app:launchSingleTop="true"
-            app:popUpTo="@+id/profileFragment"
+            app:popUpTo="@+id/serviceListFragment"
             app:popUpToInclusive="true" />
     </fragment>
     <fragment
@@ -80,7 +80,7 @@
             android:id="@+id/signOutFromSettings"
             app:destination="@id/loginFragment"
             app:launchSingleTop="true"
-            app:popUpTo="@+id/settingsFragment"
+            app:popUpTo="@+id/serviceListFragment"
             app:popUpToInclusive="true" />
     </fragment>
 </navigation>

@@ -59,7 +59,7 @@ class MainActivity : AppCompatActivity(), ToolbarTitleChanger {
         setupActionBarWithNavController(navController)
         main_bottom_navigation_view.setupWithNavController(navController)
 
-        navController.addOnNavigatedListener { _, destination ->
+        navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
                 /**
                  * Conditional navigation: if the user is logged in, he/she is allowed to navigate to the ServiceListFragment.
