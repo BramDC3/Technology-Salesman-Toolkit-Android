@@ -44,4 +44,4 @@ The entire application has been provided with kDoc documentation. I've added doc
 
 ## Download
 
-I'm currently uploading the application to the Google Play Store. A link will come here soon!
+Technology Salesman Toolkit is available in the Google Play Store. [Download it here](https://play.google.com/store/apps/details?id=com.bramdeconinck.technologysalesmantoolkit)!
