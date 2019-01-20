@@ -22,7 +22,7 @@ This is the GitHub repository for the Technology Salesman Toolkit (TEST) app, an
 
 ## Technology
 
-Technology Salesman Toolkit is a native Android application that supports Android devices starting at Android KitKat (API 19) all the way up to Android Pie (API 28). It has only one activity and multiple fragments. The architecture used to create TEST is MVVM. The app uses a Firestore backend. Multiple Android Jetpack components were used, including:
+Technology Salesman Toolkit is a native Android application that supports Android devices starting at Android KitKat (API 19) all the way up to Android Pie (API 28). It has only one activity and multiple fragments. The architecture used to create TEST is MVVM. The app uses a Firebase backend. Multiple Android Jetpack components were used, including:
 > - Data Binding
 > - LiveData
 > - Room
